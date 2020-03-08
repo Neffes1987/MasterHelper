@@ -9,7 +9,7 @@
   <fragment
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:name="com.example.masterhelper.AppBarFragment"
+    android:name="AppBarFragment.AppBarFragment"
     android:id="@+id/fragment2"
     tools:layout="@layout/fragment_app_bar"/>
 
@@ -17,8 +17,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:name="ListFragment.ListScreenFragment"
-    android:id="@+id/fragment"
+    android:id="@+id/journeys"
     tools:layout="@layout/fragment_list_screen"
+    style="@style/ConstraintLayoutStyled"
     android:layout_marginTop="?attr/actionBarSize"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

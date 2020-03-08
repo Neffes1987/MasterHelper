@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  tools:context=".Script">
+
+  <TextView
+    android:text="@string/scene_name"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:id="@+id/textView2"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/scene_name"/>
+
+  <EditText
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:inputType="textPersonName"
+    android:text="Name"
+    android:ems="10"
+    android:id="@+id/scene_name"
+    app:layout_constraintTop_toBottomOf="@+id/textView3"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    />
+
+  <TextView
+    android:text="@string/scene_description"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:id="@+id/textView3"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toTopOf="parent"/>
+
+  <EditText
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+    android:inputType="textMultiLine"
+    android:gravity="start|top"
+    android:ems="10"
+    android:id="@+id/scene_description"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="1.0"
+    app:layout_constraintTop_toBottomOf="@+id/textView2"
+    app:layout_constraintBottom_toTopOf="@+id/fragment4"/>
+
+  <fragment
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:name="BottomNavigationFragment.BottomNavigationFragment"
+    android:id="@+id/fragment4"
+    tools:layout="@layout/fragment_bottom_navigation"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintBottom_toBottomOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
