@@ -24,21 +24,23 @@
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       android:id="@+id/screen_list_id"
-      style="@style/Widget.AppCompat.ListView">
+      style="@android:style/Widget.Material.ExpandableListView"
+      android:cacheColorHint="#64819C"
+      tools:listitem="@android:layout/simple_expandable_list_item_2">
 
     </ListView>
   </LinearLayout>
 
   <com.google.android.material.floatingactionbutton.FloatingActionButton
-    android:src="@android:drawable/ic_menu_add"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:clickable="true"
     android:id="@+id/createItemBtn"
-    app:backgroundTint="#009688"
+    app:backgroundTint="@color/colorPrimary"
     android:layout_gravity="bottom|end"
     android:layout_marginBottom="10dp"
     android:layout_marginRight="10dp"
-    app:maxImageSize="40dp"/>
+    app:maxImageSize="24dp"
+    android:src="@mipmap/baseline_add_black_18dp"/>
 
 </FrameLayout>

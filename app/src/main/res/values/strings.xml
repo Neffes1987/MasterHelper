@@ -8,10 +8,13 @@
   <string name="journey_description">Краткое описания приключения</string>
 
   <string name="screen_name_music">Музыка</string>
+  <string name="background_music">Фоновая музыка</string>
+
   <string name="screen_name_facts">Факты и Мифы</string>
 
   <string name="screen_name_scene">Сцена</string>
   <string name="screen_name_scene_create">Создать сцену</string>
+  <string name="screen_name_scene_start">Начать сцену</string>
 
   <string name="screen_name_scene_step">Событие сцены</string>
 
@@ -28,4 +31,6 @@
   <string name="hello_blank_fragment">Hello blank fragment</string>
   <string name="search">Поиск...</string>
   <string name="name">Имя</string>
+  <string name="isDoneFlag">Выполнен</string>
+  <string name="toggleAccordionButtonDescription">Переключить состояние аккордиона</string>
 </resources>

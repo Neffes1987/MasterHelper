@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+  <androidx.cardview.widget.CardView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+      android:orientation="vertical"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      >
+
+      <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/accordion_head"
+        android:background="@color/colorPrimary"
+        style="@style/ConstraintLayoutPaddingStyled"
+        android:gravity="center_vertical">
+
+        <TextView
+          android:text="@string/name"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:id="@+id/itemTitle"
+          android:layout_weight="10"/>
+
+        <ImageView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          app:srcCompat="@mipmap/baseline_done_black_18dp"
+          android:id="@+id/isDoneFlag"
+          android:layout_weight="1"
+          tools:visibility="visible"
+          android:contentDescription="@string/isDoneFlag"/>
+
+        <ImageButton
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          app:srcCompat="@mipmap/baseline_filter_list_black_18dp"
+          android:id="@+id/imageButton"
+          android:layout_weight="1"
+          android:scaleType="center"
+          android:layout_gravity="clip_vertical"
+          android:contentDescription="@string/toggleAccordionButtonDescription"/>
+
+      </LinearLayout>
+
+      <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/ConstraintLayoutPaddingStyled"
+        android:id="@+id/progress_bar_wrapper">
+
+        <ProgressBar
+          style="?android:attr/progressBarStyleHorizontal"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:id="@+id/progressBar2"
+          android:layout_weight="1"
+          android:progress="10"/>
+
+      </LinearLayout>
+
+      <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/ConstraintLayoutPaddingStyled"
+        android:id="@+id/accordion_body">
+
+        <TextView
+          android:text="@string/scene_description"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:id="@+id/scene_description"
+          style="@style/rowStyled"
+          tools:text="@string/scene_description"/>
+
+        <LinearLayout
+          android:orientation="horizontal"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:id="@+id/screen_steps_block">
+
+          <TextView
+            android:text="@string/screen_steps"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/screen_steps_title"
+            android:layout_weight="1"/>
+
+          <TextView
+            android:text="0"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/screen_steps_value"
+            android:layout_weight="1"
+            android:gravity="end"/>
+        </LinearLayout>
+
+        <Switch
+          android:text="@string/background_music"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:id="@+id/background_music_toggler"
+          style="@style/rowStyled"
+          />
+
+        <LinearLayout
+          android:orientation="horizontal"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          style="@style/rowStyled"
+          android:gravity="center_vertical"
+          android:id="@+id/start_scene_block">
+
+          <TextView
+            android:text="@string/screen_name_scene_start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/start_scene_title"
+            android:layout_weight="10"/>
+
+          <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@mipmap/baseline_play_arrow_black_18dp"
+            android:id="@+id/start_scene_btn"
+            android:layout_weight="1"
+            android:minHeight="40dp"
+            android:contentDescription="@string/screen_name_scene_start"/>
+        </LinearLayout>
+
+        <LinearLayout
+          android:orientation="horizontal"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent">
+
+          <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@mipmap/baseline_create_black_18dp"
+            android:id="@+id/imageButton2"
+            android:layout_weight="1"/>
+
+          <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@mipmap/baseline_keyboard_arrow_down_black_18dp"
+            android:id="@+id/imageButton3"
+            android:layout_weight="1"/>
+
+          <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@mipmap/baseline_keyboard_arrow_up_black_18dp"
+            android:id="@+id/imageButton4"
+            android:layout_weight="1"/>
+
+          <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@mipmap/baseline_clear_black_18dp"
+            android:id="@+id/imageButton5"
+            android:layout_weight="1"/>
+        </LinearLayout>
+
+      </LinearLayout>
+
+    </LinearLayout>
+
+  </androidx.cardview.widget.CardView>
+</LinearLayout>
