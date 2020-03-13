@@ -9,11 +9,14 @@
   tools:context=".ProjectScreen">
 
   <fragment
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:name="ListFragment.ListScreenFragment"
-    android:id="@+id/journeys"
-    tools:layout="@layout/fragment_list_screen"
-    app:layout_constraintTop_toTopOf="parent"/>
-
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+    android:name="RecyclerViewFragment.RecyclerViewFragment"
+    android:id="@+id/fragment"
+    tools:layout="@layout/fragment_recycler_view"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintBottom_toBottomOf="parent"
+    />
 </androidx.constraintlayout.widget.ConstraintLayout>

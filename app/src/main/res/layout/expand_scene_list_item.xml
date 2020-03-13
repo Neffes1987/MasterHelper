@@ -3,18 +3,19 @@
               xmlns:app="http://schemas.android.com/apk/res-auto"
               xmlns:tools="http://schemas.android.com/tools"
               android:orientation="vertical"
+              style="@style/rowStyled"
               android:layout_width="match_parent"
-              android:layout_height="match_parent">
+              android:layout_height="wrap_content">
 
   <androidx.cardview.widget.CardView
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <LinearLayout
       android:orientation="vertical"
       android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      >
+      android:layout_height="wrap_content"
+      tools:visibility="visible">
 
       <LinearLayout
         android:orientation="horizontal"
@@ -45,7 +46,7 @@
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           app:srcCompat="@mipmap/baseline_filter_list_black_18dp"
-          android:id="@+id/imageButton"
+          android:id="@+id/itemToggler"
           android:layout_weight="1"
           android:scaleType="center"
           android:layout_gravity="clip_vertical"
@@ -64,7 +65,7 @@
           style="?android:attr/progressBarStyleHorizontal"
           android:layout_width="0dp"
           android:layout_height="wrap_content"
-          android:id="@+id/progressBar2"
+          android:id="@+id/scene_progress"
           android:layout_weight="1"
           android:progress="10"/>
 
@@ -75,7 +76,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         style="@style/ConstraintLayoutPaddingStyled"
-        android:id="@+id/accordion_body">
+        android:id="@+id/accordion_body"
+        android:visibility="visible">
 
         <TextView
           android:text="@string/scene_description"
@@ -149,28 +151,28 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:srcCompat="@mipmap/baseline_create_black_18dp"
-            android:id="@+id/imageButton2"
+            android:id="@+id/editItemBtn"
             android:layout_weight="1"/>
 
           <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:srcCompat="@mipmap/baseline_keyboard_arrow_down_black_18dp"
-            android:id="@+id/imageButton3"
+            android:id="@+id/upOrderBtn"
             android:layout_weight="1"/>
 
           <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:srcCompat="@mipmap/baseline_keyboard_arrow_up_black_18dp"
-            android:id="@+id/imageButton4"
+            android:id="@+id/upDownOrderBtn"
             android:layout_weight="1"/>
 
           <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:srcCompat="@mipmap/baseline_clear_black_18dp"
-            android:id="@+id/imageButton5"
+            android:id="@+id/deleteItemBtn"
             android:layout_weight="1"/>
         </LinearLayout>
 
