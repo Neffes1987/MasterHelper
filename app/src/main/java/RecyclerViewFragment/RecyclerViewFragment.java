@@ -16,8 +16,10 @@ import java.util.HashMap;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class RecyclerViewFragment extends Fragment {
+public class RecyclerViewFragment extends Fragment implements IRecycleAdapter {
   RecycleListScreenFragmentData item = new RecycleListScreenFragmentData("title", "name", 10, 12, false, false);
+
+  RecyclerView recyclerView;
 
   HashMap<Integer, RecycleListScreenFragmentData> data = new HashMap<>();
 
@@ -32,7 +34,7 @@ public class RecyclerViewFragment extends Fragment {
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
                            Bundle savedInstanceState) {
     View fr = inflater.inflate(R.layout.fragment_recycler_view, container, false);
-    RecyclerView recyclerView = (RecyclerView) fr.findViewById(R.id.recycler_list_view);
+    recyclerView = (RecyclerView) fr.findViewById(R.id.recycler_list_view);
     recyclerView.setHasFixedSize(true);
 
     // use a linear layout manager
@@ -45,10 +47,20 @@ public class RecyclerViewFragment extends Fragment {
     data.put(3, item);
 
     // specify an adapter (see also next example)
-    RecycleAdapter mAdapter = new RecycleAdapter(data);
+    RecycleAdapter mAdapter = new RecycleAdapter(data, this);
     recyclerView.setAdapter(mAdapter);
-
     return fr;
   }
 
+  @Override
+  public void onChangeItem(int position, String fieldName, String newValue) {
+    RecycleAdapter.MyViewHolder viewHolder = (RecycleAdapter.MyViewHolder) recyclerView.findViewHolderForLayoutPosition(position);
+    switch (fieldName){
+      case "isExpand":
+        int newState = viewHolder.body.getVisibility() == View.VISIBLE ? View.GONE : View.VISIBLE;
+        viewHolder.body.setVisibility(newState);
+        break;
+      default: return;
+    }
+  }
 }

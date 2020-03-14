@@ -14,6 +14,7 @@ import java.util.HashMap;
 
 public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.MyViewHolder> {
   private HashMap<Integer, RecycleListScreenFragmentData> mDataset;
+  private RecyclerViewFragment parent;
 
   // Provide a reference to the views for each data item
   // Complex data items may need more than one view per item, and
@@ -65,8 +66,9 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.MyViewHo
   }
 
   // Provide a suitable constructor (depends on the kind of dataset)
-  public RecycleAdapter(HashMap<Integer, RecycleListScreenFragmentData> data) {
+  public RecycleAdapter(HashMap<Integer, RecycleListScreenFragmentData> data, RecyclerViewFragment fragment) {
     mDataset = data;
+    parent = fragment;
   }
 
   // Create new views (invoked by the layout manager)
@@ -83,14 +85,11 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.MyViewHo
 
   // Replace the contents of a view (invoked by the layout manager)
   @Override
-  public void onBindViewHolder(MyViewHolder holder, int position) {
+  public void onBindViewHolder(MyViewHolder holder, final int position) {
     // - get element from your dataset at this position
     // - replace the contents of the view with that element
-    Log.i("test1", "onBindViewHolder: " + position);
+
     RecycleListScreenFragmentData itemData = mDataset.get(position);
-    if(holder.title == null){
-      return ;
-    }
     holder.title.setText(itemData.title);
     holder.description.setText(itemData.description);
     holder.isMusicToggledFlag.setChecked(itemData.isMusicStarted);
@@ -102,6 +101,13 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.MyViewHo
     holder.progressBar.setMax(itemData.scriptsTotal);
     holder.progressBar.setProgress(itemData.scriptsFinished);
     holder.screenStepsValue.setText(scripts);
+
+    holder.expandButton.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        parent.onChangeItem(position, "isExpand", "");
+      }
+    });
   }
 
   // Return the size of your dataset (invoked by the layout manager)
