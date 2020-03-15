@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:app="http://schemas.android.com/apk/res-auto"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             tools:context=".expand_text_description">
+
+  <LinearLayout
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+      android:orientation="horizontal"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:id="@+id/accordionScript_head"
+      android:background="@color/colorPrimary"
+      style="@style/ConstraintLayoutPaddingStyled"
+      android:gravity="center_vertical">
+
+      <TextView
+        android:text="@string/name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/itemScriptTitle"
+        android:layout_weight="10"/>
+
+      <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@mipmap/baseline_filter_list_black_18dp"
+        android:id="@+id/itemScriptToggler"
+        android:layout_weight="1"
+        android:scaleType="center"
+        android:layout_gravity="clip_vertical"
+        android:contentDescription="@string/toggleAccordionButtonDescription"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+      android:orientation="horizontal"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent">
+
+      <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+          android:text="@string/scene_name"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:id="@+id/scene_title"
+          />
+
+        <TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:id="@+id/textView"
+          />
+
+        <TextView
+          android:text="@string/scene_description"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:id="@+id/textView3"
+          />
+
+        <TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:id="@+id/script_description"/>
+      </LinearLayout>
+    </LinearLayout>
+
+  </LinearLayout>
+
+</FrameLayout>

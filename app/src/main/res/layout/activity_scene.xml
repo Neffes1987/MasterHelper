@@ -9,78 +9,21 @@
   tools:context=".Scene"
   android:isScrollContainer="true">
 
-  <TextView
-    android:text="@string/scene_name"
+  <fragment
     android:layout_width="0dp"
     android:layout_height="wrap_content"
-    android:id="@+id/textView2"
-    app:layout_constraintStart_toStartOf="parent"
+    android:name="com.example.masterhelper.expand_text_description"
+    android:id="@+id/fragment"
+    tools:layout="@layout/fragment_expand_text_description"
     app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent"/>
 
-  <EditText
+  <androidx.recyclerview.widget.RecyclerView
     android:layout_width="0dp"
     android:layout_height="wrap_content"
-    android:inputType="textPersonName"
-    android:text="Name"
-    android:ems="10"
-    android:id="@+id/scene_name"
+    app:layout_constraintTop_toBottomOf="@+id/fragment"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintHorizontal_bias="0.0"
-    app:layout_constraintTop_toBottomOf="@+id/textView2"/>
-
-  <TextView
-    android:text="@string/scene_description"
-    android:layout_width="0dp"
-    android:layout_height="wrap_content"
-    android:id="@+id/textView3"
-    app:layout_constraintTop_toBottomOf="@+id/scene_name"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    android:layout_marginTop="16dp"/>
-
-  <EditText
-    android:layout_width="0dp"
-    android:layout_height="wrap_content"
-    android:inputType="textMultiLine"
-    android:gravity="start|top"
-    android:ems="10"
-    android:id="@+id/scene_description"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintHorizontal_bias="1.0"
-    app:layout_constraintTop_toBottomOf="@+id/textView3"/>
-
-  <fragment
-    android:layout_width="0dp"
-    android:layout_height="0dp"
-    android:name="ListFragment.ListScreenFragment"
-    android:id="@+id/scripts_fragment"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    tools:layout="@layout/fragment_list_screen"
-    app:layout_constraintTop_toBottomOf="@+id/textView4"
-    app:layout_constraintBottom_toTopOf="@+id/fragment3"/>
-
-  <fragment
-    android:layout_width="0dp"
-    android:layout_height="wrap_content"
-    android:name="BottomNavigationFragment.BottomNavigationFragment"
-    android:id="@+id/fragment3"
-    tools:layout="@layout/fragment_bottom_navigation"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"/>
-
-  <TextView
-    android:text="@string/screen_steps"
-    android:layout_width="0dp"
-    android:layout_height="wrap_content"
-    android:id="@+id/textView4"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/scene_description"
-    android:layout_marginTop="16dp"/>
+    app:layout_constraintEnd_toEndOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:orientation="vertical"
+              style="@style/rowStyled"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content">
+
+  <androidx.cardview.widget.CardView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+      android:orientation="vertical"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      tools:visibility="visible">
+
+      <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/accordionScript_head"
+        android:background="@color/colorPrimary"
+        style="@style/ConstraintLayoutPaddingStyled"
+        android:gravity="center_vertical">
+
+        <TextView
+          android:text="@string/name"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:id="@+id/itemScriptTitle"
+          android:layout_weight="10"/>
+
+        <ImageView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          app:srcCompat="@mipmap/baseline_done_black_18dp"
+          android:id="@+id/isScriptDoneFlag"
+          android:layout_weight="1"
+          tools:visibility="visible"
+          android:contentDescription="@string/isDoneFlag"/>
+
+        <ImageButton
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          app:srcCompat="@mipmap/baseline_filter_list_black_18dp"
+          android:id="@+id/itemScriptToggler"
+          android:layout_weight="1"
+          android:scaleType="center"
+          android:layout_gravity="clip_vertical"
+          android:contentDescription="@string/toggleAccordionButtonDescription"/>
+
+      </LinearLayout>
+
+      <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/ConstraintLayoutPaddingStyled"
+        android:id="@+id/accordionScript_body"
+        android:visibility="visible">
+
+        <TextView
+          android:text="@string/scene_description"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:id="@+id/script_description"
+          style="@style/rowStyled"
+          tools:text="@string/script_description"/>
+
+        <LinearLayout
+          android:orientation="horizontal"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          style="@style/rowStyled"
+          android:layout_weight="1">
+
+          <TextView
+            android:text="@string/script_has_battle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/hasScriptBattleAction"
+            android:layout_weight="8"/>
+
+          <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@mipmap/baseline_done_black_18dp"
+            android:id="@+id/hasBattleActionIcon"
+            android:layout_weight="1"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+          android:orientation="horizontal"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          style="@style/rowStyled"
+          android:gravity="center_vertical"
+          android:id="@+id/startScript_block">
+
+          <TextView
+            android:text="@string/script_start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/start_script_title"
+            android:layout_weight="10"/>
+
+          <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@mipmap/baseline_play_arrow_black_18dp"
+            android:id="@+id/start_script_btn"
+            android:layout_weight="1"
+            android:minHeight="40dp"
+            android:contentDescription="@string/screen_name_scene_start"/>
+        </LinearLayout>
+
+        <LinearLayout
+          android:orientation="horizontal"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent">
+
+          <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@mipmap/baseline_create_black_18dp"
+            android:id="@+id/editItemScriptBtn"
+            android:layout_weight="1"/>
+
+          <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@mipmap/baseline_keyboard_arrow_down_black_18dp"
+            android:id="@+id/upOrderScriptBtn"
+            android:layout_weight="1"/>
+
+          <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@mipmap/baseline_keyboard_arrow_up_black_18dp"
+            android:id="@+id/upDownOrderScriptBtn"
+            android:layout_weight="1"/>
+
+          <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@mipmap/baseline_clear_black_18dp"
+            android:id="@+id/deleteItemScriptBtn"
+            android:layout_weight="1"/>
+        </LinearLayout>
+
+      </LinearLayout>
+
+    </LinearLayout>
+
+  </androidx.cardview.widget.CardView>
+</LinearLayout>

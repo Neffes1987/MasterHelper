@@ -27,6 +27,12 @@
   <string name="scene_description">Описание сцены</string>
   <string name="screen_steps">События сцены</string>
 
+  <string name="script">Событие сцены</string>
+  <string name="script_name">Имя события</string>
+  <string name="script_description">Описание события</string>
+  <string name="script_has_battle">Есть боевое взаиможействие</string>
+  <string name="script_start">Старт события</string>
+
   <!-- TODO: Remove or change this placeholder text -->
   <string name="hello_blank_fragment">Hello blank fragment</string>
   <string name="search">Поиск...</string>
