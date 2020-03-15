@@ -1,47 +1,53 @@
 package com.example.masterhelper;
 
-import ListFragment.IListFragmentInterface;
-import ListFragment.ListScreenFragment;
+import RecyclerSceneViewFragment.IRecycleSceneAdapter;
+import RecyclerSceneViewFragment.RecyclerSceneViewFragment;
+import RecyclerSceneViewFragment.model.RecycleSceneDataModel;
+import RecyclerSceneViewFragment.model.SceneAccordionEvents;
 import android.content.Intent;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.fragment.app.FragmentManager;
 
-public class ProjectScreen extends AppCompatActivity implements IListFragmentInterface {
-  public String[] data = new String[]{"Сцена1", "Сцена2", "Сцена3"};
+import java.util.HashMap;
+
+
+public class ProjectScreen extends AppCompatActivity implements IRecycleSceneAdapter {
+  public HashMap<Integer, RecycleSceneDataModel> data = new HashMap<>();
+
+  public RecycleSceneDataModel item = new RecycleSceneDataModel("Item", "Text", 19, 20, true, true);
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_project_screen);
-
+    data.put(0, item);
+    data.put(1, item);
+    data.put(2, item);
+    data.put(3, item);
     setListData(data);
 
     // получаем указатель на тулбар активированного в главном компоненте
     getSupportActionBar().setTitle("Имя приключения");
   }
 
-  @Override
-  public void onCreateButtonPressed() {
-
-  }
-
-  @Override
-  public void onItemButtonPressed(String id) {
-    Intent intent = new Intent(this, Scene.class);
-    startActivity(intent);
-  }
-
-  @Override
-  public void onSearchStringChanged(String str) {
-
-  }
-
-  void setListData(String[] data){
+  void setListData(HashMap<Integer, RecycleSceneDataModel> data){
     FragmentManager fm = getSupportFragmentManager();
-    ListScreenFragment lsf = (ListScreenFragment) fm.findFragmentById(R.id.journeys);
+    RecyclerSceneViewFragment lsf = (RecyclerSceneViewFragment) fm.findFragmentById(R.id.screenFragment);
+
     if(lsf != null && lsf.getView() != null){
-      lsf.updateListValues(lsf.getView(), data);
+      lsf.updateListAdapter(data);
+    }
+  }
+
+  @Override
+  public void onChangeItem(int position, SceneAccordionEvents fieldName, String newValue) {
+    switch (fieldName){
+      case start:
+        Intent intent = new Intent(this, Scene.class);
+        startActivity(intent);
+        break;
+      default: return;
     }
   }
 }
