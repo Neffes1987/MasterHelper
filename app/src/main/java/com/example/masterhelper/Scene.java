@@ -20,7 +20,7 @@ public class Scene extends AppCompatActivity implements IRecycleAdapter {
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_screen_scene);
+    setContentView(R.layout.activity_screen_view_scene);
     data.put(0, item);
     data.put(1, item);
     data.put(2, item);

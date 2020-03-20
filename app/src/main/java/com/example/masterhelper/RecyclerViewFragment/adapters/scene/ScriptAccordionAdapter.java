@@ -32,7 +32,7 @@ public class ScriptAccordionAdapter extends RecyclerView.Adapter<ScriptAdapterHo
   @Override
   public ScriptAdapterHolder onCreateViewHolder(ViewGroup parent, int viewType) {
     View v = LayoutInflater.from(parent.getContext())
-      .inflate(R.layout.fragment_script_list_item, parent, false);
+      .inflate(R.layout.fragment_view_script_list_item, parent, false);
     return new ScriptAdapterHolder(v, screen);
   }
 

@@ -32,7 +32,7 @@ public class SceneAccordionAdapter extends RecyclerView.Adapter<SceneAdapterHold
   @Override
   public SceneAdapterHolder onCreateViewHolder(ViewGroup parent, int viewType) {
     View v = LayoutInflater.from(parent.getContext())
-      .inflate(R.layout.fragment_scene_list_item, parent, false);
+      .inflate(R.layout.fragment_view_scene_list_item, parent, false);
     return new SceneAdapterHolder(v, screen);
   }
 

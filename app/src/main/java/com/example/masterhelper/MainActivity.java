@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity implements IListFragmentInte
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_screen_projects);
+    setContentView(R.layout.activity_screen_view_projects);
     toolbar = findViewById(R.id.toolbar);
     toolbar.setTitle(R.string.screen_name_journeys);
     setSupportActionBar(toolbar);

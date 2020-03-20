@@ -20,7 +20,7 @@ public class ProjectScreen extends AppCompatActivity implements IRecycleAdapter 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_project_screen);
+    setContentView(R.layout.activity_project_view_screen);
     data.put(0, item);
     data.put(1, item);
     data.put(2, item);
