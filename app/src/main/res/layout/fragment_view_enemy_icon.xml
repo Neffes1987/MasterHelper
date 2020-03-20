@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:app="http://schemas.android.com/apk/res-auto"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             tools:context=".EnemyIcon"
+             android:maxHeight="80dp"
+             android:maxWidth="80dp"
+             app:layout_constraintHeight_max="80dp">
+
+  <androidx.cardview.widget.CardView
+    android:layout_width="wrap_content"
+    android:layout_height="120dp"
+    app:cardBackgroundColor="#0FE597"
+    app:cardCornerRadius="8dp"
+    app:cardUseCompatPadding="true"
+    android:layout_gravity="center_horizontal"
+    android:padding="4dp">
+
+    <ImageView
+      android:src="@mipmap/enemy3"
+      android:layout_width="80dp"
+      android:layout_height="80dp"
+      android:id="@+id/enemyIcon"
+      android:contentDescription="@string/script_enemy_icon"
+      android:background="#007A2323"
+      />
+
+    <LinearLayout
+      android:orientation="horizontal"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:id="@+id/health_statistic_row"
+      android:layout_gravity="bottom|end"
+      >
+
+      <ImageView
+        android:src="@mipmap/baseline_favorite_black_18dp"
+        android:layout_width="0dp"
+        android:layout_height="20dp"
+        android:id="@+id/heart"
+        android:layout_weight="1"
+        android:contentDescription="@string/attack_icon"
+        app:srcCompat="@mipmap/baseline_gavel_black_18dp"/>
+
+      <TextView
+        android:text="@string/default_enemy_stat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/health_value"
+        android:layout_gravity="end"/>
+    </LinearLayout>
+
+    <LinearLayout
+      android:orientation="horizontal"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:id="@+id/attack_statistic_row"
+      android:layout_gravity="bottom"
+      >
+
+      <ImageView
+        android:src="@mipmap/baseline_favorite_black_18dp"
+        android:layout_width="0dp"
+        android:layout_height="20dp"
+        android:id="@+id/imageView2"
+        android:layout_weight="1"
+        android:contentDescription="@string/heart_icon"/>
+
+      <TextView
+        android:text="@string/default_enemy_stat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/attack_value"
+        />
+    </LinearLayout>
+
+  </androidx.cardview.widget.CardView>
+
+</FrameLayout>
