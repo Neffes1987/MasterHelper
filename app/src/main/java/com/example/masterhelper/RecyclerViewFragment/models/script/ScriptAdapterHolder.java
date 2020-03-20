@@ -24,9 +24,6 @@ public class ScriptAdapterHolder extends RecyclerView.ViewHolder{
   /** виджет прогресса по сцене, виден всегда */
   private ImageView hasBattleActionIcon;
 
-  /** включить\выключить музыку в сцене */
-  private Switch isMusicToggledFlag;
-
   /** иконка окончания сцены, появляется в заголовке аккордиона */
   private ImageView isFinishedIcon;
 
@@ -64,13 +61,6 @@ public class ScriptAdapterHolder extends RecyclerView.ViewHolder{
     this.description.setText(description);
   }
 
-  /** передать текущее состояние флага включения музыки в виджет
-   * @param isMusicToggledFlag - флаг состояния переключения фоновой музыки
-   * */
-  private void setIsMusicToggledFlag(Boolean isMusicToggledFlag) {
-    this.isMusicToggledFlag.setChecked(isMusicToggledFlag);
-  }
-
   /** указать текущее количество пройденых сцен
    * @param isVisible - определяет боевая это сцена или ситуативная
    * - scriptsFinished - сколько скриптов выполнено
@@ -103,7 +93,6 @@ public class ScriptAdapterHolder extends RecyclerView.ViewHolder{
   public void updateHolderByData(ScriptRecycleDataModel itemData, int position){
     setTitle(itemData.title);
     setDescription(itemData.description);
-    setIsMusicToggledFlag(itemData.isMusicStarted);
     setHolderPosition(position);
     setHasBattleActionIcon(itemData.hasBattleActionIcon);
     setSceneIsDone(itemData);
@@ -137,14 +126,13 @@ public class ScriptAdapterHolder extends RecyclerView.ViewHolder{
     downOrderBtn = v.findViewById(R.id.downOrderScriptBtn);
     downOrderBtn.setOnClickListener(downOrderSceneListener);
 
-    isMusicToggledFlag = v.findViewById(R.id.background_music_toggler);
     hasBattleActionIcon = v.findViewById(R.id.hasBattleActionIcon);
 
-    expandButton = v.findViewById(R.id.itemToggler);
-    expandButton.setOnClickListener(toggleSceneListener);
+    expandButton = v.findViewById(R.id.itemScriptToggler);
+    expandButton.setOnClickListener(toggleScriptListener);
   }
 
-  View.OnClickListener toggleSceneListener = new View.OnClickListener() {
+  View.OnClickListener toggleScriptListener = new View.OnClickListener() {
     /** переключение состояния аккордиона */
     @Override
     public void onClick(View v) {

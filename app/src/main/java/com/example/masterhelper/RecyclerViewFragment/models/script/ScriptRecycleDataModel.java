@@ -18,21 +18,13 @@ public class ScriptRecycleDataModel {
   /** скрипт уже выполнен */
   public boolean isFinished;
 
-  /** флаг, что таб открыт */
-  public boolean isExpand;
-
-  /** флаг, что музыкальное сопровохжение включено */
-  public boolean isMusicStarted;
-
   /**@constructor
    * генератор записи для адаптора
    * */
-  public ScriptRecycleDataModel(String title, String description, boolean hasBattleActionIcon, boolean isFinished, boolean isExpand, boolean isMusicStarted ){
+  public ScriptRecycleDataModel(String title, String description, boolean hasBattleActionIcon, boolean isFinished ){
     this.title = title;
     this.description = description;
     this.hasBattleActionIcon = hasBattleActionIcon;
-    this.isExpand = isExpand;
-    this.isMusicStarted = isMusicStarted;
     this.isFinished = isFinished;
   }
 }

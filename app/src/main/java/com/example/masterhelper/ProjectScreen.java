@@ -1,9 +1,9 @@
 package com.example.masterhelper;
 
 import com.example.masterhelper.RecyclerViewFragment.IRecycleAdapter;
+import com.example.masterhelper.RecyclerViewFragment.RecyclerAccordionEvents;
 import com.example.masterhelper.RecyclerViewFragment.RecyclerViewFragment;
 import com.example.masterhelper.RecyclerViewFragment.models.scene.SceneRecycleDataModel;
-import com.example.masterhelper.RecyclerViewFragment.models.scene.SceneAccordionEvents;
 import android.content.Intent;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
@@ -41,7 +41,7 @@ public class ProjectScreen extends AppCompatActivity implements IRecycleAdapter 
   }
 
   @Override
-  public void onChangeItem(int position, SceneAccordionEvents fieldName, String newValue) {
+  public void onChangeItem(int position, RecyclerAccordionEvents fieldName, String newValue) {
     switch (fieldName){
       case start:
         Intent intent = new Intent(this, Scene.class);

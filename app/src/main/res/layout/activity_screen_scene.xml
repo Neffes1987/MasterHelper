@@ -7,4 +7,16 @@
   android:layout_height="match_parent"
   style="@style/ConstraintLayoutStyled"
   tools:context=".Scene"
-  android:isScrollContainer="true"/>
+  android:isScrollContainer="true">
+
+  <fragment
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+    android:name="com.example.masterhelper.RecyclerViewFragment.RecyclerViewFragment"
+    android:id="@+id/screenScriptsList"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintBottom_toBottomOf="parent"
+    tools:layout="@layout/fragment_recycler_view"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
