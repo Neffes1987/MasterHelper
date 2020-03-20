@@ -8,6 +8,6 @@ public class Script extends AppCompatActivity {
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_script);
+    setContentView(R.layout.activity_screen_script);
   }
 }

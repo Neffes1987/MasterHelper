@@ -1,9 +1,9 @@
 package com.example.masterhelper;
 
-import RecyclerSceneViewFragment.IRecycleSceneAdapter;
-import RecyclerSceneViewFragment.RecyclerSceneViewFragment;
-import RecyclerSceneViewFragment.model.RecycleSceneDataModel;
-import RecyclerSceneViewFragment.model.SceneAccordionEvents;
+import com.example.masterhelper.RecyclerViewFragment.IRecycleAdapter;
+import com.example.masterhelper.RecyclerViewFragment.RecyclerViewFragment;
+import com.example.masterhelper.RecyclerViewFragment.models.scene.SceneRecycleDataModel;
+import com.example.masterhelper.RecyclerViewFragment.models.scene.SceneAccordionEvents;
 import android.content.Intent;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,10 +12,10 @@ import androidx.fragment.app.FragmentManager;
 import java.util.HashMap;
 
 
-public class ProjectScreen extends AppCompatActivity implements IRecycleSceneAdapter {
-  public HashMap<Integer, RecycleSceneDataModel> data = new HashMap<>();
+public class ProjectScreen extends AppCompatActivity implements IRecycleAdapter {
+  public HashMap<Integer, SceneRecycleDataModel> data = new HashMap<>();
 
-  public RecycleSceneDataModel item = new RecycleSceneDataModel("Item", "Text", 19, 20, true, true);
+  public SceneRecycleDataModel item = new SceneRecycleDataModel("Item", "Text", 19, 20, true, true);
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -31,12 +31,12 @@ public class ProjectScreen extends AppCompatActivity implements IRecycleSceneAda
     getSupportActionBar().setTitle("Имя приключения");
   }
 
-  void setListData(HashMap<Integer, RecycleSceneDataModel> data){
+  void setListData(HashMap<Integer, SceneRecycleDataModel> data){
     FragmentManager fm = getSupportFragmentManager();
-    RecyclerSceneViewFragment lsf = (RecyclerSceneViewFragment) fm.findFragmentById(R.id.screenFragment);
+    RecyclerViewFragment lsf = (RecyclerViewFragment) fm.findFragmentById(R.id.screenFragment);
 
     if(lsf != null && lsf.getView() != null){
-      lsf.updateListAdapter(data);
+      lsf.updateSceneListAdapter(data);
     }
   }
 

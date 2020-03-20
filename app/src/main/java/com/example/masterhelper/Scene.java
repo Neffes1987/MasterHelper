@@ -1,7 +1,7 @@
 package com.example.masterhelper;
 
-import ListFragment.IListFragmentInterface;
-import ListFragment.ListScreenFragment;
+import com.example.masterhelper.ListFragment.IListFragmentInterface;
+import com.example.masterhelper.ListFragment.ListScreenFragment;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.fragment.app.FragmentManager;
@@ -12,7 +12,7 @@ public class Scene extends AppCompatActivity implements IListFragmentInterface {
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_scene);
+    setContentView(R.layout.activity_screen_scene);
     setListData(data);
     // получаем указатель на тулбар активированного в главном компоненте
     getSupportActionBar().setTitle("Имя сцены");

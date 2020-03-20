@@ -1,7 +1,7 @@
 package com.example.masterhelper;
 
-import ListFragment.IListFragmentInterface;
-import ListFragment.ListScreenFragment;
+import com.example.masterhelper.ListFragment.IListFragmentInterface;
+import com.example.masterhelper.ListFragment.ListScreenFragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity implements IListFragmentInte
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_main);
+    setContentView(R.layout.activity_screen_projects);
     toolbar = findViewById(R.id.toolbar);
     toolbar.setTitle(R.string.screen_name_journeys);
     setSupportActionBar(toolbar);

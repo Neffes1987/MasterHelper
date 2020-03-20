@@ -1,4 +1,4 @@
-package ListFragment;
+package com.example.masterhelper.ListFragment;
 
 public interface IListFragmentInterface {
   void onCreateButtonPressed();

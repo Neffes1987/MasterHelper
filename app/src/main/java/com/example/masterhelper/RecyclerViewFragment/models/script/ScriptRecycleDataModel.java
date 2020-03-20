@@ -1,10 +1,10 @@
-package RecyclerSceneViewFragment.model;
+package com.example.masterhelper.RecyclerViewFragment.models.script;
 
 /**
  * Модель данных для адаптера поключения аккордиона в цеклический список сцены
  * @autor Neffes
  * */
-public class RecycleSceneDataModel {
+public class ScriptRecycleDataModel {
 
   /** название сцены выводится в строке списка(видна всегда)*/
   public String title;
@@ -12,11 +12,11 @@ public class RecycleSceneDataModel {
   /** описание сцены, тескт внутри аккордиона, выводится если таб открыт*/
   public String description;
 
-  /** количество скриптов внутри сцены*/
-  public int scriptsTotal;
+  /** в скрипте боевая сцена */
+  public boolean hasBattleActionIcon;
 
-  /** количество пройденых скриптов данной сцены */
-  public int scriptsFinished;
+  /** скрипт уже выполнен */
+  public boolean isFinished;
 
   /** флаг, что таб открыт */
   public boolean isExpand;
@@ -27,12 +27,12 @@ public class RecycleSceneDataModel {
   /**@constructor
    * генератор записи для адаптора
    * */
-  public RecycleSceneDataModel(String title, String description, int scriptsFinished, int scriptsTotal, boolean isExpand, boolean isMusicStarted ){
+  public ScriptRecycleDataModel(String title, String description, boolean hasBattleActionIcon, boolean isFinished, boolean isExpand, boolean isMusicStarted ){
     this.title = title;
     this.description = description;
-    this.scriptsFinished = scriptsFinished;
-    this.scriptsTotal = scriptsTotal;
+    this.hasBattleActionIcon = hasBattleActionIcon;
     this.isExpand = isExpand;
     this.isMusicStarted = isMusicStarted;
+    this.isFinished = isFinished;
   }
 }

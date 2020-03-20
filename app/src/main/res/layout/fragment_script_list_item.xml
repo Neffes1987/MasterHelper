@@ -134,14 +134,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:srcCompat="@mipmap/baseline_keyboard_arrow_down_black_18dp"
-            android:id="@+id/upOrderScriptBtn"
+            android:id="@+id/downOrderScriptBtn"
             android:layout_weight="1"/>
 
           <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:srcCompat="@mipmap/baseline_keyboard_arrow_up_black_18dp"
-            android:id="@+id/upDownOrderScriptBtn"
+            android:id="@+id/upOrderScriptBtn"
             android:layout_weight="1"/>
 
           <ImageButton

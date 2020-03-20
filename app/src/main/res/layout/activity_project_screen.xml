@@ -11,7 +11,7 @@
   <fragment
     android:layout_width="0dp"
     android:layout_height="0dp"
-    android:name="RecyclerSceneViewFragment.RecyclerSceneViewFragment"
+    android:name="com.example.masterhelper.RecyclerViewFragment.RecyclerViewFragment"
     android:id="@+id/screenFragment"
     tools:layout="@layout/fragment_recycler_view"
     app:layout_constraintEnd_toEndOf="parent"

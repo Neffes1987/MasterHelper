@@ -1,15 +1,16 @@
-package RecyclerSceneViewFragment.model;
+package com.example.masterhelper.RecyclerViewFragment.models.scene;
 
-import RecyclerSceneViewFragment.IRecycleSceneAdapter;
+import com.example.masterhelper.RecyclerViewFragment.IRecycleAdapter;
 import android.view.View;
 import android.widget.*;
 import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.masterhelper.R;
+import com.example.masterhelper.RecyclerViewFragment.RecyclerAccordionEvents;
 
 /** Модель для управления интерфейсом внутри аккордиона для цеклического списка*/
-public class AdapterHolder extends RecyclerView.ViewHolder{
+public class SceneAdapterHolder extends RecyclerView.ViewHolder{
 
   /** текстовое поле в с именем сцены */
   private TextView title;
@@ -50,7 +51,7 @@ public class AdapterHolder extends RecyclerView.ViewHolder{
   /** кнопка перемещения сцены ниже по списку */
   public AppCompatImageButton downOrderBtn;
   private int position;
-  private IRecycleSceneAdapter screen;
+  private IRecycleAdapter screen;
 
   /** установить название сцены в виджет
    * @param title - имя сцены
@@ -78,7 +79,7 @@ public class AdapterHolder extends RecyclerView.ViewHolder{
    * - scriptsFinished - сколько скриптов выполнено
    * - scriptsTotal - сколько всего скриптов в сцене
    * */
-  private void setScreenStepsValue(RecycleSceneDataModel item) {
+  private void setScreenStepsValue(SceneRecycleDataModel item) {
     String scripts = item.scriptsFinished +"/"+ item.scriptsTotal;
     this.screenStepsValue.setText(scripts);
   }
@@ -88,7 +89,7 @@ public class AdapterHolder extends RecyclerView.ViewHolder{
    * - scriptsFinished - сколько скриптов выполнено
    * - scriptsTotal - сколько всего скриптов в сцене
    * */
-  private void setSceneIsDone(RecycleSceneDataModel item) {
+  private void setSceneIsDone(SceneRecycleDataModel item) {
     if(item.scriptsTotal <= item.scriptsFinished) {
       this.isFinishedIcon.setVisibility(View.VISIBLE);
     } else {
@@ -108,7 +109,7 @@ public class AdapterHolder extends RecyclerView.ViewHolder{
    * - scriptsFinished - сколько скриптов выполнено
    * - scriptsTotal - сколько всего скриптов в сцене
    * */
-  private void setProgressBar(RecycleSceneDataModel item) {
+  private void setProgressBar(SceneRecycleDataModel item) {
     this.progressBar.setMax(item.scriptsTotal);
     this.progressBar.setProgress(item.scriptsFinished);
     setSceneIsDone(item);
@@ -119,7 +120,7 @@ public class AdapterHolder extends RecyclerView.ViewHolder{
    * @param itemData - набор данных для инициализации сцены
    * @param position - текущая позиция холдера сцены в списке
    * */
-  public void updateHolderByData(RecycleSceneDataModel itemData, int position){
+  public void updateHolderByData(SceneRecycleDataModel itemData, int position){
     setTitle(itemData.title);
     setDescription(itemData.description);
     setIsMusicToggledFlag(itemData.isMusicStarted);
@@ -128,7 +129,7 @@ public class AdapterHolder extends RecyclerView.ViewHolder{
   }
 
   /** @constructor генератор указателей на элементы UI для адаптера */
-  public AdapterHolder(View v, IRecycleSceneAdapter screen) {
+  public SceneAdapterHolder(View v, IRecycleAdapter screen) {
     super(v);
     this.screen = screen;
 
@@ -176,35 +177,35 @@ public class AdapterHolder extends RecyclerView.ViewHolder{
   View.OnClickListener editSceneListener = new View.OnClickListener() {
     @Override
     public void onClick(View v) {
-      screen.onChangeItem(position, SceneAccordionEvents.edit, "1");
+      screen.onChangeItem(position, RecyclerAccordionEvents.edit, "1");
     }
   };
 
   View.OnClickListener startSceneListener = new View.OnClickListener() {
     @Override
     public void onClick(View v) {
-      screen.onChangeItem(position, SceneAccordionEvents.start, "1");
+      screen.onChangeItem(position, RecyclerAccordionEvents.start, "1");
     }
   };
 
   View.OnClickListener deleteSceneListener = new View.OnClickListener() {
     @Override
     public void onClick(View v) {
-      screen.onChangeItem(position, SceneAccordionEvents.delete, "1");
+      screen.onChangeItem(position, RecyclerAccordionEvents.delete, "1");
     }
   };
 
   View.OnClickListener upOrderSceneListener = new View.OnClickListener() {
     @Override
     public void onClick(View v) {
-      screen.onChangeItem(position, SceneAccordionEvents.up, "1");
+      screen.onChangeItem(position, RecyclerAccordionEvents.up, "1");
     }
   };
 
   View.OnClickListener downOrderSceneListener = new View.OnClickListener() {
     @Override
     public void onClick(View v) {
-      screen.onChangeItem(position, SceneAccordionEvents.down, "1");
+      screen.onChangeItem(position, RecyclerAccordionEvents.down, "1");
     }
   };
 }
