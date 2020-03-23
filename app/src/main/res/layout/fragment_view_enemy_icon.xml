@@ -11,12 +11,20 @@
 
   <androidx.cardview.widget.CardView
     android:layout_width="wrap_content"
-    android:layout_height="120dp"
+    android:layout_height="wrap_content"
     app:cardBackgroundColor="#0FE597"
     app:cardCornerRadius="8dp"
     app:cardUseCompatPadding="true"
     android:layout_gravity="center_horizontal"
-    android:padding="4dp">
+    android:padding="4dp"
+    android:id="@+id/enemy_card">
+
+    <ImageView
+      android:src="@mipmap/baseline_flare_black_18dp"
+      android:layout_width="15dp"
+      android:layout_height="15dp"
+      android:id="@+id/last_changed"
+      android:layout_gravity="end"/>
 
     <ImageView
       android:src="@mipmap/enemy3"
@@ -27,54 +35,14 @@
       android:background="#007A2323"
       />
 
-    <LinearLayout
-      android:orientation="horizontal"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:id="@+id/health_statistic_row"
-      android:layout_gravity="bottom|end"
-      >
-
-      <ImageView
-        android:src="@mipmap/baseline_favorite_black_18dp"
-        android:layout_width="0dp"
-        android:layout_height="20dp"
-        android:id="@+id/heart"
-        android:layout_weight="1"
-        android:contentDescription="@string/attack_icon"
-        app:srcCompat="@mipmap/baseline_gavel_black_18dp"/>
-
-      <TextView
-        android:text="@string/default_enemy_stat"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/health_value"
-        android:layout_gravity="end"/>
-    </LinearLayout>
-
-    <LinearLayout
-      android:orientation="horizontal"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:id="@+id/attack_statistic_row"
-      android:layout_gravity="bottom"
-      >
-
-      <ImageView
-        android:src="@mipmap/baseline_favorite_black_18dp"
-        android:layout_width="0dp"
-        android:layout_height="20dp"
-        android:id="@+id/imageView2"
-        android:layout_weight="1"
-        android:contentDescription="@string/heart_icon"/>
-
-      <TextView
-        android:text="@string/default_enemy_stat"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/attack_value"
-        />
-    </LinearLayout>
+    <ImageView
+      android:src="@color/colorAccent"
+      android:layout_width="80dp"
+      android:layout_height="28dp"
+      android:id="@+id/damage_mask"
+      android:background="@color/colorAccent"
+      android:alpha="0.6"
+      android:layout_gravity="bottom"/>
 
   </androidx.cardview.widget.CardView>
 
