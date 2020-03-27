@@ -1,15 +1,18 @@
 package com.example.masterhelper;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import com.example.masterhelper.enemy.adapter.EnemyAdapter;
+import com.example.masterhelper.enemy.adapter.EnemyIconClickListener;
 import com.example.masterhelper.enemy.model.EnemyModel;
 
 import java.util.HashSet;
@@ -33,8 +36,14 @@ public class Script extends AppCompatActivity {
     EnemyAdapter enemyAdapter3 = new EnemyAdapter(enemy3, inflater);
     EnemyModel enemy4 = new EnemyModel("", 20, 15, 5, 4);
     EnemyAdapter enemyAdapter4 = new EnemyAdapter(enemy4, inflater);
-    EnemyModel enemy5 = new EnemyModel("", 20, 15, 5, 4);
+    EnemyModel enemy5 = new EnemyModel("", 20, 15, 5, 5);
     EnemyAdapter enemyAdapter5 = new EnemyAdapter(enemy5, inflater);
+
+    enemyAdapter1.setOnClickListener(enemyIconClickListener);
+    enemyAdapter2.setOnClickListener(enemyIconClickListener);
+    enemyAdapter3.setOnClickListener(enemyIconClickListener);
+    enemyAdapter4.setOnClickListener(enemyIconClickListener);
+    enemyAdapter5.setOnClickListener(enemyIconClickListener);
 
     Set<EnemyAdapter> enemyAdapters = new HashSet<EnemyAdapter>();
     enemyAdapters.add(enemyAdapter1);
@@ -91,5 +100,18 @@ public class Script extends AppCompatActivity {
     // добавляем последнюю строку в таблицу
     addRowToTable(tableLayout, currentRow);
    }
+
+   protected void openEnemyDetails(long id){
+     Intent intent = new Intent(this, ScriptAboutView.class);
+     intent.putExtra("id", id);
+     startActivity(intent);
+   }
+
+   private EnemyIconClickListener enemyIconClickListener = new EnemyIconClickListener(){
+     @Override
+     public void onClick(long id) {
+       openEnemyDetails(id);
+     }
+   };
 
 }

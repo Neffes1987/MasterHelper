@@ -39,9 +39,12 @@
   <string name="hello_blank_fragment">Hello blank fragment</string>
   <string name="search">Поиск...</string>
   <string name="name">Имя</string>
+  <string name="description">Описание</string>
   <string name="isDoneFlag">Выполнен</string>
   <string name="toggleAccordionButtonDescription">Переключить состояние аккордиона</string>
   <string name="default_enemy_stat">20</string>
   <string name="attack_icon">attack_icon</string>
   <string name="heart_icon">heart_icon</string>
+  <string name="enemy_health_title">Здоровье</string>
+  <string name="empty_value">0</string>
 </resources>

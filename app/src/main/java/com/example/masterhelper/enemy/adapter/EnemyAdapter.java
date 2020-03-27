@@ -16,6 +16,7 @@ public class EnemyAdapter {
   ImageView lastChanged;
   View enemyView;
   EnemyModel enemyData;
+  EnemyIconClickListener mOnClickListener;
 
   public EnemyAdapter(EnemyModel enemyData, LayoutInflater inflater){
     enemyView = inflater.inflate(R.layout.fragment_view_enemy_icon, null);
@@ -23,6 +24,8 @@ public class EnemyAdapter {
     enemyDamageMask = enemyView.findViewById(R.id.damage_mask);
     enemyIcon = enemyView.findViewById(R.id.enemyIcon);
     lastChanged = enemyView.findViewById(R.id.last_changed);
+
+    enemyView.setOnClickListener(onEnemyIconClickListener);
 
     this.enemyData = enemyData;
     setDamageMaskHeight();
@@ -63,4 +66,18 @@ public class EnemyAdapter {
   private int calculateMaskHeight (int currentHealth, int totalHealth, int enemyImageHeight){
     return enemyImageHeight - (currentHealth * enemyImageHeight) / totalHealth;
   }
+
+  public void setOnClickListener(EnemyIconClickListener l) {
+    mOnClickListener = l;
+  }
+
+  private View.OnClickListener onEnemyIconClickListener = new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+      if(mOnClickListener != null){
+        mOnClickListener.onClick(enemyData.getId());
+      }
+    }
+  };
+
 }
