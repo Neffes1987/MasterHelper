@@ -7,87 +7,89 @@
   android:layout_height="match_parent"
   tools:context=".ScriptAboutView">
 
-  <androidx.cardview.widget.CardView
-    android:layout_width="0dp"
-    android:layout_height="0dp"
+  <TextView
+    android:text="@string/name"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    style="@style/rowStyled"
+    android:id="@+id/enemy_name_id"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
-    android:layout_marginStart="8dp"
-    android:layout_marginTop="8dp"
-    android:layout_marginEnd="8dp"
+    app:layout_constraintTop_toTopOf="parent"
+    android:layout_marginTop="16dp"/>
+
+  <fragment
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:name="com.example.masterhelper.view_characteristic_row"
+    android:id="@+id/health_fragment_id"
+    tools:layout="@layout/fragment_view_characteristic_row"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/enemy_name_id"/>
+
+  <fragment
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:name="com.example.masterhelper.view_characteristic_row"
+    android:id="@+id/damage_fragment_id"
+    tools:layout="@layout/fragment_view_characteristic_row"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/health_fragment_id"/>
+
+  <fragment
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:name="com.example.masterhelper.view_characteristic_row"
+    android:id="@+id/ordering_fragment_id"
+    tools:layout="@layout/fragment_view_characteristic_row"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/damage_fragment_id"/>
+
+  <TextView
+    android:text="@string/description"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    style="@style/rowStyled"
+    android:id="@+id/enemy_description_id"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/ordering_fragment_id"
+    />
+
+  <LinearLayout
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    android:id="@+id/linearLayout2"
+    app:layout_constraintBottom_toBottomOf="parent"
     android:layout_marginBottom="8dp">
 
-    <LinearLayout
-      android:orientation="vertical"
-      android:layout_width="match_parent"
-      android:layout_height="match_parent">
+    <ImageButton
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      app:srcCompat="@mipmap/baseline_queue_black_18dp"
+      android:id="@+id/imageButton2"
+      android:layout_weight="1"/>
 
-      <TextView
-        android:text="@string/name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        style="@style/rowStyled"
-        android:id="@+id/enemy_name_id"/>
+    <ImageButton
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      app:srcCompat="@mipmap/baseline_create_black_18dp"
+      android:id="@+id/imageButton"
+      android:layout_weight="1"/>
 
-      <fragment
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:name="com.example.masterhelper.view_characteristic_row"
-        android:id="@+id/health_fragment_id"
-        tools:layout="@layout/fragment_view_characteristic_row"/>
+    <ImageButton
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      app:srcCompat="@mipmap/baseline_forward_black_18dp"
+      android:id="@+id/imageButton3"
+      android:layout_weight="1"/>
 
-      <fragment
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:name="com.example.masterhelper.view_characteristic_row"
-        android:id="@+id/damage_fragment_id"
-        tools:layout="@layout/fragment_view_characteristic_row"/>
+  </LinearLayout>
 
-      <fragment
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:name="com.example.masterhelper.view_characteristic_row"
-        android:id="@+id/ordering_fragment_id"
-        tools:layout="@layout/fragment_view_characteristic_row"/>
-
-      <TextView
-        android:text="@string/description"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        style="@style/rowStyled"
-        android:id="@+id/enemy_description_id"/>
-
-      <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <ImageButton
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          app:srcCompat="@mipmap/baseline_queue_black_18dp"
-          android:id="@+id/imageButton2"
-          android:layout_weight="1"/>
-
-        <ImageButton
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          app:srcCompat="@mipmap/baseline_create_black_18dp"
-          android:id="@+id/imageButton"
-          android:layout_weight="1"/>
-
-        <ImageButton
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          app:srcCompat="@mipmap/baseline_forward_black_18dp"
-          android:id="@+id/imageButton3"
-          android:layout_weight="1"/>
-
-      </LinearLayout>
-
-    </LinearLayout>
-
-  </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>
