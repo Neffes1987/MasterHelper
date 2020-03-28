@@ -8,11 +8,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 
-/**
- * A simple {@link Fragment} subclass.
- */
+/**  */
 public class view_characteristic_row extends Fragment {
-
+  /**  */
+  int fragmentViewCharacteristicRowLayout = R.layout.fragment_view_characteristic_row;
 
   public view_characteristic_row() {
     // Required empty public constructor
@@ -23,7 +22,7 @@ public class view_characteristic_row extends Fragment {
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
                            Bundle savedInstanceState) {
     // Inflate the layout for this fragment
-    return inflater.inflate(R.layout.fragment_view_characteristic_row, container, false);
+    return inflater.inflate(fragmentViewCharacteristicRowLayout, container, false);
   }
 
 }

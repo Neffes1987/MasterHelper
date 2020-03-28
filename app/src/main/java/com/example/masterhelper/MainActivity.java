@@ -1,7 +1,7 @@
 package com.example.masterhelper;
 
-import com.example.masterhelper.ListFragment.IListFragmentInterface;
-import com.example.masterhelper.ListFragment.ListScreenFragment;
+import com.example.masterhelper.ui.ListFragment.IListFragmentInterface;
+import com.example.masterhelper.ui.ListFragment.ListScreenFragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
@@ -10,15 +10,27 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentManager;
 
 public class MainActivity extends AppCompatActivity implements IListFragmentInterface {
+  /** */
+  int journeysScreenId = R.id.JOURNEYS_ID;
+
+  /** */
+  int activityScreenViewProjectsLayout = R.layout.activity_screen_view_projects;
+
+  /** */
+  int toolbarId = R.id.TOOLBAR_ID;
   Toolbar toolbar;
+
+  /** */
+  int ScreenTitleStringString = R.string.SCREEN_NAME_JOURNEYS_TEXT;
+
   public String[] data = new String[]{"Проект1", "Проект2", "Проект3"};
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_screen_view_projects);
-    toolbar = findViewById(R.id.toolbar);
-    toolbar.setTitle(R.string.screen_name_journeys);
+    setContentView(activityScreenViewProjectsLayout);
+    toolbar = findViewById(toolbarId);
+    toolbar.setTitle(ScreenTitleStringString);
     setSupportActionBar(toolbar);
     setListData(data);
   }
@@ -41,7 +53,7 @@ public class MainActivity extends AppCompatActivity implements IListFragmentInte
 
   void setListData(String[] data){
     FragmentManager fm = getSupportFragmentManager();
-    ListScreenFragment lsf = (ListScreenFragment) fm.findFragmentById(R.id.journeys);
+    ListScreenFragment lsf = (ListScreenFragment) fm.findFragmentById(journeysScreenId);
     if(lsf != null && lsf.getView() != null){
       lsf.updateListValues(lsf.getView(), data);
     }

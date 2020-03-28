@@ -4,14 +4,21 @@ import android.content.Intent;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.fragment.app.FragmentManager;
-import com.example.masterhelper.RecyclerViewFragment.IRecycleAdapter;
-import com.example.masterhelper.RecyclerViewFragment.RecyclerAccordionEvents;
-import com.example.masterhelper.RecyclerViewFragment.RecyclerViewFragment;
-import com.example.masterhelper.RecyclerViewFragment.models.script.ScriptRecycleDataModel;
+import com.example.masterhelper.ui.RecyclerViewFragment.IRecycleAdapter;
+import com.example.masterhelper.ui.RecyclerViewFragment.RecyclerAccordionEvents;
+import com.example.masterhelper.ui.RecyclerViewFragment.RecyclerViewFragment;
+import com.example.masterhelper.ui.RecyclerViewFragment.models.script.ScriptRecycleDataModel;
 
 import java.util.HashMap;
 
 public class Scene extends AppCompatActivity implements IRecycleAdapter {
+
+  /** */
+  int activityScreenViewSceneLayout = R.layout.activity_screen_view_scene;
+
+  /** */
+  int screenScriptsListId = R.id.SCREEN_SCRIPTS_LIST_ID;
+
   public HashMap<Integer, ScriptRecycleDataModel> data = new HashMap<>();
 
   public ScriptRecycleDataModel item = new ScriptRecycleDataModel("Событие сцены", "Text", true, false);
@@ -20,7 +27,7 @@ public class Scene extends AppCompatActivity implements IRecycleAdapter {
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_screen_view_scene);
+    setContentView(activityScreenViewSceneLayout);
     data.put(0, item);
     data.put(1, item);
     data.put(2, item);
@@ -33,7 +40,7 @@ public class Scene extends AppCompatActivity implements IRecycleAdapter {
 
   void setListData(HashMap<Integer, ScriptRecycleDataModel> data){
     FragmentManager fm = getSupportFragmentManager();
-    RecyclerViewFragment lsf = (RecyclerViewFragment) fm.findFragmentById(R.id.screenScriptsList);
+    RecyclerViewFragment lsf = (RecyclerViewFragment) fm.findFragmentById(screenScriptsListId);
 
     if(lsf != null && lsf.getView() != null){
       lsf.updateScriptListAdapter(data);

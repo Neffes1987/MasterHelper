@@ -1,4 +1,4 @@
-package com.example.masterhelper.enemy.adapter;
+package com.example.masterhelper.ui.enemy.adapter;
 
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -7,23 +7,41 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import androidx.cardview.widget.CardView;
 import com.example.masterhelper.R;
-import com.example.masterhelper.enemy.model.EnemyModel;
+import com.example.masterhelper.ui.enemy.model.EnemyModel;
 
 public class EnemyAdapter {
-  CardView enemyCard;
-  ImageView enemyDamageMask;
-  ImageView enemyIcon;
-  ImageView lastChanged;
+  /**  */
+  int enemyViewFragmentLayout = R.layout.fragment_view_enemy_icon;
   View enemyView;
+
+  /**  */
+  int enemyCardId = R.id.ENEMY_CARD;
+  CardView enemyCard;
+
+  /**  */
+  int enemyDamageMaskId = R.id.DAMAGE_MASK;
+  ImageView enemyDamageMask;
+
+  /**  */
+  int enemyIconId = R.id.ENEMY_ICON;
+  ImageView enemyIcon;
+
+  /**  */
+  int lastChangedId = R.id.LAST_CHANGED;
+  ImageView lastChanged;
+
+  /**  */
   EnemyModel enemyData;
+
+  /**  */
   EnemyIconClickListener mOnClickListener;
 
   public EnemyAdapter(EnemyModel enemyData, LayoutInflater inflater){
-    enemyView = inflater.inflate(R.layout.fragment_view_enemy_icon, null);
-    enemyCard = enemyView.findViewById(R.id.enemy_card);
-    enemyDamageMask = enemyView.findViewById(R.id.damage_mask);
-    enemyIcon = enemyView.findViewById(R.id.enemyIcon);
-    lastChanged = enemyView.findViewById(R.id.last_changed);
+    enemyView = inflater.inflate(enemyViewFragmentLayout, null);
+    enemyCard = enemyView.findViewById(enemyCardId);
+    enemyDamageMask = enemyView.findViewById(enemyDamageMaskId);
+    enemyIcon = enemyView.findViewById(enemyIconId);
+    lastChanged = enemyView.findViewById(lastChangedId);
 
     enemyView.setOnClickListener(onEnemyIconClickListener);
 

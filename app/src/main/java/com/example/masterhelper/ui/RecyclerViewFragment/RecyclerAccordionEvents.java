@@ -1,4 +1,4 @@
-package com.example.masterhelper.RecyclerViewFragment;
+package com.example.masterhelper.ui.RecyclerViewFragment;
 
 public enum RecyclerAccordionEvents {
   edit,

@@ -3,29 +3,33 @@ package com.example.masterhelper;
 import android.content.Context;
 import android.content.Intent;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import com.example.masterhelper.enemy.adapter.EnemyAdapter;
-import com.example.masterhelper.enemy.adapter.EnemyIconClickListener;
-import com.example.masterhelper.enemy.model.EnemyModel;
+import com.example.masterhelper.ui.enemy.adapter.EnemyAdapter;
+import com.example.masterhelper.ui.enemy.adapter.EnemyIconClickListener;
+import com.example.masterhelper.ui.enemy.model.EnemyModel;
 
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
 public class Script extends AppCompatActivity {
-  private int MIN_MARGIN = 200;
+  /** */
+  int activityScreenViewScriptLayout =  R.layout.activity_screen_view_script;
+
+  /** */
+  int tableId = R.id.ENEMIES_GRID_ID;
+
+  int MIN_MARGIN = 200;
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_screen_view_script);
-    TableLayout tableLayout = findViewById(R.id.enemies_grid);
+    setContentView(activityScreenViewScriptLayout);
+    TableLayout tableLayout = findViewById(tableId);
     LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
     EnemyModel enemy1 = new EnemyModel("", 20, 10, 5, 1);

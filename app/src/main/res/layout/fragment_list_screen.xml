@@ -4,7 +4,7 @@
              xmlns:tools="http://schemas.android.com/tools"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
-             tools:context="ListFragment.ListScreenFragment"
+             tools:context=".ui.ListFragment.ListScreenFragment"
   >
 
   <LinearLayout
@@ -17,13 +17,13 @@
       android:layout_height="wrap_content"
       android:inputType="textPersonName"
       android:ems="10"
-      android:id="@+id/searchStr"
+      android:id="@+id/SEARCH_STR"
       android:hint="@string/search"/>
 
     <ListView
       android:layout_width="match_parent"
       android:layout_height="match_parent"
-      android:id="@+id/screen_list_id"
+      android:id="@+id/SCREEN_LIST_ID"
       style="@android:style/Widget.Material.ExpandableListView"
       android:cacheColorHint="#64819C"
       tools:listitem="@android:layout/simple_expandable_list_item_2">
@@ -35,7 +35,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:clickable="true"
-    android:id="@+id/createItemBtn"
+    android:id="@+id/CREATE_ITEM_BTN"
     app:backgroundTint="@color/colorPrimary"
     android:layout_gravity="bottom|end"
     android:layout_marginBottom="10dp"

@@ -1,12 +1,22 @@
-package com.example.masterhelper.enemy.model;
+package com.example.masterhelper.ui.enemy.model;
 
 public class EnemyModel {
+  /** */
   private String name;
+
+  /** */
   private int totalHealth;
+
+  /** */
   private int currentHealth;
+
+  /** */
   private int damage;
+
+  /** */
   private long id;
 
+  /** */
   public EnemyModel(String name, int totalHealth, int currentHealth, int damage, long id){
     this.damage = damage;
     this.totalHealth = totalHealth;

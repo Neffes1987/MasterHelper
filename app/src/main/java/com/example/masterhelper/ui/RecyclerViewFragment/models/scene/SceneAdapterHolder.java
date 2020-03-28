@@ -1,13 +1,13 @@
-package com.example.masterhelper.RecyclerViewFragment.models.scene;
+package com.example.masterhelper.ui.RecyclerViewFragment.models.scene;
 
-import com.example.masterhelper.RecyclerViewFragment.IRecycleAdapter;
+import com.example.masterhelper.ui.RecyclerViewFragment.IRecycleAdapter;
 import android.view.View;
 import android.widget.*;
 import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.masterhelper.R;
-import com.example.masterhelper.RecyclerViewFragment.RecyclerAccordionEvents;
+import com.example.masterhelper.ui.RecyclerViewFragment.RecyclerAccordionEvents;
 
 /** Модель для управления интерфейсом внутри аккордиона для цеклического списка*/
 public class SceneAdapterHolder extends RecyclerView.ViewHolder{
@@ -133,35 +133,35 @@ public class SceneAdapterHolder extends RecyclerView.ViewHolder{
     super(v);
     this.screen = screen;
 
-    title = v.findViewById(R.id.itemTitle);
-    description = v.findViewById(R.id.scene_description);
-    screenStepsValue = v.findViewById(R.id.screen_steps_value);
+    title = v.findViewById(R.id.SCENE_TITLE_ID);
+    description = v.findViewById(R.id.SCENE_DESCRIPTION_ID);
+    screenStepsValue = v.findViewById(R.id.SCREEN_STEPS_VALUE_ID);
 
-    body = v.findViewById(R.id.accordion_body);
+    body = v.findViewById(R.id.SCREEN_ACCORDION_BODY_ID);
     body.setVisibility(View.GONE);
 
-    progressBar = v.findViewById(R.id.scene_progress);
+    progressBar = v.findViewById(R.id.SCENE_PROGRESS_ID);
 
-    isFinishedIcon = v.findViewById(R.id.isDoneFlag);
+    isFinishedIcon = v.findViewById(R.id.SCREEN_IS_DONE_FLAG_ID);
 
-    startScene = v.findViewById(R.id.start_scene_btn);
+    startScene = v.findViewById(R.id.SCENE_START_BTN_ID);
     startScene.setOnClickListener(startSceneListener);
 
-    editBtn = v.findViewById(R.id.editItemBtn);
+    editBtn = v.findViewById(R.id.SCREEN_EDIT_BTN_ID);
     editBtn.setOnClickListener(editSceneListener);
 
-    deleteBtn = v.findViewById(R.id.deleteItemBtn);
+    deleteBtn = v.findViewById(R.id.SCREEN_DELETE_BTN_ID);
     deleteBtn.setOnClickListener(deleteSceneListener);
 
-    upOrderBtn = v.findViewById(R.id.upOrderBtn);
+    upOrderBtn = v.findViewById(R.id.SCREEN_UP_ORDER_BTN_ID);
     upOrderBtn.setOnClickListener(upOrderSceneListener);
 
-    downOrderBtn = v.findViewById(R.id.upDownOrderBtn);
+    downOrderBtn = v.findViewById(R.id.SCREEN_DOWN_ORDER_BTN_ID);
     downOrderBtn.setOnClickListener(downOrderSceneListener);
 
-    isMusicToggledFlag = v.findViewById(R.id.background_music_toggler);
+    isMusicToggledFlag = v.findViewById(R.id.SCREEN_BACKGROUND_MUSIC_TOGGLER_ID);
 
-    expandButton = v.findViewById(R.id.itemToggler);
+    expandButton = v.findViewById(R.id.SCREEN_TOGGLER_ID);
     expandButton.setOnClickListener(toggleSceneListener);
   }
 

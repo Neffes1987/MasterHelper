@@ -17,20 +17,20 @@
     app:cardUseCompatPadding="true"
     android:layout_gravity="center_horizontal"
     android:padding="4dp"
-    android:id="@+id/enemy_card">
+    android:id="@+id/ENEMY_CARD">
 
     <ImageView
       android:src="@mipmap/baseline_flare_black_18dp"
       android:layout_width="15dp"
       android:layout_height="15dp"
-      android:id="@+id/last_changed"
+      android:id="@+id/LAST_CHANGED"
       android:layout_gravity="end"/>
 
     <ImageView
       android:src="@mipmap/enemy3"
       android:layout_width="80dp"
       android:layout_height="80dp"
-      android:id="@+id/enemyIcon"
+      android:id="@+id/ENEMY_ICON"
       android:contentDescription="@string/script_enemy_icon"
       android:background="#007A2323"
       />
@@ -39,7 +39,7 @@
       android:src="@color/colorAccent"
       android:layout_width="80dp"
       android:layout_height="28dp"
-      android:id="@+id/damage_mask"
+      android:id="@+id/DAMAGE_MASK"
       android:background="@color/colorAccent"
       android:alpha="0.6"
       android:layout_gravity="bottom"/>

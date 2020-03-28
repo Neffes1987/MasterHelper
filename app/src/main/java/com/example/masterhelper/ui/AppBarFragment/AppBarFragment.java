@@ -1,4 +1,4 @@
-package com.example.masterhelper.AppBarFragment;
+package com.example.masterhelper.ui.AppBarFragment;
 
 import android.os.Bundle;
 import android.view.*;
@@ -7,12 +7,17 @@ import androidx.fragment.app.Fragment;
 import com.example.masterhelper.R;
 
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * to handle interaction events.
- */
+/**  */
 public class AppBarFragment extends Fragment {
+  /** верхнее меню */
+  int appBarFragmentLayout = R.layout.fragment_app_bar;
+
+  /** выпадающее меню  */
+  int mainMenuMenu = R.menu.menu_main;
+
+  /** кнопка настройки */
+  int settingsButtonId = R.id.ACTION_SETTINGS;
+
   public AppBarFragment() {
     // Required empty public constructor
   }
@@ -26,18 +31,18 @@ public class AppBarFragment extends Fragment {
 
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-    return inflater.inflate(R.layout.fragment_app_bar, container, false);
+    return inflater.inflate(appBarFragmentLayout, container, false);
   }
 
   public void onCreateOptionsMenu(Menu menu, MenuInflater inflater){
-    inflater.inflate(R.menu.menu_main, menu);
+    inflater.inflate(mainMenuMenu, menu);
   }
 
   @Override
   public boolean onOptionsItemSelected(MenuItem item) {
 
     int id = item.getItemId();
-    if (id == R.id.action_settings) {
+    if (id == settingsButtonId) {
       Toast.makeText(getContext(), "ghbdtn", Toast.LENGTH_LONG).show();
       return true;
     }

@@ -1,27 +1,32 @@
-package com.example.masterhelper.RecyclerViewFragment.adapters.scene;
+package com.example.masterhelper.ui.RecyclerViewFragment.adapters.scene;
 
-import com.example.masterhelper.RecyclerViewFragment.IRecycleAdapter;
-import com.example.masterhelper.RecyclerViewFragment.models.scene.SceneAdapterHolder;
-import com.example.masterhelper.RecyclerViewFragment.models.scene.SceneRecycleDataModel;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.masterhelper.R;
+import com.example.masterhelper.ui.RecyclerViewFragment.IRecycleAdapter;
+import com.example.masterhelper.ui.RecyclerViewFragment.models.script.ScriptAdapterHolder;
+import com.example.masterhelper.ui.RecyclerViewFragment.models.script.ScriptRecycleDataModel;
 
 import java.util.HashMap;
 
 /**
  * Адаптор для работы с аккордионами внутри цеклического списка
  * */
-public class SceneAccordionAdapter extends RecyclerView.Adapter<SceneAdapterHolder> {
+public class ScriptAccordionAdapter extends RecyclerView.Adapter<ScriptAdapterHolder> {
+  /** */
+  int fragmentViewScriptListItemLayout = R.layout.fragment_view_script_list_item;
 
-  private HashMap<Integer, SceneRecycleDataModel> mDataset;
+  /** */
+  private HashMap<Integer, ScriptRecycleDataModel> mDataset;
+
+  /** */
   private IRecycleAdapter screen;
 
   /** Инициализируем набор данных для списка и передаем указатель на активность */
-  public SceneAccordionAdapter(HashMap<Integer, SceneRecycleDataModel> data, IRecycleAdapter screen) {
+  public ScriptAccordionAdapter(HashMap<Integer, ScriptRecycleDataModel> data, IRecycleAdapter screen) {
     mDataset = data;
     this.screen = screen;
   }
@@ -30,18 +35,18 @@ public class SceneAccordionAdapter extends RecyclerView.Adapter<SceneAdapterHold
    * Указатель на сцену нужен, чтобы прокинуть коллбек на кнопки */
   @NonNull
   @Override
-  public SceneAdapterHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+  public ScriptAdapterHolder onCreateViewHolder(ViewGroup parent, int viewType) {
     View v = LayoutInflater.from(parent.getContext())
-      .inflate(R.layout.fragment_view_scene_list_item, parent, false);
-    return new SceneAdapterHolder(v, screen);
+      .inflate(fragmentViewScriptListItemLayout, parent, false);
+    return new ScriptAdapterHolder(v, screen);
   }
 
   /** привязываем данные к сцены к холдеру адаптера
    *  берем данные из маппы и инициализируем холдер
    * */
   @Override
-  public void onBindViewHolder(SceneAdapterHolder holder, final int position) {
-    SceneRecycleDataModel itemData = mDataset.get(position);
+  public void onBindViewHolder(ScriptAdapterHolder holder, final int position) {
+    ScriptRecycleDataModel itemData = mDataset.get(position);
     assert itemData != null;
     holder.updateHolderByData(itemData, position);
   }

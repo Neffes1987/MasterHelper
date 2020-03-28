@@ -21,7 +21,6 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/accordion_head"
         android:background="@color/colorPrimary"
         style="@style/ConstraintLayoutPaddingStyled"
         android:gravity="center_vertical">
@@ -30,14 +29,14 @@
           android:text="@string/name"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:id="@+id/itemTitle"
+          android:id="@+id/SCENE_TITLE_ID"
           android:layout_weight="10"/>
 
         <ImageView
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           app:srcCompat="@mipmap/baseline_done_black_18dp"
-          android:id="@+id/isDoneFlag"
+          android:id="@+id/SCREEN_IS_DONE_FLAG_ID"
           android:layout_weight="1"
           tools:visibility="visible"
           android:contentDescription="@string/isDoneFlag"/>
@@ -46,7 +45,7 @@
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           app:srcCompat="@mipmap/baseline_filter_list_black_18dp"
-          android:id="@+id/itemToggler"
+          android:id="@+id/SCREEN_TOGGLER_ID"
           android:layout_weight="1"
           android:scaleType="center"
           android:layout_gravity="clip_vertical"
@@ -59,13 +58,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         style="@style/ConstraintLayoutPaddingStyled"
-        android:id="@+id/progress_bar_wrapper">
+        >
 
         <ProgressBar
           style="?android:attr/progressBarStyleHorizontal"
           android:layout_width="0dp"
           android:layout_height="wrap_content"
-          android:id="@+id/scene_progress"
+          android:id="@+id/SCENE_PROGRESS_ID"
           android:layout_weight="1"
           android:progress="10"/>
 
@@ -76,14 +75,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         style="@style/ConstraintLayoutPaddingStyled"
-        android:id="@+id/accordion_body"
+        android:id="@+id/SCREEN_ACCORDION_BODY_ID"
         android:visibility="visible">
 
         <TextView
           android:text="@string/scene_description"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:id="@+id/scene_description"
+          android:id="@+id/SCENE_DESCRIPTION_ID"
           style="@style/rowStyled"
           tools:text="@string/scene_description"/>
 
@@ -92,20 +91,19 @@
           android:layout_width="match_parent"
           android:layout_height="match_parent"
           style="@style/rowStyled"
-          android:id="@+id/screen_steps_block">
+          >
 
           <TextView
             android:text="@string/screen_steps"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/screen_steps_title"
             android:layout_weight="1"/>
 
           <TextView
             android:text="0"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:id="@+id/screen_steps_value"
+            android:id="@+id/SCREEN_STEPS_VALUE_ID"
             android:layout_weight="1"
             android:gravity="end"/>
         </LinearLayout>
@@ -114,7 +112,7 @@
           android:text="@string/background_music"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:id="@+id/background_music_toggler"
+          android:id="@+id/SCREEN_BACKGROUND_MUSIC_TOGGLER_ID"
           style="@style/rowStyled"
           />
 
@@ -124,20 +122,19 @@
           android:layout_height="match_parent"
           style="@style/rowStyled"
           android:gravity="center_vertical"
-          android:id="@+id/start_scene_block">
+          >
 
           <TextView
             android:text="@string/screen_name_scene_start"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/start_scene_title"
             android:layout_weight="10"/>
 
           <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:srcCompat="@mipmap/baseline_play_arrow_black_18dp"
-            android:id="@+id/start_scene_btn"
+            android:id="@+id/SCENE_START_BTN_ID"
             android:layout_weight="1"
             android:minHeight="40dp"
             android:contentDescription="@string/screen_name_scene_start"/>
@@ -152,28 +149,28 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:srcCompat="@mipmap/baseline_create_black_18dp"
-            android:id="@+id/editItemBtn"
+            android:id="@+id/SCREEN_EDIT_BTN_ID"
             android:layout_weight="1"/>
 
           <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:srcCompat="@mipmap/baseline_keyboard_arrow_down_black_18dp"
-            android:id="@+id/upOrderBtn"
+            android:id="@+id/SCREEN_UP_ORDER_BTN_ID"
             android:layout_weight="1"/>
 
           <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:srcCompat="@mipmap/baseline_keyboard_arrow_up_black_18dp"
-            android:id="@+id/upDownOrderBtn"
+            android:id="@+id/SCREEN_DOWN_ORDER_BTN_ID"
             android:layout_weight="1"/>
 
           <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:srcCompat="@mipmap/baseline_clear_black_18dp"
-            android:id="@+id/deleteItemBtn"
+            android:id="@+id/SCREEN_DELETE_BTN_ID"
             android:layout_weight="1"/>
         </LinearLayout>
 

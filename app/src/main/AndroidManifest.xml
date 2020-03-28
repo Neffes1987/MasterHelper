@@ -9,7 +9,11 @@
     android:roundIcon="@mipmap/ic_launcher_round"
     android:supportsRtl="true"
     android:theme="@style/AppTheme">
-    <activity android:name=".ScriptAboutView" android:theme="@style/AppTheme.About" >
+    <activity android:name=".ScriptTextDescriptionScreen">
+    </activity>
+    <activity
+      android:name=".ScriptAboutView"
+      android:theme="@style/AppTheme.About">
     </activity>
     <activity android:name=".Script">
     </activity>

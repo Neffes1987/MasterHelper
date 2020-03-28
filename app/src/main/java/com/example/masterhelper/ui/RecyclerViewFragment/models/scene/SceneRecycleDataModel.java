@@ -1,4 +1,4 @@
-package com.example.masterhelper.RecyclerViewFragment.models.scene;
+package com.example.masterhelper.ui.RecyclerViewFragment.models.scene;
 
 /**
  * Модель данных для адаптера поключения аккордиона в цеклический список сцены

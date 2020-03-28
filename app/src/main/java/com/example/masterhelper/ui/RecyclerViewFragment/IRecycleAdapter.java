@@ -1,4 +1,4 @@
-package com.example.masterhelper.RecyclerViewFragment;
+package com.example.masterhelper.ui.RecyclerViewFragment;
 
 /** Интерфейс для оповещения активности, что произошло событие внутри таба аккордтона*/
 public interface IRecycleAdapter {

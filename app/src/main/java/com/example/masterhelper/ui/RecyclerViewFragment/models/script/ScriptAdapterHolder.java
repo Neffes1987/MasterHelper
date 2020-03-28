@@ -1,4 +1,4 @@
-package com.example.masterhelper.RecyclerViewFragment.models.script;
+package com.example.masterhelper.ui.RecyclerViewFragment.models.script;
 
 import android.view.View;
 import android.widget.*;
@@ -6,8 +6,8 @@ import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.masterhelper.R;
-import com.example.masterhelper.RecyclerViewFragment.IRecycleAdapter;
-import com.example.masterhelper.RecyclerViewFragment.RecyclerAccordionEvents;
+import com.example.masterhelper.ui.RecyclerViewFragment.IRecycleAdapter;
+import com.example.masterhelper.ui.RecyclerViewFragment.RecyclerAccordionEvents;
 
 /** Модель для управления интерфейсом внутри аккордиона для цеклического списка*/
 public class ScriptAdapterHolder extends RecyclerView.ViewHolder{
@@ -103,32 +103,32 @@ public class ScriptAdapterHolder extends RecyclerView.ViewHolder{
     super(v);
     this.screen = screen;
 
-    title = v.findViewById(R.id.itemScriptTitle);
-    description = v.findViewById(R.id.script_description);
+    title = v.findViewById(R.id.SCRIPT_TITLE_ID);
+    description = v.findViewById(R.id.SCRIPT_DESCRIPTION_ID);
 
-    body = v.findViewById(R.id.accordionScript_body);
+    body = v.findViewById(R.id.ACCORDION_SCRIPT_BODY_ID);
     body.setVisibility(View.GONE);
 
-    isFinishedIcon = v.findViewById(R.id.isScriptDoneFlag);
+    isFinishedIcon = v.findViewById(R.id.IS_SCRIPT_DONE_FLAG_ID);
 
-    startScene = v.findViewById(R.id.start_script_btn);
+    startScene = v.findViewById(R.id.SCRIPT_START_BTN_ID);
     startScene.setOnClickListener(startSceneListener);
 
-    editBtn = v.findViewById(R.id.editItemScriptBtn);
+    editBtn = v.findViewById(R.id.SCRIPT_EDIT_BTN_ID);
     editBtn.setOnClickListener(editSceneListener);
 
-    deleteBtn = v.findViewById(R.id.deleteItemScriptBtn);
+    deleteBtn = v.findViewById(R.id.SCRIPT_DELETE_BTN_ID);
     deleteBtn.setOnClickListener(deleteSceneListener);
 
-    upOrderBtn = v.findViewById(R.id.downOrderScriptBtn);
+    upOrderBtn = v.findViewById(R.id.SCRIPT_UP_ORDER_BTN_ID);
     upOrderBtn.setOnClickListener(upOrderSceneListener);
 
-    downOrderBtn = v.findViewById(R.id.downOrderScriptBtn);
+    downOrderBtn = v.findViewById(R.id.SCRIPT_DOWN_ORDER_BTN_ID);
     downOrderBtn.setOnClickListener(downOrderSceneListener);
 
-    hasBattleActionIcon = v.findViewById(R.id.hasBattleActionIcon);
+    hasBattleActionIcon = v.findViewById(R.id.SCRIPT_HAS_BATTLE_ACTION_ICON_ID);
 
-    expandButton = v.findViewById(R.id.itemScriptToggler);
+    expandButton = v.findViewById(R.id.SCRIPT_TOGGLER_ID);
     expandButton.setOnClickListener(toggleScriptListener);
   }
 
