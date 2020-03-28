@@ -5,19 +5,44 @@
   xmlns:app="http://schemas.android.com/apk/res-auto"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  tools:context=".ScriptTextDescriptionScreen">
+  tools:context=".ScriptTextDescriptionScreen"
+  android:padding="8dp">
 
-  <TextView
-    android:text="@string/description"
+  <ScrollView
     android:layout_width="0dp"
-    android:layout_height="0dp"
-    android:id="@+id/SCRIPT_DESCRIPTION_ID"
+    android:layout_height="wrap_content"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintBottom_toTopOf="@+id/SCRIPT_ACTION_BUTTONS_FRAGMENT_ID"
+    android:layout_marginBottom="24dp"
+    app:layout_constraintVertical_bias="0.5">
+
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="vertical">
+
+      <TextView
+        android:text="@string/description"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/SCRIPT_DESCRIPTION_ID"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:padding="8dp"
+        android:textSize="18sp"/>
+    </LinearLayout>
+  </ScrollView>
+
+  <fragment
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:name="com.example.masterhelper.ui.ScriptBottomButtonsFragment.ScriptBottomButtonsFragment"
+    android:id="@+id/SCRIPT_ACTION_BUTTONS_FRAGMENT_ID"
+    tools:layout="@layout/fragment_script_bottom_buttons"
+    app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintBottom_toBottomOf="parent"
-    android:layout_marginBottom="8dp"
-    android:layout_marginStart="8dp"
-    android:layout_marginTop="8dp"
-    android:layout_marginEnd="8dp"/>
+    app:layout_constraintEnd_toEndOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

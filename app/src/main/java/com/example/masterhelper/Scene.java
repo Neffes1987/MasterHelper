@@ -22,6 +22,7 @@ public class Scene extends AppCompatActivity implements IRecycleAdapter {
   public HashMap<Integer, ScriptRecycleDataModel> data = new HashMap<>();
 
   public ScriptRecycleDataModel item = new ScriptRecycleDataModel("Событие сцены", "Text", true, false);
+  public ScriptRecycleDataModel item1 = new ScriptRecycleDataModel("Событие сцены", "Text", false, false);
 
 
   @Override
@@ -29,9 +30,9 @@ public class Scene extends AppCompatActivity implements IRecycleAdapter {
     super.onCreate(savedInstanceState);
     setContentView(activityScreenViewSceneLayout);
     data.put(0, item);
-    data.put(1, item);
+    data.put(1, item1);
     data.put(2, item);
-    data.put(3, item);
+    data.put(3, item1);
     setListData(data);
     // получаем указатель на тулбар активированного в главном компоненте
     getSupportActionBar().setTitle("Имя сцены");
@@ -49,10 +50,18 @@ public class Scene extends AppCompatActivity implements IRecycleAdapter {
 
   @Override
   public void onChangeItem(int position, RecyclerAccordionEvents fieldName, String newValue) {
+    ScriptRecycleDataModel currentData = data.get(position);
+
     switch (fieldName){
       case start:
-        Intent intent = new Intent(this, Script.class);
-        startActivity(intent);
+        assert currentData != null;
+        if(currentData.hasBattleActionIcon){
+          Intent intent = new Intent(this, Script.class);
+          startActivity(intent);
+        } else {
+          Intent intent = new Intent(this, ScriptTextDescriptionScreen.class);
+          startActivity(intent);
+        }
         break;
       default: return;
     }

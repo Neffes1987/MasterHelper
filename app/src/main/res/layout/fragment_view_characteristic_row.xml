@@ -3,8 +3,8 @@
              xmlns:app="http://schemas.android.com/apk/res-auto"
              xmlns:tools="http://schemas.android.com/tools"
              android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             tools:context=".view_characteristic_row"
+             android:layout_height="wrap_content"
+             tools:context=".ui.viewCharacteristicRow.ViewCharacteristicRow"
              android:paddingTop="10dp"
              android:paddingBottom="10dp">
 
@@ -20,7 +20,7 @@
       android:layout_width="wrap_content"
       android:layout_height="match_parent"
       android:text="@string/name"
-      android:id="@+id/row_title_id"
+      android:id="@+id/ROW_TITLE_ID"
       android:layout_weight="2"
       android:gravity="center_vertical"/>
 
@@ -34,7 +34,7 @@
       android:text="@string/empty_value"
       android:layout_width="wrap_content"
       android:layout_height="match_parent"
-      android:id="@+id/row_value_id"
+      android:id="@+id/ROW_VALUE_ID"
       android:layout_weight="2"
       android:textAlignment="viewEnd"
       android:gravity="center_vertical"/>
@@ -49,7 +49,7 @@
       android:src="@mipmap/baseline_remove_circle_outline_black_18dp"
       android:layout_width="wrap_content"
       android:layout_height="40dp"
-      android:id="@+id/row_decrease_value"
+      android:id="@+id/ROW_DECREASE_VALUE_ID"
       android:layout_weight="1"
       android:background="#00FFFFFF"/>
 
@@ -63,7 +63,7 @@
       android:src="@mipmap/baseline_add_circle_outline_black_18dp"
       android:layout_width="wrap_content"
       android:layout_height="40dp"
-      android:id="@+id/row_increase_value"
+      android:id="@+id/ROW_INCREASE_VALUE_ID"
       android:layout_weight="1"
       android:background="#00FFFFFF"/>
 

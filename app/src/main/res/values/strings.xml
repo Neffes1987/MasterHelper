@@ -46,5 +46,7 @@
   <string name="attack_icon">attack_icon</string>
   <string name="heart_icon">heart_icon</string>
   <string name="enemy_health_title">Здоровье</string>
+  <string name="enemy_damage_title">Повреждение</string>
+  <string name="enemy_ordering_title">Инициатива</string>
   <string name="empty_value">0</string>
 </resources>

@@ -12,84 +12,86 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     style="@style/rowStyled"
-    android:id="@+id/enemy_name_id"
+    android:id="@+id/ENEMY_NAME_ID"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintTop_toTopOf="parent"
-    />
+    android:paddingBottom="20dp"/>
+
+  <ScrollView
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:id="@+id/scrollView2"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/ENEMY_NAME_ID"
+    app:layout_constraintBottom_toTopOf="@+id/SCRIPT_ENEMY_BOTTOM_BUTTONS"
+    android:paddingBottom="80dp"
+    app:layout_constraintVertical_bias="0.18"
+    android:paddingTop="20dp">
+
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="vertical"
+      android:id="@+id/linearLayout3">
+
+      <fragment
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:name="com.example.masterhelper.ui.viewCharacteristicRow.ViewCharacteristicRow"
+        android:id="@+id/HEALTH_FRAGMENT_ID"
+        tools:layout="@layout/fragment_view_characteristic_row"
+        tools:layout_conversion_absoluteHeight="60dp"
+        tools:layout_editor_absoluteY="40dp"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_conversion_absoluteWidth="379dp"/>
+
+      <fragment
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:name="com.example.masterhelper.ui.viewCharacteristicRow.ViewCharacteristicRow"
+        android:id="@+id/DAMAGE_FRAGMENT_ID"
+        tools:layout="@layout/fragment_view_characteristic_row"
+        tools:layout_conversion_absoluteHeight="60dp"
+        tools:layout_editor_absoluteY="100dp"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_conversion_absoluteWidth="379dp"/>
+
+      <fragment
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:name="com.example.masterhelper.ui.viewCharacteristicRow.ViewCharacteristicRow"
+        android:id="@+id/ORDERING_FRAGMENT_ID"
+        tools:layout="@layout/fragment_view_characteristic_row"
+        tools:layout_conversion_absoluteHeight="60dp"
+        tools:layout_editor_absoluteY="160dp"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_conversion_absoluteWidth="379dp"/>
+
+      <TextView
+        android:text="@string/description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/rowStyled"
+        android:id="@+id/ENEMY_DESCRIPTION_ID"
+        tools:layout_conversion_absoluteHeight="40dp"
+        tools:layout_editor_absoluteY="219dp"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_conversion_absoluteWidth="379dp"/>
+
+    </LinearLayout>
+  </ScrollView>
 
   <fragment
-    android:layout_width="match_parent"
-    android:layout_height="60dp"
-    android:name="com.example.masterhelper.view_characteristic_row"
-    android:id="@+id/health_fragment_id"
-    tools:layout="@layout/fragment_view_characteristic_row"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/enemy_name_id"/>
-
-  <fragment
-    android:layout_width="match_parent"
+    android:layout_width="0dp"
     android:layout_height="wrap_content"
-    android:name="com.example.masterhelper.view_characteristic_row"
-    android:id="@+id/damage_fragment_id"
-    tools:layout="@layout/fragment_view_characteristic_row"
-    app:layout_constraintStart_toStartOf="parent"
+    android:name="com.example.masterhelper.ui.ScriptBottomButtonsFragment.ScriptBottomButtonsFragment"
+    android:id="@+id/SCRIPT_ENEMY_BOTTOM_BUTTONS"
+    tools:layout="@layout/fragment_script_bottom_buttons"
     app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/health_fragment_id"/>
-
-  <fragment
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:name="com.example.masterhelper.view_characteristic_row"
-    android:id="@+id/ordering_fragment_id"
-    tools:layout="@layout/fragment_view_characteristic_row"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/damage_fragment_id"/>
-
-  <TextView
-    android:text="@string/description"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    style="@style/rowStyled"
-    android:id="@+id/enemy_description_id"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/ordering_fragment_id"
-    />
-
-  <LinearLayout
-    android:orientation="horizontal"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    android:id="@+id/linearLayout2"
     app:layout_constraintBottom_toBottomOf="parent"
-    android:layout_marginBottom="8dp">
-
-    <ImageButton
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      app:srcCompat="@mipmap/baseline_queue_black_18dp"
-      android:id="@+id/imageButton2"
-      android:layout_weight="1"/>
-
-    <ImageButton
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      app:srcCompat="@mipmap/baseline_create_black_18dp"
-      android:id="@+id/imageButton"
-      android:layout_weight="1"/>
-
-    <ImageButton
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      app:srcCompat="@mipmap/baseline_forward_black_18dp"
-      android:id="@+id/imageButton3"
-      android:layout_weight="1"/>
-
-  </LinearLayout>
+    />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
