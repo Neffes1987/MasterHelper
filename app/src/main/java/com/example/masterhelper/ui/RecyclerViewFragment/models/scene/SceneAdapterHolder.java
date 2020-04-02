@@ -90,7 +90,7 @@ public class SceneAdapterHolder extends RecyclerView.ViewHolder{
    * - scriptsTotal - сколько всего скриптов в сцене
    * */
   private void setSceneIsDone(SceneRecycleDataModel item) {
-    if(item.scriptsTotal <= item.scriptsFinished) {
+    if(item.scriptsTotal <= item.scriptsFinished && item.scriptsTotal != 0) {
       this.isFinishedIcon.setVisibility(View.VISIBLE);
     } else {
       this.isFinishedIcon.setVisibility(View.GONE);

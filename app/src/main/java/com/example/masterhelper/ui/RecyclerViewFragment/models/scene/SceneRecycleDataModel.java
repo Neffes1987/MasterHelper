@@ -27,6 +27,15 @@ public class SceneRecycleDataModel {
   /**@constructor
    * генератор записи для адаптора
    * */
+  public SceneRecycleDataModel(String title){
+    this.title = title;
+    this.description = "";
+    this.scriptsFinished = 0;
+    this.scriptsTotal = 0;
+    this.isExpand = false;
+    this.isMusicStarted = false;
+  }
+
   public SceneRecycleDataModel(String title, String description, int scriptsFinished, int scriptsTotal, boolean isExpand, boolean isMusicStarted ){
     this.title = title;
     this.description = description;

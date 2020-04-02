@@ -15,6 +15,8 @@ import java.util.Objects;
 
 
 public class ListScreenFragment extends Fragment {
+  int MIN_LIST_LENGTH_FOR_SEARCH = 10;
+
   /**  */
   int fragmentListScreenLayout = R.layout.fragment_list_screen;
 
@@ -27,8 +29,9 @@ public class ListScreenFragment extends Fragment {
   /**  */
   int createItemBtnId = R.id.CREATE_ITEM_BTN;
 
-  /**  */
+  /** строка поиска */
   int searchStrId = R.id.SEARCH_STR;
+  EditText searchStr;
 
   public String[] data = new String[]{"Запись1", "Запись2", "Запись3"};
 
@@ -60,6 +63,9 @@ public class ListScreenFragment extends Fragment {
     ListAdapter adapter = new ArrayAdapter<>(Objects.requireNonNull(getActivity()), simpleListItemLayout, data);
     ListView listView = fragmentView.findViewById(screenListId);
     listView.setAdapter(adapter);
+    if(data.length > MIN_LIST_LENGTH_FOR_SEARCH){
+      searchStr.setVisibility(View.VISIBLE);
+    }
   }
 
   void setCreateBtnHandler(View fragmentView){
@@ -68,8 +74,10 @@ public class ListScreenFragment extends Fragment {
   }
 
   void setSearchStrHandlers(View fragmentView){
-    final EditText searchStr = fragmentView.findViewById(searchStrId);
+    searchStr = fragmentView.findViewById(searchStrId);
+    searchStr.setVisibility(View.GONE);
     searchStr.addTextChangedListener(watcher);
+
   }
 
   View.OnClickListener clickHandler = new View.OnClickListener() {

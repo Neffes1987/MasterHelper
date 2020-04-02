@@ -32,15 +32,10 @@
   </LinearLayout>
 
   <com.google.android.material.floatingactionbutton.FloatingActionButton
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:clickable="true"
     android:id="@+id/CREATE_ITEM_BTN"
     app:backgroundTint="@color/colorPrimary"
-    android:layout_gravity="bottom|end"
-    android:layout_marginBottom="10dp"
-    android:layout_marginRight="10dp"
     app:maxImageSize="24dp"
-    android:src="@mipmap/baseline_add_black_18dp"/>
+    android:src="@mipmap/baseline_add_black_18dp"
+    style="@style/floatCreateButton"/>
 
 </FrameLayout>

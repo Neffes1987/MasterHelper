@@ -1,5 +1,6 @@
 package com.example.masterhelper;
 
+import android.util.Log;
 import com.example.masterhelper.ui.ListFragment.IListFragmentInterface;
 import com.example.masterhelper.ui.ListFragment.ListScreenFragment;
 import android.content.Intent;
@@ -8,6 +9,10 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentManager;
+
+import java.util.HashSet;
+
+import static com.example.masterhelper.utils.Utils.convertToArray;
 
 public class MainActivity extends AppCompatActivity implements IListFragmentInterface {
   /** */
@@ -23,7 +28,7 @@ public class MainActivity extends AppCompatActivity implements IListFragmentInte
   /** */
   int ScreenTitleStringString = R.string.SCREEN_NAME_JOURNEYS_TEXT;
 
-  public String[] data = new String[]{"Проект1", "Проект2", "Проект3"};
+  public HashSet<String> data = new HashSet<>();
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -37,8 +42,11 @@ public class MainActivity extends AppCompatActivity implements IListFragmentInte
 
   @Override
   public void onCreateButtonPressed() {
-    Toast.makeText(this, "create", Toast.LENGTH_SHORT).show();
+    Intent intent = new Intent(MainActivity.this, CreateNewItem.class);
+    intent.putExtra("title", R.string.journey_create_title);
+    startActivityForResult(intent, 1);
   }
+
 
   @Override
   public void onItemButtonPressed(String id) {
@@ -51,11 +59,28 @@ public class MainActivity extends AppCompatActivity implements IListFragmentInte
     Toast.makeText(this, str, Toast.LENGTH_SHORT).show();
   }
 
-  void setListData(String[] data){
+  void setListData(HashSet<String> data){
+    String[] dataArray = convertToArray(data);
     FragmentManager fm = getSupportFragmentManager();
     ListScreenFragment lsf = (ListScreenFragment) fm.findFragmentById(journeysScreenId);
     if(lsf != null && lsf.getView() != null){
-      lsf.updateListValues(lsf.getView(), data);
+      lsf.updateListValues(lsf.getView(), dataArray);
+    }
+  }
+
+  @Override
+  protected void onActivityResult(int requestCode, int resultCode, Intent result) {
+    super.onActivityResult(requestCode, resultCode, result);
+
+    if (requestCode == 1) {
+      if (resultCode == RESULT_OK) {
+        String newName = result.getStringExtra("name");
+        if(newName != null && newName.trim().length() == 0){
+          return;
+        }
+        data.add(newName);
+        setListData(data);
+      }
     }
   }
 }
