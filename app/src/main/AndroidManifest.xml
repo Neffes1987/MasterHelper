@@ -9,7 +9,15 @@
     android:roundIcon="@mipmap/ic_launcher_round"
     android:supportsRtl="true"
     android:theme="@style/AppTheme">
-    <activity android:name=".CreateNewItem" android:theme="@style/AppTheme.About">
+    <activity android:name=".MusicSettingsScreen">
+    </activity>
+    <activity android:name=".EditScriptScreen">
+    </activity>
+    <activity android:name=".EditSceneScreen">
+    </activity>
+    <activity
+      android:name=".CreateNewItem"
+      android:theme="@style/AppTheme.About">
     </activity>
     <activity
       android:name=".ScriptTextDescriptionScreen"

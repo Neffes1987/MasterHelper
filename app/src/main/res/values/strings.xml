@@ -54,4 +54,8 @@
   <string name="empty_value">0</string>
   <string name="create">Создать</string>
   <string name="cancel">Отмена</string>
+
+  <string name="download">Загрузить новый файл</string>
+
+  <string name="add_music">Добавить музыкальный файл</string>
 </resources>
