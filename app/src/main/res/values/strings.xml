@@ -58,4 +58,5 @@
   <string name="download">Загрузить новый файл</string>
 
   <string name="add_music">Добавить музыкальный файл</string>
+  <string name="library_music">Фоновая музыка</string>
 </resources>

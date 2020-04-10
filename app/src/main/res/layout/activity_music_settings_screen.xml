@@ -7,49 +7,14 @@
   android:layout_height="match_parent"
   tools:context=".MusicSettingsScreen">
 
-  <TextView
-    android:text="@string/add_music"
+  <fragment
     android:layout_width="0dp"
-    android:layout_height="wrap_content"
-    android:id="@+id/textView"
+    android:layout_height="0dp"
+    android:name="com.example.masterhelper.ui.SoundsList.SoundsList"
+    android:id="@+id/SOUND_LIST_FRAGMENT_ID"
+    tools:layout="@layout/fragment_sounds_list"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent"
-    android:textAlignment="center"/>
-
-  <androidx.recyclerview.widget.RecyclerView
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/textView"
-    app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-    android:layout_marginTop="8dp"
-    app:layout_constraintVertical_bias="0.0">
-
-  </androidx.recyclerview.widget.RecyclerView>
-
-  <LinearLayout
-    android:orientation="horizontal"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    android:id="@+id/linearLayout">
-
-    <Button
-      android:text="@string/download"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:id="@+id/DOWNLOAD_FILE_ID"
-      android:layout_weight="1"/>
-
-    <Button
-      android:text="@string/cancel"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:id="@+id/CLOSE_MUSIC_SETTINGS"
-      android:layout_weight="1"/>
-  </LinearLayout>
+    app:layout_constraintBottom_toBottomOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,10 +1,13 @@
 package com.example.masterhelper.ui.AppBarFragment;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.*;
 import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 import com.example.masterhelper.R;
+import com.example.masterhelper.ui.SoundsList.model.ISoundsAdapterHolder;
 
 
 /**  */
@@ -17,6 +20,8 @@ public class AppBarFragment extends Fragment {
 
   /** кнопка настройки */
   int settingsButtonId = R.id.ACTION_SETTINGS;
+
+  IAppBarFragment mListener;
 
   public AppBarFragment() {
     // Required empty public constructor
@@ -40,13 +45,19 @@ public class AppBarFragment extends Fragment {
 
   @Override
   public boolean onOptionsItemSelected(MenuItem item) {
-
-    int id = item.getItemId();
-    if (id == settingsButtonId) {
-      Toast.makeText(getContext(), "ghbdtn", Toast.LENGTH_LONG).show();
-      return true;
-    }
-
+    mListener.onItemSelected(item);
     return super.onOptionsItemSelected(item);
   }
+
+  @Override
+  public void onAttach(Context context) {
+    super.onAttach(context);
+    if (context instanceof IAppBarFragment) {
+      mListener = (IAppBarFragment) context;
+    } else {
+      throw new RuntimeException(context.toString()
+        + " must implement IAppBarFragment");
+    }
+  }
+
 }

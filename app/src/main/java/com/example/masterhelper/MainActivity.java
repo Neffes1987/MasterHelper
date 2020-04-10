@@ -1,6 +1,8 @@
 package com.example.masterhelper;
 
 import android.util.Log;
+import android.view.MenuItem;
+import com.example.masterhelper.ui.AppBarFragment.IAppBarFragment;
 import com.example.masterhelper.ui.ListFragment.IListFragmentInterface;
 import com.example.masterhelper.ui.ListFragment.ListScreenFragment;
 import android.content.Intent;
@@ -14,7 +16,7 @@ import java.util.HashSet;
 
 import static com.example.masterhelper.utils.Utils.convertToArray;
 
-public class MainActivity extends AppCompatActivity implements IListFragmentInterface {
+public class MainActivity extends AppCompatActivity implements IListFragmentInterface, IAppBarFragment {
   /** */
   int journeysScreenId = R.id.JOURNEYS_ID;
 
@@ -82,5 +84,11 @@ public class MainActivity extends AppCompatActivity implements IListFragmentInte
         setListData(data);
       }
     }
+  }
+
+  @Override
+  public void onItemSelected(MenuItem selectedView) {
+    Intent intent = new Intent(MainActivity.this, MusicSettingsScreen.class);
+    startActivity(intent);
   }
 }
