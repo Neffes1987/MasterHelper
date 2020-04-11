@@ -10,6 +10,9 @@ import android.view.ViewGroup;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.masterhelper.R;
+import com.example.masterhelper.commonAdapter.CommonAdapter;
+import com.example.masterhelper.commonAdapter.item.CustomListItemsEnum;
+import com.example.masterhelper.commonAdapter.item.ICommonItemEvents;
 import com.example.masterhelper.ui.SoundsList.adapter.SoundsListAdapter;
 import com.example.masterhelper.ui.SoundsList.model.ISoundsAdapterHolder;
 import com.example.masterhelper.ui.SoundsList.model.SoundFileModel;
@@ -23,7 +26,7 @@ import java.util.HashMap;
  * {@link ISoundsAdapterHolder} interface
  * to handle interaction events.
  */
-public class SoundsList extends Fragment implements ISoundsAdapterHolder {
+public class SoundsList extends Fragment implements ICommonItemEvents {
 
   private ISoundsAdapterHolder mListener;
 
@@ -48,7 +51,7 @@ public class SoundsList extends Fragment implements ISoundsAdapterHolder {
   public void updateListAdapter(HashMap<Integer, SoundFileModel> data){
     LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
     recyclerView.setLayoutManager(layoutManager);
-    SoundsListAdapter mAdapter = new SoundsListAdapter(data);
+    CommonAdapter mAdapter = new CommonAdapter<>(data, R.layout.fragment_sounds_item, CustomListItemsEnum.music, this);
     recyclerView.setAdapter(mAdapter);
   }
 
@@ -70,12 +73,7 @@ public class SoundsList extends Fragment implements ISoundsAdapterHolder {
   }
 
   @Override
-  public void onSoundSelected(int position, boolean isSelected) {
-    mListener.onSoundSelected(position,isSelected);
-  }
-
-  @Override
-  public void onSoundStarted(int position) {
-    mListener.onSoundStarted(position);
+  public void onClick(View elementFiredAction, int position) {
+    Log.i("TAG", "onClick: parent");
   }
 }

@@ -1,15 +1,9 @@
 package com.example.masterhelper.ui.SoundsList.model;
 
-import android.util.Log;
 import android.view.View;
 import android.widget.*;
-import androidx.appcompat.widget.AppCompatImageButton;
-import androidx.appcompat.widget.AppCompatImageView;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.masterhelper.R;
-import com.example.masterhelper.ui.RecyclerViewFragment.IRecycleAdapter;
-import com.example.masterhelper.ui.RecyclerViewFragment.RecyclerAccordionEvents;
-import com.example.masterhelper.ui.RecyclerViewFragment.models.scene.SceneRecycleDataModel;
 
 /** Модель для управления интерфейсом внутри аккордиона для цеклического списка*/
 public class SoundsAdapterHolder extends RecyclerView.ViewHolder{
