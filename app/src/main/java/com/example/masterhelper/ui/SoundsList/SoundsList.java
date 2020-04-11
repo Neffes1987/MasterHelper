@@ -51,7 +51,7 @@ public class SoundsList extends Fragment implements ICommonItemEvents {
   public void updateListAdapter(HashMap<Integer, SoundFileModel> data){
     LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
     recyclerView.setLayoutManager(layoutManager);
-    CommonAdapter mAdapter = new CommonAdapter<>(data, R.layout.fragment_sounds_item, CustomListItemsEnum.music, this);
+    CommonAdapter<SoundFileModel> mAdapter = new CommonAdapter<>(data, R.layout.fragment_sounds_item, CustomListItemsEnum.music, this);
     recyclerView.setAdapter(mAdapter);
   }
 
