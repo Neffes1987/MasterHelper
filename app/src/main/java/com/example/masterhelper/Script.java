@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.masterhelper.commonAdapter.CommonAdapter;
@@ -19,6 +20,8 @@ public class Script extends AppCompatActivity implements ICommonItemEvents {
 
   /** */
   int tableId = R.id.ENEMIES_GRID_ID;
+
+  int NUMBER_OF_CELLS = 5;
 
   /** */
   RecyclerView recyclerView;
@@ -44,8 +47,8 @@ public class Script extends AppCompatActivity implements ICommonItemEvents {
     enemies.put(3, enemy4);
     enemies.put(4, enemy5);
 
-    LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-    recyclerView.setLayoutManager(layoutManager);
+    GridLayoutManager gridLayoutManager = new GridLayoutManager(this, NUMBER_OF_CELLS);
+    recyclerView.setLayoutManager(gridLayoutManager);
 
     CommonAdapter<EnemyModel> mAdapter = new CommonAdapter<>(enemies, R.layout.fragment_view_enemy_icon, CustomListItemsEnum.enemyIcon, this);
     recyclerView.setAdapter(mAdapter);
