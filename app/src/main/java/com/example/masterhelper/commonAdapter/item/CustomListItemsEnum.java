@@ -1,5 +1,7 @@
 package com.example.masterhelper.commonAdapter.item;
 
 public enum CustomListItemsEnum {
-  music
+  music,
+  scene,
+  script
 }

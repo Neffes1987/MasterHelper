@@ -7,7 +7,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import androidx.cardview.widget.CardView;
 import com.example.masterhelper.R;
-import com.example.masterhelper.ui.enemy.model.EnemyModel;
+import com.example.masterhelper.models.EnemyModel;
 
 public class EnemyAdapter {
   /**  */

@@ -6,12 +6,12 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import com.example.masterhelper.R;
 import com.example.masterhelper.commonAdapter.CommonAdapter;
-import com.example.masterhelper.ui.SoundsList.model.SoundFileModel;
+import com.example.masterhelper.models.SoundFileModel;
 
 /** Модель для управления интерфейсом внутри элемента для циклического списка
  * Model - тип модели данных, который следует передать в обработчик жлемента списка для инициализаци
  * */
-public class MusicItem<Model> extends CommonItem {
+public class MusicItem<Model> extends CommonItem<Model> {
 
   /** текстовое поле в с именем файла */
   private TextView title;

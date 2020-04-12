@@ -1,9 +1,10 @@
 package com.example.masterhelper.ui.RecyclerViewFragment;
 
 
-import com.example.masterhelper.ui.RecyclerViewFragment.adapters.scene.SceneAccordionAdapter;
-import com.example.masterhelper.ui.RecyclerViewFragment.adapters.scene.ScriptAccordionAdapter;
-import com.example.masterhelper.ui.RecyclerViewFragment.models.scene.SceneRecycleDataModel;
+import com.example.masterhelper.commonAdapter.CommonAdapter;
+import com.example.masterhelper.commonAdapter.item.CustomListItemsEnum;
+import com.example.masterhelper.commonAdapter.item.ICommonItemEvents;
+import com.example.masterhelper.models.SceneRecycleDataModel;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
@@ -12,11 +13,11 @@ import android.view.ViewGroup;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.masterhelper.R;
-import com.example.masterhelper.ui.RecyclerViewFragment.models.script.ScriptRecycleDataModel;
+import com.example.masterhelper.models.ScriptRecycleDataModel;
 
 import java.util.HashMap;
 
-public class RecyclerViewFragment extends Fragment implements IRecycleFragment {
+public class RecyclerViewFragment extends Fragment implements ICommonItemEvents, IRecycleFragment {
 
   /** */
   RecyclerView recyclerView;
@@ -32,19 +33,15 @@ public class RecyclerViewFragment extends Fragment implements IRecycleFragment {
   public void updateSceneListAdapter(HashMap<Integer, SceneRecycleDataModel> data){
     LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
     recyclerView.setLayoutManager(layoutManager);
-
-    IRecycleAdapter screenActivity = (IRecycleAdapter) getActivity();
-    SceneAccordionAdapter mAdapter = new SceneAccordionAdapter(data, screenActivity);
+    CommonAdapter<SceneRecycleDataModel> mAdapter = new CommonAdapter<>(data, R.layout.fragment_view_scene_list_item, CustomListItemsEnum.scene, this);
     recyclerView.setAdapter(mAdapter);
   }
 
-  @Override
   public void updateScriptListAdapter(HashMap<Integer, ScriptRecycleDataModel> data) {
     LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
     recyclerView.setLayoutManager(layoutManager);
 
-    IRecycleAdapter screenActivity = (IRecycleAdapter) getActivity();
-    ScriptAccordionAdapter mAdapter = new ScriptAccordionAdapter(data, screenActivity);
+    CommonAdapter<ScriptRecycleDataModel> mAdapter = new CommonAdapter<>(data, R.layout.fragment_view_script_list_item, CustomListItemsEnum.script, this);
     recyclerView.setAdapter(mAdapter);
   }
 
@@ -55,5 +52,12 @@ public class RecyclerViewFragment extends Fragment implements IRecycleFragment {
     recyclerView = fr.findViewById(recyclerListViewId);
     recyclerView.setHasFixedSize(true);
     return fr;
+  }
+
+  @Override
+  public void onClick(View elementFiredAction, int position) {
+    ICommonItemEvents screenActivity = (ICommonItemEvents) getActivity();
+    assert screenActivity != null;
+    screenActivity.onClick(elementFiredAction, position);
   }
 }

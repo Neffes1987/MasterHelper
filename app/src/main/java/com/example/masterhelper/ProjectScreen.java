@@ -1,10 +1,9 @@
 package com.example.masterhelper;
 
 import android.view.View;
-import com.example.masterhelper.ui.RecyclerViewFragment.IRecycleAdapter;
-import com.example.masterhelper.ui.RecyclerViewFragment.RecyclerAccordionEvents;
+import com.example.masterhelper.commonAdapter.item.ICommonItemEvents;
 import com.example.masterhelper.ui.RecyclerViewFragment.RecyclerViewFragment;
-import com.example.masterhelper.ui.RecyclerViewFragment.models.scene.SceneRecycleDataModel;
+import com.example.masterhelper.models.SceneRecycleDataModel;
 import android.content.Intent;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,7 +14,7 @@ import java.util.HashMap;
 import java.util.Objects;
 
 
-public class ProjectScreen extends AppCompatActivity implements IRecycleAdapter {
+public class ProjectScreen extends AppCompatActivity implements ICommonItemEvents {
   String TITLE = "Имя приключения";
 
   /** */
@@ -83,9 +82,11 @@ public class ProjectScreen extends AppCompatActivity implements IRecycleAdapter 
   }
 
   @Override
-  public void onChangeItem(int position, RecyclerAccordionEvents fieldName, String newValue) {
-    switch (fieldName){
-      case start:
+  public void onClick(View elementFiredAction, int position) {
+    // SceneRecycleDataModel currentData = data.get(position);
+    int btnId = elementFiredAction.getId();
+    switch (btnId){
+      case R.id.SCENE_START_BTN_ID:
         Intent intent = new Intent(this, Scene.class);
         startActivity(intent);
         break;

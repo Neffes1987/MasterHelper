@@ -1,17 +1,17 @@
 package com.example.masterhelper;
 
-import android.util.Log;
+import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.fragment.app.FragmentManager;
+import com.example.masterhelper.commonAdapter.item.ICommonItemEvents;
 import com.example.masterhelper.ui.SoundsList.SoundsList;
-import com.example.masterhelper.ui.SoundsList.model.ISoundsAdapterHolder;
-import com.example.masterhelper.ui.SoundsList.model.SoundFileModel;
+import com.example.masterhelper.models.SoundFileModel;
 
 import java.util.Date;
 import java.util.HashMap;
 
-public class MusicSettingsScreen extends AppCompatActivity implements ISoundsAdapterHolder {
+public class MusicSettingsScreen extends AppCompatActivity implements ICommonItemEvents {
 
   private HashMap<Integer, SoundFileModel> data = new HashMap<>();
 
@@ -30,12 +30,7 @@ public class MusicSettingsScreen extends AppCompatActivity implements ISoundsAda
   }
 
   @Override
-  public void onSoundSelected(int position, boolean isSelected) {
-
-  }
-
-  @Override
-  public void onSoundStarted(int position) {
+  public void onClick(View elementFiredAction, int position) {
 
   }
 }

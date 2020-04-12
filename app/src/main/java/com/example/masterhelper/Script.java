@@ -5,19 +5,21 @@ import android.content.Intent;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import com.example.masterhelper.commonAdapter.item.ICommonItemEvents;
 import com.example.masterhelper.ui.enemy.adapter.EnemyAdapter;
 import com.example.masterhelper.ui.enemy.adapter.EnemyIconClickListener;
-import com.example.masterhelper.ui.enemy.model.EnemyModel;
+import com.example.masterhelper.models.EnemyModel;
 
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
-public class Script extends AppCompatActivity {
+public class Script extends AppCompatActivity implements ICommonItemEvents {
   /** */
   int activityScreenViewScriptLayout =  R.layout.activity_screen_view_script;
 
@@ -118,4 +120,8 @@ public class Script extends AppCompatActivity {
      }
    };
 
+  @Override
+  public void onClick(View elementFiredAction, int position) {
+
+  }
 }

@@ -13,9 +13,7 @@ import com.example.masterhelper.R;
 import com.example.masterhelper.commonAdapter.CommonAdapter;
 import com.example.masterhelper.commonAdapter.item.CustomListItemsEnum;
 import com.example.masterhelper.commonAdapter.item.ICommonItemEvents;
-import com.example.masterhelper.ui.SoundsList.adapter.SoundsListAdapter;
-import com.example.masterhelper.ui.SoundsList.model.ISoundsAdapterHolder;
-import com.example.masterhelper.ui.SoundsList.model.SoundFileModel;
+import com.example.masterhelper.models.SoundFileModel;
 
 import java.util.HashMap;
 
@@ -23,12 +21,12 @@ import java.util.HashMap;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link ISoundsAdapterHolder} interface
+ * {@link ICommonItemEvents} interface
  * to handle interaction events.
  */
 public class SoundsList extends Fragment implements ICommonItemEvents {
 
-  private ISoundsAdapterHolder mListener;
+  private ICommonItemEvents mListener;
 
   private RecyclerView recyclerView;
 
@@ -58,8 +56,8 @@ public class SoundsList extends Fragment implements ICommonItemEvents {
   @Override
   public void onAttach(Context context) {
     super.onAttach(context);
-    if (context instanceof ISoundsAdapterHolder) {
-      mListener = (ISoundsAdapterHolder) context;
+    if (context instanceof ICommonItemEvents) {
+      mListener = (ICommonItemEvents) context;
     } else {
       throw new RuntimeException(context.toString()
         + " must implement ISoundsAdapterHolder");

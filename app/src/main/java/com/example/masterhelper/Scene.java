@@ -1,17 +1,17 @@
 package com.example.masterhelper;
 
 import android.content.Intent;
+import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.fragment.app.FragmentManager;
-import com.example.masterhelper.ui.RecyclerViewFragment.IRecycleAdapter;
-import com.example.masterhelper.ui.RecyclerViewFragment.RecyclerAccordionEvents;
+import com.example.masterhelper.commonAdapter.item.ICommonItemEvents;
 import com.example.masterhelper.ui.RecyclerViewFragment.RecyclerViewFragment;
-import com.example.masterhelper.ui.RecyclerViewFragment.models.script.ScriptRecycleDataModel;
+import com.example.masterhelper.models.ScriptRecycleDataModel;
 
 import java.util.HashMap;
 
-public class Scene extends AppCompatActivity implements IRecycleAdapter {
+public class Scene extends AppCompatActivity implements ICommonItemEvents {
 
   /** */
   int activityScreenViewSceneLayout = R.layout.activity_screen_view_scene;
@@ -49,11 +49,11 @@ public class Scene extends AppCompatActivity implements IRecycleAdapter {
   }
 
   @Override
-  public void onChangeItem(int position, RecyclerAccordionEvents fieldName, String newValue) {
+  public void onClick(View elementFiredAction, int position) {
     ScriptRecycleDataModel currentData = data.get(position);
-
-    switch (fieldName){
-      case start:
+    int btnId = elementFiredAction.getId();
+    switch (btnId){
+      case R.id.SCRIPT_START_BTN_ID:
         assert currentData != null;
         if(currentData.hasBattleActionIcon){
           Intent intent = new Intent(this, Script.class);

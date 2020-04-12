@@ -1,16 +1,15 @@
-package com.example.masterhelper.ui.RecyclerViewFragment.models.scene;
+package com.example.masterhelper.commonAdapter.item;
 
-import com.example.masterhelper.ui.RecyclerViewFragment.IRecycleAdapter;
 import android.view.View;
 import android.widget.*;
 import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.appcompat.widget.AppCompatImageView;
-import androidx.recyclerview.widget.RecyclerView;
 import com.example.masterhelper.R;
-import com.example.masterhelper.ui.RecyclerViewFragment.RecyclerAccordionEvents;
+import com.example.masterhelper.commonAdapter.CommonAdapter;
+import com.example.masterhelper.models.SceneRecycleDataModel;
 
 /** Модель для управления интерфейсом внутри аккордиона для цеклического списка*/
-public class SceneAdapterHolder extends RecyclerView.ViewHolder{
+public class SceneItem<Model> extends CommonItem<Model>{
 
   /** текстовое поле в с именем сцены */
   private TextView title;
@@ -50,8 +49,6 @@ public class SceneAdapterHolder extends RecyclerView.ViewHolder{
 
   /** кнопка перемещения сцены ниже по списку */
   public AppCompatImageButton downOrderBtn;
-  private int position;
-  private IRecycleAdapter screen;
 
   /** установить название сцены в виджет
    * @param title - имя сцены
@@ -97,13 +94,6 @@ public class SceneAdapterHolder extends RecyclerView.ViewHolder{
     }
   }
 
-  /** получить текущее положение холдера в списке холждеров адаптера
-   * @param position - текущая позиция холдера сцены в списке
-   * */
-  private void setHolderPosition(int position){
-    this.position = position;
-  }
-
   /** инициализировать виджеты прогрессы сцены
    * @param item - набор данных для инициализации сцены
    * - scriptsFinished - сколько скриптов выполнено
@@ -125,13 +115,12 @@ public class SceneAdapterHolder extends RecyclerView.ViewHolder{
     setDescription(itemData.description);
     setIsMusicToggledFlag(itemData.isMusicStarted);
     setProgressBar(itemData);
-    setHolderPosition(position);
+    setPosition(position);
   }
 
   /** @constructor генератор указателей на элементы UI для адаптера */
-  public SceneAdapterHolder(View v, IRecycleAdapter screen) {
-    super(v);
-    this.screen = screen;
+  public SceneItem(View v, CommonAdapter<Model> adapter) {
+    super(v, adapter);
 
     title = v.findViewById(R.id.SCENE_TITLE_ID);
     description = v.findViewById(R.id.SCENE_DESCRIPTION_ID);
@@ -145,67 +134,31 @@ public class SceneAdapterHolder extends RecyclerView.ViewHolder{
     isFinishedIcon = v.findViewById(R.id.SCREEN_IS_DONE_FLAG_ID);
 
     startScene = v.findViewById(R.id.SCENE_START_BTN_ID);
-    startScene.setOnClickListener(startSceneListener);
+    startScene.setOnClickListener(commonListener);
 
     editBtn = v.findViewById(R.id.SCREEN_EDIT_BTN_ID);
-    editBtn.setOnClickListener(editSceneListener);
+    editBtn.setOnClickListener(commonListener);
 
     deleteBtn = v.findViewById(R.id.SCREEN_DELETE_BTN_ID);
-    deleteBtn.setOnClickListener(deleteSceneListener);
+    deleteBtn.setOnClickListener(commonListener);
 
     upOrderBtn = v.findViewById(R.id.SCREEN_UP_ORDER_BTN_ID);
-    upOrderBtn.setOnClickListener(upOrderSceneListener);
+    upOrderBtn.setOnClickListener(commonListener);
 
     downOrderBtn = v.findViewById(R.id.SCREEN_DOWN_ORDER_BTN_ID);
-    downOrderBtn.setOnClickListener(downOrderSceneListener);
+    downOrderBtn.setOnClickListener(commonListener);
 
     isMusicToggledFlag = v.findViewById(R.id.SCREEN_BACKGROUND_MUSIC_TOGGLER_ID);
 
     expandButton = v.findViewById(R.id.SCREEN_TOGGLER_ID);
-    expandButton.setOnClickListener(toggleSceneListener);
+    expandButton.setOnClickListener(itemToggle);
   }
 
-  View.OnClickListener toggleSceneListener = new View.OnClickListener() {
-    /** переключение состояния аккордиона */
+  View.OnClickListener itemToggle =  new View.OnClickListener() {
     @Override
     public void onClick(View v) {
-      int newState = body.getVisibility() == View.VISIBLE ? View.GONE : View.VISIBLE;
-      body.setVisibility(newState);
+      toggleVisibility(body);
     }
   };
 
-  View.OnClickListener editSceneListener = new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-      screen.onChangeItem(position, RecyclerAccordionEvents.edit, "1");
-    }
-  };
-
-  View.OnClickListener startSceneListener = new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-      screen.onChangeItem(position, RecyclerAccordionEvents.start, "1");
-    }
-  };
-
-  View.OnClickListener deleteSceneListener = new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-      screen.onChangeItem(position, RecyclerAccordionEvents.delete, "1");
-    }
-  };
-
-  View.OnClickListener upOrderSceneListener = new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-      screen.onChangeItem(position, RecyclerAccordionEvents.up, "1");
-    }
-  };
-
-  View.OnClickListener downOrderSceneListener = new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-      screen.onChangeItem(position, RecyclerAccordionEvents.down, "1");
-    }
-  };
 }

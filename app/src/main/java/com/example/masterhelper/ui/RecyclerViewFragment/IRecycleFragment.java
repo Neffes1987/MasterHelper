@@ -1,7 +1,7 @@
 package com.example.masterhelper.ui.RecyclerViewFragment;
 
-import com.example.masterhelper.ui.RecyclerViewFragment.models.scene.SceneRecycleDataModel;
-import com.example.masterhelper.ui.RecyclerViewFragment.models.script.ScriptRecycleDataModel;
+import com.example.masterhelper.models.SceneRecycleDataModel;
+import com.example.masterhelper.models.ScriptRecycleDataModel;
 
 import java.util.HashMap;
 

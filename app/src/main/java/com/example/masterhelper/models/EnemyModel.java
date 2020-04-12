@@ -1,4 +1,4 @@
-package com.example.masterhelper.ui.enemy.model;
+package com.example.masterhelper.models;
 
 public class EnemyModel {
   /** */

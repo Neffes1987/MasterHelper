@@ -1,4 +1,4 @@
-package com.example.masterhelper.ui.SoundsList.model;
+package com.example.masterhelper.models;
 
 import java.util.Date;
 
