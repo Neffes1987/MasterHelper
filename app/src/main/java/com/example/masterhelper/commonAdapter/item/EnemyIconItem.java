@@ -52,8 +52,8 @@ public class EnemyIconItem<Model> extends CommonItem<Model> {
     setDamageMaskHeight();
   }
 
-  public void setLastChanged(boolean newValue) {
-    lastChanged.setVisibility(newValue ? View.VISIBLE : View.GONE);
+  public void setLastChanged() {
+    toggleVisibility(lastChanged);
   }
 
   public void setCurrentHealth(int currentHealth){
