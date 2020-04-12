@@ -6,7 +6,7 @@ import com.example.masterhelper.commonAdapter.item.*;
 
 /** Промежуточный класс, который связывает адаптер и вьюху циклического списка*/
 public class CommonHolder<Model> extends RecyclerView.ViewHolder {
-  private CommonItem commonItem;
+  private CommonItem<Model> commonItem;
   /** @constructor генератор указателей на элементы UI для адаптера */
   public void initRecyclerView(Model item, int position) {
     commonItem.updateHolderByData(item, position);
@@ -24,6 +24,9 @@ public class CommonHolder<Model> extends RecyclerView.ViewHolder {
         break;
       case script:
         commonItem = new ScriptItem<Model>(v, adapter);
+        break;
+      case enemyIcon:
+        commonItem = new EnemyIconItem<Model>(v, adapter);
         break;
     }
   }
