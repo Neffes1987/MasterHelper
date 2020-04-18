@@ -2,7 +2,6 @@ package com.example.masterhelper.ui.SoundsList;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +13,7 @@ import com.example.masterhelper.commonAdapter.CommonAdapter;
 import com.example.masterhelper.commonAdapter.item.CustomListItemsEnum;
 import com.example.masterhelper.commonAdapter.item.ICommonItemEvents;
 import com.example.masterhelper.models.SoundFileModel;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.HashMap;
 
@@ -29,6 +29,7 @@ public class SoundsList extends Fragment implements ICommonItemEvents {
   private ICommonItemEvents mListener;
 
   private RecyclerView recyclerView;
+  private FloatingActionButton createBtn;
 
   private View selfFragment;
 
@@ -43,6 +44,8 @@ public class SoundsList extends Fragment implements ICommonItemEvents {
     // Inflate the layout for this fragment
     selfFragment = inflater.inflate(R.layout.fragment_sounds_list, container, false);
     recyclerView = selfFragment.findViewById(R.id.SOUNDS_LIST_ID);
+    createBtn = selfFragment.findViewById(R.id.ADD_NEW_FILE_ID);
+    createBtn.setOnClickListener(addSoundListener);
     return selfFragment;
   }
 
@@ -70,8 +73,15 @@ public class SoundsList extends Fragment implements ICommonItemEvents {
     mListener = null;
   }
 
+  View.OnClickListener addSoundListener = new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+      mListener.onClick(v, -1);
+    }
+  };
+
   @Override
   public void onClick(View elementFiredAction, int position) {
-    Log.i("TAG", "onClick: parent");
+    mListener.onClick(elementFiredAction, position);
   }
 }

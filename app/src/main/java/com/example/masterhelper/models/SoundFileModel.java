@@ -1,10 +1,8 @@
 package com.example.masterhelper.models;
 
-import java.util.Date;
-
 public class SoundFileModel {
   String filename;
-  Date createTime;
+  long createTime;
   String path;
   int fileId;
   boolean selected;
@@ -17,7 +15,7 @@ public class SoundFileModel {
     return selected;
   }
 
-  public Date getCreateTime() {
+  public long getCreateTime() {
     return createTime;
   }
 
@@ -33,14 +31,14 @@ public class SoundFileModel {
     return path;
   }
 
-  public SoundFileModel(String filename, Date createTime, String path, int fileId){
+  public SoundFileModel(String filename, long createTime, String path, int fileId){
     setCreateTime(createTime);
     setFileId(fileId);
     setFilename(filename);
     setPath(path);
   }
 
-  private void setCreateTime(Date createTime) {
+  private void setCreateTime(long createTime) {
     this.createTime = createTime;
   }
 

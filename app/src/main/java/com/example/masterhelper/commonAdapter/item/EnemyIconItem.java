@@ -9,7 +9,6 @@ import androidx.cardview.widget.CardView;
 import com.example.masterhelper.R;
 import com.example.masterhelper.commonAdapter.CommonAdapter;
 import com.example.masterhelper.models.EnemyModel;
-import com.example.masterhelper.ui.enemy.adapter.EnemyIconClickListener;
 
 public class EnemyIconItem<Model> extends CommonItem<Model> {
   /**  */
@@ -31,9 +30,6 @@ public class EnemyIconItem<Model> extends CommonItem<Model> {
   /**  */
   EnemyModel enemyData;
 
-  /**  */
-  EnemyIconClickListener mOnClickListener;
-
   public EnemyIconItem(View enemyView, CommonAdapter<Model> adapter) {
     super(enemyView, adapter);
     Log.i("TAG", "EnemyIconItem: ");
@@ -42,7 +38,6 @@ public class EnemyIconItem<Model> extends CommonItem<Model> {
     enemyIcon = enemyView.findViewById(enemyIconId);
     lastChanged = enemyView.findViewById(lastChangedId);
     enemyView.setOnClickListener(commonListener);
-    setLastChanged(false);
   }
 
   @Override
@@ -52,9 +47,9 @@ public class EnemyIconItem<Model> extends CommonItem<Model> {
     setDamageMaskHeight();
   }
 
-  public void setLastChanged() {
-    toggleVisibility(lastChanged);
-  }
+  //public void setLastChanged() {
+    //toggleVisibility(lastChanged);
+  //}
 
   public void setCurrentHealth(int currentHealth){
     enemyData.setCurrentHealth(currentHealth);
