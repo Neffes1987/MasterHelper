@@ -17,7 +17,10 @@ public class CommonHolder<Model> extends RecyclerView.ViewHolder {
     super(v);
     switch (itemTemplateType){
       case music:
-        commonItem = new MusicItem<Model>(v, adapter);
+        commonItem = new MusicItem<Model>(v, adapter, false);
+        break;
+      case musicGeneral:
+        commonItem = new MusicItem<Model>(v, adapter, true);
         break;
       case scene:
         commonItem = new SceneItem<Model>(v, adapter);

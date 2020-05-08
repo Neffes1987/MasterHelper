@@ -24,6 +24,8 @@ import java.util.HashSet;
 public class MusicSettingsScreen extends AppCompatActivity implements ICommonItemEvents {
   private static final int PICK_AUDIO_FILE = 1;
   private static final String PICK_AUDIO_TYPE = "audio/*";
+  private static final int MAX_AUDIO_STREAMS = 1;
+  private static final int STARTED_AUDIO_PRIORITY = 1;
 
   /** утилита для работы с медиафайлами */
   private MediaFiles mediaFiles;
@@ -38,7 +40,7 @@ public class MusicSettingsScreen extends AppCompatActivity implements ICommonIte
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_music_settings_screen);
-    mediaFiles = new MediaFiles(this, 1);
+    mediaFiles = new MediaFiles(this, MAX_AUDIO_STREAMS);
     updateViewList();
   }
 
@@ -53,7 +55,7 @@ public class MusicSettingsScreen extends AppCompatActivity implements ICommonIte
       StartFilePickerIntent();
     } else {
       if (elementFiredAction.getId() == R.id.RUN_MUSIC_FILE_ID){
-        mediaFiles.startMediaRecord(position);
+        mediaFiles.startMediaRecord(position, STARTED_AUDIO_PRIORITY);
       }
     }
   }
@@ -116,7 +118,7 @@ public class MusicSettingsScreen extends AppCompatActivity implements ICommonIte
     FragmentManager fragmentManager = getSupportFragmentManager();
     SoundsList soundListFragment = (SoundsList) fragmentManager.findFragmentById(R.id.SOUND_LIST_FRAGMENT_ID);
     assert soundListFragment != null;
-    soundListFragment.updateListAdapter(newData);
+    soundListFragment.updateListAdapter(newData, true);
   }
 
 }

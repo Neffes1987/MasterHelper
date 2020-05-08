@@ -1,7 +1,7 @@
 <resources>
   <string name="app_name">Помошник настольщика</string>
 
-  <string name="action_settings">Настрок</string>
+  <string name="action_settings">Настройки</string>
 
   <string name="SCREEN_NAME_JOURNEYS_TEXT">Список приключений</string>
   <string name="journey_name">Название приключения</string>

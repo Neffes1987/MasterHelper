@@ -22,11 +22,12 @@ public class MusicItem<Model> extends CommonItem<Model> {
   /** запустить проигрывание сцены */
   private ImageButton startSound;
 
-  public MusicItem(View v, CommonAdapter<Model> adapter) {
+  public MusicItem(View v, CommonAdapter<Model> adapter, boolean hideCheckboxes) {
     super(v, adapter);
     title = itemView.findViewById(R.id.FILE_NAME_ID);
     selected = itemView.findViewById(R.id.FILE_NAME_SELECTOR_ID);
     selected.setOnClickListener(commonListener);
+    selected.setVisibility(hideCheckboxes ? View.GONE : View.VISIBLE);
     startSound = itemView.findViewById(R.id.RUN_MUSIC_FILE_ID);
     startSound.setOnClickListener(commonListener);
 

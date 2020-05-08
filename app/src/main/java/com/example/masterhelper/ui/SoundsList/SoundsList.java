@@ -17,7 +17,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.HashMap;
 
-
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
@@ -29,9 +28,6 @@ public class SoundsList extends Fragment implements ICommonItemEvents {
   private ICommonItemEvents mListener;
 
   private RecyclerView recyclerView;
-  private FloatingActionButton createBtn;
-
-  private View selfFragment;
 
   public SoundsList() {
     // Required empty public constructor
@@ -42,17 +38,22 @@ public class SoundsList extends Fragment implements ICommonItemEvents {
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
                            Bundle savedInstanceState) {
     // Inflate the layout for this fragment
-    selfFragment = inflater.inflate(R.layout.fragment_sounds_list, container, false);
+    View selfFragment = inflater.inflate(R.layout.fragment_sounds_list, container, false);
     recyclerView = selfFragment.findViewById(R.id.SOUNDS_LIST_ID);
-    createBtn = selfFragment.findViewById(R.id.ADD_NEW_FILE_ID);
+    FloatingActionButton createBtn = selfFragment.findViewById(R.id.ADD_NEW_FILE_ID);
     createBtn.setOnClickListener(addSoundListener);
     return selfFragment;
   }
 
-  public void updateListAdapter(HashMap<Integer, SoundFileModel> data){
+  public void updateListAdapter(HashMap<Integer, SoundFileModel> data, Boolean isGeneral){
     LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
     recyclerView.setLayoutManager(layoutManager);
-    CommonAdapter<SoundFileModel> mAdapter = new CommonAdapter<>(data, R.layout.fragment_sounds_item, CustomListItemsEnum.music, this);
+    CommonAdapter<SoundFileModel> mAdapter = new CommonAdapter<>(
+      data,
+      R.layout.fragment_sounds_item,
+      isGeneral ? CustomListItemsEnum.musicGeneral : CustomListItemsEnum.music,
+      this
+    );
     recyclerView.setAdapter(mAdapter);
   }
 

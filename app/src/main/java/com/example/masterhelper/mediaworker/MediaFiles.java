@@ -6,7 +6,6 @@ import android.media.SoundPool;
 import android.media.SoundPool.OnLoadCompleteListener;
 import android.net.Uri;
 import android.provider.OpenableColumns;
-import android.util.Log;
 
 import java.io.*;
 import java.util.HashSet;
@@ -28,6 +27,7 @@ public class MediaFiles {
   SoundPool sp;
 
   int loadedSPFile;
+  int loadedSPFilePriority;
 
 
   /** конструктор утилиты */
@@ -106,19 +106,21 @@ public class MediaFiles {
 
   /** отдать фктуальный список файлов в дериктории приложения */
   public HashSet<File> getFilesList() {
+    setFilesList();
     return filesList;
   }
 
-  public void startMediaRecord(int position) {
+  public void startMediaRecord(int position, int priority) {
     File file = (File) filesList.toArray()[position];
     sp.setOnLoadCompleteListener(listener);
+    loadedSPFilePriority = priority;
     loadedSPFile = sp.load(file.getPath(), 1);
   }
   
   OnLoadCompleteListener listener = new OnLoadCompleteListener() {
     @Override
     public void onLoadComplete(SoundPool soundPool, int sampleId, int status) {
-      sp.play(loadedSPFile, 1, 1, 1, 0, 1);
+      sp.play(loadedSPFile, 1, 1, loadedSPFilePriority, 0, 1);
     }
   };
   
