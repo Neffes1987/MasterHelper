@@ -1,8 +1,10 @@
 package com.example.masterhelper;
 
+import android.database.Cursor;
 import android.util.Log;
 import android.view.MenuItem;
-import com.example.masterhelper.mediaworker.MediaFiles;
+import com.example.masterhelper.data.DbHelpers;
+import com.example.masterhelper.data.contracts.Journeys;
 import com.example.masterhelper.ui.AppBarFragment.IAppBarFragment;
 import com.example.masterhelper.ui.ListFragment.IListFragmentInterface;
 import com.example.masterhelper.ui.ListFragment.ListScreenFragment;
@@ -13,9 +15,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentManager;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
 import java.util.HashSet;
-
-import static com.example.masterhelper.utils.Utils.convertToArray;
 
 public class MainActivity extends AppCompatActivity implements IListFragmentInterface, IAppBarFragment {
   /** */
@@ -33,6 +35,27 @@ public class MainActivity extends AppCompatActivity implements IListFragmentInte
 
   public HashSet<String> data = new HashSet<>();
 
+  private DbHelpers dbHelpers;
+
+  private String[] getJourneysList(){
+    StringBuilder journeyNames = new StringBuilder();
+    String sqlQuery = Journeys.getListQuery(Journeys.TABLE_NAME, null, null, Journeys._ID + " DESC", 0);
+
+    Cursor queryResult = dbHelpers.getList(sqlQuery);
+    while (queryResult.moveToNext()) {
+      // Используем индекс для получения строки или числа
+      int titleColumnIndex = queryResult.getColumnIndex(Journeys.COLUMN_TITLE);
+      journeyNames.append(queryResult.getString(titleColumnIndex)).append(',');
+    }
+    queryResult.close();
+    return journeyNames.toString().split(",");
+  }
+
+  private void addJourney(String newItemName){
+    String sqlQuery = Journeys.addItemQuery(newItemName);
+    dbHelpers.addNewItem(sqlQuery);
+  }
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -40,7 +63,8 @@ public class MainActivity extends AppCompatActivity implements IListFragmentInte
     toolbar = findViewById(toolbarId);
     toolbar.setTitle(ScreenTitleStringString);
     setSupportActionBar(toolbar);
-    setListData(data);
+    dbHelpers  = new DbHelpers(this);
+    setListData();
   }
 
   @Override
@@ -62,12 +86,11 @@ public class MainActivity extends AppCompatActivity implements IListFragmentInte
     Toast.makeText(this, str, Toast.LENGTH_SHORT).show();
   }
 
-  void setListData(HashSet<String> data){
-    String[] dataArray = convertToArray(data);
+  void setListData(){
     FragmentManager fm = getSupportFragmentManager();
     ListScreenFragment lsf = (ListScreenFragment) fm.findFragmentById(journeysScreenId);
     if(lsf != null && lsf.getView() != null){
-      lsf.updateListValues(lsf.getView(), dataArray);
+      lsf.updateListValues(lsf.getView(), getJourneysList());
     }
   }
 
@@ -81,8 +104,8 @@ public class MainActivity extends AppCompatActivity implements IListFragmentInte
         if(newName != null && newName.trim().length() == 0){
           return;
         }
-        data.add(newName);
-        setListData(data);
+        addJourney(newName);
+        setListData();
       }
     }
   }

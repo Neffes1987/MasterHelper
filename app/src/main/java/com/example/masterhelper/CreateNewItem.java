@@ -37,7 +37,7 @@ public class CreateNewItem extends AppCompatActivity {
 
     nameEditField = findViewById(ameEditFieldId);
     int title = getIntent().getIntExtra("title", 0);
-    Log.i("TAG", "onCreate: " + title);
+
     if(title != 0){
       titleField = findViewById(titleFieldId);
       titleField.setText(title);
@@ -48,7 +48,6 @@ public class CreateNewItem extends AppCompatActivity {
   View.OnClickListener createDialogListener = new View.OnClickListener() {
     @Override
     public void onClick(View v) {
-      Log.i("TAG", "onClick: " + v);
       Intent result = new Intent();
       result.putExtra("name", nameEditField.getText().toString());
       setResult(RESULT_OK, result);
