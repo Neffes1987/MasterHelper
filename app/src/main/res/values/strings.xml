@@ -7,6 +7,7 @@
   <string name="journey_name">Название приключения</string>
   <string name="journey_description">Краткое описания приключения</string>
   <string name="journey_create_title">Создать приключение</string>
+  <string name="journey_update_title">Изменить имя приключения</string>
 
   <string name="screen_name_music">Музыка</string>
   <string name="background_music">Фоновая музыка</string>

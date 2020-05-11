@@ -11,6 +11,8 @@ import android.os.Bundle;
 
 public class CreateNewItem extends AppCompatActivity {
 
+  int itemId;
+
   int createBtnId = R.id.ITEM_CREATE_BTN_ID;
   Button createBtn;
 
@@ -37,11 +39,16 @@ public class CreateNewItem extends AppCompatActivity {
 
     nameEditField = findViewById(ameEditFieldId);
     int title = getIntent().getIntExtra("title", 0);
+    itemId = getIntent().getIntExtra("id", -1);
+
+    String oldName = getIntent().getStringExtra("oldName");
 
     if(title != 0){
       titleField = findViewById(titleFieldId);
       titleField.setText(title);
     }
+
+    nameEditField.setText(oldName);
 
   }
 
@@ -50,6 +57,7 @@ public class CreateNewItem extends AppCompatActivity {
     public void onClick(View v) {
       Intent result = new Intent();
       result.putExtra("name", nameEditField.getText().toString());
+      result.putExtra("id", itemId);
       setResult(RESULT_OK, result);
       finish();
     }

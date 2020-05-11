@@ -45,7 +45,6 @@ public class ScriptItem<Model> extends CommonItem<Model>{
 
   /** кнопка перемещения сцены ниже по списку */
   public AppCompatImageButton downOrderBtn;
-  private int position;
 
   /** установить название сцены в виджет
    * @param title - имя сцены
@@ -79,23 +78,17 @@ public class ScriptItem<Model> extends CommonItem<Model>{
     this.isFinishedIcon.setVisibility(item.isFinished ? View.VISIBLE : View.GONE);
   }
 
-  /** получить текущее положение холдера в списке холждеров адаптера
-   * @param position - текущая позиция холдера сцены в списке
-   * */
-  private void setHolderPosition(int position){
-    this.position = position;
-  }
-
   /** инициализировать все поля холдера данными, а так же назначить порядковый номер сцены в списке
    * @param itemData - набор данных для инициализации сцены
    * @param position - текущая позиция холдера сцены в списке
    * */
-  public void updateHolderByData(ScriptRecycleDataModel itemData, int position){
-    setTitle(itemData.title);
-    setDescription(itemData.description);
+  public void updateHolderByData(Model itemData, int position){
+    ScriptRecycleDataModel script = (ScriptRecycleDataModel) itemData;
+    setTitle(script.title);
+    setDescription(script.description);
     setPosition(position);
-    setHasBattleActionIcon(itemData.hasBattleActionIcon);
-    setSceneIsDone(itemData);
+    setHasBattleActionIcon(script.hasBattleActionIcon);
+    setSceneIsDone(script);
   }
 
   /** @constructor генератор указателей на элементы UI для адаптера */

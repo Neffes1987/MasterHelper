@@ -110,11 +110,12 @@ public class SceneItem<Model> extends CommonItem<Model>{
    * @param itemData - набор данных для инициализации сцены
    * @param position - текущая позиция холдера сцены в списке
    * */
-  public void updateHolderByData(SceneRecycleDataModel itemData, int position){
-    setTitle(itemData.title);
-    setDescription(itemData.description);
-    setIsMusicToggledFlag(itemData.isMusicStarted);
-    setProgressBar(itemData);
+  public void updateHolderByData(Model itemData, int position){
+    SceneRecycleDataModel scene = (SceneRecycleDataModel) itemData;
+    setTitle(scene.title);
+    setDescription(scene.description);
+    setIsMusicToggledFlag(scene.isMusicStarted);
+    setProgressBar(scene);
     setPosition(position);
   }
 

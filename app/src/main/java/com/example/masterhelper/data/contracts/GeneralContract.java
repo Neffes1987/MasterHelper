@@ -13,11 +13,10 @@ public class GeneralContract implements BaseColumns {
 
   public static String getListQueryBase(String tableName, @Nullable String[] columns){
     String columnsList = columns != null ? Arrays.toString(columns) : "*";
-    String query = "SELECT "+ columnsList +" FROM " + tableName;
-    return query;
+    return "SELECT "+ columnsList +" FROM " + tableName;
   }
 
-  public static String getListQuery(String tableName, @Nullable String[] columns, @Nullable String where,  @Nullable String ordering,  @Nullable int limit ){
+  public static String getListQuery(String tableName, @Nullable String[] columns, @Nullable String where,  @Nullable String ordering,  int limit ){
     String query = getListQueryBase(tableName, columns);
     if(where != null){
       query += " WHERE " + where;
@@ -33,4 +32,64 @@ public class GeneralContract implements BaseColumns {
 
     return query + ';';
   }
+
+  public static String generateInsertQuery(String tableName, String[] columns, String[] values){
+    StringBuilder valuesResult = new StringBuilder();
+    StringBuilder columnsResult = new StringBuilder();
+    int columnsLastIndex = columns.length -1;
+
+    for(int i=0; i<=columnsLastIndex; i++){
+      String columnName = columns[i];
+      String value = values[i];
+
+      columnsResult.append(columnName);
+      valuesResult.append("'").append(value).append("'");
+      if(i <  columnsLastIndex){
+        columnsResult.append(",");
+        valuesResult.append(",");
+      }
+    }
+
+    return "INSERT INTO " + tableName + " (" + columnsResult + ") VALUES ("+ valuesResult +")";
+  }
+
+  public static String generateUpdateValues(String tableName, int itemId, String[] columns, String[] values){
+    StringBuilder result = new StringBuilder();
+    int columnsLastIndex = columns.length -1;
+
+    for(int i=0; i<=columnsLastIndex; i++){
+      String columnName = columns[i];
+      String value = values[i];
+
+      result.append(columnName).append("='").append(value).append("'");
+      if(i <  columnsLastIndex){
+        result.append(",");
+      }
+    }
+
+    return "UPDATE " + tableName + " SET "+ result.toString() +" WHERE " + BaseColumns._ID + "='"+itemId+"'";
+  }
+
+  public static String generateTableQuery(String TableName, String[] columns){
+    StringBuilder result = new StringBuilder();
+    if(columns.length == 0){
+      return "";
+    }
+    result.append(INDEX_KEY);
+    int columnsLastIndex = columns.length -1;
+
+    for(int i=0; i<=columnsLastIndex; i++){
+      String columnName = columns[i];
+      result.append(columnName);
+      if(i <  columnsLastIndex){
+        result.append(",");
+      }
+    }
+    return "CREATE TABLE " + TableName + " (" +result.toString() + ");";
+  }
+
+  public static String generateDeleteItemQuery(String tableName, int itemId){
+    return "DELETE FROM " + tableName + " WHERE " + _ID + "='"+itemId+"'";
+  }
+
 }

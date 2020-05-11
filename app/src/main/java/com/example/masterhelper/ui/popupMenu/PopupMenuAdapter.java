@@ -1,7 +1,6 @@
 package com.example.masterhelper.ui.popupMenu;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.PopupMenu;
@@ -11,9 +10,13 @@ public class PopupMenuAdapter {
   private PopupMenuEvents parentView;
   public PopupMenu popupMenu;
 
-  public PopupMenuAdapter(Context context, View v) throws Exception {
+  public final static int ORDERING_ITEM_INDEX = 2;
+
+  public PopupMenuAdapter(Context context, View v, Boolean ShowOrdering) throws Exception {
     popupMenu = new PopupMenu(context, v);
     popupMenu.inflate(R.menu.popupmenu);
+    popupMenu.getMenu().getItem(ORDERING_ITEM_INDEX).setVisible(ShowOrdering);
+
     if(context instanceof PopupMenuEvents){
       parentView = (PopupMenuEvents) context;
       popupMenu.setOnMenuItemClickListener(listener);

@@ -6,7 +6,7 @@ import android.view.View;
 import android.widget.ImageButton;
 import com.example.masterhelper.commonAdapter.item.ICommonItemEvents;
 import com.example.masterhelper.data.DbHelpers;
-import com.example.masterhelper.data.contracts.Journeys;
+import com.example.masterhelper.data.contracts.JourneysContract;
 import com.example.masterhelper.models.JourneyModel;
 import com.example.masterhelper.ui.AppBarFragment.IAppBarFragment;
 import android.content.Intent;
@@ -19,10 +19,14 @@ import com.example.masterhelper.ui.popupMenu.PopupMenuAdapter;
 import com.example.masterhelper.ui.popupMenu.PopupMenuEvents;
 
 import java.util.LinkedHashMap;
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity implements ICommonItemEvents, IAppBarFragment, PopupMenuEvents {
   /** */
   int journeysScreenId = R.id.JOURNEYS_ID;
+
+  /** */
+  int selectedJourneyId;
 
   /** */
   int journeyCreateBtnId = R.id.JOURNEY_CREATE_BTN;
@@ -46,13 +50,13 @@ public class MainActivity extends AppCompatActivity implements ICommonItemEvents
   private DbHelpers dbHelpers;
 
   private LinkedHashMap<Integer, JourneyModel> getJourneysList(){
-    String sqlQuery = Journeys.getListQuery(Journeys.TABLE_NAME, null, null, Journeys._ID + " DESC", 0);
+    String sqlQuery = JourneysContract.getListQuery(JourneysContract.TABLE_NAME, null, null, JourneysContract._ID + " DESC", 0);
     LinkedHashMap<Integer, JourneyModel> result = new LinkedHashMap<>();
     Cursor queryResult = dbHelpers.getList(sqlQuery);
     while (queryResult.moveToNext()) {
       // Используем индекс для получения строки или числа
-      int titleColumnIndex = queryResult.getColumnIndex(Journeys.COLUMN_TITLE);
-      int idColumnIndex = queryResult.getColumnIndex(Journeys._ID);
+      int titleColumnIndex = queryResult.getColumnIndex(JourneysContract.COLUMN_TITLE);
+      int idColumnIndex = queryResult.getColumnIndex(JourneysContract._ID);
       JourneyModel journeyModel = new JourneyModel(queryResult.getString(titleColumnIndex), queryResult.getInt(idColumnIndex));
       result.put(journeyModel.getId(),journeyModel);
     }
@@ -62,8 +66,22 @@ public class MainActivity extends AppCompatActivity implements ICommonItemEvents
   }
 
   private void addJourney(String newItemName){
-    String sqlQuery = Journeys.addItemQuery(newItemName);
+
+    String sqlQuery = JourneysContract.addItemQuery(new JourneyModel(newItemName));
     dbHelpers.addNewItem(sqlQuery);
+    setListData();
+  }
+
+  private void deleteJourney(int journeyId){
+    String sqlQuery = JourneysContract.deleteItemQuery(journeyId);
+    dbHelpers.deleteItem(sqlQuery);
+    setListData();
+  }
+
+  private void updateJourney(int journeyId, String newTitle){
+    String sqlQuery = JourneysContract.updateItemQuery(journeyId, new JourneyModel(newTitle));
+    dbHelpers.updateItem(sqlQuery);
+    setListData();
   }
 
   @Override
@@ -80,10 +98,18 @@ public class MainActivity extends AppCompatActivity implements ICommonItemEvents
     setListData();
   }
 
-  public void onCreateButtonPressed() {
+  public void onCreateJourneyButtonPressed() {
     Intent intent = new Intent(MainActivity.this, CreateNewItem.class);
     intent.putExtra("title", R.string.journey_create_title);
     startActivityForResult(intent, 1);
+  }
+
+  public void onUpdateJourneyButtonPressed(int id) {
+    Intent intent = new Intent(MainActivity.this, CreateNewItem.class);
+    intent.putExtra("title", R.string.journey_update_title);
+    intent.putExtra("id", id);
+    intent.putExtra("oldName", Objects.requireNonNull(data.get(id)).getTitle());
+    startActivityForResult(intent, 2);
   }
 
 
@@ -104,16 +130,21 @@ public class MainActivity extends AppCompatActivity implements ICommonItemEvents
   @Override
   protected void onActivityResult(int requestCode, int resultCode, Intent result) {
     super.onActivityResult(requestCode, resultCode, result);
-
-    if (requestCode == 1) {
-      if (resultCode == RESULT_OK) {
-        String newName = result.getStringExtra("name");
-        if(newName != null && newName.trim().length() == 0){
-          return;
-        }
+    if(resultCode != RESULT_OK){
+      return;
+    }
+    String newName = result.getStringExtra("name");
+    int id = result.getIntExtra("id", -1);
+    if(newName != null && newName.trim().length() == 0){
+      return;
+    }
+    switch (requestCode){
+      case 1:
         addJourney(newName);
-        setListData();
-      }
+        break;
+      case 2:
+        updateJourney(id, newName);
+        break;
     }
   }
 
@@ -125,7 +156,7 @@ public class MainActivity extends AppCompatActivity implements ICommonItemEvents
 
   void onStartItemPopup(View v){
     try {
-      journeysPopup = new PopupMenuAdapter(this, v);
+      journeysPopup = new PopupMenuAdapter(this, v, false);
       journeysPopup.popupMenu.show();
     } catch (Exception e) {
       e.printStackTrace();
@@ -136,6 +167,7 @@ public class MainActivity extends AppCompatActivity implements ICommonItemEvents
   @Override
   public void onClick(View elementFiredAction, int position) {
     JourneyModel journeyModel = (JourneyModel) data.values().toArray()[position];
+    selectedJourneyId = journeyModel.getId();
     switch (elementFiredAction.getId()){
       case R.id.JOURNEY_TITLE_ID:
         onItemButtonPressed(journeyModel.getId());
@@ -146,10 +178,18 @@ public class MainActivity extends AppCompatActivity implements ICommonItemEvents
     }
   }
 
-  View.OnClickListener OnCreateNewItem = v -> onCreateButtonPressed();
+  View.OnClickListener OnCreateNewItem = v -> onCreateJourneyButtonPressed();
 
   @Override
   public void onPopupMenuSelected(MenuItem selectedMenuItem) {
-
+    switch (selectedMenuItem.getItemId()){
+      case R.id.POPUP_MENU_DELETE_ID:
+        deleteJourney(selectedJourneyId);
+        break;
+      case R.id.POPUP_MENU_UPDATE_ID:
+        onUpdateJourneyButtonPressed(selectedJourneyId);
+        break;
+    }
+    selectedJourneyId = -1;
   }
 }

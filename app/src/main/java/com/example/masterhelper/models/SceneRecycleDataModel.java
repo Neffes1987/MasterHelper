@@ -24,24 +24,77 @@ public class SceneRecycleDataModel {
   /** флаг, что музыкальное сопровохжение включено */
   public boolean isMusicStarted;
 
+  /** уникальный ид закиси */
+  public int id;
+
   /**@constructor
    * генератор записи для адаптора
    * */
   public SceneRecycleDataModel(String title){
-    this.title = title;
-    this.description = "";
-    this.scriptsFinished = 0;
-    this.scriptsTotal = 0;
-    this.isExpand = false;
-    this.isMusicStarted = false;
+    setTitle(title);
+    setDescription("");
+    setExpand(false);
+    setMusicStarted(false);
+    setId(0);
+    setScriptsFinished(0);
+    setScriptsTotal(0);
   }
 
-  public SceneRecycleDataModel(String title, String description, int scriptsFinished, int scriptsTotal, boolean isExpand, boolean isMusicStarted ){
+  public SceneRecycleDataModel(String title, int id,  String description, int scriptsFinished, int scriptsTotal, boolean isExpand, boolean isMusicStarted ){
+    setTitle(title);
+    setDescription(description);
+    setExpand(isExpand);
+    setMusicStarted(isMusicStarted);
+    setId(id);
+    setScriptsFinished(scriptsFinished);
+    setScriptsTotal(scriptsTotal);
+  }
+
+  public void setId(int id) {
+    this.id = id;
+  }
+
+  public void setTitle(String title) {
     this.title = title;
+  }
+
+  public void setDescription(String description) {
     this.description = description;
+  }
+
+  public void setExpand(boolean expand) {
+    isExpand = expand;
+  }
+
+  public void setMusicStarted(boolean musicStarted) {
+    isMusicStarted = musicStarted;
+  }
+
+  public void setScriptsFinished(int scriptsFinished) {
     this.scriptsFinished = scriptsFinished;
+  }
+
+  public void setScriptsTotal(int scriptsTotal) {
     this.scriptsTotal = scriptsTotal;
-    this.isExpand = isExpand;
-    this.isMusicStarted = isMusicStarted;
+  }
+
+  public int getId() {
+    return id;
+  }
+
+  public String getTitle() {
+    return title;
+  }
+
+  public int getScriptsFinished() {
+    return scriptsFinished;
+  }
+
+  public int getScriptsTotal() {
+    return scriptsTotal;
+  }
+
+  public String getDescription() {
+    return description;
   }
 }

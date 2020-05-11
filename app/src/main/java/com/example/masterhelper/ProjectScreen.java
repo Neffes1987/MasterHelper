@@ -1,7 +1,13 @@
 package com.example.masterhelper;
 
+import android.database.Cursor;
+import android.util.Log;
 import android.view.View;
 import com.example.masterhelper.commonAdapter.item.ICommonItemEvents;
+import com.example.masterhelper.data.DbHelpers;
+import com.example.masterhelper.data.contracts.JourneysContract;
+import com.example.masterhelper.data.contracts.SceneContract;
+import com.example.masterhelper.models.JourneyModel;
 import com.example.masterhelper.ui.RecyclerViewFragment.RecyclerViewFragment;
 import com.example.masterhelper.models.SceneRecycleDataModel;
 import android.content.Intent;
@@ -9,13 +15,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.fragment.app.FragmentManager;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
 import java.util.LinkedHashMap;
 import java.util.Objects;
 
 
 public class ProjectScreen extends AppCompatActivity implements ICommonItemEvents {
-  String TITLE = "Имя приключения";
+  JourneyModel currentJourney;
+
+  DbHelpers dbHelpers;
 
   /** */
   int activityProjectViewScreenLayout = R.layout.activity_project_view_screen;
@@ -33,14 +40,69 @@ public class ProjectScreen extends AppCompatActivity implements ICommonItemEvent
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(activityProjectViewScreenLayout);
+    int journeyId = getIntent().getIntExtra("id", -1);
+    if(journeyId == -1){
+      setResult(RESULT_CANCELED);
+      finish();
+    }
+    dbHelpers  = new DbHelpers(this);
+    currentJourney = getJourney(journeyId);
 
     // получаем указатель на тулбар активированного в главном компоненте
-    Objects.requireNonNull(getSupportActionBar()).setTitle(TITLE);
+    Objects.requireNonNull(getSupportActionBar()).setTitle(currentJourney.getTitle());
 
     createNewSceneBtn = findViewById(createNewSceneBtnId);
     createNewSceneBtn.setOnClickListener(onCreateBtnListener);
-
+    getScenesList(currentJourney.getId());
+    setListData(data);
   }
+
+  private JourneyModel getJourney(int id){
+    String sqlQuery = JourneysContract.getListQuery(JourneysContract.TABLE_NAME, null, JourneysContract._ID+"="+ id, null, 1);
+    Cursor queryResult = dbHelpers.getList(sqlQuery);
+    queryResult.moveToNext();
+    int titleColumnIndex = queryResult.getColumnIndex(JourneysContract.COLUMN_TITLE);
+    int idColumnIndex = queryResult.getColumnIndex(JourneysContract._ID);
+    return new JourneyModel(queryResult.getString(titleColumnIndex), queryResult.getInt(idColumnIndex));
+  }
+
+  private LinkedHashMap<Integer, SceneRecycleDataModel> getScenesList(int journeyId){
+    String sqlQuery = SceneContract.getListQuery(SceneContract.TABLE_NAME, null, SceneContract.COLUMN_JOURNEY_ID+"="+ journeyId, SceneContract._ID + " DESC", 0);
+    LinkedHashMap<Integer, SceneRecycleDataModel> result = new LinkedHashMap<>();
+    Cursor queryResult = dbHelpers.getList(sqlQuery);
+
+    while (queryResult.moveToNext()) {
+      // Используем индекс для получения строки или числа
+      int titleColumnIndex = queryResult.getColumnIndex(SceneContract.COLUMN_TITLE);
+      int descriptionColumnIndex = queryResult.getColumnIndex(SceneContract.COLUMN_DESCRIPTION);
+      int scriptFinishedColumnIndex = queryResult.getColumnIndex(SceneContract.COLUMN_SCRIPT_FINISHED);
+      int scriptTotalColumnIndex = queryResult.getColumnIndex(SceneContract.COLUMN_SCRIPT_TOTAL);
+      int idColumnIndex = queryResult.getColumnIndex(SceneContract._ID);
+
+      SceneRecycleDataModel sceneRecycleDataModel = new SceneRecycleDataModel(
+        queryResult.getString(titleColumnIndex),
+        queryResult.getInt(idColumnIndex),
+        queryResult.getString(descriptionColumnIndex),
+        queryResult.getInt(scriptFinishedColumnIndex),
+        queryResult.getInt(scriptTotalColumnIndex),
+        false,
+        false
+      );
+      result.put(sceneRecycleDataModel.getId(), sceneRecycleDataModel);
+    }
+    queryResult.close();
+    data = result;
+    return result;
+  }
+
+  private void addNewItem(SceneRecycleDataModel newItem){
+    String sqlQuery = SceneContract.addItemQuery(newItem, currentJourney.getId());
+    dbHelpers.addNewItem(sqlQuery);
+    getScenesList(currentJourney.getId());
+    setListData(data);
+  }
+
+
 
   void setListData(LinkedHashMap<Integer, SceneRecycleDataModel> data){
     FragmentManager fm = getSupportFragmentManager();
@@ -51,12 +113,7 @@ public class ProjectScreen extends AppCompatActivity implements ICommonItemEvent
     }
   }
 
-  View.OnClickListener onCreateBtnListener = new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-      onCreateButtonPressed();
-    }
-  };
+  View.OnClickListener onCreateBtnListener = v -> onCreateButtonPressed();
 
   public void onCreateButtonPressed() {
     Intent intent = new Intent(this, CreateNewItem.class);
@@ -74,9 +131,8 @@ public class ProjectScreen extends AppCompatActivity implements ICommonItemEvent
         if(newName != null && newName.trim().length() == 0){
           return;
         }
-         SceneRecycleDataModel item = new SceneRecycleDataModel(newName);
-        data.put(data.size(), item);
-        setListData(data);
+       SceneRecycleDataModel item = new SceneRecycleDataModel(newName);
+       addNewItem(item);
       }
     }
   }

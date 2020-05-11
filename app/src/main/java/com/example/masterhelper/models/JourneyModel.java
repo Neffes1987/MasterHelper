@@ -12,6 +12,11 @@ public class JourneyModel {
     this.id = id;
   }
 
+  public JourneyModel(String title){
+    setTitle(title);
+    setId(0);
+  }
+
   public JourneyModel(String title, int id){
     setTitle(title);
     setId(id);
