@@ -11,7 +11,7 @@ import com.example.masterhelper.commonAdapter.item.CustomListItemsEnum;
 import com.example.masterhelper.commonAdapter.item.ICommonItemEvents;
 import com.example.masterhelper.models.EnemyModel;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 public class Script extends AppCompatActivity implements ICommonItemEvents {
   /** */
@@ -39,7 +39,7 @@ public class Script extends AppCompatActivity implements ICommonItemEvents {
     EnemyModel enemy4 = new EnemyModel("", 20, 15, 5, 4);
     EnemyModel enemy5 = new EnemyModel("", 20, 15, 5, 5);
 
-    HashMap<Integer, EnemyModel> enemies = new HashMap<>();
+    LinkedHashMap<Integer, EnemyModel> enemies = new LinkedHashMap<>();
     enemies.put(0, enemy1);
     enemies.put(1, enemy2);
     enemies.put(2, enemy3);

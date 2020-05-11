@@ -1,11 +1,9 @@
 package com.example.masterhelper;
 
-import android.content.Context;
 import android.database.Cursor;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import androidx.appcompat.widget.PopupMenu;
+import android.widget.ImageButton;
 import com.example.masterhelper.commonAdapter.item.ICommonItemEvents;
 import com.example.masterhelper.data.DbHelpers;
 import com.example.masterhelper.data.contracts.Journeys;
@@ -18,12 +16,17 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentManager;
 import com.example.masterhelper.ui.RecyclerViewFragment.RecyclerViewFragment;
 import com.example.masterhelper.ui.popupMenu.PopupMenuAdapter;
+import com.example.masterhelper.ui.popupMenu.PopupMenuEvents;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 
-public class MainActivity extends AppCompatActivity implements ICommonItemEvents, IAppBarFragment {
+public class MainActivity extends AppCompatActivity implements ICommonItemEvents, IAppBarFragment, PopupMenuEvents {
   /** */
   int journeysScreenId = R.id.JOURNEYS_ID;
+
+  /** */
+  int journeyCreateBtnId = R.id.JOURNEY_CREATE_BTN;
+  ImageButton journeyCreateBtn;
 
   /** */
   PopupMenuAdapter journeysPopup;
@@ -38,15 +41,13 @@ public class MainActivity extends AppCompatActivity implements ICommonItemEvents
   /** */
   int ScreenTitleStringString = R.string.SCREEN_NAME_JOURNEYS_TEXT;
 
-  HashMap<Integer, JourneyModel> data = new HashMap<>();
-
-
+  LinkedHashMap<Integer, JourneyModel> data = new LinkedHashMap<>();
 
   private DbHelpers dbHelpers;
 
-  private HashMap<Integer, JourneyModel> getJourneysList(){
+  private LinkedHashMap<Integer, JourneyModel> getJourneysList(){
     String sqlQuery = Journeys.getListQuery(Journeys.TABLE_NAME, null, null, Journeys._ID + " DESC", 0);
-    HashMap<Integer, JourneyModel> result = new HashMap<>();
+    LinkedHashMap<Integer, JourneyModel> result = new LinkedHashMap<>();
     Cursor queryResult = dbHelpers.getList(sqlQuery);
     while (queryResult.moveToNext()) {
       // Используем индекс для получения строки или числа
@@ -71,6 +72,9 @@ public class MainActivity extends AppCompatActivity implements ICommonItemEvents
     setContentView(activityScreenViewProjectsLayout);
     toolbar = findViewById(toolbarId);
     toolbar.setTitle(ScreenTitleStringString);
+    journeyCreateBtn = findViewById(journeyCreateBtnId);
+    journeyCreateBtn.setOnClickListener(OnCreateNewItem);
+
     setSupportActionBar(toolbar);
     dbHelpers  = new DbHelpers(this);
     setListData();
@@ -121,7 +125,8 @@ public class MainActivity extends AppCompatActivity implements ICommonItemEvents
 
   void onStartItemPopup(View v){
     try {
-      journeysPopup = new PopupMenuAdapter(v);
+      journeysPopup = new PopupMenuAdapter(this, v);
+      journeysPopup.popupMenu.show();
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -139,5 +144,12 @@ public class MainActivity extends AppCompatActivity implements ICommonItemEvents
         onStartItemPopup(elementFiredAction);
         break;
     }
+  }
+
+  View.OnClickListener OnCreateNewItem = v -> onCreateButtonPressed();
+
+  @Override
+  public void onPopupMenuSelected(MenuItem selectedMenuItem) {
+
   }
 }

@@ -10,7 +10,7 @@ import android.os.Bundle;
 import androidx.fragment.app.FragmentManager;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Objects;
 
 
@@ -27,7 +27,7 @@ public class ProjectScreen extends AppCompatActivity implements ICommonItemEvent
   int createNewSceneBtnId = R.id.CREATE_NEW_SCENE_BTN_ID;
   FloatingActionButton createNewSceneBtn;
 
-  public HashMap<Integer, SceneRecycleDataModel> data = new HashMap<>();
+  public LinkedHashMap<Integer, SceneRecycleDataModel> data = new LinkedHashMap<>();
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +42,7 @@ public class ProjectScreen extends AppCompatActivity implements ICommonItemEvent
 
   }
 
-  void setListData(HashMap<Integer, SceneRecycleDataModel> data){
+  void setListData(LinkedHashMap<Integer, SceneRecycleDataModel> data){
     FragmentManager fm = getSupportFragmentManager();
     RecyclerViewFragment lsf = (RecyclerViewFragment) fm.findFragmentById(screenFragmentId);
 

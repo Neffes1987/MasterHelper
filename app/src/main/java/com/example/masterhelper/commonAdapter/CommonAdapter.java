@@ -1,17 +1,14 @@
 package com.example.masterhelper.commonAdapter;
 
-import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.masterhelper.commonAdapter.item.CustomListItemsEnum;
 import com.example.masterhelper.commonAdapter.item.ICommonItemEvents;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 /**
  * Адаптор для работы с аккордионами внутри цеклического списка
@@ -21,13 +18,13 @@ public class CommonAdapter<Model> extends RecyclerView.Adapter<CommonHolder<Mode
   int fragmentId;
 
   /** */
-  private HashMap<Integer, Model> mDataset;
+  private LinkedHashMap<Integer, Model> mDataset;
   private ICommonItemEvents parentScreenView;
 
   CustomListItemsEnum commonItemType;
 
   /** Инициализируем набор данных для списка и передаем указатель на активность */
-  public CommonAdapter(HashMap<Integer, Model> data, int listItemFragmentId,  CustomListItemsEnum viewType, ICommonItemEvents parentScreen) {
+  public CommonAdapter(LinkedHashMap<Integer, Model> data, int listItemFragmentId,  CustomListItemsEnum viewType, ICommonItemEvents parentScreen) {
     mDataset = data;
     fragmentId = listItemFragmentId;
     commonItemType = viewType;

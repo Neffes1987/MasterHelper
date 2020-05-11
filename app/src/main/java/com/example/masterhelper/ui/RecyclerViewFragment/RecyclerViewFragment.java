@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.masterhelper.R;
 import com.example.masterhelper.models.ScriptRecycleDataModel;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 public class RecyclerViewFragment extends Fragment implements ICommonItemEvents, IRecycleFragment {
 
@@ -31,14 +31,14 @@ public class RecyclerViewFragment extends Fragment implements ICommonItemEvents,
 
   public RecyclerViewFragment() { }
 
-  public void updateSceneListAdapter(HashMap<Integer, SceneRecycleDataModel> data){
+  public void updateSceneListAdapter(LinkedHashMap<Integer, SceneRecycleDataModel> data){
     LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
     recyclerView.setLayoutManager(layoutManager);
     CommonAdapter<SceneRecycleDataModel> mAdapter = new CommonAdapter<>(data, R.layout.fragment_view_scene_list_item, CustomListItemsEnum.scene, this);
     recyclerView.setAdapter(mAdapter);
   }
 
-  public void updateScriptListAdapter(HashMap<Integer, ScriptRecycleDataModel> data) {
+  public void updateScriptListAdapter(LinkedHashMap<Integer, ScriptRecycleDataModel> data) {
     LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
     recyclerView.setLayoutManager(layoutManager);
 
@@ -46,7 +46,7 @@ public class RecyclerViewFragment extends Fragment implements ICommonItemEvents,
     recyclerView.setAdapter(mAdapter);
   }
 
-  public void updateJourneyListAdapter(HashMap<Integer, JourneyModel> data) {
+  public void updateJourneyListAdapter(LinkedHashMap<Integer, JourneyModel> data) {
     LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
     recyclerView.setLayoutManager(layoutManager);
 

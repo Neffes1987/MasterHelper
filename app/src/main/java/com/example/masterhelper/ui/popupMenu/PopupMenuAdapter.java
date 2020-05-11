@@ -1,5 +1,7 @@
 package com.example.masterhelper.ui.popupMenu;
 
+import android.content.Context;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.PopupMenu;
@@ -9,11 +11,11 @@ public class PopupMenuAdapter {
   private PopupMenuEvents parentView;
   public PopupMenu popupMenu;
 
-  public PopupMenuAdapter(View v) throws Exception {
-    popupMenu = new PopupMenu(v.getContext(), v);
+  public PopupMenuAdapter(Context context, View v) throws Exception {
+    popupMenu = new PopupMenu(context, v);
     popupMenu.inflate(R.menu.popupmenu);
-    if(v instanceof PopupMenuEvents){
-      parentView = (PopupMenuEvents) v;
+    if(context instanceof PopupMenuEvents){
+      parentView = (PopupMenuEvents) context;
       popupMenu.setOnMenuItemClickListener(listener);
     } else {
       throw new Exception("Activity должен реализовывать интерфейс PopupMenuEvents");

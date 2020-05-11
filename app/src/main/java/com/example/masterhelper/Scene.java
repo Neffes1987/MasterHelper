@@ -9,7 +9,7 @@ import com.example.masterhelper.commonAdapter.item.ICommonItemEvents;
 import com.example.masterhelper.ui.RecyclerViewFragment.RecyclerViewFragment;
 import com.example.masterhelper.models.ScriptRecycleDataModel;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 public class Scene extends AppCompatActivity implements ICommonItemEvents {
 
@@ -19,7 +19,7 @@ public class Scene extends AppCompatActivity implements ICommonItemEvents {
   /** */
   int screenScriptsListId = R.id.SCREEN_SCRIPTS_LIST_ID;
 
-  public HashMap<Integer, ScriptRecycleDataModel> data = new HashMap<>();
+  public LinkedHashMap<Integer, ScriptRecycleDataModel> data = new LinkedHashMap<>();
 
   public ScriptRecycleDataModel item = new ScriptRecycleDataModel("Событие сцены", "Text", true, false);
   public ScriptRecycleDataModel item1 = new ScriptRecycleDataModel("Событие сцены", "Text", false, false);
@@ -39,7 +39,7 @@ public class Scene extends AppCompatActivity implements ICommonItemEvents {
   }
 
 
-  void setListData(HashMap<Integer, ScriptRecycleDataModel> data){
+  void setListData(LinkedHashMap<Integer, ScriptRecycleDataModel> data){
     FragmentManager fm = getSupportFragmentManager();
     RecyclerViewFragment lsf = (RecyclerViewFragment) fm.findFragmentById(screenScriptsListId);
 

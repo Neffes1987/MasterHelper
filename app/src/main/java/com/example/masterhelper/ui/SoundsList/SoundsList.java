@@ -15,7 +15,7 @@ import com.example.masterhelper.commonAdapter.item.ICommonItemEvents;
 import com.example.masterhelper.models.SoundFileModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -45,7 +45,7 @@ public class SoundsList extends Fragment implements ICommonItemEvents {
     return selfFragment;
   }
 
-  public void updateListAdapter(HashMap<Integer, SoundFileModel> data, Boolean isGeneral){
+  public void updateListAdapter(LinkedHashMap<Integer, SoundFileModel> data, Boolean isGeneral){
     LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
     recyclerView.setLayoutManager(layoutManager);
     CommonAdapter<SoundFileModel> mAdapter = new CommonAdapter<>(

@@ -29,7 +29,7 @@
     android:layout_height="wrap_content"
     android:clickable="true"
     app:srcCompat="@mipmap/baseline_add_black_18dp"
-    android:id="@+id/CREATE_ITEM_BTN"
+    android:id="@+id/JOURNEY_CREATE_BTN"
     android:layout_gravity="bottom|right"
     android:layout_margin="8dp"/>
 

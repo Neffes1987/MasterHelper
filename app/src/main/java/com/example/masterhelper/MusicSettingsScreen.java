@@ -18,8 +18,8 @@ import com.example.masterhelper.mediaworker.MediaFiles;
 import com.example.masterhelper.ui.SoundsList.SoundsList;
 import com.example.masterhelper.models.SoundFileModel;
 
-import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 
 public class MusicSettingsScreen extends AppCompatActivity implements ICommonItemEvents {
   private static final int PICK_AUDIO_FILE = 1;
@@ -109,7 +109,7 @@ public class MusicSettingsScreen extends AppCompatActivity implements ICommonIte
 
   /** метод обновляет список добавленных данных на вьюхе */
   private void updateViewList() {
-    HashMap<Integer, SoundFileModel> newData = new HashMap<>();
+    LinkedHashMap<Integer, SoundFileModel> newData = new LinkedHashMap<>();
 
     mediaFiles.getFilesList().forEach(fileInList -> newData.put(newData.size(),
       new SoundFileModel(fileInList.getName(), fileInList.lastModified(), fileInList.getPath(), newData.size())
