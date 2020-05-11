@@ -137,16 +137,16 @@ public class SceneItem<Model> extends CommonItem<Model>{
     startScene = v.findViewById(R.id.SCENE_START_BTN_ID);
     startScene.setOnClickListener(commonListener);
 
-    editBtn = v.findViewById(R.id.SCREEN_EDIT_BTN_ID);
+    editBtn = v.findViewById(R.id.SCENE_EDIT_BTN_ID);
     editBtn.setOnClickListener(commonListener);
 
-    deleteBtn = v.findViewById(R.id.SCREEN_DELETE_BTN_ID);
+    deleteBtn = v.findViewById(R.id.SCENE_DELETE_BTN_ID);
     deleteBtn.setOnClickListener(commonListener);
 
-    upOrderBtn = v.findViewById(R.id.SCREEN_UP_ORDER_BTN_ID);
+    upOrderBtn = v.findViewById(R.id.SCENE_UP_ORDER_BTN_ID);
     upOrderBtn.setOnClickListener(commonListener);
 
-    downOrderBtn = v.findViewById(R.id.SCREEN_DOWN_ORDER_BTN_ID);
+    downOrderBtn = v.findViewById(R.id.SCENE_DOWN_ORDER_BTN_ID);
     downOrderBtn.setOnClickListener(commonListener);
 
     isMusicToggledFlag = v.findViewById(R.id.SCREEN_BACKGROUND_MUSIC_TOGGLER_ID);

@@ -13,7 +13,7 @@ public class JourneysContract extends GeneralContract {
 
   private final static String[] INSERT_COLUMNS_PROPS = { COLUMN_TITLE };
 
-  private final static String[] UPDATE_COLUMNS_PROPS = { COLUMN_TITLE };
+  private final static String[] UPDATE_COLUMNS_PROPS = INSERT_COLUMNS_PROPS;
 
   public static String[] getValues(JourneyModel journey){
     return new String[]{journey.getTitle()};
@@ -34,4 +34,5 @@ public class JourneysContract extends GeneralContract {
     String[] values = getValues(newItem);
     return generateUpdateValues(TABLE_NAME, itemId, UPDATE_COLUMNS_PROPS, values);
   }
+
 }

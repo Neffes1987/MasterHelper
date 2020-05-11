@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import com.example.masterhelper.data.contracts.JourneysContract;
 import com.example.masterhelper.data.contracts.SceneContract;
+import com.example.masterhelper.data.contracts.ScriptsContract;
 
 public class DbHelpers extends SQLiteOpenHelper {
   /**
@@ -15,7 +16,27 @@ public class DbHelpers extends SQLiteOpenHelper {
   /**
    * Версия базы данных. При изменении схемы увеличить на единицу
    */
-  private static final int DATABASE_VERSION = 6;
+  private static final int DATABASE_VERSION = 8;
+
+  SQLiteDatabase db;
+
+  private void generateJourneyTable(){
+    db.execSQL("DROP TABLE IF EXISTS "+JourneysContract.TABLE_NAME);
+    String SQL_CREATE_TABLE = JourneysContract.CREATE_TABLE;
+    db.execSQL(SQL_CREATE_TABLE);
+  }
+
+  private void generateScenesTable(){
+    db.execSQL("DROP TABLE IF EXISTS "+SceneContract.TABLE_NAME);
+    String SQL_CREATE_TABLE = SceneContract.CREATE_TABLE;
+    db.execSQL(SQL_CREATE_TABLE);
+  }
+
+  private void generateScriptsTable(){
+    db.execSQL("DROP TABLE IF EXISTS "+ScriptsContract.TABLE_NAME);
+    String SQL_CREATE_TABLE = ScriptsContract.CREATE_TABLE;
+    db.execSQL(SQL_CREATE_TABLE);
+  }
 
 
   /**
@@ -30,14 +51,11 @@ public class DbHelpers extends SQLiteOpenHelper {
    */
   @Override
   public void onCreate(SQLiteDatabase db) {
+    this.db = db;
     // Строка для создания таблицы
-    String SQL_CREATE_JOURNEYS_TABLE = JourneysContract.CREATE_TABLE;
-
-    // Запускаем создание таблицы
-    db.execSQL(SQL_CREATE_JOURNEYS_TABLE);
-
-    String SQL_CREATE_SCENES_TABLE = SceneContract.CREATE_TABLE;
-    db.execSQL(SQL_CREATE_SCENES_TABLE);
+    generateJourneyTable();
+    generateScenesTable();
+    generateScriptsTable();
   }
 
   /**
@@ -45,16 +63,10 @@ public class DbHelpers extends SQLiteOpenHelper {
    */
   @Override
   public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-    db.execSQL("DROP TABLE "+JourneysContract.TABLE_NAME);
-    db.execSQL("DROP TABLE "+SceneContract.TABLE_NAME);
-    // Строка для создания таблицы
-    String SQL_CREATE_JOURNEYS_TABLE = JourneysContract.CREATE_TABLE;
-
-    // Запускаем создание таблицы
-    db.execSQL(SQL_CREATE_JOURNEYS_TABLE);
-
-    String SQL_CREATE_SCENES_TABLE = SceneContract.CREATE_TABLE;
-    db.execSQL(SQL_CREATE_SCENES_TABLE);
+    this.db = db;
+    generateJourneyTable();
+    generateScenesTable();
+    generateScriptsTable();
   }
 
   public Cursor getList(String query){

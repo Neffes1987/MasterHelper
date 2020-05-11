@@ -149,28 +149,28 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:srcCompat="@mipmap/baseline_create_black_18dp"
-            android:id="@+id/SCREEN_EDIT_BTN_ID"
+            android:id="@+id/SCENE_EDIT_BTN_ID"
             android:layout_weight="1"/>
 
           <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:srcCompat="@mipmap/baseline_keyboard_arrow_down_black_18dp"
-            android:id="@+id/SCREEN_UP_ORDER_BTN_ID"
+            android:id="@+id/SCENE_UP_ORDER_BTN_ID"
             android:layout_weight="1"/>
 
           <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:srcCompat="@mipmap/baseline_keyboard_arrow_up_black_18dp"
-            android:id="@+id/SCREEN_DOWN_ORDER_BTN_ID"
+            android:id="@+id/SCENE_DOWN_ORDER_BTN_ID"
             android:layout_weight="1"/>
 
           <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:srcCompat="@mipmap/baseline_clear_black_18dp"
-            android:id="@+id/SCREEN_DELETE_BTN_ID"
+            android:id="@+id/SCENE_DELETE_BTN_ID"
             android:layout_weight="1"/>
         </LinearLayout>
 

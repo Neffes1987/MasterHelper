@@ -3,7 +3,10 @@ package com.example.masterhelper.data.contracts;
 import android.provider.BaseColumns;
 import androidx.annotation.Nullable;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class GeneralContract implements BaseColumns {
 
@@ -90,6 +93,13 @@ public class GeneralContract implements BaseColumns {
 
   public static String generateDeleteItemQuery(String tableName, int itemId){
     return "DELETE FROM " + tableName + " WHERE " + _ID + "='"+itemId+"'";
+  }
+
+
+  public static final String [] concat(final String [] first, final String [] second) {
+    final ArrayList<String> resultList = new ArrayList<>(Arrays.asList(first));
+    resultList.addAll(new ArrayList<>(Arrays.asList(second)));
+    return resultList.toArray(new String [resultList.size()]);
   }
 
 }

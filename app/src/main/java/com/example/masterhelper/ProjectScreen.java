@@ -1,7 +1,6 @@
 package com.example.masterhelper;
 
 import android.database.Cursor;
-import android.util.Log;
 import android.view.View;
 import com.example.masterhelper.commonAdapter.item.ICommonItemEvents;
 import com.example.masterhelper.data.DbHelpers;
@@ -75,16 +74,14 @@ public class ProjectScreen extends AppCompatActivity implements ICommonItemEvent
       // Используем индекс для получения строки или числа
       int titleColumnIndex = queryResult.getColumnIndex(SceneContract.COLUMN_TITLE);
       int descriptionColumnIndex = queryResult.getColumnIndex(SceneContract.COLUMN_DESCRIPTION);
-      int scriptFinishedColumnIndex = queryResult.getColumnIndex(SceneContract.COLUMN_SCRIPT_FINISHED);
-      int scriptTotalColumnIndex = queryResult.getColumnIndex(SceneContract.COLUMN_SCRIPT_TOTAL);
       int idColumnIndex = queryResult.getColumnIndex(SceneContract._ID);
 
       SceneRecycleDataModel sceneRecycleDataModel = new SceneRecycleDataModel(
         queryResult.getString(titleColumnIndex),
         queryResult.getInt(idColumnIndex),
         queryResult.getString(descriptionColumnIndex),
-        queryResult.getInt(scriptFinishedColumnIndex),
-        queryResult.getInt(scriptTotalColumnIndex),
+        0,
+        0,
         false,
         false
       );
@@ -95,9 +92,23 @@ public class ProjectScreen extends AppCompatActivity implements ICommonItemEvent
     return result;
   }
 
-  private void addNewItem(SceneRecycleDataModel newItem){
+  private void addNewScene(SceneRecycleDataModel newItem){
     String sqlQuery = SceneContract.addItemQuery(newItem, currentJourney.getId());
     dbHelpers.addNewItem(sqlQuery);
+    getScenesList(currentJourney.getId());
+    setListData(data);
+  }
+
+  private void updateScene(SceneRecycleDataModel newItem, int itemId){
+    String sqlQuery = SceneContract.updateItemQuery(itemId, newItem);
+    dbHelpers.updateItem(sqlQuery);
+    getScenesList(currentJourney.getId());
+    setListData(data);
+  }
+
+  private void deleteScene(int itemId){
+    String sqlQuery = SceneContract.deleteItemQuery(itemId);
+    dbHelpers.deleteItem(sqlQuery);
     getScenesList(currentJourney.getId());
     setListData(data);
   }
@@ -121,31 +132,50 @@ public class ProjectScreen extends AppCompatActivity implements ICommonItemEvent
     startActivityForResult(intent, 1);
   }
 
+  public void onUpdateScreenNameButtonPressed(int id) {
+    Intent intent = new Intent(this, CreateNewItem.class);
+    intent.putExtra("title", R.string.screen_name_scene_update);
+    intent.putExtra("id", id);
+    intent.putExtra("oldName", Objects.requireNonNull(data.get(id)).getTitle());
+    startActivityForResult(intent, 2);
+  }
+
   @Override
   protected void onActivityResult(int requestCode, int resultCode, Intent result) {
     super.onActivityResult(requestCode, resultCode, result);
-
-    if (requestCode == 1) {
-      if (resultCode == RESULT_OK) {
-        String newName = result.getStringExtra("name");
-        if(newName != null && newName.trim().length() == 0){
-          return;
-        }
-       SceneRecycleDataModel item = new SceneRecycleDataModel(newName);
-       addNewItem(item);
-      }
+    if(resultCode != RESULT_OK){
+      return;
+    }
+    String newName = result.getStringExtra("name");
+    int id = result.getIntExtra("id", 0);
+    if(newName != null && newName.trim().length() == 0){
+      return;
+    }
+    SceneRecycleDataModel item = new SceneRecycleDataModel(newName);
+    switch (requestCode){
+      case 1:
+        addNewScene(item);
+        break;
+      case 2:
+        updateScene(item, id);
+        break;
     }
   }
 
   @Override
   public void onClick(View elementFiredAction, int position) {
-    // SceneRecycleDataModel currentData = data.get(position);
+    SceneRecycleDataModel currentData = (SceneRecycleDataModel) data.values().toArray()[position];
     int btnId = elementFiredAction.getId();
     switch (btnId){
       case R.id.SCENE_START_BTN_ID:
         Intent intent = new Intent(this, Scene.class);
         startActivity(intent);
         break;
+      case R.id.SCENE_DELETE_BTN_ID:
+        deleteScene(currentData.getId());
+        break;
+      case R.id.SCENE_EDIT_BTN_ID:
+          onUpdateScreenNameButtonPressed(currentData.getId());
       default: return;
     }
   }
