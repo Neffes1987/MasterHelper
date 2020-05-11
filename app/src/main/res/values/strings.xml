@@ -59,4 +59,10 @@
 
   <string name="add_music">Добавить музыкальный файл</string>
   <string name="library_music">Фоновая музыка</string>
+
+
+  <!-- popup menu -->
+  <string name="popup_menu_update">Изменить</string>
+  <string name="popup_menu_delete">Удалить</string>
+  <string name="popup_menu_order">Сортировать</string>
 </resources>

@@ -1,27 +1,32 @@
 package com.example.masterhelper;
 
+import android.content.Context;
 import android.database.Cursor;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import androidx.appcompat.widget.PopupMenu;
+import com.example.masterhelper.commonAdapter.item.ICommonItemEvents;
 import com.example.masterhelper.data.DbHelpers;
 import com.example.masterhelper.data.contracts.Journeys;
+import com.example.masterhelper.models.JourneyModel;
 import com.example.masterhelper.ui.AppBarFragment.IAppBarFragment;
-import com.example.masterhelper.ui.ListFragment.IListFragmentInterface;
-import com.example.masterhelper.ui.ListFragment.ListScreenFragment;
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentManager;
+import com.example.masterhelper.ui.RecyclerViewFragment.RecyclerViewFragment;
+import com.example.masterhelper.ui.popupMenu.PopupMenuAdapter;
 
-import java.lang.reflect.Array;
-import java.util.Arrays;
-import java.util.HashSet;
+import java.util.HashMap;
 
-public class MainActivity extends AppCompatActivity implements IListFragmentInterface, IAppBarFragment {
+public class MainActivity extends AppCompatActivity implements ICommonItemEvents, IAppBarFragment {
   /** */
   int journeysScreenId = R.id.JOURNEYS_ID;
+
+  /** */
+  PopupMenuAdapter journeysPopup;
 
   /** */
   int activityScreenViewProjectsLayout = R.layout.activity_screen_view_projects;
@@ -33,22 +38,26 @@ public class MainActivity extends AppCompatActivity implements IListFragmentInte
   /** */
   int ScreenTitleStringString = R.string.SCREEN_NAME_JOURNEYS_TEXT;
 
-  public HashSet<String> data = new HashSet<>();
+  HashMap<Integer, JourneyModel> data = new HashMap<>();
+
+
 
   private DbHelpers dbHelpers;
 
-  private String[] getJourneysList(){
-    StringBuilder journeyNames = new StringBuilder();
+  private HashMap<Integer, JourneyModel> getJourneysList(){
     String sqlQuery = Journeys.getListQuery(Journeys.TABLE_NAME, null, null, Journeys._ID + " DESC", 0);
-
+    HashMap<Integer, JourneyModel> result = new HashMap<>();
     Cursor queryResult = dbHelpers.getList(sqlQuery);
     while (queryResult.moveToNext()) {
       // Используем индекс для получения строки или числа
       int titleColumnIndex = queryResult.getColumnIndex(Journeys.COLUMN_TITLE);
-      journeyNames.append(queryResult.getString(titleColumnIndex)).append(',');
+      int idColumnIndex = queryResult.getColumnIndex(Journeys._ID);
+      JourneyModel journeyModel = new JourneyModel(queryResult.getString(titleColumnIndex), queryResult.getInt(idColumnIndex));
+      result.put(journeyModel.getId(),journeyModel);
     }
     queryResult.close();
-    return journeyNames.toString().split(",");
+    data = result;
+    return result;
   }
 
   private void addJourney(String newItemName){
@@ -67,7 +76,6 @@ public class MainActivity extends AppCompatActivity implements IListFragmentInte
     setListData();
   }
 
-  @Override
   public void onCreateButtonPressed() {
     Intent intent = new Intent(MainActivity.this, CreateNewItem.class);
     intent.putExtra("title", R.string.journey_create_title);
@@ -75,22 +83,17 @@ public class MainActivity extends AppCompatActivity implements IListFragmentInte
   }
 
 
-  @Override
-  public void onItemButtonPressed(String id) {
+  public void onItemButtonPressed(int id) {
     Intent intent = new Intent(MainActivity.this, ProjectScreen.class);
+    intent.putExtra("id", id);
     startActivity(intent);
-  }
-
-  @Override
-  public void onSearchStringChanged(String str) {
-    Toast.makeText(this, str, Toast.LENGTH_SHORT).show();
   }
 
   void setListData(){
     FragmentManager fm = getSupportFragmentManager();
-    ListScreenFragment lsf = (ListScreenFragment) fm.findFragmentById(journeysScreenId);
+    RecyclerViewFragment lsf = (RecyclerViewFragment) fm.findFragmentById(journeysScreenId);
     if(lsf != null && lsf.getView() != null){
-      lsf.updateListValues(lsf.getView(), getJourneysList());
+      lsf.updateJourneyListAdapter(getJourneysList());
     }
   }
 
@@ -114,5 +117,27 @@ public class MainActivity extends AppCompatActivity implements IListFragmentInte
   public void onItemSelected(MenuItem selectedView) {
     Intent intent = new Intent(MainActivity.this, MusicSettingsScreen.class);
     startActivity(intent);
+  }
+
+  void onStartItemPopup(View v){
+    try {
+      journeysPopup = new PopupMenuAdapter(v);
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
+
+
+  @Override
+  public void onClick(View elementFiredAction, int position) {
+    JourneyModel journeyModel = (JourneyModel) data.values().toArray()[position];
+    switch (elementFiredAction.getId()){
+      case R.id.JOURNEY_TITLE_ID:
+        onItemButtonPressed(journeyModel.getId());
+        break;
+      case R.id.JOURNEY_EDIT_ID:
+        onStartItemPopup(elementFiredAction);
+        break;
+    }
   }
 }

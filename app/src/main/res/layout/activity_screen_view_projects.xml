@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
@@ -16,10 +17,20 @@
   <fragment
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:name="com.example.masterhelper.ui.ListFragment.ListScreenFragment"
+    android:name="com.example.masterhelper.ui.RecyclerViewFragment.RecyclerViewFragment"
     android:id="@+id/JOURNEYS_ID"
-    tools:layout="@layout/fragment_list_screen"
-    style="@style/ConstraintLayoutStyled"
-    android:layout_marginTop="?attr/actionBarSize"/>
+    tools:layout="@layout/fragment_recycler_view"
+    android:layout_marginTop="?attr/actionBarSize"
+    android:layout_marginLeft="8dp"
+    android:layout_marginRight="8dp"/>
+
+  <com.google.android.material.floatingactionbutton.FloatingActionButton
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    app:srcCompat="@mipmap/baseline_add_black_18dp"
+    android:id="@+id/CREATE_ITEM_BTN"
+    android:layout_gravity="bottom|right"
+    android:layout_margin="8dp"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

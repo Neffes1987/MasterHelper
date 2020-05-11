@@ -20,6 +20,7 @@ public class CommonItem<Model> extends RecyclerView.ViewHolder implements ICommo
     super(v);
     this.adapter = adapter;
   }
+
   public void updateHolderByData(Model itemData, int position) {}
 
   public void setPosition(int position) {

@@ -5,5 +5,6 @@ public enum CustomListItemsEnum {
   musicGeneral,
   scene,
   script,
+  journey,
   enemyIcon
 }

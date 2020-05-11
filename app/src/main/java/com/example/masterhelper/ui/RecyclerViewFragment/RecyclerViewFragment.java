@@ -4,6 +4,7 @@ package com.example.masterhelper.ui.RecyclerViewFragment;
 import com.example.masterhelper.commonAdapter.CommonAdapter;
 import com.example.masterhelper.commonAdapter.item.CustomListItemsEnum;
 import com.example.masterhelper.commonAdapter.item.ICommonItemEvents;
+import com.example.masterhelper.models.JourneyModel;
 import com.example.masterhelper.models.SceneRecycleDataModel;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
@@ -42,6 +43,14 @@ public class RecyclerViewFragment extends Fragment implements ICommonItemEvents,
     recyclerView.setLayoutManager(layoutManager);
 
     CommonAdapter<ScriptRecycleDataModel> mAdapter = new CommonAdapter<>(data, R.layout.fragment_view_script_list_item, CustomListItemsEnum.script, this);
+    recyclerView.setAdapter(mAdapter);
+  }
+
+  public void updateJourneyListAdapter(HashMap<Integer, JourneyModel> data) {
+    LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+    recyclerView.setLayoutManager(layoutManager);
+
+    CommonAdapter<JourneyModel> mAdapter = new CommonAdapter<>(data, R.layout.fragment_view_journey_item, CustomListItemsEnum.journey, this);
     recyclerView.setAdapter(mAdapter);
   }
 

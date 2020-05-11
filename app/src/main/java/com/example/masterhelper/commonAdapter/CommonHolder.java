@@ -31,6 +31,9 @@ public class CommonHolder<Model> extends RecyclerView.ViewHolder {
       case enemyIcon:
         commonItem = new EnemyIconItem<Model>(v, adapter);
         break;
+      case journey:
+        commonItem = new JourneyItem<Model>(v, adapter, true);
+        break;
     }
   }
 }

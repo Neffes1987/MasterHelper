@@ -54,9 +54,8 @@ public class CommonAdapter<Model> extends RecyclerView.Adapter<CommonHolder<Mode
    * */
   @Override
   public void onBindViewHolder(CommonHolder<Model> holder, final int position) {
-    Model itemData = mDataset.get(position);
+    Model itemData = (Model) mDataset.values().toArray()[position];
     assert itemData != null;
-
     holder.initRecyclerView(itemData, position);
   }
 
