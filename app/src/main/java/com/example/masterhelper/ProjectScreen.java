@@ -169,6 +169,8 @@ public class ProjectScreen extends AppCompatActivity implements ICommonItemEvent
     switch (btnId){
       case R.id.SCENE_START_BTN_ID:
         Intent intent = new Intent(this, Scene.class);
+        intent.putExtra("sceneId", currentData.getId());
+        intent.putExtra("sceneName", currentData.getTitle());
         startActivity(intent);
         break;
       case R.id.SCENE_DELETE_BTN_ID:

@@ -9,6 +9,9 @@ public class ScriptRecycleDataModel {
   /** название сцены выводится в строке списка(видна всегда)*/
   public String title;
 
+  /** ид скрипта */
+  public int id;
+
   /** описание сцены, тескт внутри аккордиона, выводится если таб открыт*/
   public String description;
 
@@ -21,10 +24,43 @@ public class ScriptRecycleDataModel {
   /**@constructor
    * генератор записи для адаптора
    * */
-  public ScriptRecycleDataModel(String title, String description, boolean hasBattleActionIcon, boolean isFinished ){
-    this.title = title;
+  public ScriptRecycleDataModel(String title, int id, String description, boolean hasBattleActionIcon, boolean isFinished ){
+    setTitle(title);
+    setDescription(description);
+    setFinished(isFinished);
+    setHasBattleActionIcon(hasBattleActionIcon);
+    setId(id);
+  }
+
+  public String getDescription() {
+    return description;
+  }
+
+  public String getTitle() {
+    return title;
+  }
+
+  public int getId() {
+    return id;
+  }
+
+  public void setDescription(String description) {
     this.description = description;
+  }
+
+  public void setTitle(String title) {
+    this.title = title;
+  }
+
+  public void setId(int id) {
+    this.id = id;
+  }
+
+  public void setFinished(boolean finished) {
+    isFinished = finished;
+  }
+
+  public void setHasBattleActionIcon(boolean hasBattleActionIcon) {
     this.hasBattleActionIcon = hasBattleActionIcon;
-    this.isFinished = isFinished;
   }
 }

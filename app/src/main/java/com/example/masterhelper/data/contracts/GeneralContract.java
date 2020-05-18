@@ -1,6 +1,7 @@
 package com.example.masterhelper.data.contracts;
 
 import android.provider.BaseColumns;
+import android.util.Log;
 import androidx.annotation.Nullable;
 
 import java.lang.reflect.Array;
@@ -40,7 +41,6 @@ public class GeneralContract implements BaseColumns {
     StringBuilder valuesResult = new StringBuilder();
     StringBuilder columnsResult = new StringBuilder();
     int columnsLastIndex = columns.length -1;
-
     for(int i=0; i<=columnsLastIndex; i++){
       String columnName = columns[i];
       String value = values[i];

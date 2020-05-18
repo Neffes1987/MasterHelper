@@ -37,18 +37,16 @@
     <EditText
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:inputType="textPersonName"
+      android:inputType="textMultiLine|textPersonName"
       android:ems="10"
-      android:id="@+id/ITEM_DESCRIPTION_ID"
-      android:text="@string/description"
-      android:visibility="gone"/>
+      android:id="@+id/ITEM_NAME_ID2"
+      android:autofillHints=""/>
 
     <CheckBox
       android:text="@string/script_has_battle"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:id="@+id/SCRIPT_HAS_BATTLE_SCENE_ID"
-      android:visibility="gone"/>
+      android:id="@+id/checkBox"/>
 
     <LinearLayout
       android:orientation="horizontal"
