@@ -1,7 +1,6 @@
 package com.example.masterhelper.ui.ScriptBottomButtonsFragment;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.widget.ImageButton;
 import androidx.fragment.app.Fragment;
@@ -20,11 +19,17 @@ public class ScriptBottomButtonsFragment extends Fragment {
   int duplicateBtnId = R.id.DUPLICATE_BTN_ID;
   ImageButton duplicateBtn;
 
-  int editBtnId = R.id.EDIT_BUTTON_ID;
+  int doneEnemyEditId = R.id.DONE_ENEMY_EDIT_ID;
+  ImageButton doneEnemyEdit;
+
+  int editBtnId = R.id.EDIT_ENEMY_BTN_ID;
   ImageButton editBtn;
 
   int nextBtnId = R.id.NEXT_BTN_ID;
   ImageButton nextBtn;
+
+  int deleteButtonId = R.id.DELETE_BUTTON_ID;
+  ImageButton deleteButton;
 
   public ScriptBottomButtonsFragment() {
     // Required empty public constructor
@@ -41,12 +46,40 @@ public class ScriptBottomButtonsFragment extends Fragment {
     View view =  inflater.inflate(fragmentScriptBottomButtonsLayout, container, false);
     duplicateBtn = view.findViewById(duplicateBtnId);
     duplicateBtn.setOnClickListener(onClickListener);
+
     editBtn= view.findViewById(editBtnId);
     editBtn.setOnClickListener(onClickListener);
+
     nextBtn = view.findViewById(nextBtnId);
     nextBtn.setOnClickListener(onClickListener);
+
+    doneEnemyEdit = view.findViewById(doneEnemyEditId);
+    doneEnemyEdit.setOnClickListener(onClickListener);
+
+    deleteButton = view.findViewById(deleteButtonId);
+    deleteButton.setOnClickListener(onClickListener);
+    setControlMode(true);
     return view;
   }
+
+  public void setControlMode(boolean readonly){
+    if(readonly){
+      duplicateBtn.setVisibility(View.GONE);
+      doneEnemyEdit.setVisibility(View.GONE);
+      deleteButton.setVisibility(View.GONE);
+
+      editBtn.setVisibility(View.VISIBLE);
+      nextBtn.setVisibility(View.VISIBLE);
+    } else {
+      duplicateBtn.setVisibility(View.VISIBLE);
+      doneEnemyEdit.setVisibility(View.VISIBLE);
+      deleteButton.setVisibility(View.VISIBLE);
+
+      editBtn.setVisibility(View.GONE);
+      nextBtn.setVisibility(View.GONE);
+    }
+  }
+
 
   View.OnClickListener onClickListener = new View.OnClickListener() {
     @Override
@@ -63,6 +96,14 @@ public class ScriptBottomButtonsFragment extends Fragment {
         }
         if(id == editBtnId){
           mListener.setScriptBottomButtonsAction(ScriptBottomButtonsActions.edit);
+          return;
+        }
+        if(id == deleteButtonId){
+          mListener.setScriptBottomButtonsAction(ScriptBottomButtonsActions.delete);
+          return;
+        }
+        if(id == doneEnemyEditId){
+          mListener.setScriptBottomButtonsAction(ScriptBottomButtonsActions.save);
           return;
         }
         mListener.setScriptBottomButtonsAction(ScriptBottomButtonsActions.empty);
@@ -92,6 +133,8 @@ public class ScriptBottomButtonsFragment extends Fragment {
     edit,
     next,
     duplicate,
+    delete,
+    save,
     empty,
   }
 

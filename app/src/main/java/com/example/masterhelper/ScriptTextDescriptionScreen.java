@@ -30,7 +30,17 @@ public class ScriptTextDescriptionScreen extends AppCompatActivity  implements S
   }
 
   @Override
-  public void setViewCharacteristicRowActions(int title, int value) {
+  public void changeValue(long id, int value) {
+
+  }
+
+  @Override
+  public void deleteRow(long rowId) {
+
+  }
+
+  @Override
+  public void addNewRow(String title) {
 
   }
 }

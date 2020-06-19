@@ -3,19 +3,22 @@ package com.example.masterhelper.ui.viewCharacteristicRow;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.example.masterhelper.R;
+import com.example.masterhelper.models.AchieveModel;
 
 
 /**  */
 public class ViewCharacteristicRow extends Fragment {
   int propertyTitleId = R.id.ROW_TITLE_ID;
-  TextView propertyTitle;
+  EditText propertyTitle;
 
   int propertyValueId = R.id.ROW_VALUE_ID;
   TextView propertyValue;
@@ -26,21 +29,67 @@ public class ViewCharacteristicRow extends Fragment {
   int rowIncreaseValueId = R.id.ROW_INCREASE_VALUE_ID;
   ImageButton rowIncreaseValue;
 
-  IViewCharacteristicRow mListener;
-  int title;
-  int value = 0;
+  int rowDeleteBtnId = R.id.ROW_CHANGE_ID;
+  ImageButton rowDeleteBtn;
 
-  public void setTitle(int title) {
+  int rowChangeId = R.id.ROW_CHANGE_ID;
+  ImageButton rowChange;
+
+  IViewCharacteristicRow mListener;
+
+  String title = "";
+  int value = 0;
+  long rowId = 0;
+  boolean editable = false;
+  boolean isNew = false;
+
+  public void setTitle(String title) {
     this.title = title;
     propertyTitle.setText(title);
   }
 
   public void setValue(int value) {
     this.value = value;
-    propertyValue.setText(value+"");
+    propertyValue.setText(value + "");
   }
 
-  private int getTitle() {
+  public void setRowId(long rowId) {
+    this.rowId = rowId;
+  }
+
+  public void setIsNew(boolean isNew) {
+    this.isNew = isNew;
+    if(isNew){
+      setEditable(true);
+    }
+    setValueControlsVisible(!isNew);
+  }
+
+  public void setValueControlsVisible(boolean isVisible) {
+    if(rowIncreaseValue != null){
+      rowIncreaseValue.setVisibility(isVisible ? View.VISIBLE : View.GONE);
+    }
+    if(propertyTitle != null){
+      propertyTitle.setEnabled(!isVisible);
+    }
+    if(rowDecreaseValue != null){
+      rowDecreaseValue.setVisibility(isVisible ? View.VISIBLE : View.GONE);
+    }
+    if(propertyValue != null){
+      propertyValue.setVisibility(isVisible ? View.VISIBLE : View.GONE);
+    }
+    if(rowDeleteBtn != null){
+      rowDeleteBtn.setImageResource(!isVisible ? R.mipmap.baseline_done_black_18dp : R.mipmap.baseline_clear_black_18dp);
+      rowDeleteBtn.setVisibility(editable ? View.VISIBLE : View.GONE);
+    }
+  }
+
+  public void setEditable(boolean editable) {
+    this.editable = editable;
+  }
+
+  private String getTitle() {
+    title = propertyTitle.getText().toString();
     return title;
   }
 
@@ -48,23 +97,44 @@ public class ViewCharacteristicRow extends Fragment {
     return value;
   }
 
-  View.OnClickListener onClickListener = new View.OnClickListener() {
+  public long getRowId() {
+    return rowId;
+  }
+
+  View.OnClickListener onDeleteBtnBtnListener = v -> {
+    if (mListener != null) {
+      mListener.deleteRow(getRowId());
+    }
+  };
+
+  View.OnClickListener onAddBtnBtnListener = v -> {
+    if (mListener != null) {
+      String title = getTitle();
+      if(title.trim().length() > 0){
+        mListener.addNewRow(getTitle());
+        setTitle("");
+        return;
+      }
+      Toast.makeText(getContext(), R.string.add_enemy_warning_title_placeholder, Toast.LENGTH_LONG).show();
+    }
+  };
+
+  View.OnClickListener onClickChangeBtnBtnListener = new View.OnClickListener() {
     @Override
     public void onClick(View v) {
-      int title = getTitle();
       int value = getValue();
       if (mListener != null) {
         int id = v.getId();
         if(id == rowIncreaseValueId){
           value += 1;
-          mListener.setViewCharacteristicRowActions(title, value);
+          mListener.changeValue(rowId, value);
         }
         if(id == rowDecreaseValueId){
           value -= 1;
           if(value < 0){
             value = 0;
           }
-          mListener.setViewCharacteristicRowActions(title, value);
+          mListener.changeValue(rowId, value);
         }
         setValue(value);
       }
@@ -78,19 +148,41 @@ public class ViewCharacteristicRow extends Fragment {
     // Required empty public constructor
   }
 
+  public void setDefaultValues(AchieveModel achieve, boolean isNew){
+    editable = achieve.getTag() == null;
+    title = achieve.getName();
+    rowId = achieve.getId();
+    value = achieve.getValue();
+    this.isNew = isNew;
+  }
+
+  public void updateView(){
+    setIsNew(isNew);
+    setEditable(editable);
+    setTitle(title);
+    setValue(value);
+  }
 
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
                            Bundle savedInstanceState) {
     View view = inflater.inflate(fragmentViewCharacteristicRowLayout, container, false);
     rowIncreaseValue = view.findViewById(rowIncreaseValueId);
-    rowIncreaseValue.setOnClickListener(onClickListener);
+    rowIncreaseValue.setOnClickListener(onClickChangeBtnBtnListener);
 
     rowDecreaseValue = view.findViewById(rowDecreaseValueId);
-    rowDecreaseValue.setOnClickListener(onClickListener);
+    rowDecreaseValue.setOnClickListener(onClickChangeBtnBtnListener);
+
+    rowDeleteBtn = view.findViewById(rowDeleteBtnId);
+    rowDeleteBtn.setOnClickListener(onDeleteBtnBtnListener);
+
+    rowChange = view.findViewById(rowChangeId);
+    rowChange.setOnClickListener(onAddBtnBtnListener);
 
     propertyTitle = view.findViewById(propertyTitleId);
     propertyValue = view.findViewById(propertyValueId);
+
+    updateView();
     return view;
   }
 
@@ -112,6 +204,8 @@ public class ViewCharacteristicRow extends Fragment {
   }
 
   public interface IViewCharacteristicRow {
-    void setViewCharacteristicRowActions(int title, int value);
+    void changeValue(long id, int value);
+    void deleteRow(long rowId);
+    void addNewRow(String title);
   }
 }

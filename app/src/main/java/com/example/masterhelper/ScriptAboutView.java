@@ -1,69 +1,48 @@
 package com.example.masterhelper;
 
 import android.util.Log;
-import android.widget.TextView;
+import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.fragment.app.FragmentManager;
 import com.example.masterhelper.ui.ScriptBottomButtonsFragment.ScriptBottomButtonsFragment;
 import com.example.masterhelper.ui.viewCharacteristicRow.ViewCharacteristicRow;
 
+import java.util.Objects;
+
 public class ScriptAboutView extends AppCompatActivity implements ScriptBottomButtonsFragment.IScriptBottomButtonsFragment, ViewCharacteristicRow.IViewCharacteristicRow {
   /** */
   int activityScriptAboutViewLayout = R.layout.activity_script_about_view;
 
-  int healthFragmentId = R.id.HEALTH_FRAGMENT_ID;
-  ViewCharacteristicRow healthFragment;
-  int healthTitleString = R.string.enemy_health_title;
 
-  int damageFragmentId = R.id.DAMAGE_FRAGMENT_ID;
-  ViewCharacteristicRow damageFragment;
-  int damageTitleString = R.string.enemy_damage_title;
+  String description = "slfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjslfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjslfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjslfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjslfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjslfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjslfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjslfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjslfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjslfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjslfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjslfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjslfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjslfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjslfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjslfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjslfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjslfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjslfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjslfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjslfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjslfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjslfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjslfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjslfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjslfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjslfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjslfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjglk sjdfg slfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjglk sjdfg slfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjglk sjdfg slfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjglk sjdfg slfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjglk sjdfg slfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjglk sjdfg slfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjglk sjdfg slfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjglk sjdfg slfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjglk sjdfg slfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjglk sjdfg slfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjglk sjdfg slfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjglk sjdfg slfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjglk sjdfg ";
+  String title = "Имя врага, сгенерированное или прописанное";
 
-  int orderingFragmentId = R.id.ORDERING_FRAGMENT_ID;
-  ViewCharacteristicRow orderingFragment;
-  int orderingTitleString = R.string.enemy_ordering_title;
-
-  int enemyDescriptionId = R.id.ENEMY_DESCRIPTION_ID;
-  TextView enemyDescription;
-
-  int enemyNameId = R.id.ENEMY_NAME_ID;
-  TextView enemyName;
+  private void updateToolbarTitle(String title){
+    // получаем указатель на тулбар активированного в главном компоненте
+    Objects.requireNonNull(getSupportActionBar()).setTitle(title);
+  }
 
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(activityScriptAboutViewLayout);
-    setListData();
+    updateToolbarTitle(title);
+    FragmentManager fm = getSupportFragmentManager();
+
+    int enemyId = getIntent().getIntExtra("id", 0);
+    boolean readonly = getIntent().getBooleanExtra("readonly", false);
+    setMode(readonly);
+    setListData(enemyId);
   }
 
-  void setListData(){
-    FragmentManager fm = getSupportFragmentManager();
-    healthFragment = (ViewCharacteristicRow) fm.findFragmentById(healthFragmentId);
-    damageFragment = (ViewCharacteristicRow) fm.findFragmentById(damageFragmentId);
-    orderingFragment = (ViewCharacteristicRow) fm.findFragmentById(orderingFragmentId);
+  private void setMode(boolean readonly) {
 
-    enemyDescription = findViewById(enemyDescriptionId);
-    enemyDescription.setText("slfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjslfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjslfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjslfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjslfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjslfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjslfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjslfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjslfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjslfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjslfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjslfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjslfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjslfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjslfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjslfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjslfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjslfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjslfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjslfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjslfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjslfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjslfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjslfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjslfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjslfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjslfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjslfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjglk sjdfg slfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjglk sjdfg slfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjglk sjdfg slfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjglk sjdfg slfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjglk sjdfg slfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjglk sjdfg slfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjglk sjdfg slfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjglk sjdfg slfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjglk sjdfg slfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjglk sjdfg slfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjglk sjdfg slfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjglk sjdfg slfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjglk sjdfg ");
+  }
 
-    enemyName = findViewById(enemyNameId);
-    enemyName.setText("Имя врага, сгенерированное или прописанное");
+  void setListData(int enemyId){
 
-    if(healthFragment != null && healthFragment.getView() != null){
-      healthFragment.setTitle(healthTitleString);
-      healthFragment.setValue(0);
-    }
-
-    if(damageFragment != null && damageFragment.getView() != null){
-      damageFragment.setTitle(damageTitleString);
-      damageFragment.setValue(0);
-    }
-
-    if(orderingFragment != null && orderingFragment.getView() != null){
-      orderingFragment.setTitle(orderingTitleString);
-      orderingFragment.setValue(0);
-    }
   }
 
   @Override
@@ -72,7 +51,29 @@ public class ScriptAboutView extends AppCompatActivity implements ScriptBottomBu
   }
 
   @Override
-  public void setViewCharacteristicRowActions(int title, int value) {
+  public void changeValue(long id, int value) {
 
   }
+
+  @Override
+  public void deleteRow(long rowId) {
+
+  }
+
+  @Override
+  public void addNewRow(String title) {
+
+  }
+
+  public View.OnClickListener onClickBtn = v -> {
+    int btnId = v.getId();
+    switch (btnId){
+      case R.id.DUPLICATE_BTN_ID:
+        break;
+      case R.id.DELETE_BUTTON_ID:
+        break;
+      case R.id.NEXT_BTN_ID:
+        break;
+    }
+  };
 }

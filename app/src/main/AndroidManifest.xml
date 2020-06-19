@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.example.masterhelper">
-  <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-  <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+  <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+  <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
   <application
     android:allowBackup="true"
     android:icon="@mipmap/ic_launcher"
@@ -10,6 +12,8 @@
     android:roundIcon="@mipmap/ic_launcher_round"
     android:supportsRtl="true"
     android:theme="@style/AppTheme">
+    <activity android:name=".EditEnemy">
+    </activity>
     <activity android:name=".MusicSettingsScreen">
     </activity>
     <activity android:name=".EditScriptScreen">
@@ -20,13 +24,9 @@
       android:name=".CreateNewItem"
       android:theme="@style/AppTheme.About">
     </activity>
-    <activity
-      android:name=".ScriptTextDescriptionScreen"
-      android:theme="@style/AppTheme.About">
+    <activity android:name=".ScriptTextDescriptionScreen">
     </activity>
-    <activity
-      android:name=".ScriptAboutView"
-      android:theme="@style/AppTheme.About">
+    <activity android:name=".ScriptAboutView">
     </activity>
     <activity android:name=".Script">
     </activity>

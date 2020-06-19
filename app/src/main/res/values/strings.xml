@@ -63,6 +63,11 @@
   <string name="library_music">Фоновая музыка</string>
 
 
+  <string name="add_enemy_achieve_placeholder">Добавить...</string>
+  <string name="add_enemy_title_placeholder">Имя врага...</string>
+  <string name="add_enemy_warning_title_placeholder">Сначала добавьте название характеристики</string>
+
+
   <!-- popup menu -->
   <string name="popup_menu_update">Изменить</string>
   <string name="popup_menu_delete">Удалить</string>

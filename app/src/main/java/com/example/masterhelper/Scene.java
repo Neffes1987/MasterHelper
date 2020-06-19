@@ -2,16 +2,13 @@ package com.example.masterhelper;
 
 import android.content.Intent;
 import android.database.Cursor;
-import android.util.Log;
 import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.fragment.app.FragmentManager;
 import com.example.masterhelper.commonAdapter.item.ICommonItemEvents;
 import com.example.masterhelper.data.DbHelpers;
-import com.example.masterhelper.data.contracts.SceneContract;
 import com.example.masterhelper.data.contracts.ScriptsContract;
-import com.example.masterhelper.models.SceneRecycleDataModel;
 import com.example.masterhelper.ui.RecyclerViewFragment.RecyclerViewFragment;
 import com.example.masterhelper.models.ScriptRecycleDataModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;

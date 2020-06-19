@@ -9,7 +9,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.masterhelper.commonAdapter.CommonAdapter;
 import com.example.masterhelper.commonAdapter.item.CustomListItemsEnum;
 import com.example.masterhelper.commonAdapter.item.ICommonItemEvents;
+import com.example.masterhelper.models.ACHIEVE_CONST_TAGS;
+import com.example.masterhelper.models.AchieveModel;
 import com.example.masterhelper.models.EnemyModel;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.LinkedHashMap;
 
@@ -20,24 +23,37 @@ public class Script extends AppCompatActivity implements ICommonItemEvents {
   /** */
   int tableId = R.id.ENEMIES_GRID_ID;
 
+  /** */
+  int createNewEnemyId = R.id.CREATE_NEW_ENEMY_ID;
+  FloatingActionButton createNewEnemy;
+
   int NUMBER_OF_CELLS = 5;
 
   /** */
   RecyclerView recyclerView;
 
+  /**
+   *
+   */
+  private final LinkedHashMap<Integer, AchieveModel> mockAchieves = new LinkedHashMap<>();
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(activityScreenViewScriptLayout);
-
+    mockAchieves.put(0, new AchieveModel(0, "Здоровье", 10, ACHIEVE_CONST_TAGS.HEALTH));
+    mockAchieves.put(1, new AchieveModel(1, "Урон", 10  ));
+    mockAchieves.put(2, new AchieveModel(2, "Инициатива", 10 ));
 
     recyclerView = findViewById(tableId);
+    createNewEnemy = findViewById(createNewEnemyId);
+    createNewEnemy.setOnClickListener(onCreateBtn);
 
-    EnemyModel enemy1 = new EnemyModel("", 20, 10, 5, 1);
-    EnemyModel enemy2 = new EnemyModel("", 20, 20, 5, 2);
-    EnemyModel enemy3 = new EnemyModel("", 20, 5, 5, 3);
-    EnemyModel enemy4 = new EnemyModel("", 20, 15, 5, 4);
-    EnemyModel enemy5 = new EnemyModel("", 20, 15, 5, 5);
+    EnemyModel enemy1 = new EnemyModel(0, "", "test", mockAchieves, 20);
+    EnemyModel enemy2 = new EnemyModel(1, "", "test", mockAchieves, 20);
+    EnemyModel enemy3 = new EnemyModel(2, "", "test", mockAchieves, 20);
+    EnemyModel enemy4 = new EnemyModel(3, "", "test", mockAchieves, 20);
+    EnemyModel enemy5 = new EnemyModel(4,  "", "test", mockAchieves, 20);
 
     LinkedHashMap<Integer, EnemyModel> enemies = new LinkedHashMap<>();
     enemies.put(0, enemy1);
@@ -60,8 +76,21 @@ public class Script extends AppCompatActivity implements ICommonItemEvents {
      startActivity(intent);
    }
 
+   protected void editEnemyDetails(long id){
+     Intent intent = new Intent(this, EditEnemy.class);
+     intent.putExtra("id", id);
+     startActivity(intent);
+   }
+
   @Override
   public void onClick(View elementFiredAction, int position) {
     openEnemyDetails(position);
   }
+
+  public View.OnClickListener onCreateBtn = v -> {
+    int btnId = v.getId();
+    if (btnId == R.id.CREATE_NEW_ENEMY_ID) {
+      editEnemyDetails(0);
+    }
+  };
 }

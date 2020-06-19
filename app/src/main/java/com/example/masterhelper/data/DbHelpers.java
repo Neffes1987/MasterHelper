@@ -4,11 +4,10 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import com.example.masterhelper.data.contracts.JourneysContract;
-import com.example.masterhelper.data.contracts.SceneContract;
-import com.example.masterhelper.data.contracts.ScriptsContract;
+import com.example.masterhelper.data.contracts.*;
 
 public class DbHelpers extends SQLiteOpenHelper {
+  private String SQLCreateTemplate ="DROP TABLE IF EXISTS ";
   /**
    * Имя файла базы данных
    */
@@ -21,20 +20,32 @@ public class DbHelpers extends SQLiteOpenHelper {
   SQLiteDatabase db;
 
   private void generateJourneyTable(){
-    db.execSQL("DROP TABLE IF EXISTS "+JourneysContract.TABLE_NAME);
+    db.execSQL(SQLCreateTemplate + JourneysContract.TABLE_NAME);
     String SQL_CREATE_TABLE = JourneysContract.CREATE_TABLE;
     db.execSQL(SQL_CREATE_TABLE);
   }
 
   private void generateScenesTable(){
-    db.execSQL("DROP TABLE IF EXISTS "+SceneContract.TABLE_NAME);
+    db.execSQL(SQLCreateTemplate + SceneContract.TABLE_NAME);
     String SQL_CREATE_TABLE = SceneContract.CREATE_TABLE;
     db.execSQL(SQL_CREATE_TABLE);
   }
 
   private void generateScriptsTable(){
-    db.execSQL("DROP TABLE IF EXISTS "+ScriptsContract.TABLE_NAME);
+    db.execSQL(SQLCreateTemplate + ScriptsContract.TABLE_NAME);
     String SQL_CREATE_TABLE = ScriptsContract.CREATE_TABLE;
+    db.execSQL(SQL_CREATE_TABLE);
+  }
+
+  private void generateEnemyTable(){
+    db.execSQL(SQLCreateTemplate + EnemyContract.TABLE_NAME);
+    String SQL_CREATE_TABLE = EnemyContract.CREATE_TABLE;
+    db.execSQL(SQL_CREATE_TABLE);
+  }
+
+  private void generateAchieveTable(){
+    db.execSQL(SQLCreateTemplate + AchievesContract.TABLE_NAME);
+    String SQL_CREATE_TABLE = AchievesContract.CREATE_TABLE;
     db.execSQL(SQL_CREATE_TABLE);
   }
 
@@ -56,6 +67,8 @@ public class DbHelpers extends SQLiteOpenHelper {
     generateJourneyTable();
     generateScenesTable();
     generateScriptsTable();
+    generateEnemyTable();
+    generateAchieveTable();
   }
 
   /**
@@ -67,6 +80,8 @@ public class DbHelpers extends SQLiteOpenHelper {
     generateJourneyTable();
     generateScenesTable();
     generateScriptsTable();
+    generateEnemyTable();
+    generateAchieveTable();
   }
 
   public Cursor getList(String query){
@@ -75,22 +90,19 @@ public class DbHelpers extends SQLiteOpenHelper {
     return db.rawQuery(query, null);
   }
 
-  public int addNewItem(String insertQuery){
+  public void addNewItem(String insertQuery){
     SQLiteDatabase db = getWritableDatabase();
     db.execSQL(insertQuery);
-    return 1;
   }
 
-  public int deleteItem(String deleteQuery){
+  public void deleteItem(String deleteQuery){
     SQLiteDatabase db = getWritableDatabase();
     db.execSQL(deleteQuery);
-    return 1;
   }
 
-  public int updateItem(String updateQuery){
+  public void updateItem(String updateQuery){
     SQLiteDatabase db = getWritableDatabase();
     db.execSQL(updateQuery);
-    return 1;
   }
 
 }

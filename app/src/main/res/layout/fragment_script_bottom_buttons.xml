@@ -21,14 +21,31 @@
       android:layout_height="wrap_content"
       app:srcCompat="@mipmap/baseline_queue_black_18dp"
       android:id="@+id/DUPLICATE_BTN_ID"
-      android:layout_weight="1"/>
+      android:layout_weight="1"
+      android:visibility="gone"/>
 
     <ImageButton
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      app:srcCompat="@mipmap/baseline_create_black_18dp"
-      android:id="@+id/EDIT_BUTTON_ID"
+      app:srcCompat="@mipmap/baseline_clear_black_18dp"
+      android:id="@+id/DELETE_BUTTON_ID"
+      android:layout_weight="1"
+      android:visibility="gone"/>
+
+    <ImageButton
+      android:src="@mipmap/baseline_create_black_18dp"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:id="@+id/EDIT_ENEMY_BTN_ID"
       android:layout_weight="1"/>
+
+    <ImageButton
+      android:src="@mipmap/baseline_done_black_18dp"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:id="@+id/DONE_ENEMY_EDIT_ID"
+      android:layout_weight="1"
+      android:visibility="gone"/>
 
     <ImageButton
       android:layout_width="wrap_content"

@@ -7,67 +7,23 @@
   android:layout_height="match_parent"
   tools:context=".ScriptAboutView">
 
-  <TextView
-    android:text="@string/name"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    style="@style/rowStyled"
-    android:id="@+id/ENEMY_NAME_ID"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
-    android:paddingBottom="20dp"/>
-
   <ScrollView
     android:layout_width="0dp"
     android:layout_height="wrap_content"
     android:id="@+id/scrollView2"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/ENEMY_NAME_ID"
     app:layout_constraintBottom_toTopOf="@+id/SCRIPT_ENEMY_BOTTOM_BUTTONS"
     android:paddingBottom="80dp"
-    app:layout_constraintVertical_bias="0.18"
-    android:paddingTop="20dp">
+    android:paddingTop="20dp"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintVertical_bias="0.0">
 
     <LinearLayout
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:orientation="vertical"
-      android:id="@+id/linearLayout3">
-
-      <fragment
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:name="com.example.masterhelper.ui.viewCharacteristicRow.ViewCharacteristicRow"
-        android:id="@+id/HEALTH_FRAGMENT_ID"
-        tools:layout="@layout/fragment_view_characteristic_row"
-        tools:layout_conversion_absoluteHeight="60dp"
-        tools:layout_editor_absoluteY="40dp"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_conversion_absoluteWidth="379dp"/>
-
-      <fragment
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:name="com.example.masterhelper.ui.viewCharacteristicRow.ViewCharacteristicRow"
-        android:id="@+id/DAMAGE_FRAGMENT_ID"
-        tools:layout="@layout/fragment_view_characteristic_row"
-        tools:layout_conversion_absoluteHeight="60dp"
-        tools:layout_editor_absoluteY="100dp"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_conversion_absoluteWidth="379dp"/>
-
-      <fragment
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:name="com.example.masterhelper.ui.viewCharacteristicRow.ViewCharacteristicRow"
-        android:id="@+id/ORDERING_FRAGMENT_ID"
-        tools:layout="@layout/fragment_view_characteristic_row"
-        tools:layout_conversion_absoluteHeight="60dp"
-        tools:layout_editor_absoluteY="160dp"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_conversion_absoluteWidth="379dp"/>
+      android:id="@+id/ENEMY_ABILITIES_ROW_WRAPPER_ID">
 
       <TextView
         android:text="@string/description"

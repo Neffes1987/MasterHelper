@@ -9,20 +9,28 @@
              android:paddingBottom="10dp">
 
   <!-- TODO: Update blank fragment layout -->
+
   <LinearLayout
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:paddingLeft="8dp"
-    android:paddingRight="8dp">
+    android:paddingRight="8dp"
+    android:id="@+id/VIEW_ROW_LINE_ID"
+    tools:visibility="visible">
 
-    <TextView
+    <EditText
       android:layout_width="wrap_content"
-      android:layout_height="match_parent"
-      android:text="@string/name"
+      android:layout_height="wrap_content"
+      android:inputType="textPersonName"
+      android:ems="10"
       android:id="@+id/ROW_TITLE_ID"
       android:layout_weight="2"
-      android:gravity="center_vertical"/>
+      android:editable="false"
+      android:enabled="false"
+      android:textColor="@android:color/background_dark"
+      android:textColorHint="@android:color/background_dark"
+      android:hint="@string/add_enemy_achieve_placeholder"/>
 
     <View
       android:layout_width="10dp"
@@ -35,9 +43,10 @@
       android:layout_width="wrap_content"
       android:layout_height="match_parent"
       android:id="@+id/ROW_VALUE_ID"
-      android:layout_weight="2"
-      android:textAlignment="viewEnd"
-      android:gravity="center_vertical"/>
+      android:layout_weight="0"
+      android:textAlignment="center"
+      android:gravity="center_vertical"
+      android:minWidth="40dp"/>
 
     <View
       android:layout_width="10dp"
@@ -47,10 +56,10 @@
 
     <ImageButton
       android:src="@mipmap/baseline_remove_circle_outline_black_18dp"
-      android:layout_width="wrap_content"
+      android:layout_width="60dp"
       android:layout_height="40dp"
       android:id="@+id/ROW_DECREASE_VALUE_ID"
-      android:layout_weight="1"
+      android:layout_weight="0"
       android:background="#00FFFFFF"/>
 
     <View
@@ -61,10 +70,24 @@
 
     <ImageButton
       android:src="@mipmap/baseline_add_circle_outline_black_18dp"
-      android:layout_width="wrap_content"
+      android:layout_width="60dp"
       android:layout_height="40dp"
       android:id="@+id/ROW_INCREASE_VALUE_ID"
-      android:layout_weight="1"
+      android:layout_weight="0"
+      android:background="#00FFFFFF"/>
+
+    <View
+      android:layout_width="10dp"
+      android:layout_height="match_parent"
+      android:background="#00FFFFFF"
+      android:layout_weight="0"
+      android:id="@+id/view"/>
+
+    <ImageButton
+      android:src="@mipmap/baseline_clear_black_18dp"
+      android:layout_width="60dp"
+      android:layout_height="40dp"
+      android:id="@+id/ROW_CHANGE_ID"
       android:background="#00FFFFFF"/>
 
   </LinearLayout>
