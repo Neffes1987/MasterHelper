@@ -51,12 +51,12 @@ public class ScriptAboutView extends AppCompatActivity implements ScriptBottomBu
   }
 
   @Override
-  public void changeValue(long id, int value) {
+  public void changeValue(int id, int value) {
 
   }
 
   @Override
-  public void deleteRow(long rowId) {
+  public void deleteRow(int rowId) {
 
   }
 

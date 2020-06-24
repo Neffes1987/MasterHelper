@@ -52,5 +52,4 @@
     <item name="android:clickable">true</item>
     <item name="android:layout_marginBottom">16dp</item>
   </style>
-
 </resources>

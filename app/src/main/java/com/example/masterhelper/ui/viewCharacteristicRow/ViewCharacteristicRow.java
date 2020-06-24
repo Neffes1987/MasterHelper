@@ -29,17 +29,17 @@ public class ViewCharacteristicRow extends Fragment {
   int rowIncreaseValueId = R.id.ROW_INCREASE_VALUE_ID;
   ImageButton rowIncreaseValue;
 
-  int rowDeleteBtnId = R.id.ROW_CHANGE_ID;
+  int rowDeleteBtnId = R.id.ROW_DELETE_ID;
   ImageButton rowDeleteBtn;
 
   int rowChangeId = R.id.ROW_CHANGE_ID;
-  ImageButton rowChange;
+  ImageButton rowChangeBtn;
 
   IViewCharacteristicRow mListener;
 
   String title = "";
   int value = 0;
-  long rowId = 0;
+  int rowId = 0;
   boolean editable = false;
   boolean isNew = false;
 
@@ -53,7 +53,7 @@ public class ViewCharacteristicRow extends Fragment {
     propertyValue.setText(value + "");
   }
 
-  public void setRowId(long rowId) {
+  public void setRowId(int rowId) {
     this.rowId = rowId;
   }
 
@@ -78,9 +78,13 @@ public class ViewCharacteristicRow extends Fragment {
     if(propertyValue != null){
       propertyValue.setVisibility(isVisible ? View.VISIBLE : View.GONE);
     }
+
     if(rowDeleteBtn != null){
-      rowDeleteBtn.setImageResource(!isVisible ? R.mipmap.baseline_done_black_18dp : R.mipmap.baseline_clear_black_18dp);
-      rowDeleteBtn.setVisibility(editable ? View.VISIBLE : View.GONE);
+      rowDeleteBtn.setVisibility(editable && isVisible ? View.VISIBLE : View.GONE);
+    }
+
+    if(rowChangeBtn != null){
+      rowChangeBtn.setVisibility(!isVisible ? View.VISIBLE : View.GONE);
     }
   }
 
@@ -97,11 +101,11 @@ public class ViewCharacteristicRow extends Fragment {
     return value;
   }
 
-  public long getRowId() {
+  public int getRowId() {
     return rowId;
   }
 
-  View.OnClickListener onDeleteBtnBtnListener = v -> {
+  View.OnClickListener onDeleteBtnListener = v -> {
     if (mListener != null) {
       mListener.deleteRow(getRowId());
     }
@@ -119,27 +123,29 @@ public class ViewCharacteristicRow extends Fragment {
     }
   };
 
-  View.OnClickListener onClickChangeBtnBtnListener = new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-      int value = getValue();
-      if (mListener != null) {
-        int id = v.getId();
-        if(id == rowIncreaseValueId){
-          value += 1;
-          mListener.changeValue(rowId, value);
-        }
-        if(id == rowDecreaseValueId){
-          value -= 1;
-          if(value < 0){
-            value = 0;
-          }
-          mListener.changeValue(rowId, value);
-        }
-        setValue(value);
+  private boolean calculateNewValue(View v, int offset){
+    int value = getValue();
+    if (mListener != null) {
+      int id = v.getId();
+      if(id == rowIncreaseValueId){
+        value += offset;
+        mListener.changeValue(rowId, value);
       }
+      if(id == rowDecreaseValueId){
+        value -= offset;
+        if(value < 0){
+          value = 0;
+        }
+        mListener.changeValue(rowId, value);
+      }
+      setValue(value);
     }
-  };
+    return true;
+  }
+
+
+  View.OnClickListener onClickChangeBtnListener = v -> calculateNewValue(v, 1);
+  View.OnLongClickListener onLongClickListener = v -> calculateNewValue(v, 10);
 
   /**  */
   int fragmentViewCharacteristicRowLayout = R.layout.fragment_view_characteristic_row;
@@ -168,16 +174,18 @@ public class ViewCharacteristicRow extends Fragment {
                            Bundle savedInstanceState) {
     View view = inflater.inflate(fragmentViewCharacteristicRowLayout, container, false);
     rowIncreaseValue = view.findViewById(rowIncreaseValueId);
-    rowIncreaseValue.setOnClickListener(onClickChangeBtnBtnListener);
+    rowIncreaseValue.setOnClickListener(onClickChangeBtnListener);
+    rowIncreaseValue.setOnLongClickListener(onLongClickListener);
 
     rowDecreaseValue = view.findViewById(rowDecreaseValueId);
-    rowDecreaseValue.setOnClickListener(onClickChangeBtnBtnListener);
+    rowDecreaseValue.setOnClickListener(onClickChangeBtnListener);
+    rowDecreaseValue.setOnLongClickListener(onLongClickListener);
 
     rowDeleteBtn = view.findViewById(rowDeleteBtnId);
-    rowDeleteBtn.setOnClickListener(onDeleteBtnBtnListener);
+    rowDeleteBtn.setOnClickListener(onDeleteBtnListener);
 
-    rowChange = view.findViewById(rowChangeId);
-    rowChange.setOnClickListener(onAddBtnBtnListener);
+    rowChangeBtn = view.findViewById(rowChangeId);
+    rowChangeBtn.setOnClickListener(onAddBtnBtnListener);
 
     propertyTitle = view.findViewById(propertyTitleId);
     propertyValue = view.findViewById(propertyValueId);
@@ -204,8 +212,8 @@ public class ViewCharacteristicRow extends Fragment {
   }
 
   public interface IViewCharacteristicRow {
-    void changeValue(long id, int value);
-    void deleteRow(long rowId);
+    void changeValue(int id, int value);
+    void deleteRow(int rowId);
     void addNewRow(String title);
   }
 }

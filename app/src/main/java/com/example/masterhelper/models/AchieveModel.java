@@ -8,27 +8,27 @@ public class AchieveModel {
   private int value=0;
 
   /** */
-  private long id=0;
+  private int id=0;
 
   /** */
   private ACHIEVE_CONST_TAGS tag;
 
   /** */
-  public AchieveModel(long id, String name, int value){
+  public AchieveModel(int id, String name, int value){
     setValue(value);
     setName(name);
     setId(id);
   }
 
   /** */
-  public AchieveModel(long id, String name, int value, ACHIEVE_CONST_TAGS tag){
+  public AchieveModel(int id, String name, int value, ACHIEVE_CONST_TAGS tag){
     setValue(value);
     setName(name);
     setId(id);
     setTag(tag);
   }
 
-  public long getId() {
+  public int getId() {
     return id;
   }
 
@@ -49,7 +49,7 @@ public class AchieveModel {
     return tag;
   }
 
-  public void setId(long id) {
+  public void setId(int id) {
     this.id = id;
   }
 

@@ -64,17 +64,17 @@ public class ScriptBottomButtonsFragment extends Fragment {
 
   public void setControlMode(boolean readonly){
     if(readonly){
-      duplicateBtn.setVisibility(View.GONE);
       doneEnemyEdit.setVisibility(View.GONE);
       deleteButton.setVisibility(View.GONE);
 
+      duplicateBtn.setVisibility(View.VISIBLE);
       editBtn.setVisibility(View.VISIBLE);
       nextBtn.setVisibility(View.VISIBLE);
     } else {
-      duplicateBtn.setVisibility(View.VISIBLE);
       doneEnemyEdit.setVisibility(View.VISIBLE);
       deleteButton.setVisibility(View.VISIBLE);
 
+      duplicateBtn.setVisibility(View.GONE);
       editBtn.setVisibility(View.GONE);
       nextBtn.setVisibility(View.GONE);
     }

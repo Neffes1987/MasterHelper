@@ -30,12 +30,12 @@ public class ScriptTextDescriptionScreen extends AppCompatActivity  implements S
   }
 
   @Override
-  public void changeValue(long id, int value) {
+  public void changeValue(int id, int value) {
 
   }
 
   @Override
-  public void deleteRow(long rowId) {
+  public void deleteRow(int rowId) {
 
   }
 

@@ -11,84 +11,92 @@
   <!-- TODO: Update blank fragment layout -->
 
   <LinearLayout
-    android:orientation="horizontal"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:paddingLeft="8dp"
     android:paddingRight="8dp"
     android:id="@+id/VIEW_ROW_LINE_ID"
-    tools:visibility="visible">
+    tools:visibility="visible"
+    android:background="#17A06443">
 
-    <EditText
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:inputType="textPersonName"
-      android:ems="10"
-      android:id="@+id/ROW_TITLE_ID"
+    <LinearLayout
+      android:orientation="horizontal"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_weight="2">
+
+      <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/ROW_TITLE_ID"
+        android:layout_weight="2"
+        android:editable="false"
+        android:enabled="false"
+        android:textColor="@android:color/background_dark"
+        android:textColorHint="@android:color/background_dark"
+        android:hint="@string/add_enemy_achieve_placeholder"/>
+
+      <TextView
+        android:text="@string/empty_value"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:id="@+id/ROW_VALUE_ID"
+        android:layout_weight="0"
+        android:textAlignment="center"
+        android:gravity="center_vertical"
+        android:minWidth="40dp"/>
+
+      <ImageButton
+        android:src="@mipmap/baseline_add_black_18dp"
+        android:layout_width="60dp"
+        android:layout_height="match_parent"
+        android:id="@+id/ROW_CHANGE_ID"
+        android:layout_weight="0"
+        android:backgroundTint="#D8CDCD"/>
+    </LinearLayout>
+
+    <LinearLayout
+      android:orientation="horizontal"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
       android:layout_weight="2"
-      android:editable="false"
-      android:enabled="false"
-      android:textColor="@android:color/background_dark"
-      android:textColorHint="@android:color/background_dark"
-      android:hint="@string/add_enemy_achieve_placeholder"/>
+      >
 
-    <View
-      android:layout_width="10dp"
-      android:layout_height="match_parent"
-      android:background="#00FFFFFF"
-      android:layout_weight="0"/>
+      <ImageButton
+        android:src="@mipmap/baseline_clear_black_18dp"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/ROW_DELETE_ID"
+        android:backgroundTint="#D8CDCD"/>
 
-    <TextView
-      android:text="@string/empty_value"
-      android:layout_width="wrap_content"
-      android:layout_height="match_parent"
-      android:id="@+id/ROW_VALUE_ID"
-      android:layout_weight="0"
-      android:textAlignment="center"
-      android:gravity="center_vertical"
-      android:minWidth="40dp"/>
+      <View
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:id="@+id/view"
+        android:layout_weight="1"/>
 
-    <View
-      android:layout_width="10dp"
-      android:layout_height="match_parent"
-      android:background="#00FFFFFF"
-      android:layout_weight="0"/>
+      <ImageButton
+        android:src="@mipmap/baseline_remove_circle_outline_black_18dp"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/ROW_DECREASE_VALUE_ID"
+        android:layout_weight="0"
+        style="@style/Widget.AppCompat.ImageButton"
+        android:backgroundTint="#D8CDCD"/>
 
-    <ImageButton
-      android:src="@mipmap/baseline_remove_circle_outline_black_18dp"
-      android:layout_width="60dp"
-      android:layout_height="40dp"
-      android:id="@+id/ROW_DECREASE_VALUE_ID"
-      android:layout_weight="0"
-      android:background="#00FFFFFF"/>
+      <ImageButton
+        android:src="@mipmap/baseline_add_circle_outline_black_18dp"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/ROW_INCREASE_VALUE_ID"
+        android:layout_weight="0"
+        android:backgroundTint="#D8CDCD"
+        />
 
-    <View
-      android:layout_width="10dp"
-      android:layout_height="match_parent"
-      android:background="#00FFFFFF"
-      android:layout_weight="0"/>
-
-    <ImageButton
-      android:src="@mipmap/baseline_add_circle_outline_black_18dp"
-      android:layout_width="60dp"
-      android:layout_height="40dp"
-      android:id="@+id/ROW_INCREASE_VALUE_ID"
-      android:layout_weight="0"
-      android:background="#00FFFFFF"/>
-
-    <View
-      android:layout_width="10dp"
-      android:layout_height="match_parent"
-      android:background="#00FFFFFF"
-      android:layout_weight="0"
-      android:id="@+id/view"/>
-
-    <ImageButton
-      android:src="@mipmap/baseline_clear_black_18dp"
-      android:layout_width="60dp"
-      android:layout_height="40dp"
-      android:id="@+id/ROW_CHANGE_ID"
-      android:background="#00FFFFFF"/>
+    </LinearLayout>
 
   </LinearLayout>
 
