@@ -49,11 +49,11 @@ public class Script extends AppCompatActivity implements ICommonItemEvents {
     createNewEnemy = findViewById(createNewEnemyId);
     createNewEnemy.setOnClickListener(onCreateBtn);
 
-    EnemyModel enemy1 = new EnemyModel(0, "", "test", mockAchieves, 20);
-    EnemyModel enemy2 = new EnemyModel(1, "", "test", mockAchieves, 20);
-    EnemyModel enemy3 = new EnemyModel(2, "", "test", mockAchieves, 20);
-    EnemyModel enemy4 = new EnemyModel(3, "", "test", mockAchieves, 20);
-    EnemyModel enemy5 = new EnemyModel(4,  "", "test", mockAchieves, 20);
+    EnemyModel enemy1 = new EnemyModel(0, "", "test", 40, 20);
+    EnemyModel enemy2 = new EnemyModel(1, "", "test", 20, 20);
+    EnemyModel enemy3 = new EnemyModel(2, "", "test", 10, 20);
+    EnemyModel enemy4 = new EnemyModel(3, "", "test", 100, 20);
+    EnemyModel enemy5 = new EnemyModel(4,  "", "test", 1000, 20);
 
     LinkedHashMap<Integer, EnemyModel> enemies = new LinkedHashMap<>();
     enemies.put(0, enemy1);

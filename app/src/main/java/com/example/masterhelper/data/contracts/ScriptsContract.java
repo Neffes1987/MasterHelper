@@ -1,8 +1,6 @@
 package com.example.masterhelper.data.contracts;
 
-import android.util.Log;
 import com.example.masterhelper.models.ScriptRecycleDataModel;
-
 
 public class ScriptsContract extends GeneralContract {
   public final static String TABLE_NAME = "scripts";

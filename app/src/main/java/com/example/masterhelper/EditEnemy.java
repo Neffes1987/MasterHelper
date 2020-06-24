@@ -1,11 +1,18 @@
 package com.example.masterhelper;
 
+import android.database.Cursor;
 import android.widget.EditText;
+import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.fragment.app.FragmentManager;
+import com.example.masterhelper.data.DbHelpers;
+import com.example.masterhelper.data.contracts.EnemyContract;
+import com.example.masterhelper.data.contracts.SceneContract;
 import com.example.masterhelper.models.ACHIEVE_CONST_TAGS;
 import com.example.masterhelper.models.AchieveModel;
+import com.example.masterhelper.models.EnemyModel;
+import com.example.masterhelper.models.SceneRecycleDataModel;
 import com.example.masterhelper.ui.ScriptBottomButtonsFragment.ScriptBottomButtonsFragment;
 import com.example.masterhelper.ui.viewCharacteristicRow.Abilities;
 import com.example.masterhelper.ui.viewCharacteristicRow.ViewCharacteristicRow;
@@ -21,29 +28,30 @@ public class EditEnemy extends AppCompatActivity implements ViewCharacteristicRo
   int enemyDescriptionId = R.id.ENEMY_EDIT_DESCRIPTION_ID;
   EditText enemyDescription;
 
-  /** Созданный бандл */
-  Bundle savedInstanceState;
-
-  /** */
+  /** класс для работы с характеристиками */
   Abilities abilities;
 
   FragmentManager fragmentManager;
 
+  DbHelpers dbHelpers;
+
   /** Характеристики врага */
   private final LinkedHashMap<Integer, AchieveModel> achieves = new LinkedHashMap<>();
-
-  String description = "slfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjslfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjslfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjslfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjslfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjslfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjslfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjslfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjslfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjslfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjslfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjslfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjslfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjslfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjslfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjslfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjslfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjslfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjslfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjslfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjslfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjslfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjslfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjslfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjslfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjslfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjslfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjslfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjglk sjdfg slfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjglk sjdfg slfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjglk sjdfg slfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjglk sjdfg slfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjglk sjdfg slfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjglk sjdfg slfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjglk sjdfg slfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjglk sjdfg slfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjglk sjdfg slfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjglk sjdfg slfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjglk sjdfg slfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjglk sjdfg slfdkg;skfdjg'aj aslkfjg;slkdjf s;fkjg ;lsdkfjglk sjdfg ";
-  String title = "";
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    this.savedInstanceState = savedInstanceState;
     setContentView(R.layout.activity_edit_enemy);
+    dbHelpers = new DbHelpers(this);
+
+    int id = getIntent().getIntExtra("id", 0);
+
     achieves.put(achieves.size(), new AchieveModel(achieves.size(), "Здоровье", 10, ACHIEVE_CONST_TAGS.HEALTH));
     fragmentManager = getSupportFragmentManager();
     abilities = new Abilities(fragmentManager, this, achieves);
-    long id = getIntent().getLongExtra("id", 0);
+
+
+
     ScriptBottomButtonsFragment controls = (ScriptBottomButtonsFragment) fragmentManager.findFragmentById(R.id.SCRIPT_ENEMY_BOTTOM_BUTTONS);
     if(controls != null){
       controls.setControlMode(false);
@@ -68,9 +76,7 @@ public class EditEnemy extends AppCompatActivity implements ViewCharacteristicRo
 
 
 
-  private void updateView(long enemyID){
-    updateDescription(description);
-    updateTitle(title);
+  private void updateView(int enemyID){
     abilities.updateAbilities(achieves);
     abilities.initAddAchieveRow(enemyID);
   }
@@ -91,8 +97,33 @@ public class EditEnemy extends AppCompatActivity implements ViewCharacteristicRo
     abilities.updateAbilities(achieves);
   }
 
+  private void saveAbilities(){
+
+  }
+
+  private void savePerson(){
+    //String name = enemyName.getText().toString().trim();
+    //int totalHealth
+   // String sqlQuery = EnemyContract.addItemQuery(new EnemyModel(0, name, achieves, ))
+  }
+
+  private void saveNewPerson(){
+    String name = enemyName.getText().toString().trim();
+    if(name.length() > 0){
+      savePerson();
+    } else {
+      Toast.makeText(this, "Укажите имя персонажа", Toast.LENGTH_LONG).show();
+    }
+  }
+
   @Override
   public void setScriptBottomButtonsAction(ScriptBottomButtonsFragment.ScriptBottomButtonsActions scriptBottomButtonsAction) {
-
+    switch (scriptBottomButtonsAction){
+      case save:
+        saveNewPerson();
+        break;
+      case delete:
+        break;
+    }
   }
 }

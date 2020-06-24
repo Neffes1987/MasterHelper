@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>com.example.masterhelper</OriginalElement>
+  <nodes>
+    <node x="2139.088315217391" y="1622.5">com.example.masterhelper.mediaworker</node>
+    <node x="742.0" y="3371.0">com.example.masterhelper.ui</node>
+    <node x="1398.860966349017" y="905.0">com.example.masterhelper.Script</node>
+    <node x="2866.937406938654" y="0.0">com.example.masterhelper.ExampleInstrumentedTest</node>
+    <node x="2083.437406938654" y="2053.0">com.example.masterhelper.MusicSettingsScreen</node>
+    <node x="465.86096634901696" y="225.0">com.example.masterhelper.EditEnemy</node>
+    <node x="536.0" y="3371.0">com.example.masterhelper.test</node>
+    <node x="3202.937406938654" y="0.0">com.example.masterhelper.ExampleUnitTest</node>
+    <node x="1421.5556506849312" y="251.0">com.example.masterhelper.ScriptAboutView</node>
+    <node x="0.0" y="3371.0">com.example.masterhelper.EditScriptScreen</node>
+    <node x="1071.7499999999998" y="498.0">com.example.masterhelper.commonAdapter</node>
+    <node x="60.5" y="866.0">com.example.masterhelper.CreateNewItem</node>
+    <node x="1344.2580591125666" y="2588.0">com.example.masterhelper.MainActivity</node>
+    <node x="932.860966349017" y="931.5">com.example.masterhelper.ScriptTextDescriptionScreen</node>
+    <node x="2587.937406938654" y="0.0">com.example.masterhelper.BuildConfig</node>
+    <node x="268.0" y="3371.0">com.example.masterhelper.EditSceneScreen</node>
+    <node x="1886.4886837403212" y="0.0">com.example.masterhelper.models</node>
+    <node x="770.4197438951752" y="1388.0">com.example.masterhelper.Scene</node>
+    <node x="1116.3056506849312" y="1962.0">com.example.masterhelper.ProjectScreen</node>
+    <node x="265.75630955926135" y="0.0">com.example.masterhelper.data</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="com.example.masterhelper.MusicSettingsScreen" target="com.example.masterhelper.models">
+      <point x="162.0" y="-187.0" />
+      <point x="2461.437406938654" y="1942.0" />
+      <point x="2407.727814175104" y="1942.0" />
+      <point x="2407.727814175104" y="155.0" />
+      <point x="2047.814770696843" y="155.0" />
+      <point x="70.82608695652186" y="17.5" />
+    </edge>
+    <edge source="com.example.masterhelper.ProjectScreen" target="com.example.masterhelper.CreateNewItem">
+      <point x="-175.3125" y="-278.0" />
+      <point x="1221.4931506849312" y="1932.0" />
+      <point x="217.16974389517532" y="1932.0" />
+      <point x="217.16974389517532" y="1368.0" />
+      <point x="224.0" y="1368.0" />
+      <point x="0.0" y="226.0" />
+    </edge>
+    <edge source="com.example.masterhelper.MainActivity" target="com.example.masterhelper.CreateNewItem">
+      <point x="-90.93749999999989" y="-369.0" />
+      <point x="1495.8205591125666" y="2548.0" />
+      <point x="206.16974389517532" y="2548.0" />
+      <point x="206.16974389517532" y="1368.0" />
+      <point x="115.0" y="1368.0" />
+      <point x="-109.0" y="226.0" />
+    </edge>
+    <edge source="com.example.masterhelper.MainActivity" target="com.example.masterhelper.data">
+      <point x="-151.5624999999999" y="-369.0" />
+      <point x="1435.1955591125666" y="2558.0" />
+      <point x="39.0" y="2558.0" />
+      <point x="39.0" y="195.0" />
+      <point x="295.94380955926135" y="195.0" />
+      <point x="-50.3125" y="17.5" />
+    </edge>
+    <edge source="com.example.masterhelper.ProjectScreen" target="com.example.masterhelper.models">
+      <point x="105.1875" y="-278.0" />
+      <point x="1501.9931506849312" y="1922.0" />
+      <point x="2037.4428417212623" y="1922.0" />
+      <point x="2037.4428417212623" y="205.0" />
+      <point x="2008.4669446098865" y="205.0" />
+      <point x="31.478260869565247" y="17.5" />
+    </edge>
+    <edge source="com.example.masterhelper.Scene" target="com.example.masterhelper.ScriptTextDescriptionScreen">
+      <point x="34.4375" y="-252.0" />
+      <point x="1080.357243895175" y="1338.0" />
+      <point x="1155.860966349017" y="1338.0" />
+      <point x="0.0" y="160.5" />
+    </edge>
+    <edge source="com.example.masterhelper.Script" target="com.example.masterhelper.models">
+      <point x="66.0" y="-187.0" />
+      <point x="1695.860966349017" y="826.0" />
+      <point x="1878.0556506849312" y="826.0" />
+      <point x="1878.0556506849312" y="155.0" />
+      <point x="1961.2495533055385" y="155.0" />
+      <point x="-15.739130434782624" y="17.5" />
+    </edge>
+    <edge source="com.example.masterhelper.commonAdapter" target="com.example.masterhelper.commonAdapter">
+      <point x="-94.125" y="17.5" />
+      <point x="1103.1249999999998" y="553.0" />
+      <point x="1051.7499999999998" y="553.0" />
+      <point x="1051.7499999999998" y="524.25" />
+      <point x="-125.5" y="8.75" />
+    </edge>
+    <edge source="com.example.masterhelper.ScriptAboutView" target="com.example.masterhelper.models">
+      <point x="-148.66666666666652" y="-264.5" />
+      <point x="1495.8889840182646" y="125.0" />
+      <point x="1937.6408576533647" y="125.0" />
+      <point x="-39.3478260869565" y="17.5" />
+    </edge>
+    <edge source="com.example.masterhelper.Script" target="com.example.masterhelper.ScriptAboutView">
+      <point x="0.0" y="-187.0" />
+      <point x="1629.860966349017" y="846.0" />
+      <point x="1644.5556506849312" y="846.0" />
+      <point x="0.0" y="264.5" />
+    </edge>
+    <edge source="com.example.masterhelper.Scene" target="com.example.masterhelper.data">
+      <point x="-172.1875" y="-252.0" />
+      <point x="873.7322438951752" y="1358.0" />
+      <point x="444.36096634901696" y="1358.0" />
+      <point x="444.36096634901696" y="195.0" />
+      <point x="356.31880955926135" y="195.0" />
+      <point x="10.0625" y="17.5" />
+    </edge>
+    <edge source="com.example.masterhelper.Script" target="com.example.masterhelper.EditEnemy">
+      <point x="-198.0" y="-187.0" />
+      <point x="1431.860966349017" y="846.0" />
+      <point x="688.860966349017" y="846.0" />
+      <point x="0.0" y="290.5" />
+    </edge>
+    <edge source="com.example.masterhelper.Scene" target="com.example.masterhelper.Script">
+      <point x="103.3125" y="-252.0" />
+      <point x="1149.232243895175" y="1348.0" />
+      <point x="1629.860966349017" y="1348.0" />
+      <point x="0.0" y="187.0" />
+    </edge>
+    <edge source="com.example.masterhelper.Scene" target="com.example.masterhelper.models">
+      <point x="241.0625" y="-252.0" />
+      <point x="1286.982243895175" y="1368.0" />
+      <point x="1936.740433293627" y="1368.0" />
+      <point x="1936.740433293627" y="195.0" />
+      <point x="1992.727814175104" y="195.0" />
+      <point x="15.739130434782624" y="17.5" />
+    </edge>
+    <edge source="com.example.masterhelper.models" target="com.example.masterhelper.models">
+      <point x="-78.69565217391306" y="17.5" />
+      <point x="1898.2930315664082" y="65.0" />
+      <point x="1856.4886837403212" y="65.0" />
+      <point x="1856.4886837403212" y="8.75" />
+      <point x="-90.5" y="-8.75" />
+    </edge>
+    <edge source="com.example.masterhelper.MusicSettingsScreen" target="com.example.masterhelper.mediaworker">
+      <point x="-162.0" y="-187.0" />
+      <point x="2137.437406938654" y="1942.0" />
+      <point x="2196.838315217391" y="1942.0" />
+      <point x="-57.75" y="17.5" />
+    </edge>
+    <edge source="com.example.masterhelper.MainActivity" target="com.example.masterhelper.ProjectScreen">
+      <point x="-30.312499999999886" y="-369.0" />
+      <point x="1556.4455591125666" y="2538.0" />
+      <point x="1396.8056506849312" y="2538.0" />
+      <point x="0.0" y="278.0" />
+    </edge>
+    <edge source="com.example.masterhelper.Script" target="com.example.masterhelper.commonAdapter">
+      <point x="-132.0" y="-187.0" />
+      <point x="1497.860966349017" y="836.0" />
+      <point x="1228.6249999999998" y="836.0" />
+      <point x="31.375" y="17.5" />
+    </edge>
+    <edge source="com.example.masterhelper.EditEnemy" target="com.example.masterhelper.models">
+      <point x="89.20000000000005" y="-290.5" />
+      <point x="778.060966349017" y="95.0" />
+      <point x="1914.0321620011907" y="95.0" />
+      <point x="-62.95652173913044" y="17.5" />
+    </edge>
+    <edge source="com.example.masterhelper.MainActivity" target="com.example.masterhelper.models">
+      <point x="151.5625000000001" y="-369.0" />
+      <point x="1738.3205591125666" y="2558.0" />
+      <point x="2525.937406938654" y="2558.0" />
+      <point x="2525.937406938654" y="145.0" />
+      <point x="2055.6843359142345" y="145.0" />
+      <point x="78.69565217391312" y="17.5" />
+    </edge>
+    <edge source="com.example.masterhelper.MainActivity" target="com.example.masterhelper.MusicSettingsScreen">
+      <point x="90.93750000000011" y="-369.0" />
+      <point x="1677.6955591125666" y="2548.0" />
+      <point x="2299.437406938654" y="2548.0" />
+      <point x="0.0" y="187.0" />
+    </edge>
+    <edge source="com.example.masterhelper.ProjectScreen" target="com.example.masterhelper.Scene">
+      <point x="-35.0625" y="-278.0" />
+      <point x="1361.7431506849312" y="1912.0" />
+      <point x="1045.919743895175" y="1912.0" />
+      <point x="0.0" y="252.0" />
+    </edge>
+    <edge source="com.example.masterhelper.ProjectScreen" target="com.example.masterhelper.data">
+      <point x="-105.1875" y="-278.0" />
+      <point x="1291.6181506849312" y="1922.0" />
+      <point x="398.0" y="1922.0" />
+      <point x="398.0" y="205.0" />
+      <point x="336.19380955926135" y="205.0" />
+      <point x="-10.0625" y="17.5" />
+    </edge>
+    <edge source="com.example.masterhelper.EditEnemy" target="com.example.masterhelper.data">
+      <point x="-178.39999999999986" y="-290.5" />
+      <point x="510.4609663490171" y="175.0" />
+      <point x="396.56880955926135" y="175.0" />
+      <point x="50.3125" y="17.5" />
+    </edge>
+    <edge source="com.example.masterhelper.Scene" target="com.example.masterhelper.CreateNewItem">
+      <point x="-241.0625" y="-252.0" />
+      <point x="804.8572438951752" y="1368.0" />
+      <point x="333.0" y="1368.0" />
+      <point x="109.0" y="226.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.848798328108673" x="1796.5690387101088" y="428.06228070333293" />
+  <SelectedNodes>
+    <node>com.example.masterhelper.commonAdapter</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Methods</Category>
+    <Category>Inner Classes</Category>
+    <Category>Properties</Category>
+    <Category>Fields</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

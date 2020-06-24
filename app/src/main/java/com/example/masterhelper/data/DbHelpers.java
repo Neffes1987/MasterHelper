@@ -15,7 +15,7 @@ public class DbHelpers extends SQLiteOpenHelper {
   /**
    * Версия базы данных. При изменении схемы увеличить на единицу
    */
-  private static final int DATABASE_VERSION = 8;
+  private static final int DATABASE_VERSION = 10;
 
   SQLiteDatabase db;
 
@@ -49,6 +49,18 @@ public class DbHelpers extends SQLiteOpenHelper {
     db.execSQL(SQL_CREATE_TABLE);
   }
 
+  private void generateScriptSettingsTable(){
+    db.execSQL(SQLCreateTemplate + ScriptSettingsContract.TABLE_NAME);
+    String SQL_CREATE_TABLE = ScriptSettingsContract.CREATE_TABLE;
+    db.execSQL(SQL_CREATE_TABLE);
+  }
+
+  private void generateEnemySettingsTable(){
+    db.execSQL(SQLCreateTemplate + EnemySettingsContract.TABLE_NAME);
+    String SQL_CREATE_TABLE = EnemySettingsContract.CREATE_TABLE;
+    db.execSQL(SQL_CREATE_TABLE);
+  }
+
 
   /**
    * @param context Контекст приложения
@@ -69,6 +81,8 @@ public class DbHelpers extends SQLiteOpenHelper {
     generateScriptsTable();
     generateEnemyTable();
     generateAchieveTable();
+    generateScriptSettingsTable();
+    generateEnemySettingsTable();
   }
 
   /**
@@ -82,6 +96,8 @@ public class DbHelpers extends SQLiteOpenHelper {
     generateScriptsTable();
     generateEnemyTable();
     generateAchieveTable();
+    generateScriptSettingsTable();
+    generateEnemySettingsTable();
   }
 
   public Cursor getList(String query){

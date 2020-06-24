@@ -1,8 +1,5 @@
 package com.example.masterhelper.models;
 
-import java.util.LinkedHashMap;
-
-
 public class EnemyModel {
 
   /** */
@@ -15,18 +12,19 @@ public class EnemyModel {
   private int totalHealth;
 
   /** */
+  private int currentHealth;
+
+  /** */
   private long id;
 
-  /** */
-  private LinkedHashMap<Integer, AchieveModel> achieves;
 
   /** */
-  public EnemyModel(long id, String name, String description,  LinkedHashMap<Integer, AchieveModel> achieves, int totalHealth){
+  public EnemyModel(long id, String name, String description, int totalHealth, int currentHealth){
     setName(name);
     setId(id);
-    setAchieves(achieves);
     setDescription(description);
     setTotalHealth(totalHealth);
+    setCurrentHealth(currentHealth);
   }
 
   public void setName(String name) {
@@ -35,10 +33,6 @@ public class EnemyModel {
 
   public void setId(long id) {
     this.id = id;
-  }
-
-  public void setAchieves(LinkedHashMap<Integer, AchieveModel> achieves) {
-    this.achieves = achieves;
   }
 
   public int getTotalHealth() {
@@ -65,25 +59,12 @@ public class EnemyModel {
     return name;
   }
 
-  public LinkedHashMap<Integer, AchieveModel> getAchieves() {
-    return achieves;
-  }
-
-  public AchieveModel getAchieveById(int key) {
-    return achieves.get(key);
-  }
 
   public int getCurrentHealth() {
-    AchieveModel achieve = (AchieveModel) achieves.values().toArray()[0];
-    if(achieve.getTag().equals(ACHIEVE_CONST_TAGS.HEALTH)){
-      return achieve.getValue();
-    }
-    return 0;
+    return currentHealth;
   }
-  public void setCurrentHealth(int value) {
-    AchieveModel achieve = (AchieveModel) achieves.values().toArray()[0];
-    if(!achieve.getTag().equals(ACHIEVE_CONST_TAGS.HEALTH)){
-      achieve.setValue(value);
-    }
+
+  public void setCurrentHealth(int currentHealth) {
+    this.currentHealth = currentHealth;
   }
 }

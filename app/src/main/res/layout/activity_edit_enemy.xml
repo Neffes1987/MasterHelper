@@ -15,19 +15,9 @@
     android:id="@+id/ENEMY_EDIT_NAME_ID"
     app:layout_constraintTop_toTopOf="parent"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintEnd_toStartOf="@+id/GENERATE_NAME_BTN_ID2"
     android:hint="@string/add_enemy_title_placeholder"
-    />
-
-  <ImageButton
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    app:srcCompat="@android:drawable/ic_menu_rotate"
-    android:id="@+id/GENERATE_NAME_BTN_ID2"
     app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintBottom_toTopOf="@+id/scrollView2"
-    app:layout_constraintVertical_bias="0.0"/>
+    />
 
   <ScrollView
     android:layout_width="0dp"

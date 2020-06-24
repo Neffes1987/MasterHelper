@@ -44,7 +44,7 @@ public class Abilities {
   }
 
   /** инициализация строки добавления характеристик */
-  public void initAddAchieveRow(long enemyID){
+  public void initAddAchieveRow(int enemyID){
     addNewFragment = (ViewCharacteristicRow) fm.findFragmentById(addNewFragmentId);
     if(addNewFragment != null){
       addNewFragment.setIsNew(enemyID == 0);
