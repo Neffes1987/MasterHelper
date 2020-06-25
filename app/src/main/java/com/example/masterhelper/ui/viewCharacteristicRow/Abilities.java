@@ -6,49 +6,33 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import com.example.masterhelper.R;
-import com.example.masterhelper.models.AchieveModel;
+import com.example.masterhelper.models.AbilityModel;
 
 import java.util.LinkedHashMap;
 
 /** Класс для работы со способностями */
 public class Abilities {
   /** Список характеристик */
-  private LinkedHashMap<Integer, AchieveModel> achieves;
+  private LinkedHashMap<Integer, AbilityModel> achieves;
 
   /** Менеджер фрагментов из активности */
   FragmentManager fm;
-
-  /** Строка добавления характеристики */
-  int addNewFragmentId = R.id.ADD_NEW_CHARACTERISTIC_ID;
-  ViewCharacteristicRow addNewFragment;
 
   /** список характеристик врага */
   int enemyAbilitiesRowWrapperId = R.id.ENEMY_ABILITIES_ROW_WRAPPER_ID;
   LinearLayout enemyAbilitiesRowWrapper;
 
-  /** получить список характеристик */
-  public LinkedHashMap<Integer, AchieveModel> getAchieves() {
-    return achieves;
-  }
 
   /** обновить список характеристик */
-  public void setAchieves(LinkedHashMap<Integer, AchieveModel> achieves) {
+  public void setAchieves(LinkedHashMap<Integer, AbilityModel> achieves) {
     this.achieves = achieves;
   }
 
   /** конструктор класса */
-  public Abilities(FragmentManager fm, Activity context, LinkedHashMap<Integer, AchieveModel> achieves){
+  public Abilities(FragmentManager fm, Activity context, LinkedHashMap<Integer, AbilityModel> achieves){
     this.fm = fm;
     this.achieves = achieves;
     enemyAbilitiesRowWrapper = context.findViewById(enemyAbilitiesRowWrapperId);
-  }
-
-  /** инициализация строки добавления характеристик */
-  public void initAddAchieveRow(int enemyID){
-    addNewFragment = (ViewCharacteristicRow) fm.findFragmentById(addNewFragmentId);
-    if(addNewFragment != null){
-      addNewFragment.setIsNew(enemyID == 0);
-    }
   }
 
   /** получить тег фрагмента */
@@ -57,26 +41,26 @@ public class Abilities {
   }
 
   /** добавить новую характеристику в список существующих */
-  private void addNewAbilityToView(AchieveModel achieve, FragmentTransaction fragmentTransaction){
+  private void addNewAbilityToView(AbilityModel achieve, FragmentTransaction fragmentTransaction){
     String tag = getAchieveRowTag(achieve.getId());
     if(fm.findFragmentByTag(tag) != null){
       return;
     }
     ViewCharacteristicRow viewCharacteristicRow = new ViewCharacteristicRow();
     fragmentTransaction.add(enemyAbilitiesRowWrapperId, viewCharacteristicRow, tag);
-    viewCharacteristicRow.setDefaultValues(achieve, false);
+    viewCharacteristicRow.setDefaultValues(achieve);
   }
 
 
   /** обновить список характеристик */
-  public void updateAbilities(LinkedHashMap<Integer, AchieveModel> achieves){
+  public void updateAbilities(LinkedHashMap<Integer, AbilityModel> achieves){
     setAchieves(achieves);
     if(enemyAbilitiesRowWrapper == null){
       return;
     }
 
     FragmentTransaction fragmentTransaction = fm.beginTransaction();
-    for(AchieveModel achieve: achieves.values()){
+    for(AbilityModel achieve: achieves.values()){
       addNewAbilityToView(achieve, fragmentTransaction);
     }
     fragmentTransaction.commit();

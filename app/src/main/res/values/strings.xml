@@ -1,7 +1,8 @@
 <resources>
   <string name="app_name">Помошник настольщика</string>
 
-  <string name="action_settings">Настройки</string>
+  <string name="action_settings">Загрузить музыку</string>
+  <string name="abilities_settings">Редактировать характеристики</string>
 
   <string name="SCREEN_NAME_JOURNEYS_TEXT">Список приключений</string>
   <string name="journey_name">Название приключения</string>
@@ -42,7 +43,7 @@
 
   <!-- TODO: Remove or change this placeholder text -->
   <string name="hello_blank_fragment">Hello blank fragment</string>
-  <string name="search">Поиск...</string>
+  <string name="search">Поиск…</string>
   <string name="name">Имя</string>
   <string name="description">Описание</string>
   <string name="isDoneFlag">Выполнен</string>
@@ -50,6 +51,7 @@
   <string name="default_enemy_stat">20</string>
   <string name="attack_icon">attack_icon</string>
   <string name="heart_icon">heart_icon</string>
+  <string name="enemy_max_health_title">Максимальное здоровье</string>
   <string name="enemy_health_title">Здоровье</string>
   <string name="enemy_damage_title">Повреждение</string>
   <string name="enemy_ordering_title">Инициатива</string>
@@ -63,8 +65,8 @@
   <string name="library_music">Фоновая музыка</string>
 
 
-  <string name="add_enemy_achieve_placeholder">Добавить...</string>
-  <string name="add_enemy_title_placeholder">Имя врага...</string>
+  <string name="add_enemy_achieve_placeholder">Добавить…</string>
+  <string name="add_enemy_title_placeholder">Имя врага…</string>
   <string name="add_enemy_warning_title_placeholder">Сначала добавьте название характеристики</string>
 
 

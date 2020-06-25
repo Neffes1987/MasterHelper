@@ -1,10 +1,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
       xmlns:app="http://schemas.android.com/apk/res-auto"
       xmlns:tools="http://schemas.android.com/tools"
-      tools:context="com.example.masterhelper.MainActivity">
+      tools:context="com.example.masterhelper.ui.journey.JourneysListView">
   <item
     android:id="@+id/ACTION_SETTINGS"
     android:title="@string/action_settings"
     android:orderInCategory="100"
     app:showAsAction="never"/>
+  <item
+    android:title="@string/abilities_settings"
+    android:id="@+id/ABILITIES_SETTINGS"/>
 </menu>

@@ -6,12 +6,12 @@
   android:layout_width="match_parent"
   android:layout_height="match_parent"
   style="@style/ConstraintLayoutStyled"
-  tools:context=".ProjectScreen">
+  tools:context=".ui.journey.JourneyItemView">
 
   <fragment
     android:layout_width="0dp"
     android:layout_height="0dp"
-    android:name="com.example.masterhelper.ui.RecyclerViewFragment.RecyclerViewFragment"
+    android:name="com.example.masterhelper.ui.recyclerViewFragment.RecyclerViewFragment"
     android:id="@+id/SCREEN_FRAGMENT_ID"
     tools:layout="@layout/fragment_recycler_view"
     app:layout_constraintEnd_toEndOf="parent"

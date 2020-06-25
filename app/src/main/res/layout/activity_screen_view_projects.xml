@@ -5,19 +5,19 @@
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  tools:context=".MainActivity">
+  tools:context=".ui.journey.JourneysListView">
 
   <fragment
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:name="com.example.masterhelper.ui.AppBarFragment.AppBarFragment"
+    android:name="com.example.masterhelper.ui.appBarFragment.AppBarFragment"
     android:id="@+id/fragment2"
     tools:layout="@layout/fragment_app_bar"/>
 
   <fragment
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:name="com.example.masterhelper.ui.RecyclerViewFragment.RecyclerViewFragment"
+    android:name="com.example.masterhelper.ui.recyclerViewFragment.RecyclerViewFragment"
     android:id="@+id/JOURNEYS_ID"
     tools:layout="@layout/fragment_recycler_view"
     android:layout_marginTop="?attr/actionBarSize"

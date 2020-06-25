@@ -1,48 +1,120 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
              xmlns:app="http://schemas.android.com/apk/res-auto"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="wrap_content"
+             android:layout_width="match_parent"
              android:layout_height="wrap_content"
-             tools:context=".EnemyIcon"
              android:maxHeight="80dp"
-             android:maxWidth="80dp"
              app:layout_constraintHeight_max="80dp">
 
   <androidx.cardview.widget.CardView
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardBackgroundColor="#0FE597"
-    app:cardCornerRadius="8dp"
-    app:cardUseCompatPadding="true"
-    android:layout_gravity="center_horizontal"
-    android:padding="4dp"
-    android:id="@+id/ENEMY_CARD">
+    app:cardBackgroundColor="#78DAD8D8"
+    android:layout_marginBottom="8dp">
 
-    <ImageView
-      android:src="@mipmap/baseline_flare_black_18dp"
-      android:layout_width="15dp"
-      android:layout_height="15dp"
-      android:id="@+id/LAST_CHANGED"
-      android:layout_gravity="end"/>
+    <LinearLayout
+      android:orientation="horizontal"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent">
 
-    <ImageView
-      android:src="@mipmap/enemy3"
-      android:layout_width="80dp"
-      android:layout_height="80dp"
-      android:id="@+id/ENEMY_ICON"
-      android:contentDescription="@string/script_enemy_icon"
-      android:background="#007A2323"
-      />
+      <androidx.cardview.widget.CardView
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="#0FE597"
+        app:cardCornerRadius="8dp"
+        app:cardUseCompatPadding="true"
+        android:layout_gravity="center_horizontal"
+        android:padding="4dp"
+        android:id="@+id/ENEMY_CARD">
 
-    <ImageView
-      android:src="@color/colorAccent"
-      android:layout_width="80dp"
-      android:layout_height="28dp"
-      android:id="@+id/DAMAGE_MASK"
-      android:background="@color/colorAccent"
-      android:alpha="0.6"
-      android:layout_gravity="bottom"/>
+        <ImageView
+          android:src="@mipmap/baseline_flare_black_18dp"
+          android:layout_width="15dp"
+          android:layout_height="15dp"
+          android:id="@+id/LAST_CHANGED"
+          android:layout_gravity="end"/>
+
+        <ImageView
+          android:src="@mipmap/enemy3"
+          android:layout_width="80dp"
+          android:layout_height="80dp"
+          android:id="@+id/ENEMY_ICON"
+          android:contentDescription="@string/script_enemy_icon"
+          android:background="#007A2323"
+          />
+
+        <ImageView
+          android:src="@color/colorAccent"
+          android:layout_width="80dp"
+          android:layout_height="28dp"
+          android:id="@+id/DAMAGE_MASK"
+          android:background="@color/colorAccent"
+          android:alpha="0.6"
+          android:layout_gravity="bottom"/>
+
+      </androidx.cardview.widget.CardView>
+
+      <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="0">
+
+        <TableRow
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:layout_marginTop="8dp">
+
+          <TextView
+            android:text="@string/name"
+            android:id="@+id/textView4"
+            style="@style/EnemyTableCaption"
+            android:layout_height="wrap_content"/>
+
+          <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/ENEMY_NAME_ID"
+            android:layout_weight="2"/>
+        </TableRow>
+
+        <TableRow
+          android:layout_width="match_parent"
+          android:layout_height="match_parent">
+
+          <TextView
+            android:text="@string/enemy_health_title"
+            style="@style/EnemyTableCaption"
+            android:id="@+id/textView5"
+            />
+
+          <TextView
+            android:text="0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/ENEMY_HEALTH_VALUE_ID"
+            android:layout_weight="1"/>
+        </TableRow>
+
+        <TableRow
+          android:layout_width="match_parent"
+          android:layout_height="match_parent">
+
+          <TextView
+            android:text="@string/enemy_ordering_title"
+            style="@style/EnemyTableCaption"
+            android:id="@+id/textView7"/>
+
+          <TextView
+            android:text="0"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/POSITION_NUMBER_ID"
+            android:layout_weight="1"/>
+        </TableRow>
+
+      </TableLayout>
+
+    </LinearLayout>
 
   </androidx.cardview.widget.CardView>
 

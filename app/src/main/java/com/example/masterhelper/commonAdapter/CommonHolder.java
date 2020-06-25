@@ -34,6 +34,9 @@ public class CommonHolder<Model> extends RecyclerView.ViewHolder {
       case journey:
         commonItem = new JourneyItem<Model>(v, adapter, true);
         break;
+      case abilities:
+        commonItem = new AbilityItem<Model>(v, adapter, true);
+        break;
     }
   }
 }

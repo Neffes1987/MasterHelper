@@ -2,7 +2,6 @@ package com.example.masterhelper.data.contracts;
 
 import com.example.masterhelper.models.EnemyModel;
 
-
 public class ScriptSettingsContract extends GeneralContract {
   public final static String TABLE_NAME = "scriptSettings";
 
@@ -13,6 +12,7 @@ public class ScriptSettingsContract extends GeneralContract {
   private final static String COLUMN_SCRIPT_ID_PROPS = COLUMN_SCRIPT_ID + " INTEGER NOT NULL";
   private final static String COLUMN_CHAINED_ID_PROPS = COLUMN_CHAINED_ID + " INTEGER NOT NULL";
   private final static String COLUMN_CHAINED_TYPE_PROPS = COLUMN_CHAINED_TYPE + " TEXT NOT NULL";
+
   public static String[] CREATE_TABLE_COLUMNS = {
     COLUMN_SCRIPT_ID_PROPS,
     COLUMN_CHAINED_ID_PROPS,

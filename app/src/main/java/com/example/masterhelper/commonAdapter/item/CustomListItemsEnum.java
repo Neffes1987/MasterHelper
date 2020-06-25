@@ -6,5 +6,6 @@ public enum CustomListItemsEnum {
   scene,
   script,
   journey,
-  enemyIcon
+  enemyIcon,
+  abilities,
 }

@@ -12,34 +12,26 @@
     android:roundIcon="@mipmap/ic_launcher_round"
     android:supportsRtl="true"
     android:theme="@style/AppTheme">
-    <activity android:name=".EnemyAchieveChangePopup" android:theme="@style/Theme.AppCompat.Light.Dialog.Alert"
-
-      >
+    <activity android:name=".ui.app.settings.AbilityNamesList">
     </activity>
-    <activity android:name=".EditEnemy">
+    <activity android:name=".ui.enemies.EditEnemy">
     </activity>
-    <activity android:name=".MusicSettingsScreen">
-    </activity>
-    <activity android:name=".EditScriptScreen">
-    </activity>
-    <activity android:name=".EditSceneScreen">
+    <activity android:name=".ui.app.settings.MusicSettingsScreen">
     </activity>
     <activity
-      android:name=".CreateNewItem"
+      android:name=".CreateNewItemDialog"
       android:theme="@style/AppTheme.About">
     </activity>
-    <activity android:name=".ScriptTextDescriptionScreen">
+    <activity android:name=".ui.scripts.ScriptTextDescriptionScreen">
     </activity>
-    <activity android:name=".ScriptAboutView">
+    <activity android:name=".ui.enemies.EnemiesListView">
     </activity>
-    <activity android:name=".Script">
+    <activity android:name=".ui.scene.Scene">
     </activity>
-    <activity android:name=".Scene">
-    </activity>
-    <activity android:name=".ProjectScreen">
+    <activity android:name=".ui.journey.JourneyItemView">
     </activity>
     <activity
-      android:name=".MainActivity"
+      android:name=".ui.journey.JourneysListView"
       android:label="@string/app_name"
       android:theme="@style/AppTheme.NoActionBar">
       <intent-filter>

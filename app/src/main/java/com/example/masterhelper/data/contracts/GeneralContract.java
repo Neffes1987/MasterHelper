@@ -1,13 +1,10 @@
 package com.example.masterhelper.data.contracts;
 
 import android.provider.BaseColumns;
-import android.util.Log;
 import androidx.annotation.Nullable;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 public class GeneralContract implements BaseColumns {
 
@@ -15,11 +12,22 @@ public class GeneralContract implements BaseColumns {
 
   public final static String INDEX_KEY = _ID + " INTEGER PRIMARY KEY AUTOINCREMENT, ";
 
+  /** получить весь список записей по таблице
+   * @param tableName - имя таблицы, откуда получаются записи
+   * @param columns - колонки, которые надо получить
+   * */
   public static String getListQueryBase(String tableName, @Nullable String[] columns){
     String columnsList = columns != null ? Arrays.toString(columns) : "*";
     return "SELECT "+ columnsList +" FROM " + tableName;
   }
 
+  /** получить список записий по условиям
+   * @param tableName - имя таблицы, откуда тянем записи
+   * @param columns - колонки которые надо получить
+   * @param where - условие поиска
+   * @param ordering - сортирвка списка
+   * @param limit - максимальное количество записей
+   * */
   public static String getListQuery(String tableName, @Nullable String[] columns, @Nullable String where,  @Nullable String ordering,  int limit ){
     String query = getListQueryBase(tableName, columns);
     if(where != null){
@@ -37,6 +45,12 @@ public class GeneralContract implements BaseColumns {
     return query + ';';
   }
 
+  /**
+   * добавить новую строку в таблицу
+   * @param tableName - имя таблицы куда добавляется строка
+   * @param columns - имена колонок, которые надо инициализировать
+   * @param values - значения для инициализации
+   * */
   public static String generateInsertQuery(String tableName, String[] columns, String[] values){
     StringBuilder valuesResult = new StringBuilder();
     StringBuilder columnsResult = new StringBuilder();
@@ -56,7 +70,13 @@ public class GeneralContract implements BaseColumns {
     return "INSERT INTO " + tableName + " (" + columnsResult + ") VALUES ("+ valuesResult +")";
   }
 
-  public static String generateUpdateValues(String tableName, int itemId, String[] columns, String[] values){
+  /** обновить запись по его ид
+   * @param tableName - имя таблица, где меняем строку
+   * @param tableRecordId - ид строки, которую меняем
+   * @param columns - колонки, значения которых надо поменять
+   * @param values -  значения для этих полей
+   * */
+  public static String generateUpdateValues(String tableName, int tableRecordId, String[] columns, String[] values){
     StringBuilder result = new StringBuilder();
     int columnsLastIndex = columns.length -1;
 
@@ -70,9 +90,11 @@ public class GeneralContract implements BaseColumns {
       }
     }
 
-    return "UPDATE " + tableName + " SET "+ result.toString() +" WHERE " + BaseColumns._ID + "='"+itemId+"'";
+    return "UPDATE " + tableName + " SET "+ result.toString() +" WHERE " + BaseColumns._ID + "='"+tableRecordId+"'";
   }
 
+
+  /** запрос в бд на создание таблицы */
   public static String generateTableQuery(String TableName, String[] columns){
     StringBuilder result = new StringBuilder();
     if(columns.length == 0){
@@ -91,15 +113,15 @@ public class GeneralContract implements BaseColumns {
     return "CREATE TABLE " + TableName + " (" +result.toString() + ");";
   }
 
-  public static String generateDeleteItemQuery(String tableName, int itemId){
-    return "DELETE FROM " + tableName + " WHERE " + _ID + "='"+itemId+"'";
+  /** удалить запись в таблице */
+  public static String generateDeleteItemQuery(String tableName, int deletedItemId){
+    return "DELETE FROM " + tableName + " WHERE " + _ID + "='"+deletedItemId+"'";
   }
 
-
-  public static final String [] concat(final String [] first, final String [] second) {
+  /** функция конкатернации строк */
+  public static String [] concat(final String [] first, final String [] second) {
     final ArrayList<String> resultList = new ArrayList<>(Arrays.asList(first));
     resultList.addAll(new ArrayList<>(Arrays.asList(second)));
     return resultList.toArray(new String [resultList.size()]);
   }
-
 }

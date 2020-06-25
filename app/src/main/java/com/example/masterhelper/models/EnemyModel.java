@@ -15,23 +15,35 @@ public class EnemyModel {
   private int currentHealth;
 
   /** */
-  private long id;
+  private int ordering;
+
+  /** */
+  private int id;
 
 
   /** */
-  public EnemyModel(long id, String name, String description, int totalHealth, int currentHealth){
+  public EnemyModel(int id, String name, String description, int totalHealth, int currentHealth, int ordering){
     setName(name);
     setId(id);
     setDescription(description);
     setTotalHealth(totalHealth);
     setCurrentHealth(currentHealth);
+    setOrdering(ordering);
+  }
+
+  public void setOrdering(int ordering) {
+    this.ordering = ordering;
+  }
+
+  public int getOrdering() {
+    return ordering;
   }
 
   public void setName(String name) {
     this.name = name;
   }
 
-  public void setId(long id) {
+  public void setId(int id) {
     this.id = id;
   }
 
@@ -51,7 +63,7 @@ public class EnemyModel {
     return description;
   }
 
-  public long getId() {
+  public int getId() {
     return id;
   }
 
