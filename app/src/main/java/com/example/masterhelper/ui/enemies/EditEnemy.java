@@ -7,6 +7,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import com.example.masterhelper.ListItemsDialog;
 import com.example.masterhelper.R;
 import com.example.masterhelper.models.ACHIEVE_CONST_TAGS;
 import com.example.masterhelper.models.AbilityModel;
@@ -17,7 +19,7 @@ import com.example.masterhelper.ui.viewCharacteristicRow.ViewCharacteristicRow;
 
 import java.util.LinkedHashMap;
 
-public class EditEnemy extends AppCompatActivity implements ViewCharacteristicRow.IViewCharacteristicRow, EnemyBottomButtonsFragment.IScriptBottomButtonsFragment {
+public class EditEnemy extends AppCompatActivity implements ViewCharacteristicRow.IViewCharacteristicRow, EnemyBottomButtonsFragment.IScriptBottomButtonsFragment, ListItemsDialog.IButtonsEvents {
   /** редактировать имя врага */
   EditText enemyName;
 
@@ -63,7 +65,7 @@ public class EditEnemy extends AppCompatActivity implements ViewCharacteristicRo
     abilityAddButton = findViewById(R.id.ENEMY_ABILITIES_ADD_BTN_ID);
     maxHealthValue = findViewById(R.id.MAX_HEALTH_VALUE_ID);
 
-    abilityAddButton.setOnClickListener(v -> addNewRow());
+    abilityAddButton.setOnClickListener(v -> showAbilitiesPopup());
 
     scriptID = getIntent().getIntExtra("scriptId", 0);
     enemyId = getIntent().getIntExtra("enemyId", 0);
@@ -94,10 +96,6 @@ public class EditEnemy extends AppCompatActivity implements ViewCharacteristicRo
       controls.setControlMode(false);
       updateView();
     }
-
-  }
-
-  private void addNewRow() {
 
   }
 
@@ -193,8 +191,19 @@ public class EditEnemy extends AppCompatActivity implements ViewCharacteristicRo
   }
 
   private void showAbilitiesPopup(){
-    LinkedHashMap<Integer, AbilityModel> abilitiesList = abilityDBAdapter.getSettingsAbilitiesList();
 
+    LinkedHashMap<Integer, AbilityModel> abilitiesList = abilityDBAdapter.getSettingsAbilitiesList();
+    String[] abilitiesNames = new String[abilitiesList.size()];
+    int valueIdx = 0;
+    for (int key: abilitiesList.keySet()) {
+      abilitiesNames[valueIdx] = abilitiesList.get(key).getName();
+      valueIdx += 1;
+    }
+
+    ListItemsDialog myDialogFragment = new ListItemsDialog(abilitiesNames, "Список характеристик");
+
+    FragmentTransaction transaction = fragmentManager.beginTransaction();
+    myDialogFragment.show(transaction, "dialog");
   }
 
   @Override
@@ -207,5 +216,15 @@ public class EditEnemy extends AppCompatActivity implements ViewCharacteristicRo
         deletePerson();
         break;
     }
+  }
+
+  @Override
+  public void cancel() {
+
+  }
+
+  @Override
+  public void accepted(boolean[] selectedItems) {
+
   }
 }
