@@ -48,7 +48,8 @@ public class EnemyDBAdapter {
 
   /**  */
   public EnemyModel getEnemyById(int enemyId){
-    String sqlQuery = EnemyContract.getListQuery(EnemyContract.TABLE_NAME, null, EnemyContract._ID+"="+ enemyId, EnemyContract._ID + " DESC", 1);
+    String whereCondition = enemyId > -1 ? EnemyContract._ID+"="+ enemyId : null;
+    String sqlQuery = EnemyContract.getListQuery(EnemyContract.TABLE_NAME, null, whereCondition, EnemyContract._ID + " DESC", 1);
     Cursor queryResult = dbHelpers.getList(sqlQuery);
     EnemyModel enemyModel = null;
     while (queryResult.moveToNext()) {
@@ -74,9 +75,10 @@ public class EnemyDBAdapter {
   
 
   /**  */
-  public void addNewEnemy(EnemyModel newItem, int scriptId){
+  public int addNewEnemy(EnemyModel newItem, int scriptId){
     String sqlQuery = dbHelpers.enemyContract.addItemQuery(newItem, scriptId);
     dbHelpers.addNewItem(sqlQuery);
+    return getEnemyById(-1).getId();
   }
 
   /**  */

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+    <data-source source="LOCAL" name="Android SQLite" uuid="6d59b8aa-63f0-4d41-a0b3-6df8cc5fec6a">
+      <driver-ref>sqlite.xerial</driver-ref>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:$USER_HOME$/.IntelliJIdea2019.3/system/android/databases/EMULATOR_Pixel_2_XL_API_25/com.example.masterhelper/internal/global.db</jdbc-url>
+    </data-source>
+  </component>
+</project>

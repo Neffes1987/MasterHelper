@@ -1,5 +1,6 @@
 package com.example.masterhelper.ui.enemies;
 
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -16,7 +17,7 @@ import com.example.masterhelper.models.EnemyModel;
 import com.example.masterhelper.ui.viewCharacteristicRow.Abilities;
 import com.example.masterhelper.ui.viewCharacteristicRow.AbilityDBAdapter;
 import com.example.masterhelper.ui.viewCharacteristicRow.ViewCharacteristicRow;
-
+ 
 import java.util.LinkedHashMap;
 
 public class EditEnemy extends AppCompatActivity implements ViewCharacteristicRow.IViewCharacteristicRow, EnemyBottomButtonsFragment.IScriptBottomButtonsFragment, ListItemsDialog.IButtonsEvents {
@@ -51,13 +52,13 @@ public class EditEnemy extends AppCompatActivity implements ViewCharacteristicRo
   AbilityModel healthAbility = new AbilityModel(HEALTH_POSITION, "Здоровье", 0, ACHIEVE_CONST_TAGS.HEALTH);
   AbilityModel orderingAbility = new AbilityModel(ORDERING_POSITION, "Порядок хода", 0, ACHIEVE_CONST_TAGS.ORDERING);
 
-  /** Характеристики врага */
-  private final LinkedHashMap<Integer, AbilityModel> achieves = new LinkedHashMap<>();
-
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_edit_enemy);
+
+    scriptID = getIntent().getIntExtra("scriptId", 0);
+    enemyId = getIntent().getIntExtra("enemyId", 0);
 
     abilityDBAdapter = new AbilityDBAdapter(this);
     enemyDBAdapter = new EnemyDBAdapter(this);
@@ -67,8 +68,7 @@ public class EditEnemy extends AppCompatActivity implements ViewCharacteristicRo
 
     abilityAddButton.setOnClickListener(v -> showAbilitiesPopup());
 
-    scriptID = getIntent().getIntExtra("scriptId", 0);
-    enemyId = getIntent().getIntExtra("enemyId", 0);
+
 
     if(scriptID > 0){
       currentEnemy = enemyDBAdapter.getEnemyById(enemyId);
@@ -82,14 +82,17 @@ public class EditEnemy extends AppCompatActivity implements ViewCharacteristicRo
     orderingAbility.setValue(currentEnemy.getOrdering());
 
     maxHealthValue.setText(currentEnemy.getTotalHealth() + "");
+
     updateDescription(currentEnemy.getDescription());
     updateTitle(currentEnemy.getName());
 
-    achieves.put(HEALTH_POSITION, healthAbility);
-    achieves.put(ORDERING_POSITION, orderingAbility);
-
     fragmentManager = getSupportFragmentManager();
-    abilities = new Abilities(fragmentManager, this, achieves);
+
+    abilities = new Abilities(fragmentManager, this);
+    abilities.setAbilityToList(healthAbility);
+    abilities.setAbilityToList(orderingAbility);
+    abilities.setAbilitiesView(abilityDBAdapter.getSettingsAbilitiesListByEnemy(enemyId));
+    abilities.setAbilitiesListView(abilityDBAdapter.getSettingsAbilitiesList());
 
     EnemyBottomButtonsFragment controls = (EnemyBottomButtonsFragment) fragmentManager.findFragmentById(R.id.SCRIPT_ENEMY_BOTTOM_BUTTONS);
     if(controls != null){
@@ -116,7 +119,7 @@ public class EditEnemy extends AppCompatActivity implements ViewCharacteristicRo
 
 
   private void updateView(){
-    abilities.updateAbilities(achieves);
+    abilities.updateAbilities();
   }
 
   @Override
@@ -126,10 +129,13 @@ public class EditEnemy extends AppCompatActivity implements ViewCharacteristicRo
       if(enemyId == 0){
         maxHealthValue.setText(value + "");
       }
+      return;
     }
     if(id == ORDERING_POSITION){
       orderingAbility.setValue(value);
+      return;
     }
+    abilities.setAbilityValue(id, value);
   }
 
   @Override
@@ -137,10 +143,6 @@ public class EditEnemy extends AppCompatActivity implements ViewCharacteristicRo
     abilities.deleteAbility(rowId);
   }
 
-
-  private void saveAbilities(){
-
-  }
 
   private void savePerson(String title, String description, int scriptID){
     int currentHealth = healthAbility.getValue();
@@ -158,16 +160,19 @@ public class EditEnemy extends AppCompatActivity implements ViewCharacteristicRo
 
     if(currentEnemy.getId() != 0){
       enemyDBAdapter.updateEnemy(currentEnemy);
+      abilityDBAdapter.addAbilitiesByEnemyId(abilities.getUntaggedAbilities(), currentEnemy.getId());
       Toast.makeText(this, title + " обновлен", Toast.LENGTH_LONG).show();
     } else {
 
       if(currentHealth == 0){
-        Toast.makeText(this, "Наальное здоровье должно быть больше 0", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Начальное здоровье должно быть больше 0", Toast.LENGTH_LONG).show();
         return;
       }
-      enemyDBAdapter.addNewEnemy(currentEnemy, scriptID);
+      currentEnemy.setId(enemyDBAdapter.addNewEnemy(currentEnemy, scriptID));
+      abilityDBAdapter.addAbilitiesByEnemyId(abilities.getUntaggedAbilities(), currentEnemy.getId());
       Toast.makeText(this, title + " добавлен", Toast.LENGTH_LONG).show();
     }
+
     setResult(RESULT_OK);
     finish();
   }
@@ -191,12 +196,18 @@ public class EditEnemy extends AppCompatActivity implements ViewCharacteristicRo
   }
 
   private void showAbilitiesPopup(){
+    LinkedHashMap<Integer, AbilityModel> abilitiesForPopup = abilities.getAbilitiesListView();
+    Log.i("TAG", "showAbilitiesPopup: " + abilitiesForPopup);
+    if(abilitiesForPopup.size() == 0){
+      Toast.makeText(this, "Нет доступных характеристик", Toast.LENGTH_LONG).show();
+      return;
+    }
 
-    LinkedHashMap<Integer, AbilityModel> abilitiesList = abilityDBAdapter.getSettingsAbilitiesList();
-    String[] abilitiesNames = new String[abilitiesList.size()];
+    String[] abilitiesNames = new String[abilitiesForPopup.size()];
+
     int valueIdx = 0;
-    for (int key: abilitiesList.keySet()) {
-      abilitiesNames[valueIdx] = abilitiesList.get(key).getName();
+    for (int key: abilitiesForPopup.keySet()) {
+      abilitiesNames[valueIdx] = abilitiesForPopup.get(key).getName();
       valueIdx += 1;
     }
 
@@ -219,12 +230,19 @@ public class EditEnemy extends AppCompatActivity implements ViewCharacteristicRo
   }
 
   @Override
-  public void cancel() {
-
-  }
+  public void cancel() {}
 
   @Override
   public void accepted(boolean[] selectedItems) {
-
+    LinkedHashMap<Integer, AbilityModel> abilitiesForPopup = abilities.getAbilitiesListView();
+    int valueIdx = 0;
+    for (int key: abilitiesForPopup.keySet()) {
+      if(selectedItems[valueIdx]){
+        AbilityModel item = abilitiesForPopup.get(key);
+        abilities.setAbilityToList(item);
+      }
+      valueIdx += 1;
+    }
+    updateView();
   }
 }

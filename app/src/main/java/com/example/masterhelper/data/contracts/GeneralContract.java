@@ -77,6 +77,10 @@ public class GeneralContract implements BaseColumns {
    * @param values -  значения для этих полей
    * */
   public static String generateUpdateValues(String tableName, int tableRecordId, String[] columns, String[] values){
+    return commonUpdateGenerator(tableName, columns, values) +" WHERE " + BaseColumns._ID + "='"+tableRecordId+"'";
+  }
+
+  public static String commonUpdateGenerator(String tableName, String[] columns, String[] values){
     StringBuilder result = new StringBuilder();
     int columnsLastIndex = columns.length -1;
 
@@ -89,8 +93,7 @@ public class GeneralContract implements BaseColumns {
         result.append(",");
       }
     }
-
-    return "UPDATE " + tableName + " SET "+ result.toString() +" WHERE " + BaseColumns._ID + "='"+tableRecordId+"'";
+    return "UPDATE " + tableName + " SET "+ result.toString();
   }
 
 

@@ -6,11 +6,11 @@ import com.example.masterhelper.models.AbilityModel;
 public class EnemyAbilitiesContract extends GeneralContract implements IContract<AbilityModel> {
   public final static String TABLE_NAME = "enemyAbilities";
 
-  public final static String COLUMN_SCRIPT_ID = "enemyId";
+  public final static String COLUMN_ENEMY_ID = "enemyId";
   public final static String COLUMN_ABILITY_ID = "abilityId";
   public final static String COLUMN_ABILITY_VALUE = "abilityValue";
 
-  private final static String COLUMN_SCRIPT_ID_PROPS = COLUMN_SCRIPT_ID + " INTEGER NOT NULL";
+  private final static String COLUMN_SCRIPT_ID_PROPS = COLUMN_ENEMY_ID + " INTEGER NOT NULL";
   private final static String COLUMN_ABILITY_ID_PROPS = COLUMN_ABILITY_ID + " INTEGER NOT NULL";
   private final static String COLUMN_ABILITY_VALUE_PROPS = COLUMN_ABILITY_VALUE + " INTEGER NOT NULL";
   public static String[] CREATE_TABLE_COLUMNS = {
@@ -20,7 +20,7 @@ public class EnemyAbilitiesContract extends GeneralContract implements IContract
   };
 
   public static String[] UPDATE_COLUMNS_PROPS = {
-    COLUMN_SCRIPT_ID,
+    COLUMN_ENEMY_ID,
     COLUMN_ABILITY_ID,
     COLUMN_ABILITY_VALUE
   };
@@ -42,8 +42,8 @@ public class EnemyAbilitiesContract extends GeneralContract implements IContract
     return generateDeleteItemQuery(TABLE_NAME, itemId);
   }
 
-  public String updateItemQuery(int scriptId, AbilityModel newItem){
-    String[] values = getValues(newItem, scriptId);
-    return generateUpdateValues(TABLE_NAME, newItem.getId(), UPDATE_COLUMNS_PROPS, values);
+  public String updateItemQuery(int enemyId, AbilityModel newItem){
+    String[] values = getValues(newItem, enemyId);
+    return commonUpdateGenerator(TABLE_NAME, UPDATE_COLUMNS_PROPS, values);
   }
 }
