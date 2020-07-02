@@ -23,13 +23,13 @@
   <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
 
   <style name="ConstraintLayoutStyled">
-    <item name="android:layout_marginLeft">8dp</item>
-    <item name="android:layout_marginRight">8dp</item>
+    <item name="android:layout_marginLeft">2dp</item>
+    <item name="android:layout_marginRight">2dp</item>
   </style>
 
   <style name="ConstraintLayoutPaddingStyled">
-    <item name="android:paddingLeft">8dp</item>
-    <item name="android:paddingRight">8dp</item>
+    <item name="android:paddingLeft">2dp</item>
+    <item name="android:paddingRight">2dp</item>
   </style>
 
   <style name="rowStyled">

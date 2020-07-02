@@ -1,9 +1,7 @@
 package com.example.masterhelper.ui.scene;
 
 import android.content.Intent;
-import android.util.Log;
 import android.view.View;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.fragment.app.FragmentManager;
@@ -11,7 +9,6 @@ import com.example.masterhelper.CreateNewItemDialog;
 import com.example.masterhelper.DialogPopup;
 import com.example.masterhelper.R;
 import com.example.masterhelper.ui.enemies.EnemiesListView;
-import com.example.masterhelper.ui.scripts.ScriptTextDescriptionScreen;
 import com.example.masterhelper.commonAdapter.item.ICommonItemEvents;
 import com.example.masterhelper.ui.recyclerViewFragment.RecyclerViewFragment;
 import com.example.masterhelper.models.ScriptRecycleDataModel;
@@ -139,9 +136,6 @@ public class Scene extends AppCompatActivity implements ICommonItemEvents {
         if(currentData.hasBattleActionIcon){
           Intent intent = new Intent(this, EnemiesListView.class);
           intent.putExtra("scriptId", currId);
-          startActivity(intent);
-        } else {
-          Intent intent = new Intent(this, ScriptTextDescriptionScreen.class);
           startActivity(intent);
         }
         break;

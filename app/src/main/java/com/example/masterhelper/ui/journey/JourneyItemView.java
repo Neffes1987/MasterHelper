@@ -1,6 +1,7 @@
 package com.example.masterhelper.ui.journey;
 
 import android.view.View;
+import androidx.appcompat.app.ActionBar;
 import com.example.masterhelper.CreateNewItemDialog;
 import com.example.masterhelper.DialogPopup;
 import com.example.masterhelper.R;
@@ -15,7 +16,6 @@ import androidx.fragment.app.FragmentManager;
 import com.example.masterhelper.ui.scene.SceneDBAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.LinkedHashMap;
-import java.util.Objects;
 
 import static android.content.DialogInterface.BUTTON_POSITIVE;
 
@@ -44,9 +44,12 @@ public class JourneyItemView extends AppCompatActivity implements ICommonItemEve
     }
     journeyDBAdapter  = new JourneyDBAdapter(this, journeyId);
     sceneDBAdapter  = new SceneDBAdapter(this);
+    ActionBar toolbar = getSupportActionBar();
 
     // получаем указатель на тулбар активированного в главном компоненте
-    Objects.requireNonNull(getSupportActionBar()).setTitle(journeyDBAdapter.getJourneyTitle());
+    if(toolbar != null){
+      toolbar.setTitle(journeyDBAdapter.getJourneyTitle());
+    }
 
     createNewSceneBtn = findViewById(R.id.CREATE_NEW_SCENE_BTN_ID);
     createNewSceneBtn.setOnClickListener(v -> onCreateButtonPressed());

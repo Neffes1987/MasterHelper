@@ -25,8 +25,8 @@ public class ScriptItem<Model> extends CommonItem<Model>{
   /** блок шапки аккордиона */
   private LinearLayout titleBar;
 
-  /** виджет прогресса по сцене, виден всегда */
-  private ImageView hasBattleActionIcon;
+  /** блок шапки аккордиона */
+  private LinearLayout battleScriptBar;
 
   /** иконка окончания сцены, появляется в заголовке аккордиона */
   private ImageView isFinishedIcon;
@@ -60,15 +60,6 @@ public class ScriptItem<Model> extends CommonItem<Model>{
     this.description.setText(description);
   }
 
-  /** указать текущее количество пройденых сцен
-   * @param isVisible - определяет боевая это сцена или ситуативная
-   * - scriptsFinished - сколько скриптов выполнено
-   * - scriptsTotal - сколько всего скриптов в сцене
-   * */
-  private void setHasBattleActionIcon(boolean isVisible) {
-    hasBattleActionIcon.setVisibility(isVisible ? View.VISIBLE : View.GONE);
-  }
-
   /** указать состояние флага пройденной сцены
    * @param item - набор данных для инициализации сцены
    * - scriptsFinished - сколько скриптов выполнено
@@ -89,8 +80,12 @@ public class ScriptItem<Model> extends CommonItem<Model>{
     setTitle(script.title);
     setDescription(script.description);
     setPosition(position);
-    setHasBattleActionIcon(script.hasBattleActionIcon);
     setSceneIsDone(script);
+    setBattleScriptBarVisible(script.hasBattleActionIcon);
+  }
+
+  private void setBattleScriptBarVisible(boolean visible){
+    battleScriptBar.setVisibility(visible ? View.VISIBLE : View.GONE);
   }
 
   /** @constructor генератор указателей на элементы UI для адаптера */
@@ -98,7 +93,10 @@ public class ScriptItem<Model> extends CommonItem<Model>{
     super(v, adapter);
 
     title = v.findViewById(R.id.SCRIPT_TITLE_ID);
+
     titleBar = v.findViewById(R.id.SCRIPT_TITLE_BAR_ID);
+
+    battleScriptBar = v.findViewById(R.id.SCRIPT_BATTLE_EVENT_WRAPPER_ID);
 
     description = v.findViewById(R.id.SCRIPT_DESCRIPTION_ID);
 
@@ -118,8 +116,6 @@ public class ScriptItem<Model> extends CommonItem<Model>{
 
     doneBtn = v.findViewById(R.id.SCRIPT_BTN_DONE_ID);
     doneBtn.setOnClickListener(commonListener);
-
-    hasBattleActionIcon = v.findViewById(R.id.SCRIPT_HAS_BATTLE_ACTION_ICON_ID);
 
     expandButton = v.findViewById(R.id.SCRIPT_TOGGLER_ID);
     expandButton.setOnClickListener(itemToggle);

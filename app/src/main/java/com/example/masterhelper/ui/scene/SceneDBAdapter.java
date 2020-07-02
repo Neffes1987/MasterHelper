@@ -4,7 +4,6 @@ import android.content.Context;
 import android.database.Cursor;
 import com.example.masterhelper.data.DbHelpers;
 import com.example.masterhelper.data.contracts.SceneContract;
-import com.example.masterhelper.data.contracts.ScriptsContract;
 import com.example.masterhelper.models.SceneRecycleDataModel;
 import com.example.masterhelper.models.ScriptRecycleDataModel;
 import com.example.masterhelper.ui.scripts.ScriptDBAdapter;
@@ -43,16 +42,33 @@ public class SceneDBAdapter {
 
       LinkedHashMap<Integer, ScriptRecycleDataModel> scripts = scriptDBAdapter.getScriptsList(sceneId);
       int finishedCounter = 0;
+      StringBuilder goals = new StringBuilder();
       for (ScriptRecycleDataModel script: scripts.values() ) {
-        if(script.isFinished){
+        boolean isFinished = script.isFinished;
+        if(isFinished){
           finishedCounter+=1;
         }
+        goals
+            .append("\r\n")
+            .append("- ")
+            .append(script.getTitle())
+            .append(isFinished ? " [done]" : "")
+            .append("\r\n");
       };
+
+      StringBuilder description =  new StringBuilder();
+
+      description.append(queryResult.getString(descriptionColumnIndex))
+        .append("\r\n").append("\r\n")
+        .append("Цели: ")
+        .append("\r\n")
+        .append(goals);
+
 
       SceneRecycleDataModel sceneRecycleDataModel = new SceneRecycleDataModel(
         queryResult.getString(titleColumnIndex),
         sceneId,
-        queryResult.getString(descriptionColumnIndex),
+        description.toString(),
         finishedCounter,
         scripts.size(),
         false
