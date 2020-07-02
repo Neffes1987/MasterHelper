@@ -23,11 +23,11 @@ public class SceneItem<Model> extends CommonItem<Model>{
   /** блок тела аккордиона, чтобы сворачивать разворачицвать его */
   private LinearLayout body;
 
+  /** блок заголовка аккордиона */
+  private LinearLayout titleBar;
+
   /** виджет прогресса по сцене, виден всегда */
   private ProgressBar progressBar;
-
-  /** включить\выключить музыку в сцене */
-  private Switch isMusicToggledFlag;
 
   /** иконка окончания сцены, появляется в заголовке аккордиона */
   private ImageView isFinishedIcon;
@@ -44,12 +44,6 @@ public class SceneItem<Model> extends CommonItem<Model>{
   /** кнопка удаления сцены */
   public AppCompatImageButton deleteBtn;
 
-  /** кнопка перемещения сцены выше по списку */
-  public AppCompatImageButton upOrderBtn;
-
-  /** кнопка перемещения сцены ниже по списку */
-  public AppCompatImageButton downOrderBtn;
-
   /** установить название сцены в виджет
    * @param title - имя сцены
    * */
@@ -62,13 +56,6 @@ public class SceneItem<Model> extends CommonItem<Model>{
    * */
   private void setDescription(String description) {
     this.description.setText(description);
-  }
-
-  /** передать текущее состояние флага включения музыки в виджет
-   * @param isMusicToggledFlag - флаг состояния переключения фоновой музыки
-   * */
-  private void setIsMusicToggledFlag(Boolean isMusicToggledFlag) {
-    this.isMusicToggledFlag.setChecked(isMusicToggledFlag);
   }
 
   /** указать текущее количество пройденых сцен
@@ -89,8 +76,10 @@ public class SceneItem<Model> extends CommonItem<Model>{
   private void setSceneIsDone(SceneRecycleDataModel item) {
     if(item.scriptsTotal <= item.scriptsFinished && item.scriptsTotal != 0) {
       this.isFinishedIcon.setVisibility(View.VISIBLE);
+      titleBar.setBackgroundResource(R.color.colorPrimaryDark);
     } else {
       this.isFinishedIcon.setVisibility(View.GONE);
+      titleBar.setBackgroundResource( R.color.colorPrimary);
     }
   }
 
@@ -114,7 +103,6 @@ public class SceneItem<Model> extends CommonItem<Model>{
     SceneRecycleDataModel scene = (SceneRecycleDataModel) itemData;
     setTitle(scene.title);
     setDescription(scene.description);
-    setIsMusicToggledFlag(scene.isMusicStarted);
     setProgressBar(scene);
     setPosition(position);
   }
@@ -126,6 +114,8 @@ public class SceneItem<Model> extends CommonItem<Model>{
     title = v.findViewById(R.id.SCENE_TITLE_ID);
     description = v.findViewById(R.id.SCENE_DESCRIPTION_ID);
     screenStepsValue = v.findViewById(R.id.SCREEN_STEPS_VALUE_ID);
+
+    titleBar = v.findViewById(R.id.SCENE_TITLE_BAR_ID);
 
     body = v.findViewById(R.id.SCREEN_ACCORDION_BODY_ID);
     body.setVisibility(View.GONE);
@@ -142,14 +132,6 @@ public class SceneItem<Model> extends CommonItem<Model>{
 
     deleteBtn = v.findViewById(R.id.SCENE_DELETE_BTN_ID);
     deleteBtn.setOnClickListener(commonListener);
-
-    upOrderBtn = v.findViewById(R.id.SCENE_UP_ORDER_BTN_ID);
-    upOrderBtn.setOnClickListener(commonListener);
-
-    downOrderBtn = v.findViewById(R.id.SCENE_DOWN_ORDER_BTN_ID);
-    downOrderBtn.setOnClickListener(commonListener);
-
-    isMusicToggledFlag = v.findViewById(R.id.SCREEN_BACKGROUND_MUSIC_TOGGLER_ID);
 
     expandButton = v.findViewById(R.id.SCREEN_TOGGLER_ID);
     expandButton.setOnClickListener(itemToggle);

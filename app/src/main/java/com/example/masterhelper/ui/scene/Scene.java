@@ -3,6 +3,7 @@ package com.example.masterhelper.ui.scene;
 import android.content.Intent;
 import android.util.Log;
 import android.view.View;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.fragment.app.FragmentManager;
@@ -40,8 +41,8 @@ public class Scene extends AppCompatActivity implements ICommonItemEvents {
     newScriptBtn = findViewById(R.id.SCRIPT_CREATE_NEW_BTN_ID);
     newScriptBtn.setOnClickListener(v -> {
       Intent intent = new Intent(this, CreateNewItemDialog.class);
-      intent.putExtra("title", R.string.script_create_title);
-      intent.putExtra("isScript", 1);
+      intent.putExtra(CreateNewItemDialog.TITLE, R.string.script_create_title);
+      intent.putExtra(CreateNewItemDialog.IS_SCRIPT, 1);
       startActivityForResult(intent, 1);
     });
 
@@ -49,7 +50,6 @@ public class Scene extends AppCompatActivity implements ICommonItemEvents {
     sceneId = getIntent().getIntExtra("sceneId", 0);
 
     scriptDBAdapter  = new ScriptDBAdapter(this);
-    setListData();
     // получаем указатель на тулбар активированного в главном компоненте
     Objects.requireNonNull(getSupportActionBar()).setTitle(title);
   }
@@ -66,17 +66,24 @@ public class Scene extends AppCompatActivity implements ICommonItemEvents {
     }
   }
 
-  /** обновить имя текущего скрипта  */
+  @Override
+  protected void onStart() {
+    super.onStart();
+    setListData();
+  }
+
+  /** обновить текущий скрипт  */
   public void onUpdateScriptNameButtonPressed(int id) {
     ScriptRecycleDataModel scriptRecycleDataModel = scriptsList.get(id);
     Intent intent = new Intent(this, CreateNewItemDialog.class);
-    intent.putExtra("title", R.string.script_update_title);
-    intent.putExtra("id", id);
+    intent.putExtra(CreateNewItemDialog.TITLE, R.string.script_update_title);
+    intent.putExtra(CreateNewItemDialog.IS_UPDATE, 1);
+    intent.putExtra(CreateNewItemDialog.ID, id);
     if(scriptRecycleDataModel != null){
-      intent.putExtra("oldName", scriptRecycleDataModel.getTitle());
-      intent.putExtra("hasBattleSceneValue", scriptRecycleDataModel.hasBattleActionIcon ? 1 : 0);
-      intent.putExtra("description", scriptRecycleDataModel.getDescription());
-      intent.putExtra("isScript", 1);
+      intent.putExtra(CreateNewItemDialog.OLD_NAME, scriptRecycleDataModel.getTitle());
+      intent.putExtra(CreateNewItemDialog.IS_BATTLE, scriptRecycleDataModel.hasBattleActionIcon ? 1 : 0);
+      intent.putExtra(CreateNewItemDialog.DESCRIPTION, scriptRecycleDataModel.getDescription());
+      intent.putExtra(CreateNewItemDialog.IS_SCRIPT, 1);
       startActivityForResult(intent, 2);
     }
   }
@@ -88,14 +95,25 @@ public class Scene extends AppCompatActivity implements ICommonItemEvents {
     if(resultCode != RESULT_OK){
       return;
     }
-    String newName = result.getStringExtra("name");
-    int hasBattleSceneValue = result.getIntExtra("hasBattleSceneValue", 0);
-    String description = result.getStringExtra("description");
-    int id = result.getIntExtra("id", 0);
+    String newName = result.getStringExtra(CreateNewItemDialog.NAME);
+    int hasBattleSceneValue = result.getIntExtra(CreateNewItemDialog.IS_BATTLE, 0);
+    String description = result.getStringExtra(CreateNewItemDialog.DESCRIPTION);
+    int id = result.getIntExtra(CreateNewItemDialog.ID, 0);
+
     if(newName != null && newName.trim().length() == 0){
       return;
     }
-    ScriptRecycleDataModel item = new ScriptRecycleDataModel(newName, id, description, hasBattleSceneValue == 1, false);
+
+    ScriptRecycleDataModel item;
+
+    if(id > 0){
+      item = scriptDBAdapter.getScriptById(id);
+      item.setTitle(newName);
+      item.setDescription(description);
+      item.hasBattleActionIcon = hasBattleSceneValue == 1;
+    } else {
+      item = new ScriptRecycleDataModel(newName, id, description, hasBattleSceneValue == 1, false);
+    }
     switch (requestCode){
       case 1:
         scriptDBAdapter.addNewScript(item, sceneId);
@@ -129,6 +147,12 @@ public class Scene extends AppCompatActivity implements ICommonItemEvents {
         break;
       case R.id.SCRIPT_DELETE_BTN_ID:
         scriptDBAdapter.deleteScript(currentData.getId());
+        setListData();
+        break;
+      case R.id.SCRIPT_BTN_DONE_ID:
+        boolean isFinished = !currentData.isFinished;
+        currentData.setFinished(isFinished);
+        scriptDBAdapter.updateScript(currentData, currentData.getId());
         setListData();
         break;
     }

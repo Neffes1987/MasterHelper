@@ -6,6 +6,7 @@ import com.example.masterhelper.data.DbHelpers;
 import com.example.masterhelper.data.contracts.ScriptsContract;
 import com.example.masterhelper.models.ScriptRecycleDataModel;
 
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 
 public class ScriptDBAdapter {
@@ -39,6 +40,32 @@ public class ScriptDBAdapter {
         queryResult.getString(isFinishedColumnIndex).equals("true")
       );
       result.put(scriptRecycleDataModel.getId(), scriptRecycleDataModel);
+    }
+    queryResult.close();
+    return result;
+  }
+
+  /**  */
+  public ScriptRecycleDataModel getScriptById(int scriptId){
+    String sqlQuery = ScriptsContract.getListQuery(ScriptsContract.TABLE_NAME, null, ScriptsContract._ID+"="+ scriptId, ScriptsContract._ID + " DESC", 0);
+    ScriptRecycleDataModel result = null;
+    Cursor queryResult = dbHelpers.getList(sqlQuery);
+
+    while (queryResult.moveToNext()) {
+      // Используем индекс для получения строки или числа
+      int titleColumnIndex = queryResult.getColumnIndex(ScriptsContract.COLUMN_TITLE);
+      int descriptionColumnIndex = queryResult.getColumnIndex(ScriptsContract.COLUMN_DESCRIPTION);
+      int idColumnIndex = queryResult.getColumnIndex(ScriptsContract._ID);
+      int isFinishedColumnIndex = queryResult.getColumnIndex(ScriptsContract.COLUMN_IS_FINISHED);
+      int isBattleColumnIndex = queryResult.getColumnIndex(ScriptsContract.COLUMN_HAS_BATTLE_EVENT);
+
+      result = new ScriptRecycleDataModel(
+        queryResult.getString(titleColumnIndex),
+        queryResult.getInt(idColumnIndex),
+        queryResult.getString(descriptionColumnIndex),
+        queryResult.getString(isBattleColumnIndex).equals("true"),
+        queryResult.getString(isFinishedColumnIndex).equals("true")
+      );
     }
     queryResult.close();
     return result;

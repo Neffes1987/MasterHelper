@@ -20,17 +20,23 @@ public class CreateNewItemDialog extends AppCompatActivity {
   int cancelBtnId = R.id.ITEM_CANCEL_BTN_ID;
   Button cancelBtn;
 
-  int ameEditFieldId = R.id.ITEM_NAME_ID;
   EditText nameEditField;
 
-  int descriptionEditFieldId = R.id.ITEM_DESCRIPTION_ID;
   EditText descriptionEditField;
 
-  int hasBattleSwitchId = R.id.SCRIPT_HAS_BATTLE_SCENE_ID;
   CheckBox hasBattleSwitch;
 
-  int titleFieldId = R.id.CREATE_ITEM_TITLE_ID;
   TextView titleField;
+
+  public final static String IS_SCRIPT = "isScript";
+  public final static String IS_UPDATE = "isUpdate";
+  public final static String IS_BATTLE = "hasBattleSceneValue";
+  public final static String DESCRIPTION = "description";
+  public final static String OLD_NAME = "oldName";
+  public final static String NAME = "name";
+  public final static String ID = "id";
+
+  public final static String TITLE = "title";
 
 
   @Override
@@ -44,29 +50,34 @@ public class CreateNewItemDialog extends AppCompatActivity {
     cancelBtn = findViewById(cancelBtnId);
     cancelBtn.setOnClickListener(createDialogListener);
 
-    nameEditField = findViewById(ameEditFieldId);
-    int isScript = getIntent().getIntExtra("isScript", 0);
+    nameEditField = findViewById(R.id.ITEM_NAME_ID);
+    int isScript = getIntent().getIntExtra(IS_SCRIPT, 0);
+    int isUpdate = getIntent().getIntExtra(IS_UPDATE, 0);
+    if(isUpdate > 0){
+      createBtn.setText(R.string.update);
+    }
+
+    String description = getIntent().getStringExtra(DESCRIPTION);
+    descriptionEditField = findViewById(R.id.ITEM_DESCRIPTION_ID);
+    descriptionEditField.setVisibility(View.VISIBLE);
+    descriptionEditField.setText(description);
 
     if(isScript == 1){
-      String description = getIntent().getStringExtra("description");
-      descriptionEditField = findViewById(descriptionEditFieldId);
-      descriptionEditField.setVisibility(View.VISIBLE);
-      descriptionEditField.setText(description);
 
-      int hasBattleSceneValue = getIntent().getIntExtra("hasBattleSceneValue", 0);
+      int hasBattleSceneValue = getIntent().getIntExtra(IS_BATTLE, 0);
 
-      hasBattleSwitch = findViewById(hasBattleSwitchId);
+      hasBattleSwitch = findViewById(R.id.SCRIPT_HAS_BATTLE_SCENE_ID);
       hasBattleSwitch.setVisibility(View.VISIBLE);
       hasBattleSwitch.setChecked(hasBattleSceneValue == 1);
     }
 
-    int title = getIntent().getIntExtra("title", 0);
-    itemId = getIntent().getIntExtra("id", -1);
+    int title = getIntent().getIntExtra(TITLE, 0);
+    itemId = getIntent().getIntExtra(ID, -1);
 
-    String oldName = getIntent().getStringExtra("oldName");
+    String oldName = getIntent().getStringExtra(OLD_NAME);
 
     if(title != 0){
-      titleField = findViewById(titleFieldId);
+      titleField = findViewById(R.id.CREATE_ITEM_TITLE_ID);
       titleField.setText(title);
     }
 
@@ -79,12 +90,12 @@ public class CreateNewItemDialog extends AppCompatActivity {
     public void onClick(View v) {
       if(v.getId() == createBtnId){
         Intent result = new Intent();
-        result.putExtra("name", nameEditField.getText().toString());
-        result.putExtra("id", itemId);
-        int isScript = getIntent().getIntExtra("isScript", 0);
+        result.putExtra(NAME, nameEditField.getText().toString());
+        result.putExtra(ID, itemId);
+        int isScript = getIntent().getIntExtra(IS_SCRIPT, 0);
+        result.putExtra(DESCRIPTION, descriptionEditField.getText().toString());
         if(isScript == 1) {
-          result.putExtra("hasBattleSceneValue", hasBattleSwitch.isChecked() ? 1 : 0);
-          result.putExtra("description", descriptionEditField.getText().toString());
+          result.putExtra(IS_BATTLE, hasBattleSwitch.isChecked() ? 1 : 0);
         }
         setResult(RESULT_OK, result);
       } else {

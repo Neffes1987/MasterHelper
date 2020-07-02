@@ -57,8 +57,10 @@
   <string name="enemy_damage_title">Повреждение</string>
   <string name="enemy_ordering_title">Инициатива</string>
   <string name="empty_value">0</string>
+
   <string name="create">Создать</string>
   <string name="cancel">Отмена</string>
+  <string name="update">Обновить</string>
 
   <string name="download">Загрузить новый файл</string>
 

@@ -47,7 +47,11 @@ public class JourneyItemView extends AppCompatActivity implements ICommonItemEve
 
     createNewSceneBtn = findViewById(R.id.CREATE_NEW_SCENE_BTN_ID);
     createNewSceneBtn.setOnClickListener(v -> onCreateButtonPressed());
+  }
 
+  @Override
+  protected void onStart() {
+    super.onStart();
     updateScenesList();
   }
 
@@ -65,7 +69,7 @@ public class JourneyItemView extends AppCompatActivity implements ICommonItemEve
   /** вызвать диалог создания сцены */
   public void onCreateButtonPressed() {
     Intent intent = new Intent(this, CreateNewItemDialog.class);
-    intent.putExtra("title", R.string.scene_create_title);
+    intent.putExtra(CreateNewItemDialog.TITLE, R.string.scene_create_title);
     startActivityForResult(intent, 1);
   }
 
@@ -74,32 +78,45 @@ public class JourneyItemView extends AppCompatActivity implements ICommonItemEve
     SceneRecycleDataModel scene = sceneDBAdapter.getSceneById(id);
     if(scene != null){
       Intent intent = new Intent(this, CreateNewItemDialog.class);
-      intent.putExtra("title", R.string.screen_name_scene_update);
-      intent.putExtra("id", id);
-      intent.putExtra("oldName", scene.getTitle());
+      intent.putExtra(CreateNewItemDialog.TITLE, R.string.screen_name_scene_update);
+      intent.putExtra(CreateNewItemDialog.IS_UPDATE, 1);
+      intent.putExtra(CreateNewItemDialog.ID, id);
+      intent.putExtra(CreateNewItemDialog.OLD_NAME, scene.getTitle());
+      intent.putExtra(CreateNewItemDialog.DESCRIPTION, scene.getDescription());
       startActivityForResult(intent, 2);
     }
   }
 
-  /** метод обработки результата от от диалогов создания и редактирования сцен */
+  /** метод обработки результата от диалогов создания и редактирования сцен */
   @Override
   protected void onActivityResult(int requestCode, int resultCode, Intent result) {
     super.onActivityResult(requestCode, resultCode, result);
     if(resultCode != RESULT_OK){
       return;
     }
-    String newName = result.getStringExtra("name");
-    int id = result.getIntExtra("id", 0);
+    String newName = result.getStringExtra(CreateNewItemDialog.NAME);
+    String newDescription = result.getStringExtra(CreateNewItemDialog.DESCRIPTION);
+
+    int id = result.getIntExtra(CreateNewItemDialog.ID, 0);
     if(newName != null && newName.trim().length() == 0){
       return;
     }
-    SceneRecycleDataModel item = new SceneRecycleDataModel(newName);
+    SceneRecycleDataModel scene;
+    if(id > 0) {
+      scene = sceneDBAdapter.getSceneById(id);
+
+    } else {
+      scene = new SceneRecycleDataModel(newName);
+    }
+    scene.setTitle(newName);
+    scene.setDescription(newDescription);
+
     switch (requestCode){
       case 1:
-        sceneDBAdapter.addNewScene(item, journeyDBAdapter.getJourneyId());
+        sceneDBAdapter.addNewScene(scene, journeyDBAdapter.getJourneyId());
         break;
       case 2:
-        sceneDBAdapter.updateScene(item, id);
+        sceneDBAdapter.updateScene(scene, id);
         break;
     }
     updateScenesList();

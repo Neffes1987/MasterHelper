@@ -4,23 +4,34 @@ import android.content.Context;
 import android.database.Cursor;
 import com.example.masterhelper.data.DbHelpers;
 import com.example.masterhelper.data.contracts.SceneContract;
+import com.example.masterhelper.data.contracts.ScriptsContract;
 import com.example.masterhelper.models.SceneRecycleDataModel;
+import com.example.masterhelper.models.ScriptRecycleDataModel;
+import com.example.masterhelper.ui.scripts.ScriptDBAdapter;
 
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 
 public class SceneDBAdapter {
   /** хелпер для работы с базой */
   private DbHelpers dbHelpers;
+  private ScriptDBAdapter scriptDBAdapter;
 
   /** конструктор */
   public SceneDBAdapter(Context context){
     dbHelpers = new DbHelpers(context);
+    scriptDBAdapter = new ScriptDBAdapter(context);
   }
+
+
 
   /** получить список сцен для текущего путешествия */
   public LinkedHashMap<Integer, SceneRecycleDataModel> getScenesList(int journeyId){
     String sqlQuery = SceneContract.getListQuery(SceneContract.TABLE_NAME, null, SceneContract.COLUMN_JOURNEY_ID+"="+ journeyId, SceneContract._ID + " DESC", 0);
+
     LinkedHashMap<Integer, SceneRecycleDataModel> result = new LinkedHashMap<>();
+
+
     Cursor queryResult = dbHelpers.getList(sqlQuery);
 
     while (queryResult.moveToNext()) {
@@ -28,14 +39,22 @@ public class SceneDBAdapter {
       int titleColumnIndex = queryResult.getColumnIndex(SceneContract.COLUMN_TITLE);
       int descriptionColumnIndex = queryResult.getColumnIndex(SceneContract.COLUMN_DESCRIPTION);
       int idColumnIndex = queryResult.getColumnIndex(SceneContract._ID);
+      int sceneId = queryResult.getInt(idColumnIndex);
+
+      LinkedHashMap<Integer, ScriptRecycleDataModel> scripts = scriptDBAdapter.getScriptsList(sceneId);
+      int finishedCounter = 0;
+      for (ScriptRecycleDataModel script: scripts.values() ) {
+        if(script.isFinished){
+          finishedCounter+=1;
+        }
+      };
 
       SceneRecycleDataModel sceneRecycleDataModel = new SceneRecycleDataModel(
         queryResult.getString(titleColumnIndex),
-        queryResult.getInt(idColumnIndex),
+        sceneId,
         queryResult.getString(descriptionColumnIndex),
-        0,
-        0,
-        false,
+        finishedCounter,
+        scripts.size(),
         false
       );
       result.put(sceneRecycleDataModel.getId(), sceneRecycleDataModel);
@@ -61,7 +80,6 @@ public class SceneDBAdapter {
         queryResult.getString(descriptionColumnIndex),
         0,
         0,
-        false,
         false
       );
     }

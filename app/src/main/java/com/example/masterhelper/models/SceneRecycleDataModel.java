@@ -21,9 +21,6 @@ public class SceneRecycleDataModel {
   /** флаг, что таб открыт */
   public boolean isExpand;
 
-  /** флаг, что музыкальное сопровохжение включено */
-  public boolean isMusicStarted;
-
   /** уникальный ид закиси */
   public int id;
 
@@ -34,17 +31,15 @@ public class SceneRecycleDataModel {
     setTitle(title);
     setDescription("");
     setExpand(false);
-    setMusicStarted(false);
     setId(0);
     setScriptsFinished(0);
     setScriptsTotal(0);
   }
 
-  public SceneRecycleDataModel(String title, int id,  String description, int scriptsFinished, int scriptsTotal, boolean isExpand, boolean isMusicStarted ){
+  public SceneRecycleDataModel(String title, int id,  String description, int scriptsFinished, int scriptsTotal, boolean isExpand ){
     setTitle(title);
     setDescription(description);
     setExpand(isExpand);
-    setMusicStarted(isMusicStarted);
     setId(id);
     setScriptsFinished(scriptsFinished);
     setScriptsTotal(scriptsTotal);
@@ -64,10 +59,6 @@ public class SceneRecycleDataModel {
 
   public void setExpand(boolean expand) {
     isExpand = expand;
-  }
-
-  public void setMusicStarted(boolean musicStarted) {
-    isMusicStarted = musicStarted;
   }
 
   public void setScriptsFinished(int scriptsFinished) {

@@ -22,6 +22,9 @@ public class ScriptItem<Model> extends CommonItem<Model>{
   /** блок тела аккордиона, чтобы сворачивать разворачицвать его */
   private LinearLayout body;
 
+  /** блок шапки аккордиона */
+  private LinearLayout titleBar;
+
   /** виджет прогресса по сцене, виден всегда */
   private ImageView hasBattleActionIcon;
 
@@ -40,11 +43,8 @@ public class ScriptItem<Model> extends CommonItem<Model>{
   /** кнопка удаления сцены */
   public AppCompatImageButton deleteBtn;
 
-  /** кнопка перемещения сцены выше по списку */
-  public AppCompatImageButton upOrderBtn;
-
-  /** кнопка перемещения сцены ниже по списку */
-  public AppCompatImageButton downOrderBtn;
+  /** кнопка удаления сцены */
+  public AppCompatImageButton doneBtn;
 
   /** установить название сцены в виджет
    * @param title - имя сцены
@@ -75,7 +75,9 @@ public class ScriptItem<Model> extends CommonItem<Model>{
    * - scriptsTotal - сколько всего скриптов в сцене
    * */
   private void setSceneIsDone(ScriptRecycleDataModel item) {
-    this.isFinishedIcon.setVisibility(item.isFinished ? View.VISIBLE : View.GONE);
+    boolean isFinished = item.isFinished;
+    this.isFinishedIcon.setVisibility(isFinished ? View.VISIBLE : View.GONE);
+    titleBar.setBackgroundResource(!isFinished ? R.color.colorPrimary : R.color.colorPrimaryDark);
   }
 
   /** инициализировать все поля холдера данными, а так же назначить порядковый номер сцены в списке
@@ -96,6 +98,8 @@ public class ScriptItem<Model> extends CommonItem<Model>{
     super(v, adapter);
 
     title = v.findViewById(R.id.SCRIPT_TITLE_ID);
+    titleBar = v.findViewById(R.id.SCRIPT_TITLE_BAR_ID);
+
     description = v.findViewById(R.id.SCRIPT_DESCRIPTION_ID);
 
     body = v.findViewById(R.id.ACCORDION_SCRIPT_BODY_ID);
@@ -112,11 +116,8 @@ public class ScriptItem<Model> extends CommonItem<Model>{
     deleteBtn = v.findViewById(R.id.SCRIPT_DELETE_BTN_ID);
     deleteBtn.setOnClickListener(commonListener);
 
-    upOrderBtn = v.findViewById(R.id.SCRIPT_UP_ORDER_BTN_ID);
-    upOrderBtn.setOnClickListener(commonListener);
-
-    downOrderBtn = v.findViewById(R.id.SCRIPT_DOWN_ORDER_BTN_ID);
-    downOrderBtn.setOnClickListener(commonListener);
+    doneBtn = v.findViewById(R.id.SCRIPT_BTN_DONE_ID);
+    doneBtn.setOnClickListener(commonListener);
 
     hasBattleActionIcon = v.findViewById(R.id.SCRIPT_HAS_BATTLE_ACTION_ICON_ID);
 

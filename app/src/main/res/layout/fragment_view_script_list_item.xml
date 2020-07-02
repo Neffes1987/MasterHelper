@@ -23,7 +23,8 @@
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
         style="@style/ConstraintLayoutPaddingStyled"
-        android:gravity="center_vertical">
+        android:gravity="center_vertical"
+        android:id="@+id/SCRIPT_TITLE_BAR_ID">
 
         <TextView
           android:text="@string/name"
@@ -60,14 +61,6 @@
         style="@style/ConstraintLayoutPaddingStyled"
         android:id="@+id/ACCORDION_SCRIPT_BODY_ID"
         android:visibility="visible">
-
-        <TextView
-          android:text="@string/scene_description"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:id="@+id/SCRIPT_DESCRIPTION_ID"
-          style="@style/rowStyled"
-          tools:text="@string/script_description"/>
 
         <LinearLayout
           android:orientation="horizontal"
@@ -130,15 +123,8 @@
           <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:srcCompat="@mipmap/baseline_keyboard_arrow_down_black_18dp"
-            android:id="@+id/SCRIPT_DOWN_ORDER_BTN_ID"
-            android:layout_weight="1"/>
-
-          <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@mipmap/baseline_keyboard_arrow_up_black_18dp"
-            android:id="@+id/SCRIPT_UP_ORDER_BTN_ID"
+            app:srcCompat="@mipmap/baseline_done_black_18dp"
+            android:id="@+id/SCRIPT_BTN_DONE_ID"
             android:layout_weight="1"/>
 
           <ImageButton
@@ -148,6 +134,14 @@
             android:id="@+id/SCRIPT_DELETE_BTN_ID"
             android:layout_weight="1"/>
         </LinearLayout>
+
+        <TextView
+          android:text="@string/scene_description"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:id="@+id/SCRIPT_DESCRIPTION_ID"
+          style="@style/rowStyled"
+          tools:text="@string/script_description"/>
 
       </LinearLayout>
 
