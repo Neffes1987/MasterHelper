@@ -46,6 +46,7 @@ public class CreateNewItemDialog extends AppCompatActivity {
 
     nameEditField = findViewById(ameEditFieldId);
     int isScript = getIntent().getIntExtra("isScript", 0);
+
     if(isScript == 1){
       String description = getIntent().getStringExtra("description");
       descriptionEditField = findViewById(descriptionEditFieldId);
@@ -53,9 +54,10 @@ public class CreateNewItemDialog extends AppCompatActivity {
       descriptionEditField.setText(description);
 
       int hasBattleSceneValue = getIntent().getIntExtra("hasBattleSceneValue", 0);
+
       hasBattleSwitch = findViewById(hasBattleSwitchId);
       hasBattleSwitch.setVisibility(View.VISIBLE);
-      hasBattleSwitch.setSelected(hasBattleSceneValue == 1);
+      hasBattleSwitch.setChecked(hasBattleSceneValue == 1);
     }
 
     int title = getIntent().getIntExtra("title", 0);
@@ -75,15 +77,19 @@ public class CreateNewItemDialog extends AppCompatActivity {
   View.OnClickListener createDialogListener = new View.OnClickListener() {
     @Override
     public void onClick(View v) {
-      Intent result = new Intent();
-      result.putExtra("name", nameEditField.getText().toString());
-      result.putExtra("id", itemId);
-      int isScript = getIntent().getIntExtra("isScript", 0);
-      if(isScript == 1) {
-        result.putExtra("hasBattleSceneValue", hasBattleSwitch.isChecked() ? 1 : 0);
-        result.putExtra("description", descriptionEditField.getText().toString());
+      if(v.getId() == createBtnId){
+        Intent result = new Intent();
+        result.putExtra("name", nameEditField.getText().toString());
+        result.putExtra("id", itemId);
+        int isScript = getIntent().getIntExtra("isScript", 0);
+        if(isScript == 1) {
+          result.putExtra("hasBattleSceneValue", hasBattleSwitch.isChecked() ? 1 : 0);
+          result.putExtra("description", descriptionEditField.getText().toString());
+        }
+        setResult(RESULT_OK, result);
+      } else {
+        setResult(RESULT_CANCELED);
       }
-      setResult(RESULT_OK, result);
       finish();
     }
   };

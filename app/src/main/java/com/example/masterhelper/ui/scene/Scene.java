@@ -1,6 +1,7 @@
 package com.example.masterhelper.ui.scene;
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
@@ -69,7 +70,7 @@ public class Scene extends AppCompatActivity implements ICommonItemEvents {
   public void onUpdateScriptNameButtonPressed(int id) {
     ScriptRecycleDataModel scriptRecycleDataModel = scriptsList.get(id);
     Intent intent = new Intent(this, CreateNewItemDialog.class);
-    intent.putExtra("title", R.string.screen_name_scene_update);
+    intent.putExtra("title", R.string.script_update_title);
     intent.putExtra("id", id);
     if(scriptRecycleDataModel != null){
       intent.putExtra("oldName", scriptRecycleDataModel.getTitle());

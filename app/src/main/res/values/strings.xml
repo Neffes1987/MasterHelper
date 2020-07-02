@@ -35,9 +35,10 @@
   <string name="script">Событие сцены</string>
   <string name="script_name">Имя события</string>
   <string name="script_description">Описание события</string>
-  <string name="script_has_battle">Есть боевое взаиможействие</string>
+  <string name="script_has_battle">Есть боевое взаимодействие</string>
   <string name="script_start">Старт события</string>
   <string name="script_create_title">Создать событие сцены</string>
+  <string name="script_update_title">Изменить событие сцены</string>
 
   <string name="script_enemy_icon">Иконка врага</string>
 
