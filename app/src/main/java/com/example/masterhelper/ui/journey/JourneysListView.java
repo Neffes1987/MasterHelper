@@ -1,9 +1,12 @@
 package com.example.masterhelper.ui.journey;
 
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.Toast;
 import com.example.masterhelper.CreateNewItemDialog;
+import com.example.masterhelper.DialogPopup;
 import com.example.masterhelper.ui.app.settings.AbilityNamesList;
 import com.example.masterhelper.ui.app.settings.MusicSettingsScreen;
 import com.example.masterhelper.R;
@@ -21,6 +24,8 @@ import com.example.masterhelper.ui.popupMenu.PopupMenuEvents;
 
 import java.util.LinkedHashMap;
 import java.util.Objects;
+
+import static android.content.DialogInterface.BUTTON_POSITIVE;
 
 public class JourneysListView extends AppCompatActivity implements ICommonItemEvents, IAppBarFragment, PopupMenuEvents {
   /** ид выбранного путешествия */
@@ -153,18 +158,28 @@ public class JourneysListView extends AppCompatActivity implements ICommonItemEv
     }
   }
 
+  private void deleteJourney(){
+    journeyDBAdapter.deleteJourney(selectedJourneyId);
+    selectedJourneyId = -1;
+    updateJourneysList();
+  }
+
   /** обработчик выбора пункта меню путешествия*/
   @Override
   public void onPopupMenuSelected(MenuItem selectedMenuItem) {
     switch (selectedMenuItem.getItemId()){
       case R.id.POPUP_MENU_DELETE_ID:
-        journeyDBAdapter.deleteJourney(selectedJourneyId);
-        updateJourneysList();
+        DialogPopup dialogPopup = new DialogPopup(getSupportFragmentManager());
+        dialogPopup.setClickListener((dialogInterface, id) -> {
+          if(id == BUTTON_POSITIVE){
+            deleteJourney();
+          }
+        });
+        dialogPopup.show();
         break;
       case R.id.POPUP_MENU_UPDATE_ID:
         onUpdateJourneyButtonPressed(selectedJourneyId);
         break;
     }
-    selectedJourneyId = -1;
   }
 }

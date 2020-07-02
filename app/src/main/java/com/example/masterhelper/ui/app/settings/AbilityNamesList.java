@@ -8,6 +8,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.fragment.app.FragmentManager;
+import com.example.masterhelper.DialogPopup;
 import com.example.masterhelper.R;
 import com.example.masterhelper.commonAdapter.item.ICommonItemEvents;
 import com.example.masterhelper.models.AbilityModel;
@@ -15,6 +16,8 @@ import com.example.masterhelper.ui.recyclerViewFragment.RecyclerViewFragment;
 import com.example.masterhelper.ui.viewCharacteristicRow.AbilityDBAdapter;
 
 import java.util.LinkedHashMap;
+
+import static android.content.DialogInterface.BUTTON_POSITIVE;
 
 public class AbilityNamesList extends AppCompatActivity implements ICommonItemEvents {
   FragmentManager fragmentManager;
@@ -76,7 +79,13 @@ public class AbilityNamesList extends AppCompatActivity implements ICommonItemEv
   public void onClick(View elementFiredAction, int position) {
     AbilityModel row = (AbilityModel) abilities.values().toArray()[position];
     if(row != null && elementFiredAction.getId() == R.id.JOURNEY_EDIT_ID ){
-      deleteRow(row.getId());
+      DialogPopup dialogPopup = new DialogPopup(getSupportFragmentManager());
+      dialogPopup.setClickListener((dialogInterface, id) -> {
+        if(id == BUTTON_POSITIVE){
+          deleteRow(row.getId());
+        }
+      });
+      dialogPopup.show();
     }
   }
 }

@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.fragment.app.FragmentManager;
 import com.example.masterhelper.CreateNewItemDialog;
+import com.example.masterhelper.DialogPopup;
 import com.example.masterhelper.R;
 import com.example.masterhelper.ui.enemies.EnemiesListView;
 import com.example.masterhelper.ui.scripts.ScriptTextDescriptionScreen;
@@ -19,6 +20,8 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.LinkedHashMap;
 import java.util.Objects;
+
+import static android.content.DialogInterface.BUTTON_POSITIVE;
 
 public class Scene extends AppCompatActivity implements ICommonItemEvents {
   /** хелпер для работы с таблицей скриптов в бд */
@@ -146,8 +149,14 @@ public class Scene extends AppCompatActivity implements ICommonItemEvents {
         onUpdateScriptNameButtonPressed(currId);
         break;
       case R.id.SCRIPT_DELETE_BTN_ID:
-        scriptDBAdapter.deleteScript(currentData.getId());
-        setListData();
+        DialogPopup dialogPopup = new DialogPopup(getSupportFragmentManager());
+        dialogPopup.setClickListener((dialogInterface, id) -> {
+          if(id == BUTTON_POSITIVE){
+            scriptDBAdapter.deleteScript(currentData.getId());
+            setListData();
+          }
+        });
+        dialogPopup.show();
         break;
       case R.id.SCRIPT_BTN_DONE_ID:
         boolean isFinished = !currentData.isFinished;

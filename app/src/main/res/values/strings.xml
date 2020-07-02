@@ -60,7 +60,11 @@
 
   <string name="create">Создать</string>
   <string name="cancel">Отмена</string>
+  <string name="accept">Согласен</string>
   <string name="update">Обновить</string>
+
+
+  <string name="delete_dialog_caption">Удалить выбранный элемент?</string>
 
   <string name="download">Загрузить новый файл</string>
 

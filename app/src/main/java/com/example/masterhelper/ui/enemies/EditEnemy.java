@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import com.example.masterhelper.DialogPopup;
 import com.example.masterhelper.ListItemsDialog;
 import com.example.masterhelper.R;
 import com.example.masterhelper.models.ACHIEVE_CONST_TAGS;
@@ -19,6 +20,8 @@ import com.example.masterhelper.ui.viewCharacteristicRow.AbilityDBAdapter;
 import com.example.masterhelper.ui.viewCharacteristicRow.ViewCharacteristicRow;
  
 import java.util.LinkedHashMap;
+
+import static android.content.DialogInterface.BUTTON_POSITIVE;
 
 public class EditEnemy extends AppCompatActivity implements ViewCharacteristicRow.IViewCharacteristicRow, EnemyBottomButtonsFragment.IScriptBottomButtonsFragment, ListItemsDialog.IButtonsEvents {
   /** редактировать имя врага */
@@ -197,12 +200,10 @@ public class EditEnemy extends AppCompatActivity implements ViewCharacteristicRo
 
   private void showAbilitiesPopup(){
     LinkedHashMap<Integer, AbilityModel> abilitiesForPopup = abilities.getAbilitiesListView();
-    Log.i("TAG", "showAbilitiesPopup: " + abilitiesForPopup);
     if(abilitiesForPopup.size() == 0){
       Toast.makeText(this, "Нет доступных характеристик", Toast.LENGTH_LONG).show();
       return;
     }
-
     String[] abilitiesNames = new String[abilitiesForPopup.size()];
 
     int valueIdx = 0;
@@ -212,7 +213,6 @@ public class EditEnemy extends AppCompatActivity implements ViewCharacteristicRo
     }
 
     ListItemsDialog myDialogFragment = new ListItemsDialog(abilitiesNames, "Список характеристик");
-
     FragmentTransaction transaction = fragmentManager.beginTransaction();
     myDialogFragment.show(transaction, "dialog");
   }
@@ -224,7 +224,13 @@ public class EditEnemy extends AppCompatActivity implements ViewCharacteristicRo
         saveNewPerson();
         break;
       case delete:
-        deletePerson();
+        DialogPopup dialogPopup = new DialogPopup(getSupportFragmentManager());
+        dialogPopup.setClickListener((dialogInterface, id) -> {
+          if(id == BUTTON_POSITIVE){
+            deletePerson();
+          }
+        });
+        dialogPopup.show();
         break;
     }
   }

@@ -2,6 +2,7 @@ package com.example.masterhelper.ui.journey;
 
 import android.view.View;
 import com.example.masterhelper.CreateNewItemDialog;
+import com.example.masterhelper.DialogPopup;
 import com.example.masterhelper.R;
 import com.example.masterhelper.ui.scene.Scene;
 import com.example.masterhelper.commonAdapter.item.ICommonItemEvents;
@@ -15,6 +16,8 @@ import com.example.masterhelper.ui.scene.SceneDBAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.LinkedHashMap;
 import java.util.Objects;
+
+import static android.content.DialogInterface.BUTTON_POSITIVE;
 
 
 public class JourneyItemView extends AppCompatActivity implements ICommonItemEvents {
@@ -135,8 +138,15 @@ public class JourneyItemView extends AppCompatActivity implements ICommonItemEve
         startActivity(intent);
         break;
       case R.id.SCENE_DELETE_BTN_ID:
-        sceneDBAdapter.deleteScene(currentData.getId());
-        updateScenesList();
+        DialogPopup dialogPopup = new DialogPopup(getSupportFragmentManager());
+        dialogPopup.setClickListener((dialogInterface, id) -> {
+          if(id == BUTTON_POSITIVE){
+            sceneDBAdapter.deleteScene(currentData.getId());
+            updateScenesList();
+          }
+        });
+        dialogPopup.show();
+
         break;
       case R.id.SCENE_EDIT_BTN_ID:
           onUpdateScreenNameButtonPressed(currentData.getId());
