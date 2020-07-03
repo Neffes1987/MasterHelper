@@ -22,7 +22,7 @@ public class DbHelpers extends SQLiteOpenHelper {
   /**
    * Версия базы данных. При изменении схемы увеличить на единицу
    */
-  private static final int DATABASE_VERSION = 25;
+  private static final int DATABASE_VERSION = 26;
 
   SQLiteDatabase db;
 

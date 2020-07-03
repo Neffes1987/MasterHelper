@@ -11,6 +11,8 @@ public class ScriptsContract extends GeneralContract implements IContract<Script
   public final static  String COLUMN_HAS_BATTLE_EVENT = "hasBattleActionIcon";
   public final static  String COLUMN_IS_FINISHED = "isFinished";
 
+  public final static String COLUMN_SCENE_REF_PROPS = "FOREIGN KEY ("+COLUMN_SCENE_ID+") REFERENCES " + SceneContract.TABLE_NAME + "("+SceneContract._ID+") ON DELETE CASCADE";
+
   private final static  String COLUMN_TITLE_PROPS = COLUMN_TITLE + " TEXT NOT NULL";
   private final static  String COLUMN_DESCRIPTION_PROPS = COLUMN_DESCRIPTION + " TEXT NOT NULL";
   private final static  String COLUMN_SCENE_ID_PROPS = COLUMN_SCENE_ID + " INTEGER";
@@ -22,7 +24,8 @@ public class ScriptsContract extends GeneralContract implements IContract<Script
     COLUMN_DESCRIPTION_PROPS,
     COLUMN_HAS_BATTLE_EVENT_PROPS,
     COLUMN_IS_FINISHED_PROPS,
-    COLUMN_SCENE_ID_PROPS
+    COLUMN_SCENE_ID_PROPS,
+    COLUMN_SCENE_REF_PROPS
   };
 
   public static  String[] UPDATE_COLUMNS_PROPS = {

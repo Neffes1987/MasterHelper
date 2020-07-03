@@ -12,6 +12,9 @@ public class EnemyContract extends GeneralContract implements IContract<EnemyMod
   public final static  String COLUMN_CURRENT_ORDERING = "ordering";
   public final static  String COLUMN_SCRIPT_ID = "scriptId";
 
+  public final static String COLUMN_SCRIPT_REF_PROPS = "FOREIGN KEY ("+COLUMN_SCRIPT_ID+") REFERENCES " + ScriptsContract.TABLE_NAME + "("+ScriptsContract._ID+") ON DELETE CASCADE";
+
+
   private final static  String COLUMN_TITLE_PROPS = COLUMN_TITLE + " TEXT NOT NULL";
   private final static  String COLUMN_DESCRIPTION_PROPS = COLUMN_DESCRIPTION + " TEXT NOT NULL";
   private final static  String COLUMN_TOTAL_HEALTH_PROPS = COLUMN_TOTAL_HEALTH + " INTEGER NOT NULL";
@@ -25,7 +28,8 @@ public class EnemyContract extends GeneralContract implements IContract<EnemyMod
     COLUMN_TOTAL_HEALTH_PROPS,
     COLUMN_CURRENT_HEALTH_PROPS,
     COLUMN_CURRENT_ORDERING_PROPS,
-    COLUMN_SCRIPT_ID_PROPS
+    COLUMN_SCRIPT_ID_PROPS,
+    COLUMN_SCRIPT_REF_PROPS
   };
 
   public static  String[] UPDATE_COLUMNS_PROPS = {

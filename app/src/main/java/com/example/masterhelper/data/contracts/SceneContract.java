@@ -9,6 +9,8 @@ public class SceneContract extends GeneralContract implements IContract<SceneRec
   public final static String COLUMN_DESCRIPTION = "description";
   public final static String COLUMN_JOURNEY_ID = "journeyId";
 
+  public final static String COLUMN_JOURNEY_REF_PROPS = "FOREIGN KEY ("+COLUMN_JOURNEY_ID+") REFERENCES " + JourneysContract.TABLE_NAME + "("+JourneysContract._ID+") ON DELETE CASCADE";
+
   private final static String COLUMN_TITLE_PROPS = COLUMN_TITLE + " TEXT NOT NULL";
   private final static String COLUMN_DESCRIPTION_PROPS = COLUMN_DESCRIPTION + " TEXT NOT NULL";
   private final static String COLUMN_JOURNEY_ID_PROPS = COLUMN_JOURNEY_ID + " INTEGER";
@@ -16,7 +18,8 @@ public class SceneContract extends GeneralContract implements IContract<SceneRec
   public static String[] CREATE_TABLE_COLUMNS = {
     COLUMN_TITLE_PROPS,
     COLUMN_DESCRIPTION_PROPS,
-    COLUMN_JOURNEY_ID_PROPS
+    COLUMN_JOURNEY_ID_PROPS,
+    COLUMN_JOURNEY_REF_PROPS
   };
 
   public static String[] UPDATE_COLUMNS_PROPS = {
