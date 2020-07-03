@@ -2,6 +2,7 @@ package com.example.masterhelper.ui.scene;
 
 import android.content.Intent;
 import android.view.View;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.fragment.app.FragmentManager;
@@ -46,12 +47,16 @@ public class Scene extends AppCompatActivity implements ICommonItemEvents {
       startActivityForResult(intent, 1);
     });
 
-    String title = getIntent().getStringExtra("sceneName");
+    String journeyName = getIntent().getStringExtra("journeyName");
+    String sceneName = getIntent().getStringExtra("sceneName");
     sceneId = getIntent().getIntExtra("sceneId", 0);
 
     scriptDBAdapter  = new ScriptDBAdapter(this);
-    // получаем указатель на тулбар активированного в главном компоненте
-    Objects.requireNonNull(getSupportActionBar()).setTitle(title);
+    ActionBar bar = getSupportActionBar();
+    if(bar != null){
+      bar.setSubtitle(journeyName);
+      bar.setTitle(sceneName);
+    }
   }
 
 

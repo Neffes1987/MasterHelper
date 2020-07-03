@@ -2,6 +2,7 @@ package com.example.masterhelper.ui.appBarFragment;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.*;
 import androidx.fragment.app.Fragment;
 import com.example.masterhelper.R;
@@ -15,9 +16,6 @@ public class AppBarFragment extends Fragment {
   /** выпадающее меню  */
   int mainMenuMenu = R.menu.menu_main;
 
-  /** кнопка настройки */
-  int settingsButtonId = R.id.ACTION_SETTINGS;
-
   IAppBarFragment mListener;
 
   public AppBarFragment() {
@@ -28,7 +26,6 @@ public class AppBarFragment extends Fragment {
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setHasOptionsMenu(true);
-
   }
 
   @Override
@@ -38,6 +35,7 @@ public class AppBarFragment extends Fragment {
 
   public void onCreateOptionsMenu(Menu menu, MenuInflater inflater){
     inflater.inflate(mainMenuMenu, menu);
+    super.onCreateOptionsMenu(menu, inflater);
   }
 
   @Override
