@@ -3,6 +3,7 @@ package com.example.masterhelper.ui.enemies;
 import android.content.Context;
 import android.database.Cursor;
 import com.example.masterhelper.data.DbHelpers;
+import com.example.masterhelper.data.contracts.EnemyAbilitiesContract;
 import com.example.masterhelper.data.contracts.EnemyContract;
 import com.example.masterhelper.models.EnemyModel;
 

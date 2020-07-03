@@ -10,13 +10,18 @@ public class EnemyAbilitiesContract extends GeneralContract implements IContract
   public final static String COLUMN_ABILITY_ID = "abilityId";
   public final static String COLUMN_ABILITY_VALUE = "abilityValue";
 
+  public final static String COLUMN_ENEMY_REF_PROPS = "FOREIGN KEY ("+COLUMN_ENEMY_ID+") REFERENCES " + EnemyContract.TABLE_NAME + "("+EnemyContract._ID+") ON DELETE CASCADE";
+
   private final static String COLUMN_SCRIPT_ID_PROPS = COLUMN_ENEMY_ID + " INTEGER NOT NULL";
   private final static String COLUMN_ABILITY_ID_PROPS = COLUMN_ABILITY_ID + " INTEGER NOT NULL";
   private final static String COLUMN_ABILITY_VALUE_PROPS = COLUMN_ABILITY_VALUE + " INTEGER NOT NULL";
+
+
   public static String[] CREATE_TABLE_COLUMNS = {
     COLUMN_SCRIPT_ID_PROPS,
     COLUMN_ABILITY_ID_PROPS,
-    COLUMN_ABILITY_VALUE_PROPS
+    COLUMN_ABILITY_VALUE_PROPS,
+    COLUMN_ENEMY_REF_PROPS
   };
 
   public static String[] UPDATE_COLUMNS_PROPS = {

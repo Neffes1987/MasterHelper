@@ -22,7 +22,7 @@ public class DbHelpers extends SQLiteOpenHelper {
   /**
    * Версия базы данных. При изменении схемы увеличить на единицу
    */
-  private static final int DATABASE_VERSION = 19;
+  private static final int DATABASE_VERSION = 25;
 
   SQLiteDatabase db;
 
@@ -90,6 +90,15 @@ public class DbHelpers extends SQLiteOpenHelper {
     generateAbilitiesTable();
     generateScriptSettingsTable();
     generateEnemyAbilitiesTable();
+  }
+
+  @Override
+  public void onOpen(SQLiteDatabase db) {
+    super.onOpen(db);
+    if (!db.isReadOnly()) {
+      // Enable foreign key constraints
+      db.execSQL("PRAGMA foreign_keys=ON;");
+    }
   }
 
   /**

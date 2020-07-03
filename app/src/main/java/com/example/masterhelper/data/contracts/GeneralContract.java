@@ -113,7 +113,7 @@ public class GeneralContract implements BaseColumns {
         result.append(",");
       }
     }
-    return "CREATE TABLE " + TableName + " (" +result.toString() + ");";
+    return "CREATE TABLE " + TableName + " (" +result.toString() + ")";
   }
 
   /** удалить запись в таблице */
