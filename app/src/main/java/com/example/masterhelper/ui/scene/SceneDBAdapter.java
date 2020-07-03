@@ -43,6 +43,7 @@ public class SceneDBAdapter {
       LinkedHashMap<Integer, ScriptRecycleDataModel> scripts = scriptDBAdapter.getScriptsList(sceneId);
       int finishedCounter = 0;
       StringBuilder goals = new StringBuilder();
+
       for (ScriptRecycleDataModel script: scripts.values() ) {
         boolean isFinished = script.isFinished;
         if(isFinished){
@@ -57,14 +58,14 @@ public class SceneDBAdapter {
       };
 
       StringBuilder description =  new StringBuilder();
-
-      description.append(queryResult.getString(descriptionColumnIndex))
-        .append("\r\n").append("\r\n")
-        .append("Цели: ")
-        .append("\r\n")
-        .append(goals);
-
-
+      description.append(queryResult.getString(descriptionColumnIndex));
+      if(goals.length() > 0){
+        description
+          .append("\r\n").append("\r\n")
+          .append("Цели: ")
+          .append("\r\n")
+          .append(goals);
+      }
       SceneRecycleDataModel sceneRecycleDataModel = new SceneRecycleDataModel(
         queryResult.getString(titleColumnIndex),
         sceneId,

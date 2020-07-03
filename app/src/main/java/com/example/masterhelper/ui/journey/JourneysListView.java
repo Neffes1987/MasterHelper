@@ -1,10 +1,8 @@
 package com.example.masterhelper.ui.journey;
 
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
-import android.widget.Toast;
 import com.example.masterhelper.CreateNewItemDialog;
 import com.example.masterhelper.DialogPopup;
 import com.example.masterhelper.ui.app.settings.AbilityNamesList;
@@ -64,16 +62,19 @@ public class JourneysListView extends AppCompatActivity implements ICommonItemEv
   /** вызвать диалог создания новго путешествия */
   public void onCreateJourneyButtonPressed() {
     Intent intent = new Intent(JourneysListView.this, CreateNewItemDialog.class);
-    intent.putExtra("title", R.string.journey_create_title);
+    intent.putExtra(CreateNewItemDialog.TITLE, R.string.journey_create_title);
+    intent.putExtra(CreateNewItemDialog.HIDE_DESCRIPTION, 1);
     startActivityForResult(intent, 1);
   }
 
   /** вызвать диалог редактирования нового путешествия */
   public void onUpdateJourneyButtonPressed(int id) {
     Intent intent = new Intent(JourneysListView.this, CreateNewItemDialog.class);
-    intent.putExtra("title", R.string.journey_update_title);
-    intent.putExtra("id", id);
-    intent.putExtra("oldName", Objects.requireNonNull(journeys.get(id)).getTitle());
+    intent.putExtra(CreateNewItemDialog.HIDE_DESCRIPTION, 1);
+    intent.putExtra(CreateNewItemDialog.TITLE, R.string.journey_update_title);
+    intent.putExtra(CreateNewItemDialog.IS_UPDATE, 1);
+    intent.putExtra(CreateNewItemDialog.ID, id);
+    intent.putExtra(CreateNewItemDialog.OLD_NAME, Objects.requireNonNull(journeys.get(id)).getTitle());
     startActivityForResult(intent, 2);
   }
 

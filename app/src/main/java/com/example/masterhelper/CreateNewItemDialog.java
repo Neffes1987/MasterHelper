@@ -32,6 +32,7 @@ public class CreateNewItemDialog extends AppCompatActivity {
   public final static String IS_UPDATE = "isUpdate";
   public final static String IS_BATTLE = "hasBattleSceneValue";
   public final static String DESCRIPTION = "description";
+  public final static String HIDE_DESCRIPTION = "hideDescription";
   public final static String OLD_NAME = "oldName";
   public final static String NAME = "name";
   public final static String ID = "id";
@@ -52,15 +53,17 @@ public class CreateNewItemDialog extends AppCompatActivity {
 
     nameEditField = findViewById(R.id.ITEM_NAME_ID);
     int isScript = getIntent().getIntExtra(IS_SCRIPT, 0);
+    boolean hideDescription = getIntent().getIntExtra(HIDE_DESCRIPTION, 0) == 1;
     int isUpdate = getIntent().getIntExtra(IS_UPDATE, 0);
     if(isUpdate > 0){
       createBtn.setText(R.string.update);
     }
-
-    String description = getIntent().getStringExtra(DESCRIPTION);
-    descriptionEditField = findViewById(R.id.ITEM_DESCRIPTION_ID);
-    descriptionEditField.setVisibility(View.VISIBLE);
-    descriptionEditField.setText(description);
+    if(!hideDescription){
+      String description = getIntent().getStringExtra(DESCRIPTION);
+      descriptionEditField = findViewById(R.id.ITEM_DESCRIPTION_ID);
+      descriptionEditField.setVisibility(View.VISIBLE);
+      descriptionEditField.setText(description);
+    }
 
     if(isScript == 1){
 
@@ -92,8 +95,11 @@ public class CreateNewItemDialog extends AppCompatActivity {
         Intent result = new Intent();
         result.putExtra(NAME, nameEditField.getText().toString());
         result.putExtra(ID, itemId);
+        boolean hideDescription = getIntent().getIntExtra(HIDE_DESCRIPTION, 0) == 1;
+        if(!hideDescription){
+          result.putExtra(DESCRIPTION, descriptionEditField.getText().toString());
+        }
         int isScript = getIntent().getIntExtra(IS_SCRIPT, 0);
-        result.putExtra(DESCRIPTION, descriptionEditField.getText().toString());
         if(isScript == 1) {
           result.putExtra(IS_BATTLE, hasBattleSwitch.isChecked() ? 1 : 0);
         }
