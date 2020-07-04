@@ -27,10 +27,10 @@
   <com.google.android.material.floatingactionbutton.FloatingActionButton
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:clickable="true"
+    style="@style/float_button_styles"
     app:srcCompat="@mipmap/baseline_add_black_18dp"
     android:id="@+id/JOURNEY_CREATE_BTN"
-    android:layout_gravity="bottom|right"
+    android:layout_gravity="bottom|end"
     android:layout_margin="8dp"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

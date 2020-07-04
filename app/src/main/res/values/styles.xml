@@ -37,27 +37,21 @@
     <item name="android:padding">8dp</item>
   </style>
 
-  <style name="floatCreateButton">
-    <item name="android:layout_width">wrap_content</item>
-    <item name="android:layout_height">wrap_content</item>
-    <item name="android:clickable">true</item>
-    <item name="android:layout_gravity">bottom|end</item>
-    <item name="android:layout_marginBottom">10dp</item>
-    <item name="android:layout_marginRight">10dp</item>
-  </style>
-
-  <style name="addButtonStyles">
-    <item name="android:layout_width">wrap_content</item>
-    <item name="android:layout_height">wrap_content</item>
-    <item name="android:clickable">true</item>
-    <item name="android:layout_marginBottom">16dp</item>
-  </style>
-
   <style name="EnemyTableCaption">
     <item name="android:layout_width">90dp</item>
     <item name="android:layout_height">wrap_content</item>
     <item name="android:layout_weight">0</item>
     <item name="android:paddingRight">8dp</item>
     <item name="android:paddingBottom">8dp</item>
+  </style>
+
+  <style name="float_button_styles">
+    <item name="android:layout_width">wrap_content</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:clickable">true</item>
+    <item name="android:layout_marginEnd">8dp</item>
+    <item name="android:layout_marginBottom">8dp</item>
+    <item name="android:backgroundTint">@color/colorPrimary</item>
+    <item name="android:focusable">true</item>
   </style>
 </resources>

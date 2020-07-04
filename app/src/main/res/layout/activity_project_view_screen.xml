@@ -21,15 +21,9 @@
     />
 
   <com.google.android.material.floatingactionbutton.FloatingActionButton
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:clickable="true"
     app:srcCompat="@mipmap/baseline_add_black_18dp"
     android:id="@+id/CREATE_NEW_SCENE_BTN_ID"
     app:layout_constraintBottom_toBottomOf="@+id/SCREEN_FRAGMENT_ID"
     app:layout_constraintEnd_toEndOf="parent"
-    android:layout_marginEnd="8dp"
-    android:layout_marginBottom="8dp"
-    android:backgroundTint="@color/colorPrimary"
-    android:focusable="true"/>
+    style="@style/float_button_styles"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

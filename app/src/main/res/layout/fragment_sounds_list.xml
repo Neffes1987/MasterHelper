@@ -11,10 +11,9 @@
     android:src="@mipmap/baseline_add_black_18dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:clickable="true"
+    style="@style/float_button_styles"
     android:id="@+id/ADD_NEW_FILE_ID"
-    android:layout_gravity="bottom|right"
-    android:layout_margin="8dp"/>
+    android:layout_gravity="bottom|end"/>
 
   <LinearLayout
     android:orientation="vertical"

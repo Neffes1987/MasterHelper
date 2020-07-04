@@ -23,7 +23,15 @@
   <com.google.android.material.floatingactionbutton.FloatingActionButton
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:clickable="true"
+    app:srcCompat="@mipmap/baseline_music_note_black_18dp"
+    android:id="@+id/SCENE_MUSIC_START_ID"
+    app:layout_constraintBottom_toTopOf="@+id/SCRIPT_CREATE_NEW_BTN_ID"
+    app:layout_constraintEnd_toEndOf="parent"
+    style="@style/float_button_styles"/>
+
+  <com.google.android.material.floatingactionbutton.FloatingActionButton
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     app:srcCompat="@mipmap/baseline_add_black_18dp"
     android:id="@+id/SCRIPT_CREATE_NEW_BTN_ID"
     app:layout_constraintEnd_toEndOf="parent"
@@ -31,7 +39,6 @@
     app:layout_constraintTop_toBottomOf="parent"
     app:layout_constraintStart_toEndOf="@+id/SCREEN_SCRIPTS_LIST_ID"
     app:layout_constraintVertical_bias="1.0"
-    android:layout_marginBottom="8dp"
     app:layout_constraintHorizontal_bias="1.0"
-    android:layout_marginEnd="8dp"/>
+    style="@style/float_button_styles"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
