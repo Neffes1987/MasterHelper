@@ -10,7 +10,7 @@
   <androidx.cardview.widget.CardView
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    >
+    app:cardCornerRadius="8dp">
 
     <LinearLayout
       android:orientation="vertical"
@@ -32,7 +32,8 @@
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:id="@+id/SCENE_TITLE_ID"
-          android:layout_weight="10"/>
+          android:layout_weight="10"
+          android:paddingLeft="2dp"/>
 
         <ImageView
           android:layout_width="wrap_content"
@@ -51,7 +52,8 @@
           android:layout_weight="1"
           android:scaleType="center"
           android:layout_gravity="clip_vertical"
-          android:contentDescription="@string/toggleAccordionButtonDescription"/>
+          android:contentDescription="@string/toggleAccordionButtonDescription"
+          style="@style/common_action_button"/>
 
       </LinearLayout>
 
@@ -123,7 +125,8 @@
             android:id="@+id/SCENE_START_BTN_ID"
             android:layout_weight="1"
             android:minHeight="40dp"
-            android:contentDescription="@string/screen_name_scene_start"/>
+            android:contentDescription="@string/screen_name_scene_start"
+            style="@style/common_action_button"/>
         </LinearLayout>
 
         <LinearLayout
@@ -136,14 +139,16 @@
             android:layout_height="wrap_content"
             app:srcCompat="@mipmap/baseline_create_black_18dp"
             android:id="@+id/SCENE_EDIT_BTN_ID"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            style="@style/common_action_button"/>
 
           <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:srcCompat="@mipmap/baseline_clear_black_18dp"
             android:id="@+id/SCENE_DELETE_BTN_ID"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            style="@style/delete_action_button"/>
         </LinearLayout>
 
         <TextView

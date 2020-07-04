@@ -45,13 +45,30 @@
     <item name="android:paddingBottom">8dp</item>
   </style>
 
-  <style name="float_button_styles">
+
+
+  <style name="common_action_button">
     <item name="android:layout_width">wrap_content</item>
+    <item name="android:layout_height">match_parent</item>
+    <item name="android:layout_weight">0</item>
+    <item name="android:paddingLeft">10dp</item>
+    <item name="android:paddingRight">10dp</item>
+    <item name="android:tint">@color/colorCommon</item>
+    <item name="android:textColor">@color/colorCommon</item>
+  </style>
+
+  <style name="float_button_styles" parent="common_action_button">
     <item name="android:layout_height">wrap_content</item>
     <item name="android:clickable">true</item>
-    <item name="android:layout_marginEnd">8dp</item>
     <item name="android:layout_marginBottom">8dp</item>
-    <item name="android:backgroundTint">@color/colorPrimary</item>
+    <item name="android:layout_marginRight">8dp</item>
+    <item name="android:backgroundTint">@color/colorFloatBtnBackground</item>
     <item name="android:focusable">true</item>
+  </style>
+
+  <style name="delete_action_button"  parent="common_action_button">
+    <item name="android:tint">@color/colorDelete</item>
+    <item name="android:textColor">@color/colorDelete</item>
+    <item name="android:foregroundGravity">clip_horizontal|center_horizontal</item>
   </style>
 </resources>

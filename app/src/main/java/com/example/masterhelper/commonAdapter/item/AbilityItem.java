@@ -1,9 +1,13 @@
 package com.example.masterhelper.commonAdapter.item;
 
+import android.content.Context;
+import android.util.Log;
+import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import androidx.core.content.ContextCompat;
 import com.example.masterhelper.R;
 import com.example.masterhelper.commonAdapter.CommonAdapter;
 import com.example.masterhelper.models.AbilityModel;
@@ -26,6 +30,8 @@ public class AbilityItem<Model> extends CommonItem<Model> {
 
     ImageButton editPopup = itemView.findViewById(R.id.JOURNEY_EDIT_ID);
     editPopup.setImageResource(R.mipmap.baseline_clear_black_18dp);
+    editPopup.setColorFilter(ContextCompat.getColor(editPopup.getContext(), R.color.colorDelete), android.graphics.PorterDuff.Mode.SRC_IN);
+
     editPopup.setOnClickListener(commonListener);
   }
 

@@ -12,18 +12,22 @@
     />
 
   <TextView
-    android:text="TextView"
-    android:layout_width="wrap_content"
+    android:layout_width="0dp"
     android:layout_height="match_parent"
     android:id="@+id/FILE_NAME_ID"
     android:layout_weight="2"
     android:gravity="center_vertical"/>
 
+  <ImageView
+    app:srcCompat="@mipmap/baseline_clear_black_18dp"
+    android:id="@+id/MUSIC_DELETE_ROW_ID"
+    style="@style/delete_action_button"
+    android:layout_marginEnd="10dp"
+    />
+
   <ImageButton
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
     app:srcCompat="@mipmap/baseline_play_arrow_black_18dp"
     android:id="@+id/RUN_MUSIC_FILE_ID"
-    />
+    style="@style/common_action_button"/>
 
 </LinearLayout>

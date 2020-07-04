@@ -60,7 +60,7 @@
         android:layout_width="60dp"
         android:layout_height="wrap_content"
         android:id="@+id/ROW_DELETE_ID"
-        android:backgroundTint="#D8CDCD"/>
+        style="@style/common_action_button"/>
 
       <View
         android:layout_width="wrap_content"
@@ -74,8 +74,8 @@
         android:layout_height="wrap_content"
         android:id="@+id/ROW_DECREASE_VALUE_ID"
         android:layout_weight="0"
-        style="@style/Widget.AppCompat.ImageButton"
-        android:backgroundTint="#D8CDCD"/>
+        style="@style/common_action_button"
+        />
 
       <ImageButton
         android:src="@mipmap/baseline_add_circle_outline_black_18dp"
@@ -83,8 +83,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/ROW_INCREASE_VALUE_ID"
         android:layout_weight="0"
-        android:backgroundTint="#D8CDCD"
-        />
+        style="@style/common_action_button"/>
 
     </LinearLayout>
 

@@ -78,7 +78,8 @@
         android:text="@string/add_enemy_achieve_placeholder"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/ENEMY_ABILITIES_ADD_BTN_ID"/>
+        android:id="@+id/ENEMY_ABILITIES_ADD_BTN_ID"
+        style="@style/common_action_button"/>
 
       <EditText
         android:layout_width="match_parent"

@@ -32,7 +32,8 @@
       android:layout_height="wrap_content"
       app:srcCompat="@mipmap/baseline_add_black_18dp"
       android:id="@+id/ABILITY_EDIT_ADD_BTN_ID"
-      android:layout_weight="0"/>
+      android:layout_weight="0"
+      style="@style/common_action_button"/>
 
   </LinearLayout>
 

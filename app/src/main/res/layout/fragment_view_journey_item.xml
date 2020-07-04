@@ -23,5 +23,6 @@
     android:layout_height="match_parent"
     app:srcCompat="@android:drawable/ic_menu_preferences"
     android:id="@+id/JOURNEY_EDIT_ID"
-    android:layout_weight="0"/>
+    android:layout_weight="0"
+    style="@style/common_action_button"/>
 </LinearLayout>
