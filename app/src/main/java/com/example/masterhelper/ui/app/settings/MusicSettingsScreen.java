@@ -58,6 +58,11 @@ public class MusicSettingsScreen extends AppCompatActivity implements ICommonIte
       if (elementFiredAction.getId() == R.id.RUN_MUSIC_FILE_ID){
         mediaFiles.startMediaRecord(position, STARTED_AUDIO_PRIORITY);
       }
+
+      if (elementFiredAction.getId() == R.id.MUSIC_DELETE_ROW_ID){
+        mediaFiles.deleteMedeaRecord(position);
+        updateViewList();
+      }
     }
   }
 

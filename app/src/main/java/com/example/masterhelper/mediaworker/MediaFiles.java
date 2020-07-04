@@ -6,14 +6,12 @@ import android.media.SoundPool;
 import android.media.SoundPool.OnLoadCompleteListener;
 import android.net.Uri;
 import android.provider.OpenableColumns;
+import android.widget.Toast;
 
 import java.io.*;
 import java.util.HashSet;
 
 public class MediaFiles {
-  /** тег для дебага */
-  private String TAG = "MediaFiles";
-
   /** путь до деректории с медиафайлами приложения */
   private File currentFilesDir;
 
@@ -40,7 +38,7 @@ public class MediaFiles {
   }
 
   /** обновить список файлов в деректории */
-  public void setFilesList() {
+  public void updateFilesList() {
     File[] list = currentFilesDir.listFiles();
     HashSet<File> audioList = new HashSet<>();
     assert list != null;
@@ -101,12 +99,12 @@ public class MediaFiles {
     for (Uri path : filesPaths) {
       addSingleFileToLibrary(path);
     }
-     setFilesList();
+     updateFilesList();
   }
 
   /** отдать фктуальный список файлов в дериктории приложения */
   public HashSet<File> getFilesList() {
-    setFilesList();
+    updateFilesList();
     return filesList;
   }
 
@@ -116,7 +114,39 @@ public class MediaFiles {
     loadedSPFilePriority = priority;
     loadedSPFile = sp.load(file.getPath(), 1);
   }
-  
+
+
+
+  public void deleteMedeaRecord(int position) {
+    File file = (File) filesList.toArray()[position];
+    filesList.remove(file);
+
+    if(waitUntilFileDeleted(file)){
+      Toast.makeText(context, "Файл Удален", Toast.LENGTH_LONG).show();
+      updateFilesList();
+    }
+
+  }
+
+  private boolean waitUntilFileDeleted(File file) {
+    int i = 10;
+    boolean isDeleted = true;
+    file.delete();
+    context.deleteFile(file.getName());
+    while (file.exists()) {
+      if (--i <= 0) {
+        System.out.println("Breaking out of delete wait");
+        isDeleted = false;
+        break;
+      }
+      try {
+        Thread.sleep(500);
+      } catch (InterruptedException ignored) {
+      }
+    }
+    return isDeleted;
+  }
+
   OnLoadCompleteListener listener = new OnLoadCompleteListener() {
     @Override
     public void onLoadComplete(SoundPool soundPool, int sampleId, int status) {
