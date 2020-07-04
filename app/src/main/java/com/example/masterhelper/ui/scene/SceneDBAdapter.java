@@ -2,13 +2,15 @@ package com.example.masterhelper.ui.scene;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.util.Log;
 import com.example.masterhelper.data.DbHelpers;
 import com.example.masterhelper.data.contracts.SceneContract;
+import com.example.masterhelper.data.contracts.SceneMusicContract;
 import com.example.masterhelper.models.SceneRecycleDataModel;
 import com.example.masterhelper.models.ScriptRecycleDataModel;
 import com.example.masterhelper.ui.scripts.ScriptDBAdapter;
 
-import java.util.HashSet;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 
 public class SceneDBAdapter {
@@ -103,6 +105,45 @@ public class SceneDBAdapter {
     queryResult.close();
     return sceneRecycleDataModel;
   }
+
+  public HashMap<String, Integer> getMediaForScene(int sceneId){
+    String sqlQuery = SceneMusicContract.getListQuery(SceneMusicContract.TABLE_NAME, null, SceneMusicContract.COLUMN_SCENE_ID+"="+ sceneId, SceneContract._ID + " DESC", 1);
+    HashMap<String, Integer> sceneMedia = new HashMap<>();
+    Cursor queryResult = dbHelpers.getList(sqlQuery);
+    while (queryResult.moveToNext()) {
+      // Используем индекс для получения строки или числа
+      int pathColumnIndex = queryResult.getColumnIndex(SceneMusicContract.COLUMN_FILE_PATH);
+      int idColumnIndex = queryResult.getColumnIndex(SceneMusicContract._ID);
+      sceneMedia.put(queryResult.getString(pathColumnIndex), queryResult.getInt(idColumnIndex));
+    }
+    queryResult.close();
+    return sceneMedia;
+  }
+
+  /** обновить медиа для сцены */
+  public void updateSceneMedia(String paths, int sceneId){
+    HashMap<String, Integer> currentPaths = getMediaForScene(sceneId);
+    if(paths == null){
+      return;
+    }
+
+    String[] selectedPaths = paths.split(",");
+    for (String path: selectedPaths ) {
+      if(!currentPaths.containsKey(path) && !path.equals("")){
+        String sqlQuery = dbHelpers.sceneMusicContract.addItemQuery(path, sceneId);
+        dbHelpers.addNewItem(sqlQuery);
+      } else {
+        currentPaths.remove(path);
+      }
+    }
+
+
+    if(currentPaths.size() > 0){
+      String sqlQuery = dbHelpers.sceneMusicContract.deleteRecordsByIds(currentPaths.values().toString().replaceAll("\\[|\\]|\\s", ""));
+      dbHelpers.addNewItem(sqlQuery);
+    }
+  }
+
 
   /** создать новую сцену */
   public void addNewScene(SceneRecycleDataModel newItem, int journeyId){

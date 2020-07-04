@@ -31,11 +31,12 @@ public class SoundFileModel {
     return path;
   }
 
-  public SoundFileModel(String filename, long createTime, String path, int fileId){
+  public SoundFileModel(String filename, long createTime, String path, int fileId, boolean isSelected){
     setCreateTime(createTime);
     setFileId(fileId);
     setFilename(filename);
     setPath(path);
+    setSelected(isSelected);
   }
 
   private void setCreateTime(long createTime) {

@@ -25,18 +25,19 @@ public class MusicItem<Model> extends CommonItem<Model> {
   /** удалить медиафайл */
   private ImageButton deleteSound;
 
-  public MusicItem(View v, CommonAdapter<Model> adapter, boolean hideCheckboxes) {
+  public MusicItem(View v, CommonAdapter<Model> adapter, boolean isGeneral) {
     super(v, adapter);
     title = itemView.findViewById(R.id.FILE_NAME_ID);
     selected = itemView.findViewById(R.id.FILE_NAME_SELECTOR_ID);
     selected.setOnClickListener(commonListener);
-    selected.setVisibility(hideCheckboxes ? View.GONE : View.VISIBLE);
+    selected.setVisibility(isGeneral ? View.GONE : View.VISIBLE);
 
 
     startSound = itemView.findViewById(R.id.RUN_MUSIC_FILE_ID);
     startSound.setOnClickListener(commonListener);
 
     deleteSound = itemView.findViewById(R.id.MUSIC_DELETE_ROW_ID);
+    deleteSound.setVisibility(!isGeneral ? View.GONE : View.VISIBLE);
     if(deleteSound != null){
       deleteSound.setOnClickListener(commonListener);
     }
@@ -47,7 +48,7 @@ public class MusicItem<Model> extends CommonItem<Model> {
   }
 
   public void setSelected(boolean selected) {
-    this.selected.setSelected(selected);
+    this.selected.setChecked(selected);
   }
 
   public void updateHolderByData(Model itemData, int position) {

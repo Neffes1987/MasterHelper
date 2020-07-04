@@ -15,6 +15,16 @@
     android:id="@+id/ADD_NEW_FILE_ID"
     android:layout_gravity="bottom|end"/>
 
+  <com.google.android.material.floatingactionbutton.FloatingActionButton
+    android:src="@mipmap/baseline_done_black_18dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    android:id="@+id/ADD_FILES_TO_EVENT_ID"
+    android:layout_gravity="bottom|right"
+    style="@style/float_button_styles"
+    android:visibility="gone"/>
+
   <LinearLayout
     android:orientation="vertical"
     android:layout_width="match_parent"

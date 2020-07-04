@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
@@ -13,20 +14,44 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.fragment.app.FragmentManager;
+import com.example.masterhelper.DialogPopup;
 import com.example.masterhelper.R;
 import com.example.masterhelper.commonAdapter.item.ICommonItemEvents;
 import com.example.masterhelper.mediaworker.MediaFiles;
 import com.example.masterhelper.ui.soundsList.SoundsList;
 import com.example.masterhelper.models.SoundFileModel;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
+
+import static android.content.DialogInterface.BUTTON_POSITIVE;
 
 public class MusicSettingsScreen extends AppCompatActivity implements ICommonItemEvents {
   private static final int PICK_AUDIO_FILE = 1;
   private static final String PICK_AUDIO_TYPE = "audio/*";
   private static final int MAX_AUDIO_STREAMS = 1;
   private static final int STARTED_AUDIO_PRIORITY = 1;
+
+  public static final String SELECTED_LIST = "selectedList";
+  public static final String IS_GENERAL = "isGeneral";
+  private boolean isGeneral;
+  private HashSet<String> selectedList = new HashSet<>();
+
+  public void setSelectedList() {
+    selectedList.clear();
+    String listIds = getIntent().getStringExtra(SELECTED_LIST);
+    if(listIds == null || listIds.equals("")){
+      return;
+    }
+
+    String[] list = cleanCommaToString(listIds).split(",");
+    Collections.addAll(selectedList, list);
+  }
+
+  public void setGeneral() {
+    isGeneral = getIntent().getIntExtra(IS_GENERAL, 1) == 1;
+  }
 
   /** утилита для работы с медиафайлами */
   private MediaFiles mediaFiles;
@@ -42,26 +67,52 @@ public class MusicSettingsScreen extends AppCompatActivity implements ICommonIte
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_music_settings_screen);
     mediaFiles = new MediaFiles(this, MAX_AUDIO_STREAMS);
+    setGeneral();
+    setSelectedList();
     updateViewList();
+  }
+
+  public String cleanCommaToString(String str){
+    return str.replaceAll("\\[|\\]|\\s", "");
   }
 
   /** запустить внешний экран выбора файла для добавления в галерею */
   @Override
   public void onClick(View elementFiredAction, int position) {
-    if(position == -1){
+    if(position == SoundsList.ADD_MUSIC_BTN){
       if(Build.VERSION.SDK_INT>22){
         requestPermissions(permissions, 1);
         return;
       }
       StartFilePickerIntent();
+    } else if(position == SoundsList.ATTACH_MUSIC_BTN){
+      Intent intent = new Intent();
+      intent.putExtra(SELECTED_LIST, cleanCommaToString(selectedList.toString()));
+      setResult(RESULT_OK, intent);
+      finish();
     } else {
-      if (elementFiredAction.getId() == R.id.RUN_MUSIC_FILE_ID){
-        mediaFiles.startMediaRecord(position, STARTED_AUDIO_PRIORITY);
-      }
-
-      if (elementFiredAction.getId() == R.id.MUSIC_DELETE_ROW_ID){
-        mediaFiles.deleteMedeaRecord(position);
-        updateViewList();
+      switch (elementFiredAction.getId()){
+        case R.id.RUN_MUSIC_FILE_ID:
+          mediaFiles.startMediaRecord(position, STARTED_AUDIO_PRIORITY);
+          break;
+        case R.id.MUSIC_DELETE_ROW_ID:
+          DialogPopup dialogPopup = new DialogPopup(getSupportFragmentManager());
+          dialogPopup.setClickListener((dialogInterface, id) -> {
+            if(id == BUTTON_POSITIVE){
+              mediaFiles.deleteMedeaRecord(position);
+              updateViewList();
+            }
+          });
+          dialogPopup.show();
+          break;
+        case R.id.FILE_NAME_SELECTOR_ID:
+          String selectedFilePath = mediaFiles.getFileByPosition(position).getPath();
+          if(selectedList.contains(selectedFilePath)){
+            selectedList.remove(selectedFilePath);
+          } else {
+            selectedList.add(selectedFilePath);
+          }
+          break;
       }
     }
   }
@@ -117,14 +168,17 @@ public class MusicSettingsScreen extends AppCompatActivity implements ICommonIte
   private void updateViewList() {
     LinkedHashMap<Integer, SoundFileModel> newData = new LinkedHashMap<>();
 
-    mediaFiles.getFilesList().forEach(fileInList -> newData.put(newData.size(),
-      new SoundFileModel(fileInList.getName(), fileInList.lastModified(), fileInList.getPath(), newData.size())
-    ));
+    mediaFiles.getFilesList().forEach(fileInList -> {
+      boolean isSelected = selectedList.contains(fileInList.getPath());
+      newData.put(newData.size(),
+        new SoundFileModel(fileInList.getName(), fileInList.lastModified(), fileInList.getPath(), newData.size(), isSelected)
+      );
+    });
 
     FragmentManager fragmentManager = getSupportFragmentManager();
     SoundsList soundListFragment = (SoundsList) fragmentManager.findFragmentById(R.id.SOUND_LIST_FRAGMENT_ID);
     assert soundListFragment != null;
-    soundListFragment.updateListAdapter(newData, true);
+    soundListFragment.updateListAdapter(newData, isGeneral);
   }
 
 }

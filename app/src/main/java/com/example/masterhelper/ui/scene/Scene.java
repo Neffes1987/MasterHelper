@@ -9,6 +9,7 @@ import androidx.fragment.app.FragmentManager;
 import com.example.masterhelper.CreateNewItemDialog;
 import com.example.masterhelper.DialogPopup;
 import com.example.masterhelper.R;
+import com.example.masterhelper.ui.app.settings.MusicSettingsScreen;
 import com.example.masterhelper.ui.enemies.EnemiesListView;
 import com.example.masterhelper.commonAdapter.item.ICommonItemEvents;
 import com.example.masterhelper.ui.recyclerViewFragment.RecyclerViewFragment;
@@ -16,8 +17,9 @@ import com.example.masterhelper.models.ScriptRecycleDataModel;
 import com.example.masterhelper.ui.scripts.ScriptDBAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
-import java.util.Objects;
 
 import static android.content.DialogInterface.BUTTON_POSITIVE;
 
@@ -25,11 +27,21 @@ public class Scene extends AppCompatActivity implements ICommonItemEvents {
   /** хелпер для работы с таблицей скриптов в бд */
   ScriptDBAdapter scriptDBAdapter;
 
+  /** хелпер для работы с таблицей сцен в бд */
+  SceneDBAdapter sceneDBAdapter;
+
   /** указатель на кнопку создания нового скрипта сцены */
   FloatingActionButton newScriptBtn;
 
+  /** указатель на кнопку создания нового скрипта сцены */
+  FloatingActionButton musicControl;
+
   /** ид выбранной сцены */
   int sceneId;
+
+  private final int CREATE_NEW_SCRIPT_CODE = 1;
+  private final int UPDATE_SCRIPT_CODE = 2;
+  private final int ADD_MUSIC_TO_SCENE_CODE = 3;
 
   /** временный кеш для списка скриптов */
   public LinkedHashMap<Integer, ScriptRecycleDataModel> scriptsList = new LinkedHashMap<>();
@@ -40,11 +52,24 @@ public class Scene extends AppCompatActivity implements ICommonItemEvents {
     setContentView(R.layout.activity_screen_view_scene);
 
     newScriptBtn = findViewById(R.id.SCRIPT_CREATE_NEW_BTN_ID);
+
     newScriptBtn.setOnClickListener(v -> {
       Intent intent = new Intent(this, CreateNewItemDialog.class);
       intent.putExtra(CreateNewItemDialog.TITLE, R.string.script_create_title);
       intent.putExtra(CreateNewItemDialog.IS_SCRIPT, 1);
-      startActivityForResult(intent, 1);
+      startActivityForResult(intent, CREATE_NEW_SCRIPT_CODE);
+    });
+
+    sceneDBAdapter  = new SceneDBAdapter(this);
+
+    musicControl = findViewById(R.id.SCENE_MUSIC_START_ID);
+    musicControl.setOnLongClickListener(v -> {
+      Intent intent = new Intent(this, MusicSettingsScreen.class);
+      intent.putExtra(MusicSettingsScreen.IS_GENERAL, 0);
+      HashMap<String, Integer> mediaList = sceneDBAdapter.getMediaForScene(sceneId);
+      intent.putExtra(MusicSettingsScreen.SELECTED_LIST, mediaList.size() > 0 ? mediaList.keySet().toString().replaceAll("\\[|\\]|\\s", "") : "");
+      startActivityForResult(intent, ADD_MUSIC_TO_SCENE_CODE);
+      return true;
     });
 
     String journeyName = getIntent().getStringExtra("journeyName");
@@ -89,7 +114,7 @@ public class Scene extends AppCompatActivity implements ICommonItemEvents {
       intent.putExtra(CreateNewItemDialog.IS_BATTLE, scriptRecycleDataModel.hasBattleActionIcon ? 1 : 0);
       intent.putExtra(CreateNewItemDialog.DESCRIPTION, scriptRecycleDataModel.getDescription());
       intent.putExtra(CreateNewItemDialog.IS_SCRIPT, 1);
-      startActivityForResult(intent, 2);
+      startActivityForResult(intent, UPDATE_SCRIPT_CODE);
     }
   }
 
@@ -120,11 +145,15 @@ public class Scene extends AppCompatActivity implements ICommonItemEvents {
       item = new ScriptRecycleDataModel(newName, id, description, hasBattleSceneValue == 1, false);
     }
     switch (requestCode){
-      case 1:
+      case CREATE_NEW_SCRIPT_CODE:
         scriptDBAdapter.addNewScript(item, sceneId);
         break;
-      case 2:
+      case UPDATE_SCRIPT_CODE:
         scriptDBAdapter.updateScript(item, id);
+        break;
+      case ADD_MUSIC_TO_SCENE_CODE:
+        String selectedPaths = result.getStringExtra(MusicSettingsScreen.SELECTED_LIST);
+        sceneDBAdapter.updateSceneMedia(selectedPaths, sceneId);
         break;
     }
     setListData();

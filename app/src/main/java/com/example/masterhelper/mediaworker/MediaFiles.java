@@ -108,8 +108,12 @@ public class MediaFiles {
     return filesList;
   }
 
+  public File getFileByPosition(int position){
+    return (File) filesList.toArray()[position];
+  }
+
   public void startMediaRecord(int position, int priority) {
-    File file = (File) filesList.toArray()[position];
+    File file = getFileByPosition(position);
     sp.setOnLoadCompleteListener(listener);
     loadedSPFilePriority = priority;
     loadedSPFile = sp.load(file.getPath(), 1);
@@ -118,34 +122,17 @@ public class MediaFiles {
 
 
   public void deleteMedeaRecord(int position) {
-    File file = (File) filesList.toArray()[position];
+    File file = getFileByPosition(position);
     filesList.remove(file);
 
-    if(waitUntilFileDeleted(file)){
+    if(file.delete()){
+      context.deleteFile(file.getName());
       Toast.makeText(context, "Файл Удален", Toast.LENGTH_LONG).show();
       updateFilesList();
     }
 
   }
 
-  private boolean waitUntilFileDeleted(File file) {
-    int i = 10;
-    boolean isDeleted = true;
-    file.delete();
-    context.deleteFile(file.getName());
-    while (file.exists()) {
-      if (--i <= 0) {
-        System.out.println("Breaking out of delete wait");
-        isDeleted = false;
-        break;
-      }
-      try {
-        Thread.sleep(500);
-      } catch (InterruptedException ignored) {
-      }
-    }
-    return isDeleted;
-  }
 
   OnLoadCompleteListener listener = new OnLoadCompleteListener() {
     @Override

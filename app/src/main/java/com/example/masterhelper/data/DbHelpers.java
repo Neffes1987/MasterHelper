@@ -14,6 +14,7 @@ public class DbHelpers extends SQLiteOpenHelper {
   public JourneysContract journeysContract = new JourneysContract();
   public ScriptsContract scriptsContract = new ScriptsContract();
   public SceneContract sceneContract =new SceneContract();
+  public SceneMusicContract sceneMusicContract = new SceneMusicContract();
   public ScriptSettingsContract scriptSettingsContract = new ScriptSettingsContract();
   /**
    * Имя файла базы данных
@@ -22,7 +23,7 @@ public class DbHelpers extends SQLiteOpenHelper {
   /**
    * Версия базы данных. При изменении схемы увеличить на единицу
    */
-  private static final int DATABASE_VERSION = 26;
+  private static final int DATABASE_VERSION = 27;
 
   SQLiteDatabase db;
 
@@ -35,6 +36,12 @@ public class DbHelpers extends SQLiteOpenHelper {
   private void generateScenesTable(){
     db.execSQL(SQLCreateTemplate + SceneContract.TABLE_NAME);
     String SQL_CREATE_TABLE = SceneContract.CREATE_TABLE;
+    db.execSQL(SQL_CREATE_TABLE);
+  }
+
+  private void generateScenesMusicTable(){
+    db.execSQL(SQLCreateTemplate + SceneMusicContract.TABLE_NAME);
+    String SQL_CREATE_TABLE = SceneMusicContract.CREATE_TABLE;
     db.execSQL(SQL_CREATE_TABLE);
   }
 
@@ -90,6 +97,7 @@ public class DbHelpers extends SQLiteOpenHelper {
     generateAbilitiesTable();
     generateScriptSettingsTable();
     generateEnemyAbilitiesTable();
+    generateScenesMusicTable();
   }
 
   @Override
@@ -114,6 +122,7 @@ public class DbHelpers extends SQLiteOpenHelper {
     generateAbilitiesTable();
     generateScriptSettingsTable();
     generateEnemyAbilitiesTable();
+    generateScenesMusicTable();
   }
 
   public Cursor getList(String query){

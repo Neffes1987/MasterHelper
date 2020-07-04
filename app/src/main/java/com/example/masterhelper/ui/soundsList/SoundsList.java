@@ -1,5 +1,6 @@
 package com.example.masterhelper.ui.soundsList;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
@@ -24,10 +25,16 @@ import java.util.LinkedHashMap;
  * to handle interaction events.
  */
 public class SoundsList extends Fragment implements ICommonItemEvents {
+  public static final int ADD_MUSIC_BTN = -1;
+  public static final int ATTACH_MUSIC_BTN = -2;
+
 
   private ICommonItemEvents mListener;
 
   private RecyclerView recyclerView;
+
+  FloatingActionButton createBtn;
+  FloatingActionButton addBtn;
 
   public SoundsList() {
     // Required empty public constructor
@@ -40,14 +47,29 @@ public class SoundsList extends Fragment implements ICommonItemEvents {
     // Inflate the layout for this fragment
     View selfFragment = inflater.inflate(R.layout.fragment_sounds_list, container, false);
     recyclerView = selfFragment.findViewById(R.id.SOUNDS_LIST_ID);
-    FloatingActionButton createBtn = selfFragment.findViewById(R.id.ADD_NEW_FILE_ID);
+
+    createBtn = selfFragment.findViewById(R.id.ADD_NEW_FILE_ID);
+    addBtn = selfFragment.findViewById(R.id.ADD_FILES_TO_EVENT_ID);
+
+
     createBtn.setOnClickListener(addSoundListener);
+    addBtn.setOnClickListener(attachSoundListener);
     return selfFragment;
   }
 
+  @SuppressLint("RestrictedApi")
   public void updateListAdapter(LinkedHashMap<Integer, SoundFileModel> data, Boolean isGeneral){
     LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
     recyclerView.setLayoutManager(layoutManager);
+
+    if(isGeneral){
+      createBtn.setVisibility(View.VISIBLE);
+      addBtn.setVisibility(View.GONE);
+    } else {
+      createBtn.setVisibility(View.GONE);
+      addBtn.setVisibility(View.VISIBLE);
+    }
+
     CommonAdapter<SoundFileModel> mAdapter = new CommonAdapter<>(
       data,
       R.layout.fragment_sounds_item,
@@ -77,7 +99,14 @@ public class SoundsList extends Fragment implements ICommonItemEvents {
   View.OnClickListener addSoundListener = new View.OnClickListener() {
     @Override
     public void onClick(View v) {
-      mListener.onClick(v, -1);
+      mListener.onClick(v, ADD_MUSIC_BTN);
+    }
+  };
+
+  View.OnClickListener attachSoundListener = new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+      mListener.onClick(v, ATTACH_MUSIC_BTN);
     }
   };
 
