@@ -1,14 +1,18 @@
 package com.example.masterhelper.ui.scene;
 
 import android.content.Intent;
+import android.os.Build;
 import android.view.View;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 import com.example.masterhelper.CreateNewItemDialog;
 import com.example.masterhelper.DialogPopup;
 import com.example.masterhelper.R;
+import com.example.masterhelper.mediaworker.BackgroundMediaPlayer;
 import com.example.masterhelper.ui.app.settings.MusicSettingsScreen;
 import com.example.masterhelper.ui.enemies.EnemiesListView;
 import com.example.masterhelper.commonAdapter.item.ICommonItemEvents;
@@ -17,12 +21,13 @@ import com.example.masterhelper.models.ScriptRecycleDataModel;
 import com.example.masterhelper.ui.scripts.ScriptDBAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.LinkedHashMap;
 
 import static android.content.DialogInterface.BUTTON_POSITIVE;
 
+@RequiresApi(api = Build.VERSION_CODES.M)
 public class Scene extends AppCompatActivity implements ICommonItemEvents {
   /** хелпер для работы с таблицей скриптов в бд */
   ScriptDBAdapter scriptDBAdapter;
@@ -36,8 +41,13 @@ public class Scene extends AppCompatActivity implements ICommonItemEvents {
   /** указатель на кнопку создания нового скрипта сцены */
   FloatingActionButton musicControl;
 
+  BackgroundMediaPlayer backgroundMediaPlayer = BackgroundMediaPlayer.getInstance();
+
   /** ид выбранной сцены */
   int sceneId;
+
+  /** фоновая музыка проигрывается */
+  boolean sceneMusicStarted = false;
 
   private final int CREATE_NEW_SCRIPT_CODE = 1;
   private final int UPDATE_SCRIPT_CODE = 2;
@@ -46,12 +56,28 @@ public class Scene extends AppCompatActivity implements ICommonItemEvents {
   /** временный кеш для списка скриптов */
   public LinkedHashMap<Integer, ScriptRecycleDataModel> scriptsList = new LinkedHashMap<>();
 
+  public void setSceneMusicStarted(boolean sceneMusicStarted) {
+    this.sceneMusicStarted = sceneMusicStarted;
+  }
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_screen_view_scene);
 
+    String journeyName = getIntent().getStringExtra("journeyName");
+    String sceneName = getIntent().getStringExtra("sceneName");
+    sceneId = getIntent().getIntExtra("sceneId", 0);
+
+    sceneDBAdapter  = new SceneDBAdapter();
+
+
     newScriptBtn = findViewById(R.id.SCRIPT_CREATE_NEW_BTN_ID);
+    musicControl = findViewById(R.id.SCENE_MUSIC_START_ID);
+
+    scriptDBAdapter  = new ScriptDBAdapter();
+    ActionBar bar = getSupportActionBar();
+
 
     newScriptBtn.setOnClickListener(v -> {
       Intent intent = new Intent(this, CreateNewItemDialog.class);
@@ -60,28 +86,37 @@ public class Scene extends AppCompatActivity implements ICommonItemEvents {
       startActivityForResult(intent, CREATE_NEW_SCRIPT_CODE);
     });
 
-    sceneDBAdapter  = new SceneDBAdapter(this);
 
-    musicControl = findViewById(R.id.SCENE_MUSIC_START_ID);
     musicControl.setOnLongClickListener(v -> {
       Intent intent = new Intent(this, MusicSettingsScreen.class);
       intent.putExtra(MusicSettingsScreen.IS_GENERAL, 0);
-      HashMap<String, Integer> mediaList = sceneDBAdapter.getMediaForScene(sceneId);
-      intent.putExtra(MusicSettingsScreen.SELECTED_LIST, mediaList.size() > 0 ? mediaList.keySet().toString().replaceAll("\\[|\\]|\\s", "") : "");
+      intent.putExtra(MusicSettingsScreen.SELECTED_LIST, getMediaList());
       startActivityForResult(intent, ADD_MUSIC_TO_SCENE_CODE);
       return true;
     });
 
-    String journeyName = getIntent().getStringExtra("journeyName");
-    String sceneName = getIntent().getStringExtra("sceneName");
-    sceneId = getIntent().getIntExtra("sceneId", 0);
+    musicControl.setOnClickListener(v -> {
+      boolean newSceneMusicState = !sceneMusicStarted;
+      setSceneMusicStarted(newSceneMusicState);
+      if(newSceneMusicState){
+        backgroundMediaPlayer.setMediaList(getMediaList());
+        backgroundMediaPlayer.startMediaList();
+        musicControl.setBackgroundTintList(ContextCompat.getColorStateList(getApplicationContext(), R.color.colorMusicStartedFloatTint));
+      } else {
+        backgroundMediaPlayer.stopMediaList();
+        musicControl.setBackgroundTintList(ContextCompat.getColorStateList(getApplicationContext(), R.color.colorCommonFloatTint));
+      }
+    });
 
-    scriptDBAdapter  = new ScriptDBAdapter(this);
-    ActionBar bar = getSupportActionBar();
     if(bar != null){
       bar.setSubtitle(journeyName);
       bar.setTitle(sceneName);
     }
+  }
+
+  private String getMediaList(){
+    HashMap<String, Integer> mediaList = sceneDBAdapter.getMediaForScene(sceneId);
+    return mediaList.size() > 0 ? mediaList.keySet().toString().replaceAll("\\[|]|\\s", "") : "";
   }
 
 

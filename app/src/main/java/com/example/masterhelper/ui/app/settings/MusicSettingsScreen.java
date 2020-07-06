@@ -44,7 +44,6 @@ public class MusicSettingsScreen extends AppCompatActivity implements ICommonIte
     if(listIds == null || listIds.equals("")){
       return;
     }
-
     String[] list = cleanCommaToString(listIds).split(",");
     Collections.addAll(selectedList, list);
   }

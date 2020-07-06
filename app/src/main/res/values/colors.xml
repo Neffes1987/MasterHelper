@@ -6,5 +6,8 @@
   <color name="colorTextReverse">#FFFFFF</color>
   <color name="colorCommon">#8AD618</color>
   <color name="colorDelete">#E53935</color>
+
+  <color name="colorCommonFloatTint">#FF80cbc4</color>
+  <color name="colorMusicStartedFloatTint">#D45127</color>
   <color name="colorFloatBtnBackground">#23353434</color>
 </resources>

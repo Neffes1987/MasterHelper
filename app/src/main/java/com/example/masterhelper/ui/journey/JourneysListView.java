@@ -53,7 +53,7 @@ public class JourneysListView extends AppCompatActivity implements ICommonItemEv
     journeyCreateBtn = findViewById(R.id.JOURNEY_CREATE_BTN);
     journeyCreateBtn.setOnClickListener(v -> onCreateJourneyButtonPressed());
 
-    journeyDBAdapter  = new JourneyDBAdapter(this);
+    journeyDBAdapter  = new JourneyDBAdapter();
 
     setSupportActionBar(toolbar);
     updateJourneysList();

@@ -42,8 +42,8 @@ public class JourneyItemView extends AppCompatActivity implements ICommonItemEve
       setResult(RESULT_CANCELED);
       finish();
     }
-    journeyDBAdapter  = new JourneyDBAdapter(this, journeyId);
-    sceneDBAdapter  = new SceneDBAdapter(this);
+    journeyDBAdapter  = new JourneyDBAdapter(journeyId);
+    sceneDBAdapter  = new SceneDBAdapter();
     ActionBar toolbar = getSupportActionBar();
 
     // получаем указатель на тулбар активированного в главном компоненте

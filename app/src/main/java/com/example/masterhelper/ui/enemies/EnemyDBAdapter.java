@@ -14,8 +14,8 @@ public class EnemyDBAdapter {
   private DbHelpers dbHelpers;
 
   /**  */
-  public EnemyDBAdapter(Context context){
-    dbHelpers = new DbHelpers(context);
+  public EnemyDBAdapter(){
+    dbHelpers = new DbHelpers();
   }
 
   /**  */

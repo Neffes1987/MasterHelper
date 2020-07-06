@@ -14,8 +14,8 @@ public class ScriptDBAdapter {
   private DbHelpers dbHelpers;
 
   /**  */
-  public ScriptDBAdapter(Context context){
-    dbHelpers = new DbHelpers(context);
+  public ScriptDBAdapter(){
+    dbHelpers = new DbHelpers();
   }
 
   /**  */

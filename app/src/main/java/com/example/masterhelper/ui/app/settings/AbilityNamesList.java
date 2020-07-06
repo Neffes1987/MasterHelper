@@ -38,7 +38,7 @@ public class AbilityNamesList extends AppCompatActivity implements ICommonItemEv
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_ability_names_list);
     fragmentManager = getSupportFragmentManager();
-    abilityDBAdapter = new AbilityDBAdapter(this);
+    abilityDBAdapter = new AbilityDBAdapter();
     addNewNameText = findViewById(R.id.ABILITY_EDIT_NAME_ID);
     addNewNameBtn = findViewById(R.id.ABILITY_EDIT_ADD_BTN_ID);
     addNewNameBtn.setOnClickListener(v -> addNewRow());

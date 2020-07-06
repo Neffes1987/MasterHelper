@@ -4,6 +4,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import com.example.masterhelper.GlobalApplication;
 import com.example.masterhelper.data.contracts.*;
 
 public class DbHelpers extends SQLiteOpenHelper {
@@ -75,12 +76,8 @@ public class DbHelpers extends SQLiteOpenHelper {
     db.execSQL(SQL_CREATE_TABLE);
   }
 
-
-  /**
-   * @param context Контекст приложения
-   */
-  public DbHelpers(Context context) {
-    super(context, DATABASE_NAME, null, DATABASE_VERSION);
+  public DbHelpers() {
+    super(GlobalApplication.getAppContext(), DATABASE_NAME, null, DATABASE_VERSION);
   }
 
   /**

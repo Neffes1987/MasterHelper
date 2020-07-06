@@ -19,9 +19,9 @@ public class SceneDBAdapter {
   private ScriptDBAdapter scriptDBAdapter;
 
   /** конструктор */
-  public SceneDBAdapter(Context context){
-    dbHelpers = new DbHelpers(context);
-    scriptDBAdapter = new ScriptDBAdapter(context);
+  public SceneDBAdapter(){
+    dbHelpers = new DbHelpers();
+    scriptDBAdapter = new ScriptDBAdapter();
   }
 
 
@@ -107,7 +107,7 @@ public class SceneDBAdapter {
   }
 
   public HashMap<String, Integer> getMediaForScene(int sceneId){
-    String sqlQuery = SceneMusicContract.getListQuery(SceneMusicContract.TABLE_NAME, null, SceneMusicContract.COLUMN_SCENE_ID+"="+ sceneId, SceneContract._ID + " DESC", 1);
+    String sqlQuery = SceneMusicContract.getListQuery(SceneMusicContract.TABLE_NAME, null, SceneMusicContract.COLUMN_SCENE_ID+"="+ sceneId, SceneContract._ID + " DESC", 0);
     HashMap<String, Integer> sceneMedia = new HashMap<>();
     Cursor queryResult = dbHelpers.getList(sqlQuery);
     while (queryResult.moveToNext()) {

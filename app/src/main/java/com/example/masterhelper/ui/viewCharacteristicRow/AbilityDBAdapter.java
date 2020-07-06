@@ -14,8 +14,8 @@ public class AbilityDBAdapter {
   /** класс для работы с базой */
   private DbHelpers dbHelpers;
 
-  public AbilityDBAdapter(Context context){
-    dbHelpers = new DbHelpers(context);
+  public AbilityDBAdapter(){
+    dbHelpers = new DbHelpers();
   }
 
   /** создать новое приключения */

@@ -39,7 +39,7 @@ public class EnemiesListView extends AppCompatActivity implements ICommonItemEve
 
     scriptId = getIntent().getIntExtra("scriptId", 0);
 
-    enemyDBAdapter = new EnemyDBAdapter(this);
+    enemyDBAdapter = new EnemyDBAdapter();
 
     createNewEnemy = findViewById(R.id.CREATE_NEW_ENEMY_ID);
 

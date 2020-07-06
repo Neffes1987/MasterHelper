@@ -16,11 +16,11 @@ public class JourneyDBAdapter {
   private JourneyModel currentJourney;
 
   /** конструкторы */
-  JourneyDBAdapter(Context context){
-    dbHelpers = new DbHelpers(context);
+  JourneyDBAdapter(){
+    dbHelpers = new DbHelpers();
   }
-  JourneyDBAdapter(Context context, int journeyId){
-    dbHelpers = new DbHelpers(context);
+  JourneyDBAdapter(int journeyId){
+    dbHelpers = new DbHelpers();
     currentJourney = getJourney(journeyId);
   }
 

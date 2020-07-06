@@ -63,8 +63,8 @@ public class EditEnemy extends AppCompatActivity implements ViewCharacteristicRo
     scriptID = getIntent().getIntExtra("scriptId", 0);
     enemyId = getIntent().getIntExtra("enemyId", 0);
 
-    abilityDBAdapter = new AbilityDBAdapter(this);
-    enemyDBAdapter = new EnemyDBAdapter(this);
+    abilityDBAdapter = new AbilityDBAdapter();
+    enemyDBAdapter = new EnemyDBAdapter();
 
     abilityAddButton = findViewById(R.id.ENEMY_ABILITIES_ADD_BTN_ID);
     maxHealthValue = findViewById(R.id.MAX_HEALTH_VALUE_ID);
