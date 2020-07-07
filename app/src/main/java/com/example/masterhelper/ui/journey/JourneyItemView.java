@@ -1,10 +1,14 @@
 package com.example.masterhelper.ui.journey;
 
+import android.os.Build;
+import android.util.Log;
 import android.view.View;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBar;
 import com.example.masterhelper.CreateNewItemDialog;
 import com.example.masterhelper.DialogPopup;
 import com.example.masterhelper.R;
+import com.example.masterhelper.mediaworker.BackgroundMediaPlayer;
 import com.example.masterhelper.ui.scene.Scene;
 import com.example.masterhelper.commonAdapter.item.ICommonItemEvents;
 import com.example.masterhelper.ui.recyclerViewFragment.RecyclerViewFragment;
@@ -50,6 +54,7 @@ public class JourneyItemView extends AppCompatActivity implements ICommonItemEve
     if(toolbar != null){
       toolbar.setTitle(journeyDBAdapter.getJourneyTitle());
     }
+    
 
     createNewSceneBtn = findViewById(R.id.CREATE_NEW_SCENE_BTN_ID);
     createNewSceneBtn.setOnClickListener(v -> onCreateButtonPressed());
@@ -59,6 +64,13 @@ public class JourneyItemView extends AppCompatActivity implements ICommonItemEve
   protected void onStart() {
     super.onStart();
     updateScenesList();
+  }
+
+  @RequiresApi(api = Build.VERSION_CODES.M)
+  @Override
+  protected void onResume() {
+    super.onResume();
+    BackgroundMediaPlayer.getInstance().stopMediaList();
   }
 
   /** обновить вьюху по списку сцен */

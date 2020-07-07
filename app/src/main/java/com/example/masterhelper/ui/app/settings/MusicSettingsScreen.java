@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
@@ -30,12 +29,13 @@ import static android.content.DialogInterface.BUTTON_POSITIVE;
 public class MusicSettingsScreen extends AppCompatActivity implements ICommonItemEvents {
   private static final int PICK_AUDIO_FILE = 1;
   private static final String PICK_AUDIO_TYPE = "audio/*";
-  private static final int MAX_AUDIO_STREAMS = 1;
-  private static final int STARTED_AUDIO_PRIORITY = 1;
 
   public static final String SELECTED_LIST = "selectedList";
   public static final String IS_GENERAL = "isGeneral";
   private boolean isGeneral;
+  private int EMPTY_SOUND_POSITION = -1;
+  private int currentPlayedMusic = EMPTY_SOUND_POSITION;
+  private SoundsList soundListFragment;
   private HashSet<String> selectedList = new HashSet<>();
 
   public void setSelectedList() {
@@ -65,10 +65,16 @@ public class MusicSettingsScreen extends AppCompatActivity implements ICommonIte
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_music_settings_screen);
-    mediaFiles = new MediaFiles(this, MAX_AUDIO_STREAMS);
+    mediaFiles = new MediaFiles();
     setGeneral();
     setSelectedList();
     updateViewList();
+  }
+
+  @Override
+  protected void onStop() {
+    super.onStop();
+    mediaFiles.stopMediaRecord();
   }
 
   public String cleanCommaToString(String str){
@@ -92,7 +98,15 @@ public class MusicSettingsScreen extends AppCompatActivity implements ICommonIte
     } else {
       switch (elementFiredAction.getId()){
         case R.id.RUN_MUSIC_FILE_ID:
-          mediaFiles.startMediaRecord(position, STARTED_AUDIO_PRIORITY);
+          if(currentPlayedMusic != EMPTY_SOUND_POSITION){
+            soundListFragment.updateAdapterItem(currentPlayedMusic);
+          }
+          currentPlayedMusic = position;
+          mediaFiles.startMediaRecord(position);
+          break;
+          case R.id.STOP_MUSIC_FILE_ID:
+            currentPlayedMusic = EMPTY_SOUND_POSITION;
+            mediaFiles.stopMediaRecord();
           break;
         case R.id.MUSIC_DELETE_ROW_ID:
           DialogPopup dialogPopup = new DialogPopup(getSupportFragmentManager());
@@ -175,7 +189,7 @@ public class MusicSettingsScreen extends AppCompatActivity implements ICommonIte
     });
 
     FragmentManager fragmentManager = getSupportFragmentManager();
-    SoundsList soundListFragment = (SoundsList) fragmentManager.findFragmentById(R.id.SOUND_LIST_FRAGMENT_ID);
+    soundListFragment = (SoundsList) fragmentManager.findFragmentById(R.id.SOUND_LIST_FRAGMENT_ID);
     assert soundListFragment != null;
     soundListFragment.updateListAdapter(newData, isGeneral);
   }

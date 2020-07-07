@@ -79,6 +79,12 @@ public class SoundsList extends Fragment implements ICommonItemEvents {
     recyclerView.setAdapter(mAdapter);
   }
 
+  public void updateAdapterItem(int position){
+    if(recyclerView.getAdapter() != null){
+      recyclerView.getAdapter().notifyItemChanged(position);
+    }
+  }
+
   @Override
   public void onAttach(Context context) {
     super.onAttach(context);

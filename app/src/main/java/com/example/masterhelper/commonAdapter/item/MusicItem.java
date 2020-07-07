@@ -25,6 +25,9 @@ public class MusicItem<Model> extends CommonItem<Model> {
   /** удалить медиафайл */
   private ImageButton deleteSound;
 
+  /** остановить проигрывание */
+  private ImageButton stopSound;
+
   public MusicItem(View v, CommonAdapter<Model> adapter, boolean isGeneral) {
     super(v, adapter);
     title = itemView.findViewById(R.id.FILE_NAME_ID);
@@ -34,13 +37,33 @@ public class MusicItem<Model> extends CommonItem<Model> {
 
 
     startSound = itemView.findViewById(R.id.RUN_MUSIC_FILE_ID);
-    startSound.setOnClickListener(commonListener);
+    stopSound = itemView.findViewById(R.id.STOP_MUSIC_FILE_ID);
+
+    startSound.setOnClickListener(toggleSoundPlaying);
+    stopSound.setOnClickListener(toggleSoundPlaying);
 
     deleteSound = itemView.findViewById(R.id.MUSIC_DELETE_ROW_ID);
     deleteSound.setVisibility(!isGeneral ? View.GONE : View.VISIBLE);
     if(deleteSound != null){
       deleteSound.setOnClickListener(commonListener);
     }
+  }
+
+  View.OnClickListener toggleSoundPlaying = v->{
+    commonListener.onClick(v);
+    switch (v.getId()){
+      case R.id.STOP_MUSIC_FILE_ID:
+        setMusicStarted(false);
+        break;
+      case R.id.RUN_MUSIC_FILE_ID:
+        setMusicStarted(true);
+        break;
+    }
+  };
+
+  private void setMusicStarted(boolean isStarted){
+    startSound.setVisibility(isStarted ? View.GONE : View.VISIBLE);
+    stopSound.setVisibility(isStarted ? View.VISIBLE : View.GONE);
   }
 
   public void setTitle(String title) {
@@ -56,5 +79,6 @@ public class MusicItem<Model> extends CommonItem<Model> {
     setTitle(soundFileModel.getFilename());
     setSelected(soundFileModel.getSelected());
     setPosition(position);
+    setMusicStarted(false);
   }
 }

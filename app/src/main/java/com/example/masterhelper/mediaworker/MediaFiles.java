@@ -2,11 +2,12 @@ package com.example.masterhelper.mediaworker;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.database.Cursor;
-import android.media.SoundPool;
-import android.media.SoundPool.OnLoadCompleteListener;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.provider.OpenableColumns;
 import android.widget.Toast;
+import com.example.masterhelper.GlobalApplication;
 
 import java.io.*;
 import java.util.HashSet;
@@ -19,22 +20,15 @@ public class MediaFiles {
   HashSet<File> filesList = new HashSet<>();
 
   /** указатель на контекст активити */
-  Context context;
+  Context context = GlobalApplication.getAppContext();
 
   /** указатель на утилиту проигрывания медиа файла */
-  SoundPool sp;
-
-  int loadedSPFile;
-  int loadedSPFilePriority;
-
+  private MediaPlayer mediaPlayer;
 
   /** конструктор утилиты */
-  public MediaFiles(Context context, int maxStreams){
-     this.context = context;
+  public MediaFiles(){
      currentFilesDir = context.getFilesDir();
-     SoundPool.Builder spb  = new SoundPool.Builder();
-     spb.setMaxStreams(maxStreams);
-     sp = spb.build();
+     mediaPlayer = new MediaPlayer();
   }
 
   /** обновить список файлов в деректории */
@@ -112,33 +106,36 @@ public class MediaFiles {
     return (File) filesList.toArray()[position];
   }
 
-  public void startMediaRecord(int position, int priority) {
+  public void startMediaRecord(int position) {
     File file = getFileByPosition(position);
-    sp.setOnLoadCompleteListener(listener);
-    loadedSPFilePriority = priority;
-    loadedSPFile = sp.load(file.getPath(), 1);
+    if(mediaPlayer.isPlaying()){
+      stopMediaRecord();
+    }
+    try {
+      mediaPlayer.setDataSource(GlobalApplication.getAppContext(), Uri.fromFile(file));
+      mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+      mediaPlayer.prepare();
+      mediaPlayer.start();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
   }
 
-
+  public void stopMediaRecord(){
+    mediaPlayer.stop();
+    mediaPlayer.reset();
+  }
 
   public void deleteMedeaRecord(int position) {
     File file = getFileByPosition(position);
     filesList.remove(file);
-
+    if(mediaPlayer.isPlaying()){
+      stopMediaRecord();
+    }
     if(file.delete()){
       context.deleteFile(file.getName());
       Toast.makeText(context, "Файл Удален", Toast.LENGTH_LONG).show();
       updateFilesList();
     }
-
   }
-
-
-  OnLoadCompleteListener listener = new OnLoadCompleteListener() {
-    @Override
-    public void onLoadComplete(SoundPool soundPool, int sampleId, int status) {
-      sp.play(loadedSPFile, 1, 1, loadedSPFilePriority, 0, 1);
-    }
-  };
-  
 }

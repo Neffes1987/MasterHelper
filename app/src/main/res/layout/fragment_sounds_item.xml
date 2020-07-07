@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:orientation="horizontal">
@@ -30,5 +31,14 @@
     app:srcCompat="@mipmap/baseline_play_arrow_black_18dp"
     android:id="@+id/RUN_MUSIC_FILE_ID"
     style="@style/common_action_button"/>
+
+  <ImageButton
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:srcCompat="@mipmap/baseline_pause_black_18dp"
+    android:id="@+id/STOP_MUSIC_FILE_ID"
+    android:layout_weight="0"
+    style="@style/delete_action_button"
+    tools:visibility="gone"/>
 
 </LinearLayout>

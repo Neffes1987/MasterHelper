@@ -4,7 +4,6 @@ import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Build;
-import android.util.Log;
 import androidx.annotation.RequiresApi;
 import com.example.masterhelper.GlobalApplication;
 
@@ -45,7 +44,6 @@ public final class BackgroundMediaPlayer {
 
   public void startMediaRecord(File file) {
     try {
-      Log.i("TAG", "startMediaRecord: " + file.getPath());
       mediaPlayer.setDataSource(GlobalApplication.getAppContext(), Uri.fromFile(file));
       mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
       mediaPlayer.prepare();
@@ -89,18 +87,16 @@ public final class BackgroundMediaPlayer {
   }
 
   public void startMediaList(){
+
     if(mediaPlayer.isPlaying()){
       mediaPlayer.stop();
-    }
-    if(mediaPlayer.getDuration() > 0 ){
-      mediaPlayer.start();
-      return;
     }
     startNextMediaFile();
   }
 
   public void stopMediaList(){
     mediaPlayer.stop();
+    mediaPlayer.reset();
   }
 
 }
