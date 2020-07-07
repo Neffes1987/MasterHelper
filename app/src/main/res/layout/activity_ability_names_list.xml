@@ -40,7 +40,7 @@
   <fragment
     android:layout_width="0dp"
     android:layout_height="wrap_content"
-    android:name="com.example.masterhelper.ui.recyclerViewFragment.RecyclerViewFragment"
+    android:name="com.masterhelper.listFactory.ListFactory"
     android:id="@+id/ABILITY_LIST_ID"
     android:layout_weight="1"
     tools:layout="@layout/fragment_view_journey_item"

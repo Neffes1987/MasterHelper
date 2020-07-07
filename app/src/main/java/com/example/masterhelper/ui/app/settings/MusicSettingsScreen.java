@@ -15,8 +15,8 @@ import android.os.Bundle;
 import androidx.fragment.app.FragmentManager;
 import com.example.masterhelper.DialogPopup;
 import com.example.masterhelper.R;
-import com.example.masterhelper.commonAdapter.item.ICommonItemEvents;
-import com.example.masterhelper.mediaworker.MediaFiles;
+import com.masterhelper.listFactory.commonAdapter.item.ICommonItemEvents;
+import com.masterhelper.mediaworker.MediaFiles;
 import com.example.masterhelper.ui.soundsList.SoundsList;
 import com.example.masterhelper.models.SoundFileModel;
 

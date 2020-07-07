@@ -1,6 +1,5 @@
 package com.example.masterhelper.data;
 
-import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -16,6 +15,7 @@ public class DbHelpers extends SQLiteOpenHelper {
   public ScriptsContract scriptsContract = new ScriptsContract();
   public SceneContract sceneContract =new SceneContract();
   public SceneMusicContract sceneMusicContract = new SceneMusicContract();
+  public ScriptMusicContract scriptMusicContract = new ScriptMusicContract();
   public ScriptSettingsContract scriptSettingsContract = new ScriptSettingsContract();
   /**
    * Имя файла базы данных
@@ -24,7 +24,7 @@ public class DbHelpers extends SQLiteOpenHelper {
   /**
    * Версия базы данных. При изменении схемы увеличить на единицу
    */
-  private static final int DATABASE_VERSION = 27;
+  private static final int DATABASE_VERSION = 28;
 
   SQLiteDatabase db;
 
@@ -43,6 +43,12 @@ public class DbHelpers extends SQLiteOpenHelper {
   private void generateScenesMusicTable(){
     db.execSQL(SQLCreateTemplate + SceneMusicContract.TABLE_NAME);
     String SQL_CREATE_TABLE = SceneMusicContract.CREATE_TABLE;
+    db.execSQL(SQL_CREATE_TABLE);
+  }
+
+  private void generateScriptMusicTable(){
+    db.execSQL(SQLCreateTemplate + ScriptMusicContract.TABLE_NAME);
+    String SQL_CREATE_TABLE = ScriptMusicContract.CREATE_TABLE;
     db.execSQL(SQL_CREATE_TABLE);
   }
 
@@ -95,6 +101,7 @@ public class DbHelpers extends SQLiteOpenHelper {
     generateScriptSettingsTable();
     generateEnemyAbilitiesTable();
     generateScenesMusicTable();
+    generateScriptMusicTable();
   }
 
   @Override
@@ -120,6 +127,7 @@ public class DbHelpers extends SQLiteOpenHelper {
     generateScriptSettingsTable();
     generateEnemyAbilitiesTable();
     generateScenesMusicTable();
+    generateScriptMusicTable();
   }
 
   public Cursor getList(String query){

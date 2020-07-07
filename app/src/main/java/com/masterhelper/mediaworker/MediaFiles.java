@@ -1,9 +1,7 @@
-package com.example.masterhelper.mediaworker;
+package com.masterhelper.mediaworker;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.database.Cursor;
-import android.media.AudioManager;
-import android.media.MediaPlayer;
 import android.net.Uri;
 import android.provider.OpenableColumns;
 import android.widget.Toast;
@@ -23,12 +21,12 @@ public class MediaFiles {
   Context context = GlobalApplication.getAppContext();
 
   /** указатель на утилиту проигрывания медиа файла */
-  private MediaPlayer mediaPlayer;
+  private static MediaPlayerAdapter mediaPlayer;
 
   /** конструктор утилиты */
   public MediaFiles(){
      currentFilesDir = context.getFilesDir();
-     mediaPlayer = new MediaPlayer();
+     mediaPlayer = new MediaPlayerAdapter(true);
   }
 
   /** обновить список файлов в деректории */
@@ -108,30 +106,17 @@ public class MediaFiles {
 
   public void startMediaRecord(int position) {
     File file = getFileByPosition(position);
-    if(mediaPlayer.isPlaying()){
-      stopMediaRecord();
-    }
-    try {
-      mediaPlayer.setDataSource(GlobalApplication.getAppContext(), Uri.fromFile(file));
-      mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-      mediaPlayer.prepare();
-      mediaPlayer.start();
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
+    mediaPlayer.startMediaRecord(file);
   }
 
   public void stopMediaRecord(){
-    mediaPlayer.stop();
-    mediaPlayer.reset();
+    mediaPlayer.stopMediaList();
   }
 
   public void deleteMedeaRecord(int position) {
     File file = getFileByPosition(position);
     filesList.remove(file);
-    if(mediaPlayer.isPlaying()){
-      stopMediaRecord();
-    }
+    mediaPlayer.stopMediaList();
     if(file.delete()){
       context.deleteFile(file.getName());
       Toast.makeText(context, "Файл Удален", Toast.LENGTH_LONG).show();

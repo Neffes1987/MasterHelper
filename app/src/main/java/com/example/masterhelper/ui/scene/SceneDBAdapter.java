@@ -1,8 +1,6 @@
 package com.example.masterhelper.ui.scene;
 
-import android.content.Context;
 import android.database.Cursor;
-import android.util.Log;
 import com.example.masterhelper.data.DbHelpers;
 import com.example.masterhelper.data.contracts.SceneContract;
 import com.example.masterhelper.data.contracts.SceneMusicContract;

@@ -1,4 +1,4 @@
-package com.example.masterhelper.commonAdapter.item;
+package com.masterhelper.listFactory.commonAdapter.item;
 
 import android.view.Gravity;
 import android.view.View;
@@ -7,7 +7,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.cardview.widget.CardView;
 import com.example.masterhelper.R;
-import com.example.masterhelper.commonAdapter.CommonAdapter;
+import com.masterhelper.listFactory.commonAdapter.CommonAdapter;
 import com.example.masterhelper.models.EnemyModel;
 
 public class EnemyIconItem<Model> extends CommonItem<Model> {

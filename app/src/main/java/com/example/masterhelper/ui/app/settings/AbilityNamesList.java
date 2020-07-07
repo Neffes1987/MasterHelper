@@ -1,18 +1,19 @@
 package com.example.masterhelper.ui.app.settings;
 
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import com.example.masterhelper.DialogPopup;
 import com.example.masterhelper.R;
-import com.example.masterhelper.commonAdapter.item.ICommonItemEvents;
+import com.masterhelper.listFactory.CustomListItemsEnum;
+import com.masterhelper.listFactory.commonAdapter.item.ICommonItemEvents;
 import com.example.masterhelper.models.AbilityModel;
-import com.example.masterhelper.ui.recyclerViewFragment.RecyclerViewFragment;
+import com.masterhelper.listFactory.ListFactory;
 import com.example.masterhelper.ui.viewCharacteristicRow.AbilityDBAdapter;
 
 import java.util.LinkedHashMap;
@@ -51,10 +52,12 @@ public class AbilityNamesList extends AppCompatActivity implements ICommonItemEv
   void updateAbilitiesList(){
     abilities = abilityDBAdapter.getSettingsAbilitiesList();
     FragmentManager fm = getSupportFragmentManager();
-    RecyclerViewFragment lsf = (RecyclerViewFragment) fm.findFragmentById(R.id.ABILITY_LIST_ID);
+    Fragment lsf =  fm.findFragmentById(R.id.ABILITY_LIST_ID);
 
     if(lsf != null && lsf.getView() != null){
-      lsf.updateAbilitiesListAdapter(abilities);
+      ListFactory<AbilityModel> list = (ListFactory<AbilityModel>) lsf;
+      list.setItemType(CustomListItemsEnum.abilities);
+      list.updateListAdapter(abilities);
     }
   }
 

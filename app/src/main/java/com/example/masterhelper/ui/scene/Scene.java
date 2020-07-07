@@ -12,11 +12,12 @@ import androidx.fragment.app.FragmentManager;
 import com.example.masterhelper.CreateNewItemDialog;
 import com.example.masterhelper.DialogPopup;
 import com.example.masterhelper.R;
-import com.example.masterhelper.mediaworker.BackgroundMediaPlayer;
+import com.masterhelper.mediaworker.BackgroundMediaPlayer;
 import com.example.masterhelper.ui.app.settings.MusicSettingsScreen;
 import com.example.masterhelper.ui.enemies.EnemiesListView;
-import com.example.masterhelper.commonAdapter.item.ICommonItemEvents;
-import com.example.masterhelper.ui.recyclerViewFragment.RecyclerViewFragment;
+import com.masterhelper.listFactory.CustomListItemsEnum;
+import com.masterhelper.listFactory.commonAdapter.item.ICommonItemEvents;
+import com.masterhelper.listFactory.ListFactory;
 import com.example.masterhelper.models.ScriptRecycleDataModel;
 import com.example.masterhelper.ui.scripts.ScriptDBAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -37,8 +38,10 @@ public class Scene extends AppCompatActivity implements ICommonItemEvents {
   /** указатель на кнопку создания нового скрипта сцены */
   FloatingActionButton newScriptBtn;
 
-  /** указатель на кнопку создания нового скрипта сцены */
+  /** указатель на кнопку проигрывания музыки */
   FloatingActionButton musicControl;
+
+  ListFactory<ScriptRecycleDataModel> scriptsViewList;
 
   BackgroundMediaPlayer backgroundMediaPlayer = BackgroundMediaPlayer.getInstance();
 
@@ -107,6 +110,10 @@ public class Scene extends AppCompatActivity implements ICommonItemEvents {
       }
     });
 
+    FragmentManager fm = getSupportFragmentManager();
+    scriptsViewList = (ListFactory<ScriptRecycleDataModel>) fm.findFragmentById(R.id.SCREEN_SCRIPTS_LIST_ID);
+
+
     if(bar != null){
       bar.setSubtitle(journeyName);
       bar.setTitle(sceneName);
@@ -118,15 +125,12 @@ public class Scene extends AppCompatActivity implements ICommonItemEvents {
     return mediaList.size() > 0 ? mediaList.keySet().toString().replaceAll("\\[|]|\\s", "") : "";
   }
 
-
   /** обновление списка скриптов */
   void setListData(){
     scriptsList = scriptDBAdapter.getScriptsList(sceneId);
-    FragmentManager fm = getSupportFragmentManager();
-    RecyclerViewFragment lsf = (RecyclerViewFragment) fm.findFragmentById(R.id.SCREEN_SCRIPTS_LIST_ID);
-
-    if(lsf != null && lsf.getView() != null){
-      lsf.updateScriptListAdapter(scriptsList);
+    if(scriptsViewList != null && scriptsViewList.getView() != null){
+      scriptsViewList.setItemType(CustomListItemsEnum.script);
+      scriptsViewList.updateListAdapter(scriptsList);
     }
   }
 

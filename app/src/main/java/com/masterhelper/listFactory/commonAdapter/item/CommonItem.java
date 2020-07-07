@@ -1,8 +1,8 @@
-package com.example.masterhelper.commonAdapter.item;
+package com.masterhelper.listFactory.commonAdapter.item;
 
 import android.view.View;
 import androidx.recyclerview.widget.RecyclerView;
-import com.example.masterhelper.commonAdapter.CommonAdapter;
+import com.masterhelper.listFactory.commonAdapter.CommonAdapter;
 
 /** Модель для управления интерфейсом внутри элемента для циклического списка
  * Model - тип модели данных, который следует передать в обработчик жлемента списка для инициализаци

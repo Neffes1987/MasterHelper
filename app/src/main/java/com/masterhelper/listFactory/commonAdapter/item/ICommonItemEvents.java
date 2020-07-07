@@ -1,4 +1,4 @@
-package com.example.masterhelper.commonAdapter.item;
+package com.masterhelper.listFactory.commonAdapter.item;
 
 import android.view.View;
 

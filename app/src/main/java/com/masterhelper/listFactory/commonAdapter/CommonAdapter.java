@@ -1,12 +1,12 @@
-package com.example.masterhelper.commonAdapter;
+package com.masterhelper.listFactory.commonAdapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-import com.example.masterhelper.commonAdapter.item.CustomListItemsEnum;
-import com.example.masterhelper.commonAdapter.item.ICommonItemEvents;
+import com.masterhelper.listFactory.CustomListItemsEnum;
+import com.masterhelper.listFactory.commonAdapter.item.ICommonItemEvents;
 
 import java.util.LinkedHashMap;
 

@@ -12,7 +12,7 @@
   <fragment
     android:layout_width="0dp"
     android:layout_height="0dp"
-    android:name="com.example.masterhelper.ui.recyclerViewFragment.RecyclerViewFragment"
+    android:name="com.masterhelper.listFactory.ListFactory"
     android:id="@+id/SCREEN_SCRIPTS_LIST_ID"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"

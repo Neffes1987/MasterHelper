@@ -1,13 +1,14 @@
-package com.example.masterhelper.commonAdapter;
+package com.masterhelper.listFactory.commonAdapter;
 
 import android.view.View;
 import androidx.recyclerview.widget.RecyclerView;
-import com.example.masterhelper.commonAdapter.item.*;
+import com.masterhelper.listFactory.CustomListItemsEnum;
+import com.masterhelper.listFactory.commonAdapter.item.*;
 
 /** Промежуточный класс, который связывает адаптер и вьюху циклического списка*/
 public class CommonHolder<Model> extends RecyclerView.ViewHolder {
   private CommonItem<Model> commonItem;
-  /** @constructor генератор указателей на элементы UI для адаптера */
+  /** @constructor передача параметров в элемент списка после инициализации */
   public void initRecyclerView(Model item, int position) {
     commonItem.updateHolderByData(item, position);
   }
@@ -17,25 +18,25 @@ public class CommonHolder<Model> extends RecyclerView.ViewHolder {
     super(v);
     switch (itemTemplateType){
       case music:
-        commonItem = new MusicItem<Model>(v, adapter, false);
+        commonItem = new MusicItem<>(v, adapter, false);
         break;
       case musicGeneral:
-        commonItem = new MusicItem<Model>(v, adapter, true);
+        commonItem = new MusicItem<>(v, adapter, true);
         break;
       case scene:
-        commonItem = new SceneItem<Model>(v, adapter);
+        commonItem = new SceneItem<>(v, adapter);
         break;
       case script:
-        commonItem = new ScriptItem<Model>(v, adapter);
+        commonItem = new ScriptItem<>(v, adapter);
         break;
       case enemyIcon:
-        commonItem = new EnemyIconItem<Model>(v, adapter);
+        commonItem = new EnemyIconItem<>(v, adapter);
         break;
       case journey:
-        commonItem = new JourneyItem<Model>(v, adapter, true);
+        commonItem = new JourneyItem<>(v, adapter, true);
         break;
       case abilities:
-        commonItem = new AbilityItem<Model>(v, adapter, true);
+        commonItem = new AbilityItem<>(v, adapter, true);
         break;
     }
   }

@@ -1,11 +1,11 @@
-package com.example.masterhelper.commonAdapter.item;
+package com.masterhelper.listFactory.commonAdapter.item;
 
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import com.example.masterhelper.R;
-import com.example.masterhelper.commonAdapter.CommonAdapter;
+import com.masterhelper.listFactory.commonAdapter.CommonAdapter;
 import com.example.masterhelper.models.SoundFileModel;
 
 /** Модель для управления интерфейсом внутри элемента для циклического списка
@@ -21,9 +21,6 @@ public class MusicItem<Model> extends CommonItem<Model> {
 
   /** запустить проигрывание медиафайла */
   private ImageButton startSound;
-
-  /** удалить медиафайл */
-  private ImageButton deleteSound;
 
   /** остановить проигрывание */
   private ImageButton stopSound;
@@ -42,11 +39,9 @@ public class MusicItem<Model> extends CommonItem<Model> {
     startSound.setOnClickListener(toggleSoundPlaying);
     stopSound.setOnClickListener(toggleSoundPlaying);
 
-    deleteSound = itemView.findViewById(R.id.MUSIC_DELETE_ROW_ID);
+    ImageButton deleteSound = itemView.findViewById(R.id.MUSIC_DELETE_ROW_ID);
     deleteSound.setVisibility(!isGeneral ? View.GONE : View.VISIBLE);
-    if(deleteSound != null){
-      deleteSound.setOnClickListener(commonListener);
-    }
+    deleteSound.setOnClickListener(commonListener);
   }
 
   View.OnClickListener toggleSoundPlaying = v->{

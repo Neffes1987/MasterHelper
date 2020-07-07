@@ -1,17 +1,17 @@
 package com.example.masterhelper.ui.journey;
 
 import android.os.Build;
-import android.util.Log;
 import android.view.View;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBar;
 import com.example.masterhelper.CreateNewItemDialog;
 import com.example.masterhelper.DialogPopup;
 import com.example.masterhelper.R;
-import com.example.masterhelper.mediaworker.BackgroundMediaPlayer;
+import com.masterhelper.mediaworker.BackgroundMediaPlayer;
 import com.example.masterhelper.ui.scene.Scene;
-import com.example.masterhelper.commonAdapter.item.ICommonItemEvents;
-import com.example.masterhelper.ui.recyclerViewFragment.RecyclerViewFragment;
+import com.masterhelper.listFactory.CustomListItemsEnum;
+import com.masterhelper.listFactory.commonAdapter.item.ICommonItemEvents;
+import com.masterhelper.listFactory.ListFactory;
 import com.example.masterhelper.models.SceneRecycleDataModel;
 import android.content.Intent;
 import androidx.appcompat.app.AppCompatActivity;
@@ -77,10 +77,11 @@ public class JourneyItemView extends AppCompatActivity implements ICommonItemEve
   void updateScenesList(){
     scenesList = sceneDBAdapter.getScenesList(journeyDBAdapter.getJourneyId());
     FragmentManager fm = getSupportFragmentManager();
-    RecyclerViewFragment lsf = (RecyclerViewFragment) fm.findFragmentById(R.id.SCREEN_FRAGMENT_ID);
+    ListFactory<SceneRecycleDataModel> lsf = (ListFactory<SceneRecycleDataModel>) fm.findFragmentById(R.id.SCREEN_FRAGMENT_ID);
 
     if(lsf != null && lsf.getView() != null){
-      lsf.updateSceneListAdapter(scenesList);
+      lsf.setItemType(CustomListItemsEnum.scene);
+      lsf.updateListAdapter(scenesList);
     }
   }
 

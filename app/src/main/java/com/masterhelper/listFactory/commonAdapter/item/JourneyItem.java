@@ -1,26 +1,22 @@
-package com.example.masterhelper.commonAdapter.item;
+package com.masterhelper.listFactory.commonAdapter.item;
 
-import android.content.Context;
-import android.util.Log;
-import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import androidx.core.content.ContextCompat;
 import com.example.masterhelper.R;
-import com.example.masterhelper.commonAdapter.CommonAdapter;
-import com.example.masterhelper.models.AbilityModel;
+import com.masterhelper.listFactory.commonAdapter.CommonAdapter;
+import com.example.masterhelper.models.JourneyModel;
 
 /** Модель для управления интерфейсом внутри элемента для циклического списка
  * Model - тип модели данных, который следует передать в обработчик жлемента списка для инициализаци
  * */
-public class AbilityItem<Model> extends CommonItem<Model> {
+public class JourneyItem<Model> extends CommonItem<Model> {
 
   /** текстовое поле в с именем приключения */
   private TextView title;
 
-  public AbilityItem(View v, CommonAdapter<Model> adapter, boolean hideCheckboxes) {
+  public JourneyItem(View v, CommonAdapter<Model> adapter, boolean hideCheckboxes) {
     super(v, adapter);
     title = itemView.findViewById(R.id.JOURNEY_TITLE_ID);
     title.setOnClickListener(commonListener);
@@ -29,9 +25,6 @@ public class AbilityItem<Model> extends CommonItem<Model> {
     selected.setVisibility(hideCheckboxes ? View.GONE : View.VISIBLE);
 
     ImageButton editPopup = itemView.findViewById(R.id.JOURNEY_EDIT_ID);
-    editPopup.setImageResource(R.mipmap.baseline_clear_black_18dp);
-    editPopup.setColorFilter(ContextCompat.getColor(editPopup.getContext(), R.color.colorDelete), android.graphics.PorterDuff.Mode.SRC_IN);
-
     editPopup.setOnClickListener(commonListener);
   }
 
@@ -40,8 +33,8 @@ public class AbilityItem<Model> extends CommonItem<Model> {
   }
 
   public void updateHolderByData(Model itemData, int position) {
-    AbilityModel journeyModel = (AbilityModel) itemData;
-    setTitle(journeyModel.getName());
+    JourneyModel journeyModel = (JourneyModel) itemData;
+    setTitle(journeyModel.getTitle());
     setPosition(position);
   }
 }
