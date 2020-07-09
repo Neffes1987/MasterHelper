@@ -8,8 +8,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import com.example.masterhelper.DialogPopup;
 import com.example.masterhelper.R;
+import com.masterhelper.dialogsFactory.DialogTypes;
+import com.masterhelper.dialogsFactory.DialogsFactory;
+import com.masterhelper.dialogsFactory.dialogs.CommonDialog;
 import com.masterhelper.listFactory.CustomListItemsEnum;
 import com.masterhelper.listFactory.commonAdapter.item.ICommonItemEvents;
 import com.example.masterhelper.models.AbilityModel;
@@ -82,13 +84,15 @@ public class AbilityNamesList extends AppCompatActivity implements ICommonItemEv
   public void onClick(View elementFiredAction, int position) {
     AbilityModel row = (AbilityModel) abilities.values().toArray()[position];
     if(row != null && elementFiredAction.getId() == R.id.JOURNEY_EDIT_ID ){
-      DialogPopup dialogPopup = new DialogPopup(getSupportFragmentManager());
-      dialogPopup.setClickListener((dialogInterface, id) -> {
-        if(id == BUTTON_POSITIVE){
-          deleteRow(row.getId());
-        }
-      });
-      dialogPopup.show();
+      CommonDialog dialog = DialogsFactory.createDialog(DialogTypes.delete);
+      if(dialog != null){
+        dialog.setOnResolveListener((dialogInterface, id) -> {
+          if(id == BUTTON_POSITIVE){
+            deleteRow(row.getId());
+          }
+        });
+        dialog.show(this);
+      }
     }
   }
 }

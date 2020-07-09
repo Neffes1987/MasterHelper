@@ -13,8 +13,10 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.fragment.app.FragmentManager;
-import com.example.masterhelper.DialogPopup;
 import com.example.masterhelper.R;
+import com.masterhelper.dialogsFactory.DialogTypes;
+import com.masterhelper.dialogsFactory.DialogsFactory;
+import com.masterhelper.dialogsFactory.dialogs.CommonDialog;
 import com.masterhelper.listFactory.commonAdapter.item.ICommonItemEvents;
 import com.masterhelper.mediaworker.MediaFiles;
 import com.example.masterhelper.ui.soundsList.SoundsList;
@@ -109,14 +111,16 @@ public class MusicSettingsScreen extends AppCompatActivity implements ICommonIte
             mediaFiles.stopMediaRecord();
           break;
         case R.id.MUSIC_DELETE_ROW_ID:
-          DialogPopup dialogPopup = new DialogPopup(getSupportFragmentManager());
-          dialogPopup.setClickListener((dialogInterface, id) -> {
-            if(id == BUTTON_POSITIVE){
-              mediaFiles.deleteMedeaRecord(position);
-              updateViewList();
-            }
-          });
-          dialogPopup.show();
+          CommonDialog dialog = DialogsFactory.createDialog(DialogTypes.delete);
+          if(dialog != null){
+            dialog.setOnResolveListener((dialogInterface, id) -> {
+              if(id == BUTTON_POSITIVE){
+                mediaFiles.deleteMedeaRecord(position);
+                updateViewList();
+              }
+            });
+            dialog.show(this);
+          }
           break;
         case R.id.FILE_NAME_SELECTOR_ID:
           String selectedFilePath = mediaFiles.getFileByPosition(position).getPath();

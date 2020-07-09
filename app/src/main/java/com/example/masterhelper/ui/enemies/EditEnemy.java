@@ -1,6 +1,5 @@
 package com.example.masterhelper.ui.enemies;
 
-import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -8,9 +7,6 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-import com.example.masterhelper.DialogPopup;
-import com.example.masterhelper.ListItemsDialog;
 import com.example.masterhelper.R;
 import com.example.masterhelper.models.ACHIEVE_CONST_TAGS;
 import com.example.masterhelper.models.AbilityModel;
@@ -18,12 +14,16 @@ import com.example.masterhelper.models.EnemyModel;
 import com.example.masterhelper.ui.viewCharacteristicRow.Abilities;
 import com.example.masterhelper.ui.viewCharacteristicRow.AbilityDBAdapter;
 import com.example.masterhelper.ui.viewCharacteristicRow.ViewCharacteristicRow;
- 
+import com.masterhelper.dialogsFactory.DialogTypes;
+import com.masterhelper.dialogsFactory.DialogsFactory;
+import com.masterhelper.dialogsFactory.dialogs.CommonDialog;
+import com.masterhelper.dialogsFactory.dialogs.MultiChooseDialog;
+
 import java.util.LinkedHashMap;
 
 import static android.content.DialogInterface.BUTTON_POSITIVE;
 
-public class EditEnemy extends AppCompatActivity implements ViewCharacteristicRow.IViewCharacteristicRow, EnemyBottomButtonsFragment.IScriptBottomButtonsFragment, ListItemsDialog.IButtonsEvents {
+public class EditEnemy extends AppCompatActivity implements ViewCharacteristicRow.IViewCharacteristicRow, EnemyBottomButtonsFragment.IScriptBottomButtonsFragment {
   /** редактировать имя врага */
   EditText enemyName;
 
@@ -212,9 +212,17 @@ public class EditEnemy extends AppCompatActivity implements ViewCharacteristicRo
       valueIdx += 1;
     }
 
-    ListItemsDialog myDialogFragment = new ListItemsDialog(abilitiesNames, "Список характеристик");
-    FragmentTransaction transaction = fragmentManager.beginTransaction();
-    myDialogFragment.show(transaction, "dialog");
+    MultiChooseDialog dialog = (MultiChooseDialog) DialogsFactory.createDialog(DialogTypes.multi);
+    if(dialog != null){
+      dialog.setListOfItems(abilitiesNames);
+      dialog.setTitle(R.string.abilities_settings);
+      dialog.setOnResolveListener((dialogInterface, id) -> {
+        if(id == BUTTON_POSITIVE){
+          accepted(dialog.getSelectedItems());
+        }
+      });
+      dialog.show(this);
+    }
   }
 
   @Override
@@ -224,21 +232,19 @@ public class EditEnemy extends AppCompatActivity implements ViewCharacteristicRo
         saveNewPerson();
         break;
       case delete:
-        DialogPopup dialogPopup = new DialogPopup(getSupportFragmentManager());
-        dialogPopup.setClickListener((dialogInterface, id) -> {
-          if(id == BUTTON_POSITIVE){
-            deletePerson();
-          }
-        });
-        dialogPopup.show();
+        CommonDialog dialog = DialogsFactory.createDialog(DialogTypes.delete);
+        if(dialog != null){
+          dialog.setOnResolveListener((dialogInterface, id) -> {
+            if(id == BUTTON_POSITIVE){
+              deletePerson();
+            }
+          });
+          dialog.show(this);
+        }
         break;
     }
   }
 
-  @Override
-  public void cancel() {}
-
-  @Override
   public void accepted(boolean[] selectedItems) {
     LinkedHashMap<Integer, AbilityModel> abilitiesForPopup = abilities.getAbilitiesListView();
     int valueIdx = 0;

@@ -85,8 +85,7 @@ public class MediaPlayerAdapter {
 
   public void stopMediaList(){
     if(mediaPlayer.isPlaying()){
-      mediaPlayer.stop();
-      mediaPlayer.reset();
+      stopMediaRecord();
     }
   }
 }

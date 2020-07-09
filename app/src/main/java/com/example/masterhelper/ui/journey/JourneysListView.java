@@ -4,10 +4,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import com.example.masterhelper.CreateNewItemDialog;
-import com.example.masterhelper.DialogPopup;
 import com.example.masterhelper.ui.app.settings.AbilityNamesList;
 import com.example.masterhelper.ui.app.settings.MusicSettingsScreen;
 import com.example.masterhelper.R;
+import com.masterhelper.dialogsFactory.DialogTypes;
+import com.masterhelper.dialogsFactory.DialogsFactory;
+import com.masterhelper.dialogsFactory.dialogs.CommonDialog;
 import com.masterhelper.listFactory.CustomListItemsEnum;
 import com.masterhelper.listFactory.commonAdapter.item.ICommonItemEvents;
 import com.example.masterhelper.models.JourneyModel;
@@ -172,13 +174,15 @@ public class JourneysListView extends AppCompatActivity implements ICommonItemEv
   public void onPopupMenuSelected(MenuItem selectedMenuItem) {
     switch (selectedMenuItem.getItemId()){
       case R.id.POPUP_MENU_DELETE_ID:
-        DialogPopup dialogPopup = new DialogPopup(getSupportFragmentManager());
-        dialogPopup.setClickListener((dialogInterface, id) -> {
-          if(id == BUTTON_POSITIVE){
-            deleteJourney();
-          }
-        });
-        dialogPopup.show();
+        CommonDialog dialog = DialogsFactory.createDialog(DialogTypes.delete);
+        if(dialog != null){
+          dialog.setOnResolveListener((dialogInterface, id) -> {
+            if(id == BUTTON_POSITIVE){
+              deleteJourney();
+            }
+          });
+          dialog.show(this);
+        }
         break;
       case R.id.POPUP_MENU_UPDATE_ID:
         onUpdateJourneyButtonPressed(selectedJourneyId);

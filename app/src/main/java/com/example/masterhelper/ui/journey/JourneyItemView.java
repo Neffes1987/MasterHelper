@@ -5,8 +5,10 @@ import android.view.View;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBar;
 import com.example.masterhelper.CreateNewItemDialog;
-import com.example.masterhelper.DialogPopup;
 import com.example.masterhelper.R;
+import com.masterhelper.dialogsFactory.DialogTypes;
+import com.masterhelper.dialogsFactory.DialogsFactory;
+import com.masterhelper.dialogsFactory.dialogs.CommonDialog;
 import com.masterhelper.mediaworker.BackgroundMediaPlayer;
 import com.example.masterhelper.ui.scene.Scene;
 import com.masterhelper.listFactory.CustomListItemsEnum;
@@ -155,15 +157,16 @@ public class JourneyItemView extends AppCompatActivity implements ICommonItemEve
         startActivity(intent);
         break;
       case R.id.SCENE_DELETE_BTN_ID:
-        DialogPopup dialogPopup = new DialogPopup(getSupportFragmentManager());
-        dialogPopup.setClickListener((dialogInterface, id) -> {
-          if(id == BUTTON_POSITIVE){
-            sceneDBAdapter.deleteScene(currentData.getId());
-            updateScenesList();
-          }
-        });
-        dialogPopup.show();
-
+        CommonDialog dialog = DialogsFactory.createDialog(DialogTypes.delete);
+        if(dialog != null){
+          dialog.setOnResolveListener((dialogInterface, id) -> {
+            if(id == BUTTON_POSITIVE){
+              sceneDBAdapter.deleteScene(currentData.getId());
+              updateScenesList();
+            }
+          });
+          dialog.show(this);
+        }
         break;
       case R.id.SCENE_EDIT_BTN_ID:
           onUpdateScreenNameButtonPressed(currentData.getId());

@@ -10,8 +10,10 @@ import android.os.Bundle;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 import com.example.masterhelper.CreateNewItemDialog;
-import com.example.masterhelper.DialogPopup;
 import com.example.masterhelper.R;
+import com.masterhelper.dialogsFactory.DialogTypes;
+import com.masterhelper.dialogsFactory.DialogsFactory;
+import com.masterhelper.dialogsFactory.dialogs.CommonDialog;
 import com.masterhelper.mediaworker.BackgroundMediaPlayer;
 import com.example.masterhelper.ui.app.settings.MusicSettingsScreen;
 import com.example.masterhelper.ui.enemies.EnemiesListView;
@@ -215,14 +217,17 @@ public class Scene extends AppCompatActivity implements ICommonItemEvents {
         onUpdateScriptNameButtonPressed(currId);
         break;
       case R.id.SCRIPT_DELETE_BTN_ID:
-        DialogPopup dialogPopup = new DialogPopup(getSupportFragmentManager());
-        dialogPopup.setClickListener((dialogInterface, id) -> {
-          if(id == BUTTON_POSITIVE){
-            scriptDBAdapter.deleteScript(currentData.getId());
-            setListData();
-          }
-        });
-        dialogPopup.show();
+        CommonDialog dialog = DialogsFactory.createDialog(DialogTypes.delete);
+        if(dialog != null){
+          dialog.setOnResolveListener((dialogInterface, id) -> {
+            if(id == BUTTON_POSITIVE){
+              scriptDBAdapter.deleteScript(currentData.getId());
+              setListData();
+            }
+          });
+          dialog.show(this);
+        }
+
         break;
       case R.id.SCRIPT_BTN_DONE_ID:
         boolean isFinished = !currentData.isFinished;
