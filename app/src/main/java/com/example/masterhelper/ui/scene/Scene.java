@@ -15,7 +15,7 @@ import com.masterhelper.dialogsFactory.DialogTypes;
 import com.masterhelper.dialogsFactory.DialogsFactory;
 import com.masterhelper.dialogsFactory.dialogs.CommonDialog;
 import com.masterhelper.mediaworker.BackgroundMediaPlayer;
-import com.example.masterhelper.ui.app.settings.MusicSettingsScreen;
+import com.example.masterhelper.ui.appBarFragment.MusicSettingsScreen;
 import com.example.masterhelper.ui.enemies.EnemiesListView;
 import com.masterhelper.listFactory.CustomListItemsEnum;
 import com.masterhelper.listFactory.commonAdapter.item.ICommonItemEvents;

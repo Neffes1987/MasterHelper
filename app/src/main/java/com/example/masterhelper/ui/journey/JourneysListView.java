@@ -4,8 +4,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import com.example.masterhelper.CreateNewItemDialog;
-import com.example.masterhelper.ui.app.settings.AbilityNamesList;
-import com.example.masterhelper.ui.app.settings.MusicSettingsScreen;
 import com.example.masterhelper.R;
 import com.masterhelper.dialogsFactory.DialogTypes;
 import com.masterhelper.dialogsFactory.DialogsFactory;
@@ -124,19 +122,7 @@ public class JourneysListView extends AppCompatActivity implements ICommonItemEv
 
   /** обработчик вызова музыкальных настроек */
   @Override
-  public void onItemSelected(MenuItem selectedView) {
-    Intent intent;
-    switch (selectedView.getItemId()){
-      case R.id.ACTION_SETTINGS:
-        intent = new Intent(JourneysListView.this, MusicSettingsScreen.class);
-        startActivity(intent);
-        break;
-      case R.id.ABILITIES_SETTINGS:
-        intent = new Intent(JourneysListView.this, AbilityNamesList.class);
-        startActivity(intent);
-        break;
-    }
-  }
+  public void onItemSelected(MenuItem selectedView) {}
 
   /** показать диалог настроек путешествия */
   void onShowJourneySettingsPopup(View v){

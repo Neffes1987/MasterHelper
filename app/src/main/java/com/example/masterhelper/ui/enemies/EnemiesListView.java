@@ -2,19 +2,22 @@ package com.example.masterhelper.ui.enemies;
 
 import android.content.Intent;
 import android.os.Build;
+import android.view.MenuItem;
 import android.view.View;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 import com.example.masterhelper.R;
+import com.example.masterhelper.ui.appBarFragment.IAppBarFragment;
 import com.masterhelper.listFactory.CustomListItemsEnum;
 import com.masterhelper.listFactory.commonAdapter.item.ICommonItemEvents;
 import com.masterhelper.mediaworker.BackgroundMediaPlayer;
 import com.example.masterhelper.models.EnemyModel;
-import com.example.masterhelper.ui.app.settings.MusicSettingsScreen;
+import com.example.masterhelper.ui.appBarFragment.MusicSettingsScreen;
 import com.masterhelper.listFactory.ListFactory;
 import com.example.masterhelper.ui.scripts.ScriptDBAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -23,7 +26,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 
 @RequiresApi(api = Build.VERSION_CODES.M)
-public class EnemiesListView extends AppCompatActivity implements ICommonItemEvents {
+public class EnemiesListView extends AppCompatActivity implements ICommonItemEvents, IAppBarFragment {
 
   int CREATE_NEW_ENEMY_CODE = 1;
   int EDIT_ENEMY_CODE = 2;
@@ -79,6 +82,10 @@ public class EnemiesListView extends AppCompatActivity implements ICommonItemEve
         editEnemyDetails(scriptId);
       }
     });
+
+    Toolbar toolbar = findViewById(R.id.TOOLBAR_ID);
+    toolbar.setTitle(R.string.screen_name_scene_step);
+    setSupportActionBar(toolbar);
 
     musicControl.setOnLongClickListener(v -> {
       Intent intent = new Intent(this, MusicSettingsScreen.class);
@@ -153,4 +160,6 @@ public class EnemiesListView extends AppCompatActivity implements ICommonItemEve
     openEnemyDetails(currentData.getId());
   }
 
+  @Override
+  public void onItemSelected(MenuItem selectedView) {}
 }

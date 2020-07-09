@@ -1,8 +1,7 @@
 package com.example.masterhelper.ui.appBarFragment;
 
-import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.*;
 import androidx.fragment.app.Fragment;
 import com.example.masterhelper.R;
@@ -38,21 +37,23 @@ public class AppBarFragment extends Fragment {
     super.onCreateOptionsMenu(menu, inflater);
   }
 
-  @Override
-  public boolean onOptionsItemSelected(MenuItem item) {
-    mListener.onItemSelected(item);
-    return super.onOptionsItemSelected(item);
-  }
 
   @Override
-  public void onAttach(Context context) {
-    super.onAttach(context);
-    if (context instanceof IAppBarFragment) {
-      mListener = (IAppBarFragment) context;
-    } else {
-      throw new RuntimeException(context.toString()
-        + " must implement IAppBarFragment");
+  public boolean onOptionsItemSelected(MenuItem item) {
+    Intent intent;
+    switch (item.getItemId()){
+      case R.id.ACTION_SETTINGS:
+        intent = new Intent(getActivity(), MusicSettingsScreen.class);
+        startActivity(intent);
+        break;
+      case R.id.ABILITIES_SETTINGS:
+        intent = new Intent(getActivity(), AbilityNamesList.class);
+        startActivity(intent);
+        break;
+      default:
+        mListener.onItemSelected(item);
     }
+    return super.onOptionsItemSelected(item);
   }
 
 }

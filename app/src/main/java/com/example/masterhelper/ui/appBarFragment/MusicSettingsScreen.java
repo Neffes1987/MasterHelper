@@ -1,4 +1,4 @@
-package com.example.masterhelper.ui.app.settings;
+package com.example.masterhelper.ui.appBarFragment;
 
 import android.Manifest;
 import android.content.ClipData;
