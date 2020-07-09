@@ -5,6 +5,9 @@ import android.view.View;
 import android.widget.ImageButton;
 import com.example.masterhelper.CreateNewItemDialog;
 import com.example.masterhelper.R;
+import com.masterhelper.dbAdaptersFactory.AdaptersType;
+import com.masterhelper.dbAdaptersFactory.DBAdapterFactory;
+import com.masterhelper.dbAdaptersFactory.adapters.JourneyDBAdapter;
 import com.masterhelper.dialogsFactory.DialogTypes;
 import com.masterhelper.dialogsFactory.DialogsFactory;
 import com.masterhelper.dialogsFactory.dialogs.CommonDialog;
@@ -40,7 +43,7 @@ public class JourneysListView extends AppCompatActivity implements ICommonItemEv
   Toolbar toolbar;
 
   /** хелпер для управлением таблицей путешествий в бд */
-  JourneyDBAdapter journeyDBAdapter;
+  JourneyDBAdapter journeyDBAdapter = (JourneyDBAdapter) DBAdapterFactory.getAdapter(AdaptersType.journey);
 
   /** временный кеш списка путешествий */
   LinkedHashMap<Integer, JourneyModel> journeys = new LinkedHashMap<>();
@@ -53,8 +56,6 @@ public class JourneysListView extends AppCompatActivity implements ICommonItemEv
     toolbar.setTitle(R.string.SCREEN_NAME_JOURNEYS_TEXT);
     journeyCreateBtn = findViewById(R.id.JOURNEY_CREATE_BTN);
     journeyCreateBtn.setOnClickListener(v -> onCreateJourneyButtonPressed());
-
-    journeyDBAdapter  = new JourneyDBAdapter();
 
     setSupportActionBar(toolbar);
     updateJourneysList();
@@ -88,7 +89,7 @@ public class JourneysListView extends AppCompatActivity implements ICommonItemEv
 
   /** обновить вьюху списка путешествий */
   void updateJourneysList(){
-    journeys = journeyDBAdapter.getJourneysList();
+    journeys = journeyDBAdapter.getListByParentId(0);
     FragmentManager fm = getSupportFragmentManager();
     ListFactory<JourneyModel> lsf = (ListFactory<JourneyModel>) fm.findFragmentById(R.id.JOURNEYS_ID);
     if(lsf != null && lsf.getView() != null){
@@ -109,12 +110,13 @@ public class JourneysListView extends AppCompatActivity implements ICommonItemEv
     if(newName != null && newName.trim().length() == 0){
       return;
     }
+    JourneyModel item = new JourneyModel(newName, id);
     switch (requestCode){
       case 1:
-        journeyDBAdapter.addJourney(newName);
+        journeyDBAdapter.add(item,0);
         break;
       case 2:
-        journeyDBAdapter.updateJourney(id, newName);
+        journeyDBAdapter.update(item);
         break;
     }
     updateJourneysList();
@@ -150,7 +152,7 @@ public class JourneysListView extends AppCompatActivity implements ICommonItemEv
   }
 
   private void deleteJourney(){
-    journeyDBAdapter.deleteJourney(selectedJourneyId);
+    journeyDBAdapter.delete(selectedJourneyId);
     selectedJourneyId = -1;
     updateJourneysList();
   }

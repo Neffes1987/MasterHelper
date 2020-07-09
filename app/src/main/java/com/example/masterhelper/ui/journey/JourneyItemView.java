@@ -6,6 +6,10 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBar;
 import com.example.masterhelper.CreateNewItemDialog;
 import com.example.masterhelper.R;
+import com.example.masterhelper.models.JourneyModel;
+import com.masterhelper.dbAdaptersFactory.AdaptersType;
+import com.masterhelper.dbAdaptersFactory.DBAdapterFactory;
+import com.masterhelper.dbAdaptersFactory.adapters.JourneyDBAdapter;
 import com.masterhelper.dialogsFactory.DialogTypes;
 import com.masterhelper.dialogsFactory.DialogsFactory;
 import com.masterhelper.dialogsFactory.dialogs.CommonDialog;
@@ -19,7 +23,7 @@ import android.content.Intent;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.fragment.app.FragmentManager;
-import com.example.masterhelper.ui.scene.SceneDBAdapter;
+import com.masterhelper.dbAdaptersFactory.adapters.SceneDBAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.LinkedHashMap;
 
@@ -31,10 +35,12 @@ public class JourneyItemView extends AppCompatActivity implements ICommonItemEve
   FloatingActionButton createNewSceneBtn;
 
   /** хелпер для управления данными по прикобчениям в базе */
-  JourneyDBAdapter journeyDBAdapter;
+  JourneyDBAdapter journeyDBAdapter = (JourneyDBAdapter) DBAdapterFactory.getAdapter(AdaptersType.journey);
 
   /** хелпер для управления данными по сценам в базе */
-  SceneDBAdapter sceneDBAdapter;
+  SceneDBAdapter sceneDBAdapter = (SceneDBAdapter) DBAdapterFactory.getAdapter(AdaptersType.scene);
+
+  JourneyModel currentJourney;
 
   /** временный кеш по списку сцен */
   LinkedHashMap<Integer, SceneRecycleDataModel> scenesList = new LinkedHashMap<>();
@@ -48,13 +54,11 @@ public class JourneyItemView extends AppCompatActivity implements ICommonItemEve
       setResult(RESULT_CANCELED);
       finish();
     }
-    journeyDBAdapter  = new JourneyDBAdapter(journeyId);
-    sceneDBAdapter  = new SceneDBAdapter();
     ActionBar toolbar = getSupportActionBar();
-
+    currentJourney = journeyDBAdapter.get(journeyId);
     // получаем указатель на тулбар активированного в главном компоненте
-    if(toolbar != null){
-      toolbar.setTitle(journeyDBAdapter.getJourneyTitle());
+    if(toolbar != null && currentJourney != null){
+      toolbar.setTitle(currentJourney.getTitle());
     }
     
 
@@ -77,7 +81,7 @@ public class JourneyItemView extends AppCompatActivity implements ICommonItemEve
 
   /** обновить вьюху по списку сцен */
   void updateScenesList(){
-    scenesList = sceneDBAdapter.getScenesList(journeyDBAdapter.getJourneyId());
+    scenesList = sceneDBAdapter.getListByParentId(currentJourney.getId());
     FragmentManager fm = getSupportFragmentManager();
     ListFactory<SceneRecycleDataModel> lsf = (ListFactory<SceneRecycleDataModel>) fm.findFragmentById(R.id.SCREEN_FRAGMENT_ID);
 
@@ -96,7 +100,7 @@ public class JourneyItemView extends AppCompatActivity implements ICommonItemEve
 
   /** вызвать диалог редактирования сцены */
   public void onUpdateScreenNameButtonPressed(int id) {
-    SceneRecycleDataModel scene = sceneDBAdapter.getSceneById(id);
+    SceneRecycleDataModel scene = sceneDBAdapter.get(id);
     if(scene != null){
       Intent intent = new Intent(this, CreateNewItemDialog.class);
       intent.putExtra(CreateNewItemDialog.TITLE, R.string.screen_name_scene_update);
@@ -124,7 +128,7 @@ public class JourneyItemView extends AppCompatActivity implements ICommonItemEve
     }
     SceneRecycleDataModel scene;
     if(id > 0) {
-      scene = sceneDBAdapter.getSceneById(id);
+      scene = sceneDBAdapter.get(id);
 
     } else {
       scene = new SceneRecycleDataModel(newName);
@@ -134,10 +138,10 @@ public class JourneyItemView extends AppCompatActivity implements ICommonItemEve
 
     switch (requestCode){
       case 1:
-        sceneDBAdapter.addNewScene(scene, journeyDBAdapter.getJourneyId());
+        sceneDBAdapter.add(scene, currentJourney.getId());
         break;
       case 2:
-        sceneDBAdapter.updateScene(scene, id);
+        sceneDBAdapter.update(scene);
         break;
     }
     updateScenesList();
@@ -153,7 +157,7 @@ public class JourneyItemView extends AppCompatActivity implements ICommonItemEve
         Intent intent = new Intent(this, Scene.class);
         intent.putExtra("sceneId", currentData.getId());
         intent.putExtra("sceneName", currentData.getTitle());
-        intent.putExtra("journeyName", journeyDBAdapter.getJourneyTitle());
+        intent.putExtra("journeyName", currentData.getTitle());
         startActivity(intent);
         break;
       case R.id.SCENE_DELETE_BTN_ID:
@@ -161,7 +165,7 @@ public class JourneyItemView extends AppCompatActivity implements ICommonItemEve
         if(dialog != null){
           dialog.setOnResolveListener((dialogInterface, id) -> {
             if(id == BUTTON_POSITIVE){
-              sceneDBAdapter.deleteScene(currentData.getId());
+              sceneDBAdapter.delete(currentData.getId());
               updateScenesList();
             }
           });

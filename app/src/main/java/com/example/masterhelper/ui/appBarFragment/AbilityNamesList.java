@@ -9,6 +9,8 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import com.example.masterhelper.R;
+import com.masterhelper.dbAdaptersFactory.AdaptersType;
+import com.masterhelper.dbAdaptersFactory.DBAdapterFactory;
 import com.masterhelper.dialogsFactory.DialogTypes;
 import com.masterhelper.dialogsFactory.DialogsFactory;
 import com.masterhelper.dialogsFactory.dialogs.CommonDialog;
@@ -16,7 +18,7 @@ import com.masterhelper.listFactory.CustomListItemsEnum;
 import com.masterhelper.listFactory.commonAdapter.item.ICommonItemEvents;
 import com.example.masterhelper.models.AbilityModel;
 import com.masterhelper.listFactory.ListFactory;
-import com.example.masterhelper.ui.viewCharacteristicRow.AbilityDBAdapter;
+import com.masterhelper.dbAdaptersFactory.adapters.AbilityDBAdapter;
 
 import java.util.LinkedHashMap;
 
@@ -31,7 +33,7 @@ public class AbilityNamesList extends AppCompatActivity implements ICommonItemEv
   /**  */
   ImageButton addNewNameBtn;
 
-  AbilityDBAdapter abilityDBAdapter;
+  AbilityDBAdapter abilityDBAdapter = (AbilityDBAdapter) DBAdapterFactory.getAdapter(AdaptersType.ability);
 
   /** Характеристики врага */
   private LinkedHashMap<Integer, AbilityModel> abilities = new LinkedHashMap<>();
@@ -41,7 +43,6 @@ public class AbilityNamesList extends AppCompatActivity implements ICommonItemEv
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_ability_names_list);
     fragmentManager = getSupportFragmentManager();
-    abilityDBAdapter = new AbilityDBAdapter();
     addNewNameText = findViewById(R.id.ABILITY_EDIT_NAME_ID);
     addNewNameBtn = findViewById(R.id.ABILITY_EDIT_ADD_BTN_ID);
     addNewNameBtn.setOnClickListener(v -> addNewRow());
@@ -65,7 +66,7 @@ public class AbilityNamesList extends AppCompatActivity implements ICommonItemEv
 
 
   public void deleteRow(int rowId) {
-    abilityDBAdapter.removeAbility(rowId);
+    abilityDBAdapter.delete(rowId);
     updateAbilitiesList();
   }
 
@@ -75,7 +76,7 @@ public class AbilityNamesList extends AppCompatActivity implements ICommonItemEv
       Toast.makeText(this, R.string.add_enemy_warning_title_placeholder, Toast.LENGTH_LONG).show();
       return;
     }
-    abilityDBAdapter.addAbility(title);
+    abilityDBAdapter.add(new AbilityModel(title), 0);
     updateAbilitiesList();
     addNewNameText.setText("");
   }

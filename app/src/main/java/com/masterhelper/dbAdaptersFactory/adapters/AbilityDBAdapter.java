@@ -1,6 +1,5 @@
-package com.example.masterhelper.ui.viewCharacteristicRow;
+package com.masterhelper.dbAdaptersFactory.adapters;
 
-import android.content.Context;
 import android.database.Cursor;
 import android.util.Log;
 import com.example.masterhelper.data.DbHelpers;
@@ -10,7 +9,7 @@ import com.example.masterhelper.models.AbilityModel;
 
 import java.util.LinkedHashMap;
 
-public class AbilityDBAdapter {
+public class AbilityDBAdapter extends CommonBDAdapter<AbilityModel> {
   /** класс для работы с базой */
   private DbHelpers dbHelpers;
 
@@ -18,17 +17,11 @@ public class AbilityDBAdapter {
     dbHelpers = new DbHelpers();
   }
 
-  /** создать новое приключения */
-  public void addAbility(String newItemName){
-    String sqlQuery = dbHelpers.abilitiesContract.addItemQuery(new AbilityModel(newItemName), 0);
-    dbHelpers.addNewItem(sqlQuery);
-  }
-
   public void addAbilitiesByEnemyId(LinkedHashMap<Integer, AbilityModel> newItems, int enemyId){
     StringBuilder updateQuery = new StringBuilder();
     StringBuilder deleteQuery = new StringBuilder();
 
-    LinkedHashMap<Integer, AbilityModel> existedAbilities = getSettingsAbilitiesListByEnemy(enemyId);
+    LinkedHashMap<Integer, AbilityModel> existedAbilities = getListByParentId(enemyId);
 
     for (AbilityModel newItem: newItems.values()) {
       int newItemId = newItem.getId();
@@ -61,18 +54,9 @@ public class AbilityDBAdapter {
       dbHelpers.deleteItem(deleteQuery.toString());
     }
 
-
-    Log.i("TAG", "addAbilitiesByEnemyId: " + updateQuery );
-
     if (updateQuery.toString().length() > 0){
       dbHelpers.updateItem(updateQuery.toString());
     }
-  }
-
-  /** создать новое приключения */
-  public void removeAbility(int id){
-    String sqlQuery = dbHelpers.abilitiesContract.deleteItemQuery(id);
-    dbHelpers.deleteItem(sqlQuery);
   }
 
   /**  */
@@ -97,28 +81,51 @@ public class AbilityDBAdapter {
     return result;
   }
 
-  /**  */
-  public LinkedHashMap<Integer, AbilityModel> getSettingsAbilitiesListByEnemy(int enemyId){
+
+  @Override
+  public AbilityModel get(int id) {
+    return null;
+  }
+
+  @Override
+  public void add(AbilityModel newItem, int parentId) {
+    String sqlQuery = dbHelpers.abilitiesContract.addItemQuery(newItem, parentId);
+    dbHelpers.addNewItem(sqlQuery);
+  }
+
+  @Override
+  public void delete(int deletedId) {
+    String sqlQuery = dbHelpers.abilitiesContract.deleteItemQuery(deletedId);
+    dbHelpers.deleteItem(sqlQuery);
+  }
+
+  @Override
+  public void update(AbilityModel updatedModel) {
+
+  }
+
+  @Override
+  public LinkedHashMap<Integer, AbilityModel> getListByParentId(int parentId) {
     LinkedHashMap<Integer, AbilityModel> result = new LinkedHashMap<>();
 
     StringBuilder abilitiesByScriptQuery = new StringBuilder();
     abilitiesByScriptQuery
       .append("SELECT ")
-        .append(EnemyAbilitiesContract.TABLE_NAME + "." + EnemyAbilitiesContract.COLUMN_ABILITY_ID + ",")
-        .append(EnemyAbilitiesContract.TABLE_NAME + "." + EnemyAbilitiesContract.COLUMN_ABILITY_VALUE + ",")
-        .append(AbilitiesContract.TABLE_NAME + "." + AbilitiesContract.COLUMN_NAME)
+      .append(EnemyAbilitiesContract.TABLE_NAME + "." + EnemyAbilitiesContract.COLUMN_ABILITY_ID + ",")
+      .append(EnemyAbilitiesContract.TABLE_NAME + "." + EnemyAbilitiesContract.COLUMN_ABILITY_VALUE + ",")
+      .append(AbilitiesContract.TABLE_NAME + "." + AbilitiesContract.COLUMN_NAME)
       .append(" FROM ")
-        .append(EnemyAbilitiesContract.TABLE_NAME)
+      .append(EnemyAbilitiesContract.TABLE_NAME)
       .append(" INNER JOIN ")
-        .append(AbilitiesContract.TABLE_NAME)
+      .append(AbilitiesContract.TABLE_NAME)
       .append(" ON ")
-        .append(EnemyAbilitiesContract.TABLE_NAME + "." + EnemyAbilitiesContract.COLUMN_ABILITY_ID)
-        .append("=")
-        .append(AbilitiesContract.TABLE_NAME + "." + AbilitiesContract._ID)
+      .append(EnemyAbilitiesContract.TABLE_NAME + "." + EnemyAbilitiesContract.COLUMN_ABILITY_ID)
+      .append("=")
+      .append(AbilitiesContract.TABLE_NAME + "." + AbilitiesContract._ID)
       .append(" WHERE ")
-        .append(EnemyAbilitiesContract.COLUMN_ENEMY_ID)
-        .append("=")
-        .append(enemyId)
+      .append(EnemyAbilitiesContract.COLUMN_ENEMY_ID)
+      .append("=")
+      .append(parentId)
     ;
     Cursor queryResult = dbHelpers.getList(abilitiesByScriptQuery.toString());
 
@@ -138,5 +145,4 @@ public class AbilityDBAdapter {
     queryResult.close();
     return result;
   }
-  
 }

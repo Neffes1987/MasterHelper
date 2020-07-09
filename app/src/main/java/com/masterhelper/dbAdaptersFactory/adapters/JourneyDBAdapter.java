@@ -1,6 +1,5 @@
-package com.example.masterhelper.ui.journey;
+package com.masterhelper.dbAdaptersFactory.adapters;
 
-import android.content.Context;
 import android.database.Cursor;
 import com.example.masterhelper.data.DbHelpers;
 import com.example.masterhelper.data.contracts.JourneysContract;
@@ -8,24 +7,18 @@ import com.example.masterhelper.models.JourneyModel;
 
 import java.util.LinkedHashMap;
 
-public class JourneyDBAdapter {
+public class JourneyDBAdapter extends CommonBDAdapter<JourneyModel> {
   /** класс для работы с базой */
   private DbHelpers dbHelpers;
 
-  /** выбранное приключение */
-  private JourneyModel currentJourney;
-
   /** конструкторы */
-  JourneyDBAdapter(){
+  public JourneyDBAdapter(){
     dbHelpers = new DbHelpers();
-  }
-  JourneyDBAdapter(int journeyId){
-    dbHelpers = new DbHelpers();
-    currentJourney = getJourney(journeyId);
   }
 
   /** получить данные по приключению по его ид */
-  private JourneyModel getJourney(int id){
+  @Override
+  public JourneyModel get(int id) {
     String sqlQuery = JourneysContract.getListQuery(JourneysContract.TABLE_NAME, null, JourneysContract._ID+"="+ id, null, 1);
     Cursor queryResult = dbHelpers.getList(sqlQuery);
     queryResult.moveToNext();
@@ -34,36 +27,29 @@ public class JourneyDBAdapter {
     return new JourneyModel(queryResult.getString(titleColumnIndex), queryResult.getInt(idColumnIndex));
   }
 
-  /** получить название приключения */
-  public String getJourneyTitle(){
-    return currentJourney.getTitle();
-  }
-
-  /** получить ид приключения */
-  public int getJourneyId(){
-    return currentJourney.getId();
-  }
-
-  /** создать новое приключения */
-  public void addJourney(String newItemName){
-    String sqlQuery = dbHelpers.journeysContract.addItemQuery(new JourneyModel(newItemName), 0);
+  @Override
+  public void add(JourneyModel newItem, int parentId) {
+    String sqlQuery = dbHelpers.journeysContract.addItemQuery(newItem, 0);
     dbHelpers.addNewItem(sqlQuery);
   }
 
   /** удалить приключение */
-  public void deleteJourney(int journeyId){
-    String sqlQuery = dbHelpers.journeysContract.deleteItemQuery(journeyId);
+  @Override
+  public void delete(int deletedId) {
+    String sqlQuery = dbHelpers.journeysContract.deleteItemQuery(deletedId);
     dbHelpers.deleteItem(sqlQuery);
   }
 
   /** изменить данные по путешествию */
-  public void updateJourney(int journeyId, String newTitle){
-    String sqlQuery = dbHelpers.journeysContract.updateItemQuery(journeyId, new JourneyModel(newTitle));
+  @Override
+  public void update(JourneyModel updatedModel) {
+    String sqlQuery = dbHelpers.journeysContract.updateItemQuery(updatedModel.getId(), updatedModel);
     dbHelpers.updateItem(sqlQuery);
   }
 
   /** получить список приключений */
-  public LinkedHashMap<Integer, JourneyModel> getJourneysList(){
+  @Override
+  public LinkedHashMap<Integer, JourneyModel> getListByParentId(int parentId) {
     String sqlQuery = JourneysContract.getListQuery(JourneysContract.TABLE_NAME, null, null, JourneysContract._ID + " DESC", 0);
     LinkedHashMap<Integer, JourneyModel> result = new LinkedHashMap<>();
     Cursor queryResult = dbHelpers.getList(sqlQuery);
@@ -77,5 +63,4 @@ public class JourneyDBAdapter {
     queryResult.close();
     return result;
   }
-
 }

@@ -11,6 +11,9 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 import com.example.masterhelper.CreateNewItemDialog;
 import com.example.masterhelper.R;
+import com.masterhelper.dbAdaptersFactory.AdaptersType;
+import com.masterhelper.dbAdaptersFactory.DBAdapterFactory;
+import com.masterhelper.dbAdaptersFactory.adapters.SceneDBAdapter;
 import com.masterhelper.dialogsFactory.DialogTypes;
 import com.masterhelper.dialogsFactory.DialogsFactory;
 import com.masterhelper.dialogsFactory.dialogs.CommonDialog;
@@ -21,7 +24,7 @@ import com.masterhelper.listFactory.CustomListItemsEnum;
 import com.masterhelper.listFactory.commonAdapter.item.ICommonItemEvents;
 import com.masterhelper.listFactory.ListFactory;
 import com.example.masterhelper.models.ScriptRecycleDataModel;
-import com.example.masterhelper.ui.scripts.ScriptDBAdapter;
+import com.masterhelper.dbAdaptersFactory.adapters.ScriptDBAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.HashMap;
@@ -32,7 +35,7 @@ import static android.content.DialogInterface.BUTTON_POSITIVE;
 @RequiresApi(api = Build.VERSION_CODES.M)
 public class Scene extends AppCompatActivity implements ICommonItemEvents {
   /** хелпер для работы с таблицей скриптов в бд */
-  ScriptDBAdapter scriptDBAdapter;
+  ScriptDBAdapter scriptDBAdapter = (ScriptDBAdapter) DBAdapterFactory.getAdapter(AdaptersType.script);
 
   /** хелпер для работы с таблицей сцен в бд */
   SceneDBAdapter sceneDBAdapter;
@@ -79,7 +82,6 @@ public class Scene extends AppCompatActivity implements ICommonItemEvents {
     newScriptBtn = findViewById(R.id.SCRIPT_CREATE_NEW_BTN_ID);
     musicControl = findViewById(R.id.SCENE_MUSIC_START_ID);
 
-    scriptDBAdapter  = new ScriptDBAdapter();
     ActionBar bar = getSupportActionBar();
 
 
@@ -129,7 +131,7 @@ public class Scene extends AppCompatActivity implements ICommonItemEvents {
 
   /** обновление списка скриптов */
   void setListData(){
-    scriptsList = scriptDBAdapter.getScriptsList(sceneId);
+    scriptsList = scriptDBAdapter.getListByParentId(sceneId);
     if(scriptsViewList != null && scriptsViewList.getView() != null){
       scriptsViewList.setItemType(CustomListItemsEnum.script);
       scriptsViewList.updateListAdapter(scriptsList);
@@ -177,7 +179,7 @@ public class Scene extends AppCompatActivity implements ICommonItemEvents {
     ScriptRecycleDataModel item;
 
     if(id > 0){
-      item = scriptDBAdapter.getScriptById(id);
+      item = scriptDBAdapter.get(id);
       item.setTitle(newName);
       item.setDescription(description);
       item.hasBattleActionIcon = hasBattleSceneValue == 1;
@@ -186,10 +188,10 @@ public class Scene extends AppCompatActivity implements ICommonItemEvents {
     }
     switch (requestCode){
       case CREATE_NEW_SCRIPT_CODE:
-        scriptDBAdapter.addNewScript(item, sceneId);
+        scriptDBAdapter.add(item, sceneId);
         break;
       case UPDATE_SCRIPT_CODE:
-        scriptDBAdapter.updateScript(item, id);
+        scriptDBAdapter.update(item);
         break;
       case ADD_MUSIC_TO_SCENE_CODE:
         String selectedPaths = result.getStringExtra(MusicSettingsScreen.SELECTED_LIST);
@@ -221,7 +223,7 @@ public class Scene extends AppCompatActivity implements ICommonItemEvents {
         if(dialog != null){
           dialog.setOnResolveListener((dialogInterface, id) -> {
             if(id == BUTTON_POSITIVE){
-              scriptDBAdapter.deleteScript(currentData.getId());
+              scriptDBAdapter.delete(currentData.getId());
               setListData();
             }
           });
@@ -232,7 +234,7 @@ public class Scene extends AppCompatActivity implements ICommonItemEvents {
       case R.id.SCRIPT_BTN_DONE_ID:
         boolean isFinished = !currentData.isFinished;
         currentData.setFinished(isFinished);
-        scriptDBAdapter.updateScript(currentData, currentData.getId());
+        scriptDBAdapter.update(currentData);
         setListData();
         break;
     }

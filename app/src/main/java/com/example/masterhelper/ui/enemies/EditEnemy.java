@@ -12,8 +12,11 @@ import com.example.masterhelper.models.ACHIEVE_CONST_TAGS;
 import com.example.masterhelper.models.AbilityModel;
 import com.example.masterhelper.models.EnemyModel;
 import com.example.masterhelper.ui.viewCharacteristicRow.Abilities;
-import com.example.masterhelper.ui.viewCharacteristicRow.AbilityDBAdapter;
+import com.masterhelper.dbAdaptersFactory.AdaptersType;
+import com.masterhelper.dbAdaptersFactory.DBAdapterFactory;
+import com.masterhelper.dbAdaptersFactory.adapters.AbilityDBAdapter;
 import com.example.masterhelper.ui.viewCharacteristicRow.ViewCharacteristicRow;
+import com.masterhelper.dbAdaptersFactory.adapters.EnemyDBAdapter;
 import com.masterhelper.dialogsFactory.DialogTypes;
 import com.masterhelper.dialogsFactory.DialogsFactory;
 import com.masterhelper.dialogsFactory.dialogs.CommonDialog;
@@ -42,11 +45,11 @@ public class EditEnemy extends AppCompatActivity implements ViewCharacteristicRo
   Abilities abilities;
 
   /** класс для работы с данными противника */
-  EnemyDBAdapter enemyDBAdapter;
+  EnemyDBAdapter enemyDBAdapter = (EnemyDBAdapter) DBAdapterFactory.getAdapter(AdaptersType.enemy);
 
   FragmentManager fragmentManager;
 
-  AbilityDBAdapter abilityDBAdapter;
+  AbilityDBAdapter abilityDBAdapter = (AbilityDBAdapter) DBAdapterFactory.getAdapter((AdaptersType.ability));
 
   int scriptID;
   int enemyId;
@@ -74,7 +77,7 @@ public class EditEnemy extends AppCompatActivity implements ViewCharacteristicRo
 
 
     if(scriptID > 0){
-      currentEnemy = enemyDBAdapter.getEnemyById(enemyId);
+      currentEnemy = enemyDBAdapter.get(enemyId);
     }
 
     if(currentEnemy == null){
@@ -94,7 +97,7 @@ public class EditEnemy extends AppCompatActivity implements ViewCharacteristicRo
     abilities = new Abilities(fragmentManager, this);
     abilities.setAbilityToList(healthAbility);
     abilities.setAbilityToList(orderingAbility);
-    abilities.setAbilitiesView(abilityDBAdapter.getSettingsAbilitiesListByEnemy(enemyId));
+    abilities.setAbilitiesView(abilityDBAdapter.getListByParentId(enemyId));
     abilities.setAbilitiesListView(abilityDBAdapter.getSettingsAbilitiesList());
 
     EnemyBottomButtonsFragment controls = (EnemyBottomButtonsFragment) fragmentManager.findFragmentById(R.id.SCRIPT_ENEMY_BOTTOM_BUTTONS);
@@ -162,7 +165,7 @@ public class EditEnemy extends AppCompatActivity implements ViewCharacteristicRo
     currentEnemy.setOrdering(currentOrdering);
 
     if(currentEnemy.getId() != 0){
-      enemyDBAdapter.updateEnemy(currentEnemy);
+      enemyDBAdapter.update(currentEnemy);
       abilityDBAdapter.addAbilitiesByEnemyId(abilities.getUntaggedAbilities(), currentEnemy.getId());
       Toast.makeText(this, title + " обновлен", Toast.LENGTH_LONG).show();
     } else {
@@ -171,7 +174,9 @@ public class EditEnemy extends AppCompatActivity implements ViewCharacteristicRo
         Toast.makeText(this, "Начальное здоровье должно быть больше 0", Toast.LENGTH_LONG).show();
         return;
       }
-      currentEnemy.setId(enemyDBAdapter.addNewEnemy(currentEnemy, scriptID));
+      enemyDBAdapter.add(currentEnemy, scriptID);
+      int lastAddedEnemy = enemyDBAdapter.get(-1).getId();
+      currentEnemy.setId(lastAddedEnemy);
       abilityDBAdapter.addAbilitiesByEnemyId(abilities.getUntaggedAbilities(), currentEnemy.getId());
       Toast.makeText(this, title + " добавлен", Toast.LENGTH_LONG).show();
     }
@@ -192,7 +197,7 @@ public class EditEnemy extends AppCompatActivity implements ViewCharacteristicRo
   }
 
   private void deletePerson(){
-    enemyDBAdapter.deleteEnemy(enemyId);
+    enemyDBAdapter.delete(enemyId);
     Toast.makeText(this, currentEnemy.getName() + " удален", Toast.LENGTH_LONG).show();
     setResult(RESULT_OK);
     finish();

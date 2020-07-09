@@ -13,13 +13,16 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 import com.example.masterhelper.R;
 import com.example.masterhelper.ui.appBarFragment.IAppBarFragment;
+import com.masterhelper.dbAdaptersFactory.AdaptersType;
+import com.masterhelper.dbAdaptersFactory.DBAdapterFactory;
+import com.masterhelper.dbAdaptersFactory.adapters.EnemyDBAdapter;
 import com.masterhelper.listFactory.CustomListItemsEnum;
 import com.masterhelper.listFactory.commonAdapter.item.ICommonItemEvents;
 import com.masterhelper.mediaworker.BackgroundMediaPlayer;
 import com.example.masterhelper.models.EnemyModel;
 import com.example.masterhelper.ui.appBarFragment.MusicSettingsScreen;
 import com.masterhelper.listFactory.ListFactory;
-import com.example.masterhelper.ui.scripts.ScriptDBAdapter;
+import com.masterhelper.dbAdaptersFactory.adapters.ScriptDBAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.HashMap;
@@ -49,8 +52,8 @@ public class EnemiesListView extends AppCompatActivity implements ICommonItemEve
 
   int scriptId;
 
-  EnemyDBAdapter enemyDBAdapter;
-  ScriptDBAdapter scriptDBAdapter;
+  EnemyDBAdapter enemyDBAdapter = (EnemyDBAdapter) DBAdapterFactory.getAdapter(AdaptersType.enemy);
+  ScriptDBAdapter scriptDBAdapter = (ScriptDBAdapter) DBAdapterFactory.getAdapter(AdaptersType.script);
 
 
   ListFactory<EnemyModel> lsf;
@@ -68,9 +71,6 @@ public class EnemiesListView extends AppCompatActivity implements ICommonItemEve
     setContentView(R.layout.activity_screen_view_script);
 
     scriptId = getIntent().getIntExtra("scriptId", 0);
-
-    enemyDBAdapter = new EnemyDBAdapter();
-    scriptDBAdapter = new ScriptDBAdapter();
 
     createNewEnemy = findViewById(R.id.CREATE_NEW_ENEMY_ID);
 
@@ -115,7 +115,7 @@ public class EnemiesListView extends AppCompatActivity implements ICommonItemEve
   }
 
   void updateEnemiesList(){
-    enemies = enemyDBAdapter.getEnemiesByScriptId(scriptId);
+    enemies = enemyDBAdapter.getListByParentId(scriptId);
     lsf.setItemType(CustomListItemsEnum.enemyIcon);
     lsf.updateListAdapter(enemies);
   }
