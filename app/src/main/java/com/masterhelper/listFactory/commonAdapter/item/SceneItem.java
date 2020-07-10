@@ -37,7 +37,7 @@ public class SceneItem<Model> extends CommonItem<Model>{
   public AppCompatImageButton expandButton;
 
   /** Кнопка запуска сцены */
-  public AppCompatImageView startScene;
+  public AppCompatImageButton startScene;
 
   /** кнопка редактирования сцены */
   public AppCompatImageButton editBtn;

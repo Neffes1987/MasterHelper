@@ -10,5 +10,6 @@
 
   <color name="colorCommonFloatTint">#FF80cbc4</color>
   <color name="colorMusicStartedFloatTint">#D45127</color>
+  <color name="colorAttention">#FFFFFF</color>
   <color name="colorFloatBtnBackground">#23353434</color>
 </resources>

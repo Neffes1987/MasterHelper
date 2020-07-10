@@ -25,9 +25,6 @@ public class ScriptItem<Model> extends CommonItem<Model>{
   /** блок шапки аккордиона */
   private LinearLayout titleBar;
 
-  /** блок шапки аккордиона */
-  private LinearLayout battleScriptBar;
-
   /** иконка окончания сцены, появляется в заголовке аккордиона */
   private ImageView isFinishedIcon;
 
@@ -35,7 +32,7 @@ public class ScriptItem<Model> extends CommonItem<Model>{
   public AppCompatImageButton expandButton;
 
   /** Кнопка запуска сцены */
-  public AppCompatImageView startScene;
+  public AppCompatImageButton startScene;
 
   /** кнопка редактирования сцены */
   public AppCompatImageButton editBtn;
@@ -81,11 +78,11 @@ public class ScriptItem<Model> extends CommonItem<Model>{
     setDescription(script.description);
     setPosition(position);
     setSceneIsDone(script);
-    setBattleScriptBarVisible(script.hasBattleActionIcon);
+    setBattleButtonVisible(script.hasBattleActionIcon);
   }
 
-  private void setBattleScriptBarVisible(boolean visible){
-    battleScriptBar.setVisibility(visible ? View.VISIBLE : View.GONE);
+  private void setBattleButtonVisible(boolean visible){
+    startScene.setVisibility(visible ? View.VISIBLE : View.GONE);
   }
 
   /** @constructor генератор указателей на элементы UI для адаптера */
@@ -96,8 +93,6 @@ public class ScriptItem<Model> extends CommonItem<Model>{
 
     titleBar = v.findViewById(R.id.SCRIPT_TITLE_BAR_ID);
     titleBar.setOnClickListener(itemToggle);
-
-    battleScriptBar = v.findViewById(R.id.SCRIPT_BATTLE_EVENT_WRAPPER_ID);
 
     description = v.findViewById(R.id.SCRIPT_DESCRIPTION_ID);
 

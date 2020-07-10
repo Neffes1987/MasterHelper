@@ -233,15 +233,21 @@ public class EditEnemy extends AppCompatActivity implements ViewCharacteristicRo
         saveNewPerson();
         break;
       case delete:
-        CommonDialog dialog = DialogsFactory.createDialog(DialogTypes.delete);
-        if(dialog != null){
-          dialog.setOnResolveListener((dialogInterface, id) -> {
-            if(id == BUTTON_POSITIVE){
-              deletePerson();
-            }
-          });
-          dialog.show(this);
+        if(enemyId > 0){
+          CommonDialog dialog = DialogsFactory.createDialog(DialogTypes.delete);
+          if(dialog != null){
+            dialog.setOnResolveListener((dialogInterface, id) -> {
+              if(id == BUTTON_POSITIVE){
+                deletePerson();
+              }
+            });
+            dialog.show(this);
+          }
+        } else {
+          setResult(RESULT_CANCELED);
+          finish();
         }
+
         break;
     }
   }

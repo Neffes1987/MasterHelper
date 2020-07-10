@@ -76,4 +76,10 @@
     <item name="android:textColor">@color/colorDelete</item>
     <item name="android:foregroundGravity">clip_horizontal|center_horizontal</item>
   </style>
+
+  <style name="play_action_button"  parent="common_action_button">
+    <item name="android:tint">@color/colorAttention</item>
+    <item name="android:textColor">@color/colorAttention</item>
+
+  </style>
 </resources>

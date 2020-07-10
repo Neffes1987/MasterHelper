@@ -112,31 +112,6 @@
         <LinearLayout
           android:orientation="horizontal"
           android:layout_width="match_parent"
-          android:layout_height="match_parent"
-          style="@style/rowStyled"
-          android:gravity="center_vertical"
-          >
-
-          <TextView
-            android:text="@string/screen_name_scene_start"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="10"/>
-
-          <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@mipmap/baseline_play_arrow_black_18dp"
-            android:id="@+id/SCENE_START_BTN_ID"
-            android:layout_weight="1"
-            android:minHeight="40dp"
-            android:contentDescription="@string/screen_name_scene_start"
-            style="@style/common_action_button"/>
-        </LinearLayout>
-
-        <LinearLayout
-          android:orientation="horizontal"
-          android:layout_width="match_parent"
           android:layout_height="match_parent">
 
           <ImageButton
@@ -154,6 +129,16 @@
             android:id="@+id/SCENE_DELETE_BTN_ID"
             android:layout_weight="1"
             style="@style/delete_action_button"/>
+
+          <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@mipmap/baseline_play_arrow_black_18dp"
+            android:id="@+id/SCENE_START_BTN_ID"
+            android:layout_weight="1"
+            android:minHeight="40dp"
+            android:contentDescription="@string/screen_name_scene_start"
+            style="@style/play_action_button"/>
         </LinearLayout>
 
         <TextView
