@@ -5,12 +5,12 @@
   xmlns:app="http://schemas.android.com/apk/res-auto"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  tools:context=".ui.appBarFragment.MusicSettingsScreen">
+  tools:context="com.masterhelper.ui.appBarFragment.MusicSettingsScreen">
 
   <fragment
     android:layout_width="0dp"
     android:layout_height="0dp"
-    android:name="com.example.masterhelper.ui.soundsList.SoundsList"
+    android:name="com.masterhelper.ui.soundsList.SoundsList"
     android:id="@+id/SOUND_LIST_FRAGMENT_ID"
     tools:layout="@layout/fragment_sounds_list"
     app:layout_constraintEnd_toEndOf="parent"

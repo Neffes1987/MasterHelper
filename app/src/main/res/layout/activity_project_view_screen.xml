@@ -6,7 +6,7 @@
   android:layout_width="match_parent"
   android:layout_height="match_parent"
   style="@style/ConstraintLayoutStyled"
-  tools:context=".ui.journey.JourneyItemView">
+  tools:context="com.masterhelper.ui.journey.JourneyItemView">
 
   <fragment
     android:layout_width="0dp"

@@ -1,4 +1,4 @@
-package com.example.masterhelper.ui.appBarFragment;
+package com.masterhelper.ui.appBarFragment;
 
 import android.Manifest;
 import android.content.ClipData;
@@ -19,7 +19,7 @@ import com.masterhelper.dialogsFactory.DialogsFactory;
 import com.masterhelper.dialogsFactory.dialogs.CommonDialog;
 import com.masterhelper.listFactory.commonAdapter.item.ICommonItemEvents;
 import com.masterhelper.mediaworker.MediaFiles;
-import com.example.masterhelper.ui.soundsList.SoundsList;
+import com.masterhelper.ui.soundsList.SoundsList;
 import com.masterhelper.appconfig.models.SoundFileModel;
 
 import java.util.Collections;

@@ -1,4 +1,4 @@
-package com.example.masterhelper.ui.journey;
+package com.masterhelper.ui.journey;
 
 import android.view.MenuItem;
 import android.view.View;
@@ -14,15 +14,15 @@ import com.masterhelper.dialogsFactory.dialogs.CommonDialog;
 import com.masterhelper.listFactory.CustomListItemsEnum;
 import com.masterhelper.listFactory.commonAdapter.item.ICommonItemEvents;
 import com.masterhelper.appconfig.models.JourneyModel;
-import com.example.masterhelper.ui.appBarFragment.IAppBarFragment;
+import com.masterhelper.ui.appBarFragment.IAppBarFragment;
 import android.content.Intent;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentManager;
 import com.masterhelper.listFactory.ListFactory;
-import com.example.masterhelper.ui.popupMenu.PopupMenuAdapter;
-import com.example.masterhelper.ui.popupMenu.PopupMenuEvents;
+import com.masterhelper.ui.popupMenu.PopupMenuAdapter;
+import com.masterhelper.ui.popupMenu.PopupMenuEvents;
 
 import java.util.LinkedHashMap;
 import java.util.Objects;

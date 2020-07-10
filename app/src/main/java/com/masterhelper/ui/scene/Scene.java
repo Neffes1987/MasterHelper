@@ -1,4 +1,4 @@
-package com.example.masterhelper.ui.scene;
+package com.masterhelper.ui.scene;
 
 import android.content.Intent;
 import android.os.Build;
@@ -18,8 +18,8 @@ import com.masterhelper.dialogsFactory.DialogTypes;
 import com.masterhelper.dialogsFactory.DialogsFactory;
 import com.masterhelper.dialogsFactory.dialogs.CommonDialog;
 import com.masterhelper.mediaworker.BackgroundMediaPlayer;
-import com.example.masterhelper.ui.appBarFragment.MusicSettingsScreen;
-import com.example.masterhelper.ui.enemies.EnemiesListView;
+import com.masterhelper.ui.appBarFragment.MusicSettingsScreen;
+import com.masterhelper.ui.enemies.EnemiesListView;
 import com.masterhelper.listFactory.CustomListItemsEnum;
 import com.masterhelper.listFactory.commonAdapter.item.ICommonItemEvents;
 import com.masterhelper.listFactory.ListFactory;

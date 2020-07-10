@@ -1,4 +1,4 @@
-package com.example.masterhelper.ui.appBarFragment;
+package com.masterhelper.ui.appBarFragment;
 
 import android.view.View;
 import android.widget.EditText;

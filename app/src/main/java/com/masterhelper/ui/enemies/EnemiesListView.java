@@ -1,4 +1,4 @@
-package com.example.masterhelper.ui.enemies;
+package com.masterhelper.ui.enemies;
 
 import android.content.Intent;
 import android.os.Build;
@@ -12,7 +12,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 import com.example.masterhelper.R;
-import com.example.masterhelper.ui.appBarFragment.IAppBarFragment;
+import com.masterhelper.ui.appBarFragment.IAppBarFragment;
 import com.masterhelper.dbAdaptersFactory.AdaptersType;
 import com.masterhelper.dbAdaptersFactory.DBAdapterFactory;
 import com.masterhelper.dbAdaptersFactory.adapters.EnemyDBAdapter;
@@ -20,7 +20,7 @@ import com.masterhelper.listFactory.CustomListItemsEnum;
 import com.masterhelper.listFactory.commonAdapter.item.ICommonItemEvents;
 import com.masterhelper.mediaworker.BackgroundMediaPlayer;
 import com.masterhelper.appconfig.models.EnemyModel;
-import com.example.masterhelper.ui.appBarFragment.MusicSettingsScreen;
+import com.masterhelper.ui.appBarFragment.MusicSettingsScreen;
 import com.masterhelper.listFactory.ListFactory;
 import com.masterhelper.dbAdaptersFactory.adapters.ScriptDBAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;

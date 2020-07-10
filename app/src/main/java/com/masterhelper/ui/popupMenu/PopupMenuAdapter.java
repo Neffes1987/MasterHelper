@@ -1,4 +1,4 @@
-package com.example.masterhelper.ui.popupMenu;
+package com.masterhelper.ui.popupMenu;
 
 import android.content.Context;
 import android.view.MenuItem;

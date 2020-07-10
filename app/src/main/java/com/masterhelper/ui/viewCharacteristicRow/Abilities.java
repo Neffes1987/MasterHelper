@@ -1,4 +1,4 @@
-package com.example.masterhelper.ui.viewCharacteristicRow;
+package com.masterhelper.ui.viewCharacteristicRow;
 
 import android.app.Activity;
 import android.widget.LinearLayout;

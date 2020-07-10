@@ -1,4 +1,4 @@
-package com.example.masterhelper.ui.journey;
+package com.masterhelper.ui.journey;
 
 import android.os.Build;
 import android.view.View;
@@ -14,7 +14,7 @@ import com.masterhelper.dialogsFactory.DialogTypes;
 import com.masterhelper.dialogsFactory.DialogsFactory;
 import com.masterhelper.dialogsFactory.dialogs.CommonDialog;
 import com.masterhelper.mediaworker.BackgroundMediaPlayer;
-import com.example.masterhelper.ui.scene.Scene;
+import com.masterhelper.ui.scene.Scene;
 import com.masterhelper.listFactory.CustomListItemsEnum;
 import com.masterhelper.listFactory.commonAdapter.item.ICommonItemEvents;
 import com.masterhelper.listFactory.ListFactory;

@@ -1,4 +1,4 @@
-package com.example.masterhelper.ui.enemies;
+package com.masterhelper.ui.enemies;
 
 import android.widget.Button;
 import android.widget.EditText;
@@ -10,11 +10,11 @@ import androidx.fragment.app.FragmentManager;
 import com.example.masterhelper.R;
 import com.masterhelper.appconfig.models.AbilityModel;
 import com.masterhelper.appconfig.models.EnemyModel;
-import com.example.masterhelper.ui.viewCharacteristicRow.Abilities;
+import com.masterhelper.ui.viewCharacteristicRow.Abilities;
 import com.masterhelper.dbAdaptersFactory.AdaptersType;
 import com.masterhelper.dbAdaptersFactory.DBAdapterFactory;
 import com.masterhelper.dbAdaptersFactory.adapters.AbilityDBAdapter;
-import com.example.masterhelper.ui.viewCharacteristicRow.ViewCharacteristicRow;
+import com.masterhelper.ui.viewCharacteristicRow.ViewCharacteristicRow;
 import com.masterhelper.dbAdaptersFactory.adapters.EnemyDBAdapter;
 import com.masterhelper.dialogsFactory.DialogTypes;
 import com.masterhelper.dialogsFactory.DialogsFactory;
