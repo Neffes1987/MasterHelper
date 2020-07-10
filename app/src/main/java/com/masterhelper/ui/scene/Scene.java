@@ -119,8 +119,8 @@ public class Scene extends AppCompatActivity implements ICommonItemEvents {
 
 
     if(bar != null){
-      bar.setSubtitle(journeyName);
-      bar.setTitle(sceneName);
+      bar.setSubtitle(R.string.screen_steps);
+      bar.setTitle(journeyName + " -> " + sceneName);
     }
   }
 

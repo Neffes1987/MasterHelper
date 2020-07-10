@@ -24,17 +24,17 @@ public final class BackgroundMediaPlayer implements IBackgroundMediaPlayer{
   }
 
   /**  */
-  public static void setMediaList(String newMediaList) {
+  public void setMediaList(String newMediaList) {
     mediaPlayer.setMediaList(newMediaList);
   }
 
   /**  */
-  public static void startMediaList(){
+  public void startMediaList(){
     mediaPlayer.startMediaList();
   }
 
   /**  */
-  public static void stopMediaList(){
+  public void stopMediaList(){
     mediaPlayer.stopMediaList();
   }
 

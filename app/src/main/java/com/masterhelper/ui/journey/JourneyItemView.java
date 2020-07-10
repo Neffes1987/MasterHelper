@@ -59,6 +59,7 @@ public class JourneyItemView extends AppCompatActivity implements ICommonItemEve
     // получаем указатель на тулбар активированного в главном компоненте
     if(toolbar != null && currentJourney != null){
       toolbar.setTitle(currentJourney.getTitle());
+      toolbar.setSubtitle(R.string.scene_list);
     }
     
 
