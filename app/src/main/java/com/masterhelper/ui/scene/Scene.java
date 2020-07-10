@@ -38,7 +38,7 @@ public class Scene extends AppCompatActivity implements ICommonItemEvents {
   ScriptDBAdapter scriptDBAdapter = (ScriptDBAdapter) DBAdapterFactory.getAdapter(AdaptersType.script);
 
   /** хелпер для работы с таблицей сцен в бд */
-  SceneDBAdapter sceneDBAdapter;
+  SceneDBAdapter sceneDBAdapter = (SceneDBAdapter) DBAdapterFactory.getAdapter(AdaptersType.scene);
 
   /** указатель на кнопку создания нового скрипта сцены */
   FloatingActionButton newScriptBtn;
@@ -75,9 +75,6 @@ public class Scene extends AppCompatActivity implements ICommonItemEvents {
     String journeyName = getIntent().getStringExtra("journeyName");
     String sceneName = getIntent().getStringExtra("sceneName");
     sceneId = getIntent().getIntExtra("sceneId", 0);
-
-    sceneDBAdapter  = new SceneDBAdapter();
-
 
     newScriptBtn = findViewById(R.id.SCRIPT_CREATE_NEW_BTN_ID);
     musicControl = findViewById(R.id.SCENE_MUSIC_START_ID);
