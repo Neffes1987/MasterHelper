@@ -1,8 +1,8 @@
-package com.example.masterhelper.data.contracts;
+package com.masterhelper.appconfig.contracts;
 
 import com.example.masterhelper.models.EnemyModel;
 
-public class EnemyContract extends GeneralContract implements IContract<EnemyModel> {
+public class EnemyContract extends GeneralContract<EnemyModel> {
   public final static String TABLE_NAME = "enemies";
 
   public final static  String COLUMN_TITLE = "name";

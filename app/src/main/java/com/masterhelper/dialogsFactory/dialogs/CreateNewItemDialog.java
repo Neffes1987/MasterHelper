@@ -1,4 +1,4 @@
-package com.example.masterhelper;
+package com.masterhelper.dialogsFactory.dialogs;
 
 import android.content.Intent;
 import android.util.Log;
@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import com.example.masterhelper.R;
 
 public class CreateNewItemDialog extends AppCompatActivity {
 

@@ -1,9 +1,10 @@
 package com.masterhelper.dbAdaptersFactory.adapters;
 
 import android.database.Cursor;
-import com.example.masterhelper.data.DbHelpers;
-import com.example.masterhelper.data.contracts.SceneContract;
-import com.example.masterhelper.data.contracts.SceneMusicContract;
+import com.masterhelper.appconfig.DbHelpers;
+import com.masterhelper.appconfig.GlobalApplication;
+import com.masterhelper.appconfig.contracts.SceneContract;
+import com.masterhelper.appconfig.contracts.SceneMusicContract;
 import com.example.masterhelper.models.SceneRecycleDataModel;
 import com.example.masterhelper.models.ScriptRecycleDataModel;
 import com.masterhelper.dbAdaptersFactory.AdaptersType;
@@ -14,12 +15,11 @@ import java.util.LinkedHashMap;
 
 public class SceneDBAdapter  extends CommonBDAdapter<SceneRecycleDataModel> {
   /** хелпер для работы с базой */
-  private DbHelpers dbHelpers;
+  private DbHelpers dbHelpers = GlobalApplication.getDbHelpers();
   private ScriptDBAdapter scriptDBAdapter;
 
   /** конструктор */
   public SceneDBAdapter(){
-    dbHelpers = new DbHelpers();
     scriptDBAdapter = (ScriptDBAdapter) DBAdapterFactory.getAdapter(AdaptersType.script);
   }
 

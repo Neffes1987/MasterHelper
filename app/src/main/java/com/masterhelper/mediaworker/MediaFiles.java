@@ -5,7 +5,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.provider.OpenableColumns;
 import android.widget.Toast;
-import com.example.masterhelper.GlobalApplication;
+import com.masterhelper.appconfig.GlobalApplication;
 
 import java.io.*;
 import java.util.HashSet;

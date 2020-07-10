@@ -1,20 +1,19 @@
 package com.masterhelper.dbAdaptersFactory.adapters;
 
 import android.database.Cursor;
-import com.example.masterhelper.data.DbHelpers;
-import com.example.masterhelper.data.contracts.JourneysContract;
+import com.masterhelper.appconfig.DbHelpers;
+import com.masterhelper.appconfig.GlobalApplication;
+import com.masterhelper.appconfig.contracts.JourneysContract;
 import com.example.masterhelper.models.JourneyModel;
 
 import java.util.LinkedHashMap;
 
 public class JourneyDBAdapter extends CommonBDAdapter<JourneyModel> {
   /** класс для работы с базой */
-  private DbHelpers dbHelpers;
+  private DbHelpers dbHelpers = GlobalApplication.getDbHelpers();
 
   /** конструкторы */
-  public JourneyDBAdapter(){
-    dbHelpers = new DbHelpers();
-  }
+  public JourneyDBAdapter(){}
 
   /** получить данные по приключению по его ид */
   @Override

@@ -1,9 +1,7 @@
-package com.example.masterhelper.data.contracts;
-
-import com.example.masterhelper.models.AbilityModel;
+package com.masterhelper.appconfig.contracts;
 
 
-public class SceneMusicContract extends GeneralContract implements IContract<String> {
+public class SceneMusicContract extends GeneralContract<String> {
   public final static String TABLE_NAME = "sceneMusic";
 
   public final static String COLUMN_SCENE_ID = "sceneId";

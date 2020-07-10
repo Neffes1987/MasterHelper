@@ -1,4 +1,4 @@
-package com.example.masterhelper.data.contracts;
+package com.masterhelper.appconfig.contracts;
 
 import android.provider.BaseColumns;
 import androidx.annotation.Nullable;
@@ -6,7 +6,7 @@ import androidx.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class GeneralContract implements BaseColumns {
+public abstract class GeneralContract<Model> implements BaseColumns, IContract<Model> {
 
   public final static String _ID = BaseColumns._ID;
 

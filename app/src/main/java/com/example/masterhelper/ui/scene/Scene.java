@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
-import com.example.masterhelper.CreateNewItemDialog;
+import com.masterhelper.dialogsFactory.dialogs.CreateNewItemDialog;
 import com.example.masterhelper.R;
 import com.masterhelper.dbAdaptersFactory.AdaptersType;
 import com.masterhelper.dbAdaptersFactory.DBAdapterFactory;

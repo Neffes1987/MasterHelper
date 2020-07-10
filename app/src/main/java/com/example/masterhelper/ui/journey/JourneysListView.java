@@ -3,7 +3,7 @@ package com.example.masterhelper.ui.journey;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
-import com.example.masterhelper.CreateNewItemDialog;
+import com.masterhelper.dialogsFactory.dialogs.CreateNewItemDialog;
 import com.example.masterhelper.R;
 import com.masterhelper.dbAdaptersFactory.AdaptersType;
 import com.masterhelper.dbAdaptersFactory.DBAdapterFactory;

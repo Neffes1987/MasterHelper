@@ -1,6 +1,7 @@
-package com.example.masterhelper.data.contracts;
+package com.masterhelper.appconfig.contracts;
 
 public interface IContract<Model> {
+
   static String TABLE_NAME = null;
 
   static String[] CREATE_TABLE_COLUMNS = null;
@@ -10,6 +11,7 @@ public interface IContract<Model> {
   static String[] INSERT_COLUMNS_PROPS = null;
 
   static String CREATE_TABLE = null;
+
 
   String[] getValues(Model newItem, int parentID);
 

@@ -1,21 +1,20 @@
 package com.masterhelper.dbAdaptersFactory.adapters;
 
 import android.database.Cursor;
-import android.util.Log;
-import com.example.masterhelper.data.DbHelpers;
-import com.example.masterhelper.data.contracts.AbilitiesContract;
-import com.example.masterhelper.data.contracts.EnemyAbilitiesContract;
+import com.masterhelper.appconfig.DbHelpers;
+import com.masterhelper.appconfig.GlobalApplication;
+import com.masterhelper.appconfig.contracts.AbilitiesContract;
+import com.masterhelper.appconfig.contracts.EnemyAbilitiesContract;
 import com.example.masterhelper.models.AbilityModel;
 
 import java.util.LinkedHashMap;
 
 public class AbilityDBAdapter extends CommonBDAdapter<AbilityModel> {
   /** класс для работы с базой */
-  private DbHelpers dbHelpers;
+  private DbHelpers dbHelpers = GlobalApplication.getDbHelpers();
 
-  public AbilityDBAdapter(){
-    dbHelpers = new DbHelpers();
-  }
+
+  public AbilityDBAdapter(){}
 
   public void addAbilitiesByEnemyId(LinkedHashMap<Integer, AbilityModel> newItems, int enemyId){
     StringBuilder updateQuery = new StringBuilder();

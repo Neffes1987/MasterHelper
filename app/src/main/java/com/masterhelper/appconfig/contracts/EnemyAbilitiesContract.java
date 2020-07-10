@@ -1,9 +1,9 @@
-package com.example.masterhelper.data.contracts;
+package com.masterhelper.appconfig.contracts;
 
 import com.example.masterhelper.models.AbilityModel;
 
 
-public class EnemyAbilitiesContract extends GeneralContract implements IContract<AbilityModel> {
+public class EnemyAbilitiesContract extends GeneralContract<AbilityModel> {
   public final static String TABLE_NAME = "enemyAbilities";
 
   public final static String COLUMN_ENEMY_ID = "enemyId";

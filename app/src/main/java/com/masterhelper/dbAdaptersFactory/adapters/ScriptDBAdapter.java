@@ -1,11 +1,12 @@
 package com.masterhelper.dbAdaptersFactory.adapters;
 
 import android.database.Cursor;
-import com.example.masterhelper.data.DbHelpers;
-import com.example.masterhelper.data.contracts.SceneContract;
-import com.example.masterhelper.data.contracts.SceneMusicContract;
-import com.example.masterhelper.data.contracts.ScriptMusicContract;
-import com.example.masterhelper.data.contracts.ScriptsContract;
+import com.masterhelper.appconfig.DbHelpers;
+import com.masterhelper.appconfig.GlobalApplication;
+import com.masterhelper.appconfig.contracts.SceneContract;
+import com.masterhelper.appconfig.contracts.SceneMusicContract;
+import com.masterhelper.appconfig.contracts.ScriptMusicContract;
+import com.masterhelper.appconfig.contracts.ScriptsContract;
 import com.example.masterhelper.models.ScriptRecycleDataModel;
 
 import java.util.HashMap;
@@ -13,12 +14,10 @@ import java.util.LinkedHashMap;
 
 public class ScriptDBAdapter extends CommonBDAdapter<ScriptRecycleDataModel> {
   /**  */
-  private DbHelpers dbHelpers;
+  private DbHelpers dbHelpers = GlobalApplication.getDbHelpers();
 
   /**  */
-  public ScriptDBAdapter(){
-    dbHelpers = new DbHelpers();
-  }
+  public ScriptDBAdapter(){}
 
   public HashMap<String, Integer> getMediaForScript(int scriptId){
     String sqlQuery = ScriptMusicContract.getListQuery(ScriptMusicContract.TABLE_NAME, null, ScriptMusicContract.COLUMN_SCRIPT_ID+"="+ scriptId, SceneContract._ID + " DESC", 0);

@@ -3,7 +3,7 @@ package com.masterhelper.mediaworker;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
-import com.example.masterhelper.GlobalApplication;
+import com.masterhelper.appconfig.GlobalApplication;
 
 import java.io.File;
 import java.io.IOException;

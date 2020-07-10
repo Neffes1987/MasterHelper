@@ -1,8 +1,8 @@
-package com.example.masterhelper.data.contracts;
+package com.masterhelper.appconfig.contracts;
 
 import com.example.masterhelper.models.SceneRecycleDataModel;
 
-public class SceneContract extends GeneralContract implements IContract<SceneRecycleDataModel> {
+public class SceneContract extends GeneralContract<SceneRecycleDataModel> {
   public final static String TABLE_NAME = "scene";
 
   public final static String COLUMN_TITLE = "title";

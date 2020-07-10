@@ -1,7 +1,7 @@
-package com.example.masterhelper.data.contracts;
+package com.masterhelper.appconfig.contracts;
 
 
-public class ScriptMusicContract extends GeneralContract implements IContract<String> {
+public class ScriptMusicContract extends GeneralContract<String> {
   public final static String TABLE_NAME = "scriptMusic";
 
   public final static String COLUMN_SCRIPT_ID = "scriptId";

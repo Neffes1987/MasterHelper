@@ -1,20 +1,19 @@
 package com.masterhelper.dbAdaptersFactory.adapters;
 
 import android.database.Cursor;
-import com.example.masterhelper.data.DbHelpers;
-import com.example.masterhelper.data.contracts.EnemyContract;
+import com.masterhelper.appconfig.DbHelpers;
+import com.masterhelper.appconfig.GlobalApplication;
+import com.masterhelper.appconfig.contracts.EnemyContract;
 import com.example.masterhelper.models.EnemyModel;
 
 import java.util.LinkedHashMap;
 
 public class EnemyDBAdapter  extends CommonBDAdapter<EnemyModel>  {
   /** класс для работы с базой */
-  private DbHelpers dbHelpers;
+  private DbHelpers dbHelpers = GlobalApplication.getDbHelpers();
 
   /**  */
-  public EnemyDBAdapter(){
-    dbHelpers = new DbHelpers();
-  }
+  public EnemyDBAdapter(){}
 
   @Override
   public EnemyModel get(int id) {

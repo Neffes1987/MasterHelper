@@ -1,8 +1,8 @@
-package com.example.masterhelper.data.contracts;
+package com.masterhelper.appconfig.contracts;
 
 import com.example.masterhelper.models.JourneyModel;
 
-public class JourneysContract extends GeneralContract implements IContract<JourneyModel> {
+public class JourneysContract extends GeneralContract<JourneyModel> {
   public static final  String TABLE_NAME = "journeys";
 
   public static final  String COLUMN_TITLE = "title";

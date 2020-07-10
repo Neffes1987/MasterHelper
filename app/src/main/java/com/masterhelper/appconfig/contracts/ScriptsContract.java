@@ -1,8 +1,8 @@
-package com.example.masterhelper.data.contracts;
+package com.masterhelper.appconfig.contracts;
 
 import com.example.masterhelper.models.ScriptRecycleDataModel;
 
-public class ScriptsContract extends GeneralContract implements IContract<ScriptRecycleDataModel> {
+public class ScriptsContract extends GeneralContract<ScriptRecycleDataModel> {
   public final static  String TABLE_NAME = "scripts";
 
   public final static  String COLUMN_TITLE = "title";

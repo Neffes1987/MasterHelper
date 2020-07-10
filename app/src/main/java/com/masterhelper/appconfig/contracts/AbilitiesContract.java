@@ -1,8 +1,8 @@
-package com.example.masterhelper.data.contracts;
+package com.masterhelper.appconfig.contracts;
 
 import com.example.masterhelper.models.AbilityModel;
 
-public class AbilitiesContract extends GeneralContract implements IContract<AbilityModel> {
+public class AbilitiesContract extends GeneralContract<AbilityModel> {
   public final static String TABLE_NAME = "achieves";
 
   public final static String COLUMN_NAME = "name";
@@ -19,11 +19,12 @@ public class AbilitiesContract extends GeneralContract implements IContract<Abil
 
   public static String[] INSERT_COLUMNS_PROPS = UPDATE_COLUMNS_PROPS;
 
+  public static String CREATE_TABLE = generateTableQuery(TABLE_NAME, CREATE_TABLE_COLUMNS);
+
   public String[] getValues(AbilityModel newScript, int id){
     return new String[]{newScript.getName()};
   }
 
-  public static String CREATE_TABLE = generateTableQuery(TABLE_NAME, CREATE_TABLE_COLUMNS);
 
   public String addItemQuery(AbilityModel newItem, int id){
     String[] values = getValues(newItem, id);

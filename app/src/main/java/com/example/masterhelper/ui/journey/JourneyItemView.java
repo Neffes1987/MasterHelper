@@ -4,7 +4,7 @@ import android.os.Build;
 import android.view.View;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBar;
-import com.example.masterhelper.CreateNewItemDialog;
+import com.masterhelper.dialogsFactory.dialogs.CreateNewItemDialog;
 import com.example.masterhelper.R;
 import com.example.masterhelper.models.JourneyModel;
 import com.masterhelper.dbAdaptersFactory.AdaptersType;

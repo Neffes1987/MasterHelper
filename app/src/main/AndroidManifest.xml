@@ -11,7 +11,7 @@
     android:label="@string/app_name"
     android:roundIcon="@mipmap/ic_launcher_round"
     android:supportsRtl="true"
-    android:name=".GlobalApplication"
+    android:name="com.masterhelper.appconfig.GlobalApplication"
     android:theme="@style/Platform.MaterialComponents">
     <activity android:name=".ui.appBarFragment.AbilityNamesList">
     </activity>
@@ -20,7 +20,7 @@
     <activity android:name=".ui.appBarFragment.MusicSettingsScreen">
     </activity>
     <activity
-      android:name=".CreateNewItemDialog" android:theme="@style/AppTheme.About">
+      android:name="com.masterhelper.dialogsFactory.dialogs.CreateNewItemDialog" android:theme="@style/AppTheme.About">
     </activity>
     <activity android:name=".ui.enemies.EnemiesListView" android:theme="@style/CustomTheme">
     </activity>
