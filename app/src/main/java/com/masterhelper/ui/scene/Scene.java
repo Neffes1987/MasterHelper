@@ -46,7 +46,7 @@ public class Scene extends AppCompatActivity implements ICommonItemEvents {
   /** указатель на кнопку проигрывания музыки */
   FloatingActionButton musicControl;
 
-  ListFactory<ScriptModel> scriptsViewList;
+  ListFactory scriptsViewList;
 
   BackgroundMediaPlayer backgroundMediaPlayer = BackgroundMediaPlayer.getInstance();
 
@@ -112,7 +112,7 @@ public class Scene extends AppCompatActivity implements ICommonItemEvents {
     });
 
     FragmentManager fm = getSupportFragmentManager();
-    scriptsViewList = (ListFactory<ScriptModel>) fm.findFragmentById(R.id.SCREEN_SCRIPTS_LIST_ID);
+    scriptsViewList = (ListFactory) fm.findFragmentById(R.id.SCREEN_SCRIPTS_LIST_ID);
 
 
     if(bar != null){
@@ -130,8 +130,7 @@ public class Scene extends AppCompatActivity implements ICommonItemEvents {
   void setListData(){
     scriptsList = scriptDBAdapter.getListByParentId(sceneId);
     if(scriptsViewList != null && scriptsViewList.getView() != null){
-      scriptsViewList.setItemType(CustomListItemsEnum.script);
-      scriptsViewList.updateListAdapter(scriptsList);
+      scriptsViewList.updateListAdapter(scriptsList, CustomListItemsEnum.script);
     }
   }
 

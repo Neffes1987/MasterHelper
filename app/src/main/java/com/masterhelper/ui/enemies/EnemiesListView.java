@@ -56,7 +56,7 @@ public class EnemiesListView extends AppCompatActivity implements ICommonItemEve
   ScriptDBAdapter scriptDBAdapter = (ScriptDBAdapter) DBAdapterFactory.getAdapter(AdaptersType.script);
 
 
-  ListFactory<EnemyModel> lsf;
+  ListFactory lsf;
 
   LinkedHashMap<Integer, EnemyModel> enemies = new LinkedHashMap<>();
 
@@ -109,15 +109,14 @@ public class EnemiesListView extends AppCompatActivity implements ICommonItemEve
     });
 
     FragmentManager fm = getSupportFragmentManager();
-    lsf = (ListFactory<EnemyModel>) fm.findFragmentById(R.id.ENEMIES_GRID_ID);
+    lsf = (ListFactory) fm.findFragmentById(R.id.ENEMIES_GRID_ID);
 
     updateEnemiesList();
   }
 
   void updateEnemiesList(){
     enemies = enemyDBAdapter.getListByParentId(scriptId);
-    lsf.setItemType(CustomListItemsEnum.enemyIcon);
-    lsf.updateListAdapter(enemies);
+    lsf.updateListAdapter(enemies, CustomListItemsEnum.enemyIcon);
   }
 
    /**  */

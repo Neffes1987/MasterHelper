@@ -84,11 +84,10 @@ public class JourneyItemView extends AppCompatActivity implements ICommonItemEve
   void updateScenesList(){
     scenesList = sceneDBAdapter.getListByParentId(currentJourney.getId());
     FragmentManager fm = getSupportFragmentManager();
-    ListFactory<SceneModel> lsf = (ListFactory<SceneModel>) fm.findFragmentById(R.id.SCREEN_FRAGMENT_ID);
+    ListFactory lsf = (ListFactory) fm.findFragmentById(R.id.SCREEN_FRAGMENT_ID);
 
     if(lsf != null && lsf.getView() != null){
-      lsf.setItemType(CustomListItemsEnum.scene);
-      lsf.updateListAdapter(scenesList);
+      lsf.updateListAdapter(scenesList, CustomListItemsEnum.scene);
     }
   }
 

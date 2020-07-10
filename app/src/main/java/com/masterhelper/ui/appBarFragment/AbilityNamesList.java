@@ -58,9 +58,8 @@ public class AbilityNamesList extends AppCompatActivity implements ICommonItemEv
     Fragment lsf =  fm.findFragmentById(R.id.ABILITY_LIST_ID);
 
     if(lsf != null && lsf.getView() != null){
-      ListFactory<AbilityModel> list = (ListFactory<AbilityModel>) lsf;
-      list.setItemType(CustomListItemsEnum.abilities);
-      list.updateListAdapter(abilities);
+      ListFactory list = (ListFactory) lsf;
+      list.updateListAdapter(abilities, CustomListItemsEnum.abilities);
     }
   }
 

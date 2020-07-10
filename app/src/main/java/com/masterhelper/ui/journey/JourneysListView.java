@@ -52,13 +52,17 @@ public class JourneysListView extends AppCompatActivity implements ICommonItemEv
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_screen_view_projects);
-    toolbar = findViewById(R.id.TOOLBAR_ID);
-    toolbar.setTitle(R.string.SCREEN_NAME_JOURNEYS_TEXT);
+
     journeyCreateBtn = findViewById(R.id.JOURNEY_CREATE_BTN);
     journeyCreateBtn.setOnClickListener(v -> onCreateJourneyButtonPressed());
-
-    setSupportActionBar(toolbar);
+    initToolBar();
     updateJourneysList();
+  }
+
+  private void initToolBar(){
+    toolbar = findViewById(R.id.TOOLBAR_ID);
+    toolbar.setTitle(R.string.SCREEN_NAME_JOURNEYS_TEXT);
+    setSupportActionBar(toolbar);
   }
 
   /** вызвать диалог создания новго путешествия */
@@ -91,10 +95,9 @@ public class JourneysListView extends AppCompatActivity implements ICommonItemEv
   void updateJourneysList(){
     journeys = journeyDBAdapter.getListByParentId(0);
     FragmentManager fm = getSupportFragmentManager();
-    ListFactory<JourneyModel> lsf = (ListFactory<JourneyModel>) fm.findFragmentById(R.id.JOURNEYS_ID);
+    ListFactory lsf = (ListFactory) fm.findFragmentById(R.id.JOURNEYS_ID);
     if(lsf != null && lsf.getView() != null){
-      lsf.setItemType(CustomListItemsEnum.journey);
-      lsf.updateListAdapter(journeys);
+      lsf.updateListAdapter(journeys, CustomListItemsEnum.journey);
     }
   }
 

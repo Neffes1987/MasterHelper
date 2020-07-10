@@ -14,7 +14,7 @@ import com.example.masterhelper.R;
 
 import java.util.LinkedHashMap;
 
-public class ListFactory<Model> extends Fragment implements ICommonItemEvents, IListFactory<Model> {
+public class ListFactory extends Fragment implements ICommonItemEvents, IListFactory {
   /** */
   RecyclerView recyclerView;
 
@@ -42,11 +42,9 @@ public class ListFactory<Model> extends Fragment implements ICommonItemEvents, I
     }
   }
 
-  public void updateListAdapter(LinkedHashMap<Integer, Model> data){
-    if(itemLayout == 0){
-      throw new RuntimeException("itemLayout must be set");
-    }
-    CommonAdapter<Model> mAdapter = new CommonAdapter<>(data, itemLayout, itemType, this);
+  public void updateListAdapter(LinkedHashMap data, CustomListItemsEnum itemType){
+    setItemType(itemType);
+    CommonAdapter mAdapter = new CommonAdapter<>(data, itemLayout, itemType, this);
     recyclerView.setAdapter(mAdapter);
   }
 
