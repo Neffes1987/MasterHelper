@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
+import com.masterhelper.appconfig.GlobalApplication;
 import com.masterhelper.dialogsFactory.dialogs.CreateNewItemDialog;
 import com.example.masterhelper.R;
 import com.masterhelper.dbAdaptersFactory.AdaptersType;
@@ -48,7 +49,7 @@ public class Scene extends AppCompatActivity implements ICommonItemEvents {
 
   ListFactory scriptsViewList;
 
-  BackgroundMediaPlayer backgroundMediaPlayer = BackgroundMediaPlayer.getInstance();
+  BackgroundMediaPlayer backgroundMediaPlayer = GlobalApplication.getBackgroundMediaPlayer();
 
   /** ид выбранной сцены */
   int sceneId;

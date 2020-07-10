@@ -1,26 +1,14 @@
 package com.masterhelper.mediaworker;
 
-/** Singleton для плеера фоновой музыки в сценах и в скриптах */
-public final class BackgroundMediaPlayer implements IBackgroundMediaPlayer{
-
-  /** экземпляр плеера */
-  private static BackgroundMediaPlayer backgroundMediaPlayerInstance;
+/** плеер фоновой музыки в сценах и в скриптах */
+public class BackgroundMediaPlayer implements IBackgroundMediaPlayer{
 
   /**  */
   private static MediaPlayerAdapter mediaPlayer;
 
   /** конструктор плеера */
-  private BackgroundMediaPlayer(){
+  public BackgroundMediaPlayer(){
     mediaPlayer = new MediaPlayerAdapter(false);
-  }
-
-  /** метод для получения созданного экземпляра плеера */
-  public static BackgroundMediaPlayer getInstance(){
-    if(backgroundMediaPlayerInstance == null){
-      backgroundMediaPlayerInstance = new BackgroundMediaPlayer();
-    }
-
-    return backgroundMediaPlayerInstance;
   }
 
   /**  */

@@ -4,6 +4,7 @@ import android.os.Build;
 import android.view.View;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBar;
+import com.masterhelper.appconfig.GlobalApplication;
 import com.masterhelper.dialogsFactory.dialogs.CreateNewItemDialog;
 import com.example.masterhelper.R;
 import com.masterhelper.appconfig.models.JourneyModel;
@@ -13,7 +14,6 @@ import com.masterhelper.dbAdaptersFactory.adapters.JourneyDBAdapter;
 import com.masterhelper.dialogsFactory.DialogTypes;
 import com.masterhelper.dialogsFactory.DialogsFactory;
 import com.masterhelper.dialogsFactory.dialogs.CommonDialog;
-import com.masterhelper.mediaworker.BackgroundMediaPlayer;
 import com.masterhelper.ui.scene.Scene;
 import com.masterhelper.listFactory.CustomListItemsEnum;
 import com.masterhelper.listFactory.commonAdapter.item.ICommonItemEvents;
@@ -77,7 +77,7 @@ public class JourneyItemView extends AppCompatActivity implements ICommonItemEve
   @Override
   protected void onResume() {
     super.onResume();
-    BackgroundMediaPlayer.getInstance().stopMediaList();
+    GlobalApplication.getBackgroundMediaPlayer().stopMediaList();
   }
 
   /** обновить вьюху по списку сцен */

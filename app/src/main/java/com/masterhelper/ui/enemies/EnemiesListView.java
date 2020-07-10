@@ -12,6 +12,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 import com.example.masterhelper.R;
+import com.masterhelper.appconfig.GlobalApplication;
 import com.masterhelper.ui.appBarFragment.IAppBarFragment;
 import com.masterhelper.dbAdaptersFactory.AdaptersType;
 import com.masterhelper.dbAdaptersFactory.DBAdapterFactory;
@@ -39,7 +40,7 @@ public class EnemiesListView extends AppCompatActivity implements ICommonItemEve
   /** указатель на кнопку проигрывания музыки */
   FloatingActionButton musicControl;
 
-  BackgroundMediaPlayer backgroundMediaPlayer = BackgroundMediaPlayer.getInstance();
+  BackgroundMediaPlayer backgroundMediaPlayer = GlobalApplication.getBackgroundMediaPlayer();
 
   /** */
   FloatingActionButton createNewEnemy;
