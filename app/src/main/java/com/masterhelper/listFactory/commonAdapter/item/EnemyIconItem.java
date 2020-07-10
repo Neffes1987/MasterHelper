@@ -8,7 +8,7 @@ import android.widget.TextView;
 import androidx.cardview.widget.CardView;
 import com.example.masterhelper.R;
 import com.masterhelper.listFactory.commonAdapter.CommonAdapter;
-import com.example.masterhelper.models.EnemyModel;
+import com.masterhelper.appconfig.models.EnemyModel;
 
 public class EnemyIconItem<Model> extends CommonItem<Model> {
   /**  */

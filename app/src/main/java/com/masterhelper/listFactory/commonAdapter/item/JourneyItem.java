@@ -6,7 +6,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import com.example.masterhelper.R;
 import com.masterhelper.listFactory.commonAdapter.CommonAdapter;
-import com.example.masterhelper.models.JourneyModel;
+import com.masterhelper.appconfig.models.JourneyModel;
 
 /** Модель для управления интерфейсом внутри элемента для циклического списка
  * Model - тип модели данных, который следует передать в обработчик жлемента списка для инициализаци

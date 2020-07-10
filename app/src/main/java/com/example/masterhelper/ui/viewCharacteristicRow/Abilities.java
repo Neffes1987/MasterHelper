@@ -6,7 +6,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import com.example.masterhelper.R;
-import com.example.masterhelper.models.AbilityModel;
+import com.masterhelper.appconfig.models.AbilityModel;
 
 import java.util.LinkedHashMap;
 

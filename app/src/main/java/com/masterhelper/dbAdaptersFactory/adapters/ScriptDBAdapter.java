@@ -7,12 +7,12 @@ import com.masterhelper.appconfig.contracts.SceneContract;
 import com.masterhelper.appconfig.contracts.SceneMusicContract;
 import com.masterhelper.appconfig.contracts.ScriptMusicContract;
 import com.masterhelper.appconfig.contracts.ScriptsContract;
-import com.example.masterhelper.models.ScriptRecycleDataModel;
+import com.masterhelper.appconfig.models.ScriptModel;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 
-public class ScriptDBAdapter extends CommonBDAdapter<ScriptRecycleDataModel> {
+public class ScriptDBAdapter extends CommonBDAdapter<ScriptModel> {
   /**  */
   private DbHelpers dbHelpers = GlobalApplication.getDbHelpers();
 
@@ -58,9 +58,9 @@ public class ScriptDBAdapter extends CommonBDAdapter<ScriptRecycleDataModel> {
   }
 
   @Override
-  public ScriptRecycleDataModel get(int id) {
+  public ScriptModel get(int id) {
     String sqlQuery = ScriptsContract.getListQuery(ScriptsContract.TABLE_NAME, null, ScriptsContract._ID+"="+ id, ScriptsContract._ID + " DESC", 0);
-    ScriptRecycleDataModel result = null;
+    ScriptModel result = null;
     Cursor queryResult = dbHelpers.getList(sqlQuery);
 
     while (queryResult.moveToNext()) {
@@ -71,7 +71,7 @@ public class ScriptDBAdapter extends CommonBDAdapter<ScriptRecycleDataModel> {
       int isFinishedColumnIndex = queryResult.getColumnIndex(ScriptsContract.COLUMN_IS_FINISHED);
       int isBattleColumnIndex = queryResult.getColumnIndex(ScriptsContract.COLUMN_HAS_BATTLE_EVENT);
 
-      result = new ScriptRecycleDataModel(
+      result = new ScriptModel(
         queryResult.getString(titleColumnIndex),
         queryResult.getInt(idColumnIndex),
         queryResult.getString(descriptionColumnIndex),
@@ -84,7 +84,7 @@ public class ScriptDBAdapter extends CommonBDAdapter<ScriptRecycleDataModel> {
   }
 
   @Override
-  public void add(ScriptRecycleDataModel newItem, int parentId) {
+  public void add(ScriptModel newItem, int parentId) {
     String sqlQuery = dbHelpers.scriptsContract.addItemQuery(newItem, parentId);
     dbHelpers.addNewItem(sqlQuery);
   }
@@ -96,15 +96,15 @@ public class ScriptDBAdapter extends CommonBDAdapter<ScriptRecycleDataModel> {
   }
 
   @Override
-  public void update(ScriptRecycleDataModel updatedModel) {
+  public void update(ScriptModel updatedModel) {
     String sqlQuery = dbHelpers.scriptsContract.updateItemQuery(updatedModel.getId(), updatedModel);
     dbHelpers.updateItem(sqlQuery);
   }
 
   @Override
-  public LinkedHashMap<Integer, ScriptRecycleDataModel> getListByParentId(int parentId) {
+  public LinkedHashMap<Integer, ScriptModel> getListByParentId(int parentId) {
     String sqlQuery = ScriptsContract.getListQuery(ScriptsContract.TABLE_NAME, null, ScriptsContract.COLUMN_SCENE_ID+"="+ parentId, ScriptsContract._ID + " DESC", 0);
-    LinkedHashMap<Integer, ScriptRecycleDataModel> result = new LinkedHashMap<>();
+    LinkedHashMap<Integer, ScriptModel> result = new LinkedHashMap<>();
     Cursor queryResult = dbHelpers.getList(sqlQuery);
 
     while (queryResult.moveToNext()) {
@@ -115,14 +115,14 @@ public class ScriptDBAdapter extends CommonBDAdapter<ScriptRecycleDataModel> {
       int isFinishedColumnIndex = queryResult.getColumnIndex(ScriptsContract.COLUMN_IS_FINISHED);
       int isBattleColumnIndex = queryResult.getColumnIndex(ScriptsContract.COLUMN_HAS_BATTLE_EVENT);
 
-      ScriptRecycleDataModel scriptRecycleDataModel = new ScriptRecycleDataModel(
+      ScriptModel scriptModel = new ScriptModel(
         queryResult.getString(titleColumnIndex),
         queryResult.getInt(idColumnIndex),
         queryResult.getString(descriptionColumnIndex),
         queryResult.getString(isBattleColumnIndex).equals("true"),
         queryResult.getString(isFinishedColumnIndex).equals("true")
       );
-      result.put(scriptRecycleDataModel.getId(), scriptRecycleDataModel);
+      result.put(scriptModel.getId(), scriptModel);
     }
     queryResult.close();
     return result;

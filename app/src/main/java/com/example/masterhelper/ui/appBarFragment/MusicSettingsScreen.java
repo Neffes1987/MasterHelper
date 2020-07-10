@@ -20,7 +20,7 @@ import com.masterhelper.dialogsFactory.dialogs.CommonDialog;
 import com.masterhelper.listFactory.commonAdapter.item.ICommonItemEvents;
 import com.masterhelper.mediaworker.MediaFiles;
 import com.example.masterhelper.ui.soundsList.SoundsList;
-import com.example.masterhelper.models.SoundFileModel;
+import com.masterhelper.appconfig.models.SoundFileModel;
 
 import java.util.Collections;
 import java.util.HashSet;

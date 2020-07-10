@@ -5,15 +5,15 @@ import com.masterhelper.appconfig.DbHelpers;
 import com.masterhelper.appconfig.GlobalApplication;
 import com.masterhelper.appconfig.contracts.SceneContract;
 import com.masterhelper.appconfig.contracts.SceneMusicContract;
-import com.example.masterhelper.models.SceneRecycleDataModel;
-import com.example.masterhelper.models.ScriptRecycleDataModel;
+import com.masterhelper.appconfig.models.SceneModel;
+import com.masterhelper.appconfig.models.ScriptModel;
 import com.masterhelper.dbAdaptersFactory.AdaptersType;
 import com.masterhelper.dbAdaptersFactory.DBAdapterFactory;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 
-public class SceneDBAdapter  extends CommonBDAdapter<SceneRecycleDataModel> {
+public class SceneDBAdapter  extends CommonBDAdapter<SceneModel> {
   /** хелпер для работы с базой */
   private DbHelpers dbHelpers = GlobalApplication.getDbHelpers();
   private ScriptDBAdapter scriptDBAdapter;
@@ -62,9 +62,9 @@ public class SceneDBAdapter  extends CommonBDAdapter<SceneRecycleDataModel> {
   }
 
   @Override
-  public SceneRecycleDataModel get(int id) {
+  public SceneModel get(int id) {
     String sqlQuery = SceneContract.getListQuery(SceneContract.TABLE_NAME, null, SceneContract._ID+"="+ id, SceneContract._ID + " DESC", 1);
-    SceneRecycleDataModel sceneRecycleDataModel = null;
+    SceneModel sceneModel = null;
     Cursor queryResult = dbHelpers.getList(sqlQuery);
     while (queryResult.moveToNext()) {
       // Используем индекс для получения строки или числа
@@ -72,7 +72,7 @@ public class SceneDBAdapter  extends CommonBDAdapter<SceneRecycleDataModel> {
       int descriptionColumnIndex = queryResult.getColumnIndex(SceneContract.COLUMN_DESCRIPTION);
       int idColumnIndex = queryResult.getColumnIndex(SceneContract._ID);
 
-      sceneRecycleDataModel = new SceneRecycleDataModel(
+      sceneModel = new SceneModel(
         queryResult.getString(titleColumnIndex),
         queryResult.getInt(idColumnIndex),
         queryResult.getString(descriptionColumnIndex),
@@ -82,11 +82,11 @@ public class SceneDBAdapter  extends CommonBDAdapter<SceneRecycleDataModel> {
       );
     }
     queryResult.close();
-    return sceneRecycleDataModel;
+    return sceneModel;
   }
 
   @Override
-  public void add(SceneRecycleDataModel newItem, int parentId) {
+  public void add(SceneModel newItem, int parentId) {
     String sqlQuery = dbHelpers.sceneContract.addItemQuery(newItem, parentId);
     dbHelpers.addNewItem(sqlQuery);
   }
@@ -98,16 +98,16 @@ public class SceneDBAdapter  extends CommonBDAdapter<SceneRecycleDataModel> {
   }
 
   @Override
-  public void update(SceneRecycleDataModel updatedModel) {
+  public void update(SceneModel updatedModel) {
     String sqlQuery = dbHelpers.sceneContract.updateItemQuery(updatedModel.getId(), updatedModel);
     dbHelpers.updateItem(sqlQuery);
   }
 
   @Override
-  public LinkedHashMap<Integer, SceneRecycleDataModel> getListByParentId(int parentId) {
+  public LinkedHashMap<Integer, SceneModel> getListByParentId(int parentId) {
     String sqlQuery = SceneContract.getListQuery(SceneContract.TABLE_NAME, null, SceneContract.COLUMN_JOURNEY_ID+"="+ parentId, SceneContract._ID + " DESC", 0);
 
-    LinkedHashMap<Integer, SceneRecycleDataModel> result = new LinkedHashMap<>();
+    LinkedHashMap<Integer, SceneModel> result = new LinkedHashMap<>();
 
 
     Cursor queryResult = dbHelpers.getList(sqlQuery);
@@ -119,11 +119,11 @@ public class SceneDBAdapter  extends CommonBDAdapter<SceneRecycleDataModel> {
       int idColumnIndex = queryResult.getColumnIndex(SceneContract._ID);
       int sceneId = queryResult.getInt(idColumnIndex);
 
-      LinkedHashMap<Integer, ScriptRecycleDataModel> scripts = scriptDBAdapter.getListByParentId(sceneId);
+      LinkedHashMap<Integer, ScriptModel> scripts = scriptDBAdapter.getListByParentId(sceneId);
       int finishedCounter = 0;
       StringBuilder goals = new StringBuilder();
 
-      for (ScriptRecycleDataModel script: scripts.values() ) {
+      for (ScriptModel script: scripts.values() ) {
         boolean isFinished = script.isFinished;
         if(isFinished){
           finishedCounter+=1;
@@ -145,7 +145,7 @@ public class SceneDBAdapter  extends CommonBDAdapter<SceneRecycleDataModel> {
           .append("\r\n")
           .append(goals);
       }
-      SceneRecycleDataModel sceneRecycleDataModel = new SceneRecycleDataModel(
+      SceneModel sceneModel = new SceneModel(
         queryResult.getString(titleColumnIndex),
         sceneId,
         description.toString(),
@@ -153,7 +153,7 @@ public class SceneDBAdapter  extends CommonBDAdapter<SceneRecycleDataModel> {
         scripts.size(),
         false
       );
-      result.put(sceneRecycleDataModel.getId(), sceneRecycleDataModel);
+      result.put(sceneModel.getId(), sceneModel);
     }
     queryResult.close();
     return result;

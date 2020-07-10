@@ -1,6 +1,6 @@
 package com.masterhelper.appconfig.contracts;
 
-import com.example.masterhelper.models.AbilityModel;
+import com.masterhelper.appconfig.models.AbilityModel;
 
 
 public class EnemyAbilitiesContract extends GeneralContract<AbilityModel> {

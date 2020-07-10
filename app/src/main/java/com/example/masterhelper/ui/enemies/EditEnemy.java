@@ -8,9 +8,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.fragment.app.FragmentManager;
 import com.example.masterhelper.R;
-import com.example.masterhelper.models.ACHIEVE_CONST_TAGS;
-import com.example.masterhelper.models.AbilityModel;
-import com.example.masterhelper.models.EnemyModel;
+import com.masterhelper.appconfig.models.AbilityModel;
+import com.masterhelper.appconfig.models.EnemyModel;
 import com.example.masterhelper.ui.viewCharacteristicRow.Abilities;
 import com.masterhelper.dbAdaptersFactory.AdaptersType;
 import com.masterhelper.dbAdaptersFactory.DBAdapterFactory;
@@ -55,8 +54,8 @@ public class EditEnemy extends AppCompatActivity implements ViewCharacteristicRo
   int enemyId;
 
   EnemyModel currentEnemy;
-  AbilityModel healthAbility = new AbilityModel(HEALTH_POSITION, "Здоровье", 0, ACHIEVE_CONST_TAGS.HEALTH);
-  AbilityModel orderingAbility = new AbilityModel(ORDERING_POSITION, "Порядок хода", 0, ACHIEVE_CONST_TAGS.ORDERING);
+  AbilityModel healthAbility = new AbilityModel(HEALTH_POSITION, "Здоровье", 0, AbilityModel.ACHIEVE_CONST_TAGS.HEALTH);
+  AbilityModel orderingAbility = new AbilityModel(ORDERING_POSITION, "Порядок хода", 0, AbilityModel.ACHIEVE_CONST_TAGS.ORDERING);
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {

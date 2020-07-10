@@ -1,10 +1,10 @@
-package com.example.masterhelper.models;
+package com.masterhelper.appconfig.models;
 
 /**
  * Модель данных для адаптера поключения аккордиона в цеклический список сцены
  * @autor Neffes
  * */
-public class ScriptRecycleDataModel {
+public class ScriptModel {
 
   /** название сцены выводится в строке списка(видна всегда)*/
   public String title;
@@ -24,7 +24,7 @@ public class ScriptRecycleDataModel {
   /**@constructor
    * генератор записи для адаптора
    * */
-  public ScriptRecycleDataModel(String title, int id, String description, boolean hasBattleActionIcon, boolean isFinished ){
+  public ScriptModel(String title, int id, String description, boolean hasBattleActionIcon, boolean isFinished ){
     setTitle(title);
     setDescription(description);
     setFinished(isFinished);

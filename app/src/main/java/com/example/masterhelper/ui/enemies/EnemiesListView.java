@@ -19,7 +19,7 @@ import com.masterhelper.dbAdaptersFactory.adapters.EnemyDBAdapter;
 import com.masterhelper.listFactory.CustomListItemsEnum;
 import com.masterhelper.listFactory.commonAdapter.item.ICommonItemEvents;
 import com.masterhelper.mediaworker.BackgroundMediaPlayer;
-import com.example.masterhelper.models.EnemyModel;
+import com.masterhelper.appconfig.models.EnemyModel;
 import com.example.masterhelper.ui.appBarFragment.MusicSettingsScreen;
 import com.masterhelper.listFactory.ListFactory;
 import com.masterhelper.dbAdaptersFactory.adapters.ScriptDBAdapter;

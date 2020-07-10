@@ -8,7 +8,7 @@ import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.appcompat.widget.AppCompatImageView;
 import com.example.masterhelper.R;
 import com.masterhelper.listFactory.commonAdapter.CommonAdapter;
-import com.example.masterhelper.models.ScriptRecycleDataModel;
+import com.masterhelper.appconfig.models.ScriptModel;
 
 /** Модель для управления интерфейсом внутри аккордиона для цеклического списка*/
 public class ScriptItem<Model> extends CommonItem<Model>{
@@ -65,7 +65,7 @@ public class ScriptItem<Model> extends CommonItem<Model>{
    * - scriptsFinished - сколько скриптов выполнено
    * - scriptsTotal - сколько всего скриптов в сцене
    * */
-  private void setSceneIsDone(ScriptRecycleDataModel item) {
+  private void setSceneIsDone(ScriptModel item) {
     boolean isFinished = item.isFinished;
     this.isFinishedIcon.setVisibility(isFinished ? View.VISIBLE : View.GONE);
     titleBar.setBackgroundResource(!isFinished ? R.color.colorPrimary : R.color.colorPrimaryDark);
@@ -76,7 +76,7 @@ public class ScriptItem<Model> extends CommonItem<Model>{
    * @param position - текущая позиция холдера сцены в списке
    * */
   public void updateHolderByData(Model itemData, int position){
-    ScriptRecycleDataModel script = (ScriptRecycleDataModel) itemData;
+    ScriptModel script = (ScriptModel) itemData;
     setTitle(script.title);
     setDescription(script.description);
     setPosition(position);

@@ -4,7 +4,7 @@ import android.database.Cursor;
 import com.masterhelper.appconfig.DbHelpers;
 import com.masterhelper.appconfig.GlobalApplication;
 import com.masterhelper.appconfig.contracts.JourneysContract;
-import com.example.masterhelper.models.JourneyModel;
+import com.masterhelper.appconfig.models.JourneyModel;
 
 import java.util.LinkedHashMap;
 

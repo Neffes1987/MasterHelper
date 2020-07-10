@@ -1,6 +1,6 @@
 package com.masterhelper.appconfig.contracts;
 
-import com.example.masterhelper.models.JourneyModel;
+import com.masterhelper.appconfig.models.JourneyModel;
 
 public class JourneysContract extends GeneralContract<JourneyModel> {
   public static final  String TABLE_NAME = "journeys";

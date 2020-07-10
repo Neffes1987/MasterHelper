@@ -4,7 +4,7 @@ import android.database.Cursor;
 import com.masterhelper.appconfig.DbHelpers;
 import com.masterhelper.appconfig.GlobalApplication;
 import com.masterhelper.appconfig.contracts.EnemyContract;
-import com.example.masterhelper.models.EnemyModel;
+import com.masterhelper.appconfig.models.EnemyModel;
 
 import java.util.LinkedHashMap;
 

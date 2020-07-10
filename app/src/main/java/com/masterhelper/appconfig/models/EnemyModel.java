@@ -1,4 +1,4 @@
-package com.example.masterhelper.models;
+package com.masterhelper.appconfig.models;
 
 public class EnemyModel {
 

@@ -6,7 +6,7 @@ import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.appcompat.widget.AppCompatImageView;
 import com.example.masterhelper.R;
 import com.masterhelper.listFactory.commonAdapter.CommonAdapter;
-import com.example.masterhelper.models.SceneRecycleDataModel;
+import com.masterhelper.appconfig.models.SceneModel;
 
 /** Модель для управления интерфейсом внутри аккордиона для цеклического списка*/
 public class SceneItem<Model> extends CommonItem<Model>{
@@ -63,7 +63,7 @@ public class SceneItem<Model> extends CommonItem<Model>{
    * - scriptsFinished - сколько скриптов выполнено
    * - scriptsTotal - сколько всего скриптов в сцене
    * */
-  private void setScreenStepsValue(SceneRecycleDataModel item) {
+  private void setScreenStepsValue(SceneModel item) {
     String scripts = item.scriptsFinished +"/"+ item.scriptsTotal;
     this.screenStepsValue.setText(scripts);
   }
@@ -73,7 +73,7 @@ public class SceneItem<Model> extends CommonItem<Model>{
    * - scriptsFinished - сколько скриптов выполнено
    * - scriptsTotal - сколько всего скриптов в сцене
    * */
-  private void setSceneIsDone(SceneRecycleDataModel item) {
+  private void setSceneIsDone(SceneModel item) {
     if(item.scriptsTotal <= item.scriptsFinished && item.scriptsTotal != 0) {
       this.isFinishedIcon.setVisibility(View.VISIBLE);
       titleBar.setBackgroundResource(R.color.colorPrimaryDark);
@@ -88,7 +88,7 @@ public class SceneItem<Model> extends CommonItem<Model>{
    * - scriptsFinished - сколько скриптов выполнено
    * - scriptsTotal - сколько всего скриптов в сцене
    * */
-  private void setProgressBar(SceneRecycleDataModel item) {
+  private void setProgressBar(SceneModel item) {
     this.progressBar.setMax(item.scriptsTotal);
     this.progressBar.setProgress(item.scriptsFinished);
     setSceneIsDone(item);
@@ -100,7 +100,7 @@ public class SceneItem<Model> extends CommonItem<Model>{
    * @param position - текущая позиция холдера сцены в списке
    * */
   public void updateHolderByData(Model itemData, int position){
-    SceneRecycleDataModel scene = (SceneRecycleDataModel) itemData;
+    SceneModel scene = (SceneModel) itemData;
     setTitle(scene.title);
     setDescription(scene.description);
     setProgressBar(scene);

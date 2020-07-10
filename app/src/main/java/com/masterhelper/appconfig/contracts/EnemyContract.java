@@ -1,6 +1,6 @@
 package com.masterhelper.appconfig.contracts;
 
-import com.example.masterhelper.models.EnemyModel;
+import com.masterhelper.appconfig.models.EnemyModel;
 
 public class EnemyContract extends GeneralContract<EnemyModel> {
   public final static String TABLE_NAME = "enemies";

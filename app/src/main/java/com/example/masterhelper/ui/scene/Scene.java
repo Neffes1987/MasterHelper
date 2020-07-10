@@ -23,7 +23,7 @@ import com.example.masterhelper.ui.enemies.EnemiesListView;
 import com.masterhelper.listFactory.CustomListItemsEnum;
 import com.masterhelper.listFactory.commonAdapter.item.ICommonItemEvents;
 import com.masterhelper.listFactory.ListFactory;
-import com.example.masterhelper.models.ScriptRecycleDataModel;
+import com.masterhelper.appconfig.models.ScriptModel;
 import com.masterhelper.dbAdaptersFactory.adapters.ScriptDBAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -46,7 +46,7 @@ public class Scene extends AppCompatActivity implements ICommonItemEvents {
   /** указатель на кнопку проигрывания музыки */
   FloatingActionButton musicControl;
 
-  ListFactory<ScriptRecycleDataModel> scriptsViewList;
+  ListFactory<ScriptModel> scriptsViewList;
 
   BackgroundMediaPlayer backgroundMediaPlayer = BackgroundMediaPlayer.getInstance();
 
@@ -61,7 +61,7 @@ public class Scene extends AppCompatActivity implements ICommonItemEvents {
   private final int ADD_MUSIC_TO_SCENE_CODE = 3;
 
   /** временный кеш для списка скриптов */
-  public LinkedHashMap<Integer, ScriptRecycleDataModel> scriptsList = new LinkedHashMap<>();
+  public LinkedHashMap<Integer, ScriptModel> scriptsList = new LinkedHashMap<>();
 
   public void setSceneMusicStarted(boolean sceneMusicStarted) {
     this.sceneMusicStarted = sceneMusicStarted;
@@ -115,7 +115,7 @@ public class Scene extends AppCompatActivity implements ICommonItemEvents {
     });
 
     FragmentManager fm = getSupportFragmentManager();
-    scriptsViewList = (ListFactory<ScriptRecycleDataModel>) fm.findFragmentById(R.id.SCREEN_SCRIPTS_LIST_ID);
+    scriptsViewList = (ListFactory<ScriptModel>) fm.findFragmentById(R.id.SCREEN_SCRIPTS_LIST_ID);
 
 
     if(bar != null){
@@ -146,15 +146,15 @@ public class Scene extends AppCompatActivity implements ICommonItemEvents {
 
   /** обновить текущий скрипт  */
   public void onUpdateScriptNameButtonPressed(int id) {
-    ScriptRecycleDataModel scriptRecycleDataModel = scriptsList.get(id);
+    ScriptModel scriptModel = scriptsList.get(id);
     Intent intent = new Intent(this, CreateNewItemDialog.class);
     intent.putExtra(CreateNewItemDialog.TITLE, R.string.script_update_title);
     intent.putExtra(CreateNewItemDialog.IS_UPDATE, 1);
     intent.putExtra(CreateNewItemDialog.ID, id);
-    if(scriptRecycleDataModel != null){
-      intent.putExtra(CreateNewItemDialog.OLD_NAME, scriptRecycleDataModel.getTitle());
-      intent.putExtra(CreateNewItemDialog.IS_BATTLE, scriptRecycleDataModel.hasBattleActionIcon ? 1 : 0);
-      intent.putExtra(CreateNewItemDialog.DESCRIPTION, scriptRecycleDataModel.getDescription());
+    if(scriptModel != null){
+      intent.putExtra(CreateNewItemDialog.OLD_NAME, scriptModel.getTitle());
+      intent.putExtra(CreateNewItemDialog.IS_BATTLE, scriptModel.hasBattleActionIcon ? 1 : 0);
+      intent.putExtra(CreateNewItemDialog.DESCRIPTION, scriptModel.getDescription());
       intent.putExtra(CreateNewItemDialog.IS_SCRIPT, 1);
       startActivityForResult(intent, UPDATE_SCRIPT_CODE);
     }
@@ -176,7 +176,7 @@ public class Scene extends AppCompatActivity implements ICommonItemEvents {
       return;
     }
 
-    ScriptRecycleDataModel item;
+    ScriptModel item;
 
     if(id > 0){
       item = scriptDBAdapter.get(id);
@@ -184,7 +184,7 @@ public class Scene extends AppCompatActivity implements ICommonItemEvents {
       item.setDescription(description);
       item.hasBattleActionIcon = hasBattleSceneValue == 1;
     } else {
-      item = new ScriptRecycleDataModel(newName, id, description, hasBattleSceneValue == 1, false);
+      item = new ScriptModel(newName, id, description, hasBattleSceneValue == 1, false);
     }
     switch (requestCode){
       case CREATE_NEW_SCRIPT_CODE:
@@ -204,7 +204,7 @@ public class Scene extends AppCompatActivity implements ICommonItemEvents {
   /** обработчик нажатия на кнопки управления скриптом */
   @Override
   public void onClick(View elementFiredAction, int position) {
-    ScriptRecycleDataModel currentData = (ScriptRecycleDataModel) scriptsList.values().toArray()[position];
+    ScriptModel currentData = (ScriptModel) scriptsList.values().toArray()[position];
     int btnId = elementFiredAction.getId();
     int currId = currentData.getId();
     switch (btnId){

@@ -1,8 +1,8 @@
 package com.masterhelper.appconfig.contracts;
 
-import com.example.masterhelper.models.SceneRecycleDataModel;
+import com.masterhelper.appconfig.models.SceneModel;
 
-public class SceneContract extends GeneralContract<SceneRecycleDataModel> {
+public class SceneContract extends GeneralContract<SceneModel> {
   public final static String TABLE_NAME = "scene";
 
   public final static String COLUMN_TITLE = "title";
@@ -29,7 +29,7 @@ public class SceneContract extends GeneralContract<SceneRecycleDataModel> {
 
   public static String[] INSERT_COLUMNS_PROPS = concat(UPDATE_COLUMNS_PROPS, new String[]{COLUMN_JOURNEY_ID});
 
-  public String[] getValues(SceneRecycleDataModel newScene, int journeyId){
+  public String[] getValues(SceneModel newScene, int journeyId){
     String title = newScene.title;
     String description = newScene.description;
     String[] insertValues = new String[]{title, description};
@@ -42,7 +42,7 @@ public class SceneContract extends GeneralContract<SceneRecycleDataModel> {
 
   public static String CREATE_TABLE = generateTableQuery(TABLE_NAME, CREATE_TABLE_COLUMNS);
 
-  public String addItemQuery(SceneRecycleDataModel newScene, int journeyId){
+  public String addItemQuery(SceneModel newScene, int journeyId){
     String[] values = getValues(newScene, journeyId);
     return generateInsertQuery(TABLE_NAME, INSERT_COLUMNS_PROPS, values);
   }
@@ -51,7 +51,7 @@ public class SceneContract extends GeneralContract<SceneRecycleDataModel> {
     return generateDeleteItemQuery(TABLE_NAME, itemId);
   }
 
-  public String updateItemQuery(int itemId, SceneRecycleDataModel newScene){
+  public String updateItemQuery(int itemId, SceneModel newScene){
     String[] values = getValues(newScene, 0);
     return generateUpdateValues(TABLE_NAME, itemId, UPDATE_COLUMNS_PROPS, values);
   }

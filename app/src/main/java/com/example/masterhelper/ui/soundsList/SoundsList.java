@@ -13,7 +13,7 @@ import com.example.masterhelper.R;
 import com.masterhelper.listFactory.commonAdapter.CommonAdapter;
 import com.masterhelper.listFactory.CustomListItemsEnum;
 import com.masterhelper.listFactory.commonAdapter.item.ICommonItemEvents;
-import com.example.masterhelper.models.SoundFileModel;
+import com.masterhelper.appconfig.models.SoundFileModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.LinkedHashMap;

@@ -16,7 +16,7 @@ import com.masterhelper.dialogsFactory.DialogsFactory;
 import com.masterhelper.dialogsFactory.dialogs.CommonDialog;
 import com.masterhelper.listFactory.CustomListItemsEnum;
 import com.masterhelper.listFactory.commonAdapter.item.ICommonItemEvents;
-import com.example.masterhelper.models.AbilityModel;
+import com.masterhelper.appconfig.models.AbilityModel;
 import com.masterhelper.listFactory.ListFactory;
 import com.masterhelper.dbAdaptersFactory.adapters.AbilityDBAdapter;
 

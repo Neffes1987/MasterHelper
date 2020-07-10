@@ -5,7 +5,7 @@ import com.masterhelper.appconfig.DbHelpers;
 import com.masterhelper.appconfig.GlobalApplication;
 import com.masterhelper.appconfig.contracts.AbilitiesContract;
 import com.masterhelper.appconfig.contracts.EnemyAbilitiesContract;
-import com.example.masterhelper.models.AbilityModel;
+import com.masterhelper.appconfig.models.AbilityModel;
 
 import java.util.LinkedHashMap;
 

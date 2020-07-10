@@ -1,4 +1,4 @@
-package com.example.masterhelper.models;
+package com.masterhelper.appconfig.models;
 
 public class AbilityModel {
   /** */
@@ -66,5 +66,10 @@ public class AbilityModel {
 
   public void setName(String name) {
     this.name = name;
+  }
+
+  public enum ACHIEVE_CONST_TAGS {
+    HEALTH,
+    ORDERING
   }
 }

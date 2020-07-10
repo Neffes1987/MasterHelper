@@ -13,7 +13,7 @@ import com.masterhelper.dialogsFactory.DialogsFactory;
 import com.masterhelper.dialogsFactory.dialogs.CommonDialog;
 import com.masterhelper.listFactory.CustomListItemsEnum;
 import com.masterhelper.listFactory.commonAdapter.item.ICommonItemEvents;
-import com.example.masterhelper.models.JourneyModel;
+import com.masterhelper.appconfig.models.JourneyModel;
 import com.example.masterhelper.ui.appBarFragment.IAppBarFragment;
 import android.content.Intent;
 import android.os.Bundle;

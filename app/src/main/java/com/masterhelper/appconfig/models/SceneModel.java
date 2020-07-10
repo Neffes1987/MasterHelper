@@ -1,10 +1,10 @@
-package com.example.masterhelper.models;
+package com.masterhelper.appconfig.models;
 
 /**
  * Модель данных для адаптера поключения аккордиона в цеклический список сцены
  * @autor Neffes
  * */
-public class SceneRecycleDataModel {
+public class SceneModel {
 
   /** название сцены выводится в строке списка(видна всегда)*/
   public String title;
@@ -27,7 +27,7 @@ public class SceneRecycleDataModel {
   /**@constructor
    * генератор записи для адаптора
    * */
-  public SceneRecycleDataModel(String title){
+  public SceneModel(String title){
     setTitle(title);
     setDescription("");
     setExpand(false);
@@ -36,7 +36,7 @@ public class SceneRecycleDataModel {
     setScriptsTotal(0);
   }
 
-  public SceneRecycleDataModel(String title, int id,  String description, int scriptsFinished, int scriptsTotal, boolean isExpand ){
+  public SceneModel(String title, int id, String description, int scriptsFinished, int scriptsTotal, boolean isExpand ){
     setTitle(title);
     setDescription(description);
     setExpand(isExpand);

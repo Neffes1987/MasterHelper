@@ -6,7 +6,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBar;
 import com.masterhelper.dialogsFactory.dialogs.CreateNewItemDialog;
 import com.example.masterhelper.R;
-import com.example.masterhelper.models.JourneyModel;
+import com.masterhelper.appconfig.models.JourneyModel;
 import com.masterhelper.dbAdaptersFactory.AdaptersType;
 import com.masterhelper.dbAdaptersFactory.DBAdapterFactory;
 import com.masterhelper.dbAdaptersFactory.adapters.JourneyDBAdapter;
@@ -18,7 +18,7 @@ import com.example.masterhelper.ui.scene.Scene;
 import com.masterhelper.listFactory.CustomListItemsEnum;
 import com.masterhelper.listFactory.commonAdapter.item.ICommonItemEvents;
 import com.masterhelper.listFactory.ListFactory;
-import com.example.masterhelper.models.SceneRecycleDataModel;
+import com.masterhelper.appconfig.models.SceneModel;
 import android.content.Intent;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
@@ -43,7 +43,7 @@ public class JourneyItemView extends AppCompatActivity implements ICommonItemEve
   JourneyModel currentJourney;
 
   /** временный кеш по списку сцен */
-  LinkedHashMap<Integer, SceneRecycleDataModel> scenesList = new LinkedHashMap<>();
+  LinkedHashMap<Integer, SceneModel> scenesList = new LinkedHashMap<>();
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -83,7 +83,7 @@ public class JourneyItemView extends AppCompatActivity implements ICommonItemEve
   void updateScenesList(){
     scenesList = sceneDBAdapter.getListByParentId(currentJourney.getId());
     FragmentManager fm = getSupportFragmentManager();
-    ListFactory<SceneRecycleDataModel> lsf = (ListFactory<SceneRecycleDataModel>) fm.findFragmentById(R.id.SCREEN_FRAGMENT_ID);
+    ListFactory<SceneModel> lsf = (ListFactory<SceneModel>) fm.findFragmentById(R.id.SCREEN_FRAGMENT_ID);
 
     if(lsf != null && lsf.getView() != null){
       lsf.setItemType(CustomListItemsEnum.scene);
@@ -100,7 +100,7 @@ public class JourneyItemView extends AppCompatActivity implements ICommonItemEve
 
   /** вызвать диалог редактирования сцены */
   public void onUpdateScreenNameButtonPressed(int id) {
-    SceneRecycleDataModel scene = sceneDBAdapter.get(id);
+    SceneModel scene = sceneDBAdapter.get(id);
     if(scene != null){
       Intent intent = new Intent(this, CreateNewItemDialog.class);
       intent.putExtra(CreateNewItemDialog.TITLE, R.string.screen_name_scene_update);
@@ -126,12 +126,12 @@ public class JourneyItemView extends AppCompatActivity implements ICommonItemEve
     if(newName != null && newName.trim().length() == 0){
       return;
     }
-    SceneRecycleDataModel scene;
+    SceneModel scene;
     if(id > 0) {
       scene = sceneDBAdapter.get(id);
 
     } else {
-      scene = new SceneRecycleDataModel(newName);
+      scene = new SceneModel(newName);
     }
     scene.setTitle(newName);
     scene.setDescription(newDescription);
@@ -150,7 +150,7 @@ public class JourneyItemView extends AppCompatActivity implements ICommonItemEve
   /** обработчик кнопок сцены */
   @Override
   public void onClick(View elementFiredAction, int position) {
-    SceneRecycleDataModel currentData = (SceneRecycleDataModel) scenesList.values().toArray()[position];
+    SceneModel currentData = (SceneModel) scenesList.values().toArray()[position];
     int btnId = elementFiredAction.getId();
     switch (btnId){
       case R.id.SCENE_START_BTN_ID:

@@ -1,8 +1,8 @@
 package com.masterhelper.appconfig.contracts;
 
-import com.example.masterhelper.models.ScriptRecycleDataModel;
+import com.masterhelper.appconfig.models.ScriptModel;
 
-public class ScriptsContract extends GeneralContract<ScriptRecycleDataModel> {
+public class ScriptsContract extends GeneralContract<ScriptModel> {
   public final static  String TABLE_NAME = "scripts";
 
   public final static  String COLUMN_TITLE = "title";
@@ -37,7 +37,7 @@ public class ScriptsContract extends GeneralContract<ScriptRecycleDataModel> {
 
   public static  String[] INSERT_COLUMNS_PROPS = concat(UPDATE_COLUMNS_PROPS, new String[]{COLUMN_SCENE_ID});
 
-  public String[] getValues(ScriptRecycleDataModel newScript, int sceneID){
+  public String[] getValues(ScriptModel newScript, int sceneID){
     String title = newScript.title;
     String description = newScript.description;
       String hasBattle = newScript.hasBattleActionIcon + "";
@@ -51,7 +51,7 @@ public class ScriptsContract extends GeneralContract<ScriptRecycleDataModel> {
 
   public static String CREATE_TABLE = generateTableQuery(TABLE_NAME, CREATE_TABLE_COLUMNS);
 
-  public  String addItemQuery(ScriptRecycleDataModel newItem, int sceneID){
+  public  String addItemQuery(ScriptModel newItem, int sceneID){
     String[] values = getValues(newItem, sceneID);
     return generateInsertQuery(TABLE_NAME, INSERT_COLUMNS_PROPS, values);
   }
@@ -60,7 +60,7 @@ public class ScriptsContract extends GeneralContract<ScriptRecycleDataModel> {
     return generateDeleteItemQuery(TABLE_NAME, itemId);
   }
 
-  public  String updateItemQuery(int itemId, ScriptRecycleDataModel newItem){
+  public  String updateItemQuery(int itemId, ScriptModel newItem){
     String[] values = getValues(newItem, 0);
     return generateUpdateValues(TABLE_NAME, itemId, UPDATE_COLUMNS_PROPS, values);
   }
