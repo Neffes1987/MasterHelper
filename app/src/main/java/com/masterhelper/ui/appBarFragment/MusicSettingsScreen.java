@@ -42,12 +42,10 @@ public class MusicSettingsScreen extends AppCompatActivity implements ICommonIte
 
   public void setSelectedList() {
     selectedList.clear();
-    String listIds = getIntent().getStringExtra(SELECTED_LIST);
-    if(listIds == null || listIds.equals("")){
-      return;
+    String[] listIds = getIntent().getStringArrayExtra(SELECTED_LIST);
+    if(listIds != null){
+      Collections.addAll(selectedList, listIds);
     }
-    String[] list = cleanCommaToString(listIds).split(",");
-    Collections.addAll(selectedList, list);
   }
 
   public void setGeneral() {
@@ -79,10 +77,6 @@ public class MusicSettingsScreen extends AppCompatActivity implements ICommonIte
     mediaFiles.stopMediaRecord();
   }
 
-  public String cleanCommaToString(String str){
-    return str.replaceAll("\\[|\\]|\\s", "");
-  }
-
   /** запустить внешний экран выбора файла для добавления в галерею */
   @Override
   public void onClick(View elementFiredAction, int position) {
@@ -94,7 +88,7 @@ public class MusicSettingsScreen extends AppCompatActivity implements ICommonIte
       StartFilePickerIntent();
     } else if(position == SoundsList.ATTACH_MUSIC_BTN){
       Intent intent = new Intent();
-      intent.putExtra(SELECTED_LIST, cleanCommaToString(selectedList.toString()));
+      intent.putExtra(SELECTED_LIST, selectedList.toArray(new String[0]));
       setResult(RESULT_OK, intent);
       finish();
     } else {

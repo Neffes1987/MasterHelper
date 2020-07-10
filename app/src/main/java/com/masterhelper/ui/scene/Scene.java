@@ -122,9 +122,9 @@ public class Scene extends AppCompatActivity implements ICommonItemEvents {
     }
   }
 
-  private String getMediaList(){
+  private String[] getMediaList(){
     HashMap<String, Integer> mediaList = sceneDBAdapter.getMediaForScene(sceneId);
-    return mediaList.size() > 0 ? mediaList.keySet().toString().replaceAll("\\[|]|\\s", "") : "";
+    return mediaList.keySet().toArray(new String[0]);
   }
 
   /** обновление списка скриптов */
@@ -191,7 +191,7 @@ public class Scene extends AppCompatActivity implements ICommonItemEvents {
         scriptDBAdapter.update(item);
         break;
       case ADD_MUSIC_TO_SCENE_CODE:
-        String selectedPaths = result.getStringExtra(MusicSettingsScreen.SELECTED_LIST);
+        String[] selectedPaths = result.getStringArrayExtra(MusicSettingsScreen.SELECTED_LIST);
         sceneDBAdapter.updateSceneMedia(selectedPaths, sceneId);
         break;
     }
@@ -209,6 +209,7 @@ public class Scene extends AppCompatActivity implements ICommonItemEvents {
         if(currentData.hasBattleActionIcon){
           Intent intent = new Intent(this, EnemiesListView.class);
           intent.putExtra("scriptId", currId);
+          intent.putExtra("scriptName", currentData.getTitle());
           startActivity(intent);
         }
         break;

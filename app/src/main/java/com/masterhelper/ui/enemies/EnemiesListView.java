@@ -61,9 +61,9 @@ public class EnemiesListView extends AppCompatActivity implements ICommonItemEve
 
   LinkedHashMap<Integer, EnemyModel> enemies = new LinkedHashMap<>();
 
-  private String getMediaList(){
+  private String[] getMediaList(){
     HashMap<String, Integer> mediaList = scriptDBAdapter.getMediaForScript(scriptId);
-    return mediaList.size() > 0 ? mediaList.keySet().toString().replaceAll("\\[|]|\\s", "") : "";
+    return mediaList.keySet().toArray(new String[0]);
   }
 
   @Override
@@ -72,6 +72,7 @@ public class EnemiesListView extends AppCompatActivity implements ICommonItemEve
     setContentView(R.layout.activity_screen_view_script);
 
     scriptId = getIntent().getIntExtra("scriptId", 0);
+    String scriptName = getIntent().getStringExtra("scriptName");
 
     createNewEnemy = findViewById(R.id.CREATE_NEW_ENEMY_ID);
 
@@ -85,7 +86,8 @@ public class EnemiesListView extends AppCompatActivity implements ICommonItemEve
     });
 
     Toolbar toolbar = findViewById(R.id.TOOLBAR_ID);
-    toolbar.setTitle(R.string.screen_name_scene_step);
+    toolbar.setSubtitle(R.string.screen_name_scene_step);
+    toolbar.setTitle(scriptName);
     setSupportActionBar(toolbar);
 
     musicControl.setOnLongClickListener(v -> {
@@ -147,7 +149,7 @@ public class EnemiesListView extends AppCompatActivity implements ICommonItemEve
         updateEnemiesList();
       }
       if(requestCode ==  ADD_MUSIC_TO_SCRIPT_CODE && data != null ){
-        String selectedPaths = data.getStringExtra(MusicSettingsScreen.SELECTED_LIST);
+        String[] selectedPaths = data.getStringArrayExtra(MusicSettingsScreen.SELECTED_LIST);
         scriptDBAdapter.updateScriptMedia(selectedPaths, scriptId);
       }
     }

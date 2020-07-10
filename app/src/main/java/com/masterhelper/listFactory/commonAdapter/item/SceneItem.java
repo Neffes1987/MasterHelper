@@ -1,5 +1,6 @@
 package com.masterhelper.listFactory.commonAdapter.item;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.*;
 import androidx.appcompat.widget.AppCompatImageButton;
@@ -55,7 +56,13 @@ public class SceneItem<Model> extends CommonItem<Model>{
    * @param description - описание сцены
    * */
   private void setDescription(String description) {
-    this.description.setText(description);
+    if(description.length() > 0){
+      this.description.setText(description);
+      this.description.setVisibility(View.VISIBLE);
+    } else {
+      this.description.setVisibility(View.GONE);
+    }
+
   }
 
   /** указать текущее количество пройденых сцен
@@ -101,7 +108,7 @@ public class SceneItem<Model> extends CommonItem<Model>{
    * */
   public void updateHolderByData(Model itemData, int position){
     SceneModel scene = (SceneModel) itemData;
-    setTitle(scene.title);
+    setTitle((position+1) +": "+scene.title);
     setDescription(scene.description);
     setProgressBar(scene);
     setPosition(position);
@@ -116,6 +123,7 @@ public class SceneItem<Model> extends CommonItem<Model>{
     screenStepsValue = v.findViewById(R.id.SCREEN_STEPS_VALUE_ID);
 
     titleBar = v.findViewById(R.id.SCENE_TITLE_BAR_ID);
+    titleBar.setOnClickListener(itemToggle);
 
     body = v.findViewById(R.id.SCREEN_ACCORDION_BODY_ID);
     body.setVisibility(View.GONE);
@@ -134,13 +142,17 @@ public class SceneItem<Model> extends CommonItem<Model>{
     deleteBtn.setOnClickListener(commonListener);
 
     expandButton = v.findViewById(R.id.SCREEN_TOGGLER_ID);
-    expandButton.setOnClickListener(itemToggle);
   }
 
   View.OnClickListener itemToggle =  new View.OnClickListener() {
     @Override
     public void onClick(View v) {
       toggleVisibility(body);
+      if(body.getVisibility() == View.VISIBLE){
+        expandButton.setRotation(180);
+      } else {
+        expandButton.setRotation(0);
+      }
     }
   };
 

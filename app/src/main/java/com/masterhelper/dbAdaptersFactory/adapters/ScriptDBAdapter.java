@@ -25,8 +25,8 @@ public class ScriptDBAdapter extends CommonBDAdapter<ScriptModel> {
     Cursor queryResult = dbHelpers.getList(sqlQuery);
     while (queryResult.moveToNext()) {
       // Используем индекс для получения строки или числа
-      int pathColumnIndex = queryResult.getColumnIndex(SceneMusicContract.COLUMN_FILE_PATH);
-      int idColumnIndex = queryResult.getColumnIndex(SceneMusicContract._ID);
+      int pathColumnIndex = queryResult.getColumnIndex(ScriptMusicContract.COLUMN_FILE_PATH);
+      int idColumnIndex = queryResult.getColumnIndex(ScriptMusicContract._ID);
       scriptMedia.put(queryResult.getString(pathColumnIndex), queryResult.getInt(idColumnIndex));
     }
     queryResult.close();
@@ -34,14 +34,12 @@ public class ScriptDBAdapter extends CommonBDAdapter<ScriptModel> {
   }
 
   /** обновить медиа для сцены */
-  public void updateScriptMedia(String paths, int scriptId){
+  public void updateScriptMedia(String[] paths, int scriptId){
     HashMap<String, Integer> currentPaths = getMediaForScript(scriptId);
     if(paths == null){
       return;
     }
-
-    String[] selectedPaths = paths.split(",");
-    for (String path: selectedPaths ) {
+    for (String path: paths ) {
       if(!currentPaths.containsKey(path) && !path.equals("")){
         String sqlQuery = dbHelpers.scriptMusicContract.addItemQuery(path, scriptId);
         dbHelpers.addNewItem(sqlQuery);
@@ -103,7 +101,7 @@ public class ScriptDBAdapter extends CommonBDAdapter<ScriptModel> {
 
   @Override
   public LinkedHashMap<Integer, ScriptModel> getListByParentId(int parentId) {
-    String sqlQuery = ScriptsContract.getListQuery(ScriptsContract.TABLE_NAME, null, ScriptsContract.COLUMN_SCENE_ID+"="+ parentId, ScriptsContract._ID + " DESC", 0);
+    String sqlQuery = ScriptsContract.getListQuery(ScriptsContract.TABLE_NAME, null, ScriptsContract.COLUMN_SCENE_ID+"="+ parentId, null, 0);
     LinkedHashMap<Integer, ScriptModel> result = new LinkedHashMap<>();
     Cursor queryResult = dbHelpers.getList(sqlQuery);
 

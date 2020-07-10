@@ -3,6 +3,7 @@ package com.masterhelper.mediaworker;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
+import android.widget.Toast;
 import com.masterhelper.appconfig.GlobalApplication;
 
 import java.io.File;
@@ -41,6 +42,10 @@ public class MediaPlayerAdapter {
   }
 
   public void startMediaRecord(File file) {
+    if(mediaPlayer.isPlaying()){
+      stopMediaRecord();
+    }
+
     try {
       mediaPlayer.setDataSource(GlobalApplication.getAppContext(), Uri.fromFile(file));
       mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
@@ -60,10 +65,9 @@ public class MediaPlayerAdapter {
     return mediaList;
   }
 
-  public void setMediaList(String newMediaList) {
+  public void setMediaList(String[] newMediaList) {
     mediaList.clear();
-    String[] list = newMediaList.split(",");
-    mediaList.addAll(Arrays.asList(list));
+    mediaList.addAll(Arrays.asList(newMediaList));
   }
 
 
@@ -76,6 +80,7 @@ public class MediaPlayerAdapter {
     String filePath = (String) getMediaList().toArray()[getCurrentMedia()];
     File file = new File(filePath);
     startMediaRecord(file);
+    Toast.makeText(GlobalApplication.getAppContext(), file.getName(), Toast.LENGTH_LONG).show();
   }
 
   public void startMediaList(){

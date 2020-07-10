@@ -157,7 +157,7 @@ public class JourneyItemView extends AppCompatActivity implements ICommonItemEve
         Intent intent = new Intent(this, Scene.class);
         intent.putExtra("sceneId", currentData.getId());
         intent.putExtra("sceneName", currentData.getTitle());
-        intent.putExtra("journeyName", currentData.getTitle());
+        intent.putExtra("journeyName", currentJourney.getTitle());
         startActivity(intent);
         break;
       case R.id.SCENE_DELETE_BTN_ID:

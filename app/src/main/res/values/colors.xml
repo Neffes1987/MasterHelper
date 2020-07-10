@@ -5,6 +5,7 @@
   <color name="colorAccent">#D81B60</color>
   <color name="colorTextReverse">#FFFFFF</color>
   <color name="colorCommon">#8AD618</color>
+  <color name="colorDark">#F3162201</color>
   <color name="colorDelete">#E53935</color>
 
   <color name="colorCommonFloatTint">#FF80cbc4</color>

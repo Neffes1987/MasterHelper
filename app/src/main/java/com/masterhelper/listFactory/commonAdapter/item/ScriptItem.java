@@ -77,7 +77,7 @@ public class ScriptItem<Model> extends CommonItem<Model>{
    * */
   public void updateHolderByData(Model itemData, int position){
     ScriptModel script = (ScriptModel) itemData;
-    setTitle(script.title);
+    setTitle((position+1) +": "+script.title);
     setDescription(script.description);
     setPosition(position);
     setSceneIsDone(script);
@@ -95,6 +95,7 @@ public class ScriptItem<Model> extends CommonItem<Model>{
     title = v.findViewById(R.id.SCRIPT_TITLE_ID);
 
     titleBar = v.findViewById(R.id.SCRIPT_TITLE_BAR_ID);
+    titleBar.setOnClickListener(itemToggle);
 
     battleScriptBar = v.findViewById(R.id.SCRIPT_BATTLE_EVENT_WRAPPER_ID);
 
@@ -125,6 +126,11 @@ public class ScriptItem<Model> extends CommonItem<Model>{
     @Override
     public void onClick(View v) {
       toggleVisibility(body);
+      if(body.getVisibility() == View.VISIBLE){
+        expandButton.setRotation(180);
+      } else {
+        expandButton.setRotation(0);
+      }
     }
   };
 }

@@ -12,7 +12,7 @@ public class BackgroundMediaPlayer implements IBackgroundMediaPlayer{
   }
 
   /**  */
-  public void setMediaList(String newMediaList) {
+  public void setMediaList(String[] newMediaList) {
     mediaPlayer.setMediaList(newMediaList);
   }
 

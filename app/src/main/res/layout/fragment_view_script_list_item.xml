@@ -26,7 +26,8 @@
         android:background="@color/colorPrimary"
         style="@style/ConstraintLayoutPaddingStyled"
         android:gravity="center_vertical"
-        android:id="@+id/SCRIPT_TITLE_BAR_ID">
+        android:id="@+id/SCRIPT_TITLE_BAR_ID"
+        android:padding="2dp">
 
         <TextView
           android:text="@string/name"
@@ -34,7 +35,7 @@
           android:layout_height="wrap_content"
           android:id="@+id/SCRIPT_TITLE_ID"
           android:layout_weight="10"
-          android:paddingLeft="2dp"/>
+          android:paddingLeft="8dp"/>
 
         <ImageView
           android:layout_width="wrap_content"
@@ -54,7 +55,8 @@
           android:scaleType="center"
           android:layout_gravity="clip_vertical"
           android:contentDescription="@string/toggleAccordionButtonDescription"
-          style="@style/common_action_button"/>
+          style="@style/common_action_button"
+          android:clickable="false"/>
 
       </LinearLayout>
 
@@ -107,6 +109,14 @@
           <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            app:srcCompat="@mipmap/baseline_clear_black_18dp"
+            android:id="@+id/SCRIPT_DELETE_BTN_ID"
+            android:layout_weight="1"
+            style="@style/delete_action_button"/>
+
+          <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             app:srcCompat="@mipmap/baseline_create_black_18dp"
             android:id="@+id/SCRIPT_EDIT_BTN_ID"
             android:layout_weight="1"
@@ -120,13 +130,6 @@
             android:layout_weight="1"
             style="@style/common_action_button"/>
 
-          <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@mipmap/baseline_clear_black_18dp"
-            android:id="@+id/SCRIPT_DELETE_BTN_ID"
-            android:layout_weight="1"
-            style="@style/delete_action_button"/>
         </LinearLayout>
 
       </LinearLayout>

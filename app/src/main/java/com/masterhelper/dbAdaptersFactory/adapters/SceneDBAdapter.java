@@ -38,14 +38,12 @@ public class SceneDBAdapter  extends CommonBDAdapter<SceneModel> {
   }
 
   /** обновить медиа для сцены */
-  public void updateSceneMedia(String paths, int sceneId){
+  public void updateSceneMedia(String[] paths, int sceneId){
     HashMap<String, Integer> currentPaths = getMediaForScene(sceneId);
     if(paths == null){
       return;
     }
-
-    String[] selectedPaths = paths.split(",");
-    for (String path: selectedPaths ) {
+    for (String path: paths ) {
       if(!currentPaths.containsKey(path) && !path.equals("")){
         String sqlQuery = dbHelpers.sceneMusicContract.addItemQuery(path, sceneId);
         dbHelpers.addNewItem(sqlQuery);
@@ -105,7 +103,7 @@ public class SceneDBAdapter  extends CommonBDAdapter<SceneModel> {
 
   @Override
   public LinkedHashMap<Integer, SceneModel> getListByParentId(int parentId) {
-    String sqlQuery = SceneContract.getListQuery(SceneContract.TABLE_NAME, null, SceneContract.COLUMN_JOURNEY_ID+"="+ parentId, SceneContract._ID + " DESC", 0);
+    String sqlQuery = SceneContract.getListQuery(SceneContract.TABLE_NAME, null, SceneContract.COLUMN_JOURNEY_ID+"="+ parentId, null, 0);
 
     LinkedHashMap<Integer, SceneModel> result = new LinkedHashMap<>();
 

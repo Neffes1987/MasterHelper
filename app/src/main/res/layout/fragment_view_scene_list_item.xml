@@ -25,7 +25,8 @@
         android:background="@color/colorPrimary"
         style="@style/ConstraintLayoutPaddingStyled"
         android:gravity="center_vertical"
-        android:id="@+id/SCENE_TITLE_BAR_ID">
+        android:id="@+id/SCENE_TITLE_BAR_ID"
+        android:padding="2dp">
 
         <TextView
           android:text="@string/name"
@@ -33,7 +34,8 @@
           android:layout_height="wrap_content"
           android:id="@+id/SCENE_TITLE_ID"
           android:layout_weight="10"
-          android:paddingLeft="2dp"/>
+          android:paddingLeft="8dp"
+          />
 
         <ImageView
           android:layout_width="wrap_content"
@@ -53,7 +55,8 @@
           android:scaleType="center"
           android:layout_gravity="clip_vertical"
           android:contentDescription="@string/toggleAccordionButtonDescription"
-          style="@style/common_action_button"/>
+          style="@style/common_action_button"
+          android:clickable="false"/>
 
       </LinearLayout>
 
@@ -70,7 +73,9 @@
           android:layout_height="wrap_content"
           android:id="@+id/SCENE_PROGRESS_ID"
           android:layout_weight="1"
-          android:progress="10"/>
+          android:progress="10"
+          android:paddingLeft="8dp"
+          android:paddingRight="8dp"/>
 
       </LinearLayout>
 
