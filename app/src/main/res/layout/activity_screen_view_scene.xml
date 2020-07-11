@@ -6,13 +6,13 @@
   android:layout_width="match_parent"
   android:layout_height="match_parent"
   style="@style/ConstraintLayoutStyled"
-  tools:context="com.masterhelper.ui.scene.Scene"
+  tools:context="com.example.com.masterhelper.ui.scene.Scene"
   android:isScrollContainer="true">
 
   <fragment
     android:layout_width="0dp"
     android:layout_height="0dp"
-    android:name="com.masterhelper.listFactory.ListFactory"
+    android:name="com.example.com.masterhelper.core.listFactory.ListFactory"
     android:id="@+id/SCREEN_SCRIPTS_LIST_ID"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"

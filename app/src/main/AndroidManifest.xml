@@ -12,25 +12,25 @@
     android:label="@string/app_name"
     android:roundIcon="@mipmap/enemy1"
     android:supportsRtl="true"
-    android:name="com.masterhelper.appconfig.GlobalApplication"
+    android:name="com.example.com.masterhelper.core.appconfig.GlobalApplication"
     android:theme="@style/Platform.MaterialComponents">
-    <activity android:name="com.masterhelper.ui.appBarFragment.AbilityNamesList">
+    <activity android:name="com.example.com.masterhelper.ui.appBarFragment.AbilityNamesList">
     </activity>
-    <activity android:name="com.masterhelper.ui.enemies.EditEnemy">
+    <activity android:name="com.example.com.masterhelper.ui.enemies.EditEnemy">
     </activity>
-    <activity android:name="com.masterhelper.ui.appBarFragment.MusicSettingsScreen">
-    </activity>
-    <activity
-      android:name="com.masterhelper.dialogsFactory.dialogs.CreateNewItemDialog" android:theme="@style/AppTheme.About">
-    </activity>
-    <activity android:name="com.masterhelper.ui.enemies.EnemiesListView" android:theme="@style/CustomTheme">
-    </activity>
-    <activity android:name="com.masterhelper.ui.scene.Scene">
-    </activity>
-    <activity android:name="com.masterhelper.ui.journey.JourneyItemView">
+    <activity android:name="com.example.com.masterhelper.ui.appBarFragment.MusicSettingsScreen">
     </activity>
     <activity
-      android:name="com.masterhelper.ui.journey.JourneysListView"
+      android:name="com.example.com.masterhelper.core.dialogsFactory.dialogs.CreateNewItemDialog" android:theme="@style/AppTheme.About">
+    </activity>
+    <activity android:name="com.example.com.masterhelper.ui.enemies.EnemiesListView" android:theme="@style/CustomTheme">
+    </activity>
+    <activity android:name="com.example.com.masterhelper.ui.scene.Scene">
+    </activity>
+    <activity android:name="com.example.com.masterhelper.ui.journey.JourneyItemView">
+    </activity>
+    <activity
+      android:name="com.example.com.masterhelper.ui.journey.JourneysListView"
       android:label="@string/app_name"
       android:theme="@style/CustomTheme">
       <intent-filter>

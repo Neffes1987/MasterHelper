@@ -5,12 +5,12 @@
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  tools:context="com.masterhelper.ui.enemies.EnemiesListView">
+  tools:context="com.example.com.masterhelper.ui.enemies.EnemiesListView">
 
   <fragment
     android:layout_width="0dp"
     android:layout_height="wrap_content"
-    android:name="com.masterhelper.ui.appBarFragment.AppBarFragment"
+    android:name="com.example.com.masterhelper.ui.appBarFragment.AppBarFragment"
     android:id="@+id/fragment"
     tools:layout="@layout/fragment_app_bar"
     app:layout_constraintStart_toStartOf="parent"
@@ -20,7 +20,7 @@
   <fragment
     android:layout_width="0dp"
     android:layout_height="wrap_content"
-    android:name="com.masterhelper.listFactory.ListFactory"
+    android:name="com.example.com.masterhelper.core.listFactory.ListFactory"
     android:id="@+id/ENEMIES_GRID_ID"
     tools:layout="@layout/fragment_view_journey_item"
     app:layout_constraintStart_toStartOf="parent"

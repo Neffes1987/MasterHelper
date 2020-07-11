@@ -5,19 +5,19 @@
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  tools:context="com.masterhelper.ui.journey.JourneysListView">
+  tools:context="com.example.com.masterhelper.ui.journey.JourneysListView">
 
   <fragment
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:name="com.masterhelper.ui.appBarFragment.AppBarFragment"
+    android:name="com.example.com.masterhelper.ui.appBarFragment.AppBarFragment"
     android:id="@+id/fragment2"
     tools:layout="@layout/fragment_app_bar"/>
 
   <fragment
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:name="com.masterhelper.listFactory.ListFactory"
+    android:name="com.example.com.masterhelper.core.listFactory.ListFactory"
     android:id="@+id/JOURNEYS_ID"
     tools:layout="@layout/fragment_recycler_view"
     android:layout_marginTop="?attr/actionBarSize"
