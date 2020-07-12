@@ -1,12 +1,13 @@
 package com.example.com.masterhelper.core.appconfig.models.utilities;
 
+import androidx.annotation.NonNull;
 import com.example.com.masterhelper.core.appconfig.models.DataModel;
 
 import java.util.Collection;
 import java.util.LinkedHashMap;
 
 public class ModelList {
-  private LinkedHashMap<Integer, DataModel> list = new LinkedHashMap<>();
+  protected LinkedHashMap<Integer, DataModel> list = new LinkedHashMap<>();
 
   public void clear(){
     list.clear();
@@ -38,5 +39,14 @@ public class ModelList {
 
   public Collection<Integer> keySet(){
     return list.keySet();
+  }
+
+  public String listToString() {
+    StringBuilder result = new StringBuilder();
+    for (DataModel item: list.values()) {
+      result.append(item.modelToString());
+      result.append("\r\n");
+    }
+    return result.toString();
   }
 }

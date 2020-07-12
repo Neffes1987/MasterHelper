@@ -94,4 +94,7 @@
   <string name="force_description_title">Краткая история: </string>
   <string name="force_type_title">Тип: </string>
   <string name="force_journeys_title">Активна в приключениях: </string>
+
+  <string name="force_enemy_type_title">Враги</string>
+  <string name="force_cooperators_type_title">Союзники</string>
 </resources>

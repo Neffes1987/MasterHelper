@@ -38,6 +38,8 @@ public class CommonHolder<Model> extends RecyclerView.ViewHolder {
       case abilities:
         commonItem = new AbilityItem<>(v, adapter, true);
         break;
+      case force:
+        commonItem = new ForceItem<>(v, adapter);
     }
   }
 }

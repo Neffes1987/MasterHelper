@@ -9,8 +9,6 @@ import com.example.com.masterhelper.core.appconfig.models.utilities.ModelList;
 import com.example.com.masterhelper.core.factorys.list.CustomListItemsEnum;
 import com.example.com.masterhelper.core.factorys.list.commonAdapter.item.ICommonItemEvents;
 
-import java.util.LinkedHashMap;
-
 /**
  * Адаптор для работы с аккордионами внутри цеклического списка
  * */

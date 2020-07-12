@@ -1,4 +1,6 @@
-package com.example.com.masterhelper.core.appconfig.models;
+package com.example.com.masterhelper.core.appconfig.models.forces;
+
+import com.example.com.masterhelper.core.appconfig.models.DataModel;
 
 public class RelationModal extends DataModel {
   private ResultType result = ResultType.inProgress;
@@ -30,13 +32,15 @@ public class RelationModal extends DataModel {
   }
 
   @Override
-  public String toString() {
+  public String modelToString() {
     switch (result){
       case failed: return getRejectResult();
       case solved: return getResolveResult();
       default: return "";
     }
   }
+
+
 
   public enum ResultType {
     solved,
