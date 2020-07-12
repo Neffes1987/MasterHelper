@@ -7,6 +7,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.fragment.app.FragmentManager;
+import com.example.com.masterhelper.core.appconfig.models.DataModel;
+import com.example.com.masterhelper.core.appconfig.models.utilities.ModelList;
 import com.example.com.masterhelper.ui.viewCharacteristicRow.Abilities;
 import com.example.com.masterhelper.ui.viewCharacteristicRow.ViewCharacteristicRow;
 import com.example.masterhelper.R;
@@ -21,7 +23,6 @@ import com.example.com.masterhelper.core.factorys.dialogs.DialogsFactory;
 import com.example.com.masterhelper.core.factorys.dialogs.dialogs.CommonDialog;
 import com.example.com.masterhelper.core.factorys.dialogs.dialogs.MultiChooseDialog;
 
-import java.util.LinkedHashMap;
 
 import static android.content.DialogInterface.BUTTON_POSITIVE;
 
@@ -200,7 +201,7 @@ public class EditEnemy extends AppCompatActivity implements ViewCharacteristicRo
   }
 
   private void showAbilitiesPopup(){
-    LinkedHashMap<Integer, AbilityModel> abilitiesForPopup = abilities.getAbilitiesListView();
+    ModelList abilitiesForPopup = abilities.getAbilitiesListView();
     if(abilitiesForPopup.size() == 0){
       Toast.makeText(this, "Нет доступных характеристик", Toast.LENGTH_LONG).show();
       return;
@@ -253,11 +254,11 @@ public class EditEnemy extends AppCompatActivity implements ViewCharacteristicRo
   }
 
   public void accepted(boolean[] selectedItems) {
-    LinkedHashMap<Integer, AbilityModel> abilitiesForPopup = abilities.getAbilitiesListView();
+    ModelList abilitiesForPopup = abilities.getAbilitiesListView();
     int valueIdx = 0;
     for (int key: abilitiesForPopup.keySet()) {
       if(selectedItems[valueIdx]){
-        AbilityModel item = abilitiesForPopup.get(key);
+        DataModel item = abilitiesForPopup.get(key);
         abilities.setAbilityToList(item);
       }
       valueIdx += 1;

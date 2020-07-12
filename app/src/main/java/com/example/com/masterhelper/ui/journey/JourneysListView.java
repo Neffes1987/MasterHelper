@@ -3,6 +3,7 @@ package com.example.com.masterhelper.ui.journey;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
+import com.example.com.masterhelper.core.appconfig.models.utilities.ModelList;
 import com.example.com.masterhelper.core.factorys.dialogs.dialogs.CreateNewItemDialog;
 import com.example.masterhelper.R;
 import com.example.com.masterhelper.core.factorys.DBAdapters.AdaptersType;
@@ -24,7 +25,6 @@ import com.example.com.masterhelper.core.factorys.list.ListFactory;
 import com.example.com.masterhelper.ui.popupMenu.PopupMenuAdapter;
 import com.example.com.masterhelper.ui.popupMenu.PopupMenuEvents;
 
-import java.util.LinkedHashMap;
 import java.util.Objects;
 
 import static android.content.DialogInterface.BUTTON_POSITIVE;
@@ -46,7 +46,7 @@ public class JourneysListView extends AppCompatActivity implements ICommonItemEv
   JourneyDBAdapter journeyDBAdapter = (JourneyDBAdapter) DBAdapterFactory.getAdapter(AdaptersType.journey);
 
   /** временный кеш списка путешествий */
-  LinkedHashMap<Integer, JourneyModel> journeys = new LinkedHashMap<>();
+  ModelList journeys = new ModelList();
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -80,7 +80,7 @@ public class JourneysListView extends AppCompatActivity implements ICommonItemEv
     intent.putExtra(CreateNewItemDialog.TITLE, R.string.journey_update_title);
     intent.putExtra(CreateNewItemDialog.IS_UPDATE, 1);
     intent.putExtra(CreateNewItemDialog.ID, id);
-    intent.putExtra(CreateNewItemDialog.OLD_NAME, Objects.requireNonNull(journeys.get(id)).getTitle());
+    intent.putExtra(CreateNewItemDialog.OLD_NAME, Objects.requireNonNull(journeys.get(id)).getName());
     startActivityForResult(intent, 2);
   }
 

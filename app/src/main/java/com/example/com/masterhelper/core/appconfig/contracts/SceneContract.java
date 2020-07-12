@@ -30,8 +30,8 @@ public class SceneContract extends GeneralContract<SceneModel> {
   public static String[] INSERT_COLUMNS_PROPS = concat(UPDATE_COLUMNS_PROPS, new String[]{COLUMN_JOURNEY_ID});
 
   public String[] getValues(SceneModel newScene, int journeyId){
-    String title = newScene.title;
-    String description = newScene.description;
+    String title = newScene.getName();
+    String description = newScene.getDescription();
     String[] insertValues = new String[]{title, description};
 
     if(journeyId == 0){

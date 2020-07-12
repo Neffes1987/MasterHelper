@@ -19,7 +19,7 @@ public class JourneysContract extends GeneralContract<JourneyModel> {
   public static String CREATE_TABLE = generateTableQuery(TABLE_NAME, CREATE_COLUMNS_PROPS);
 
   public String[] getValues(JourneyModel newItem, int parentID) {
-    return new String[]{newItem.getTitle()};
+    return new String[]{newItem.getName()};
   }
 
   public String addItemQuery(JourneyModel newItem, int parentID) {

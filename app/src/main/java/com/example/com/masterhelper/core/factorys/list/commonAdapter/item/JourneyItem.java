@@ -34,7 +34,7 @@ public class JourneyItem<Model> extends CommonItem<Model> {
 
   public void updateHolderByData(Model itemData, int position) {
     JourneyModel journeyModel = (JourneyModel) itemData;
-    setTitle(journeyModel.getTitle());
+    setTitle(journeyModel.getName());
     setPosition(position);
   }
 }

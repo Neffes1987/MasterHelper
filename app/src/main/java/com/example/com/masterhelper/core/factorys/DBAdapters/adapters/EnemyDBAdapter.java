@@ -5,6 +5,7 @@ import com.example.com.masterhelper.core.appconfig.DbHelpers;
 import com.example.com.masterhelper.core.appconfig.GlobalApplication;
 import com.example.com.masterhelper.core.appconfig.contracts.EnemyContract;
 import com.example.com.masterhelper.core.appconfig.models.EnemyModel;
+import com.example.com.masterhelper.core.appconfig.models.utilities.ModelList;
 
 import java.util.LinkedHashMap;
 
@@ -61,9 +62,9 @@ public class EnemyDBAdapter  extends CommonBDAdapter<EnemyModel>  {
   }
 
   @Override
-  public LinkedHashMap<Integer, EnemyModel> getListByParentId(int parentId) {
+  public ModelList getListByParentId(int parentId) {
     String sqlQuery = EnemyContract.getListQuery(EnemyContract.TABLE_NAME, null, EnemyContract.COLUMN_SCRIPT_ID +" = " + parentId, EnemyContract.COLUMN_CURRENT_ORDERING, 0);
-    LinkedHashMap<Integer, EnemyModel> result = new LinkedHashMap<>();
+    ModelList result = new ModelList();
     Cursor queryResult = dbHelpers.getList(sqlQuery);
 
     while (queryResult.moveToNext()) {
@@ -83,7 +84,7 @@ public class EnemyDBAdapter  extends CommonBDAdapter<EnemyModel>  {
         queryResult.getInt(currentHealthColumnIndex),
         queryResult.getInt(currentOrderingIndex)
       );
-      result.put(EnemyModel.getId(), EnemyModel);
+      result.addToList(EnemyModel);
     }
     queryResult.close();
     return result;

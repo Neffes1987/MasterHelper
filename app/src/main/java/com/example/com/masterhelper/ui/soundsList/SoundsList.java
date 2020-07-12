@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import com.example.com.masterhelper.core.appconfig.models.utilities.ModelList;
 import com.example.masterhelper.R;
 import com.example.com.masterhelper.core.factorys.list.commonAdapter.CommonAdapter;
 import com.example.com.masterhelper.core.factorys.list.CustomListItemsEnum;
@@ -16,7 +17,6 @@ import com.example.com.masterhelper.core.factorys.list.commonAdapter.item.ICommo
 import com.example.com.masterhelper.core.appconfig.models.SoundFileModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.util.LinkedHashMap;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -58,7 +58,7 @@ public class SoundsList extends Fragment implements ICommonItemEvents {
   }
 
   @SuppressLint("RestrictedApi")
-  public void updateListAdapter(LinkedHashMap<Integer, SoundFileModel> data, Boolean isGeneral){
+  public void updateListAdapter(ModelList data, Boolean isGeneral){
     LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
     recyclerView.setLayoutManager(layoutManager);
 

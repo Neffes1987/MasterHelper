@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import com.example.com.masterhelper.core.appconfig.models.utilities.ModelList;
 import com.example.masterhelper.R;
 import com.example.com.masterhelper.core.factorys.DBAdapters.AdaptersType;
 import com.example.com.masterhelper.core.factorys.DBAdapters.DBAdapterFactory;
@@ -36,7 +37,7 @@ public class AbilityNamesList extends AppCompatActivity implements ICommonItemEv
   AbilityDBAdapter abilityDBAdapter = (AbilityDBAdapter) DBAdapterFactory.getAdapter(AdaptersType.ability);
 
   /** Характеристики врага */
-  private LinkedHashMap<Integer, AbilityModel> abilities = new LinkedHashMap<>();
+  private ModelList abilities = new ModelList();
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {

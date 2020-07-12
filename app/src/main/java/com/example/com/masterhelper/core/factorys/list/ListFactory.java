@@ -1,6 +1,7 @@
 package com.example.com.masterhelper.core.factorys.list;
 
 
+import com.example.com.masterhelper.core.appconfig.models.utilities.ModelList;
 import com.example.com.masterhelper.core.factorys.list.commonAdapter.CommonAdapter;
 import com.example.com.masterhelper.core.factorys.list.commonAdapter.item.ICommonItemEvents;
 import android.os.Bundle;
@@ -11,8 +12,6 @@ import android.view.ViewGroup;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.masterhelper.R;
-
-import java.util.LinkedHashMap;
 
 public class ListFactory extends Fragment implements ICommonItemEvents, IListFactory {
   /** */
@@ -45,7 +44,7 @@ public class ListFactory extends Fragment implements ICommonItemEvents, IListFac
     }
   }
 
-  public void updateListAdapter(LinkedHashMap data, CustomListItemsEnum itemType){
+  public void updateListAdapter(ModelList data, CustomListItemsEnum itemType){
     setItemType(itemType);
     CommonAdapter mAdapter = new CommonAdapter<>(data, itemLayout, itemType, this);
     recyclerView.setAdapter(mAdapter);

@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
+import com.example.com.masterhelper.core.appconfig.models.utilities.ModelList;
 import com.example.com.masterhelper.ui.appBarFragment.MusicSettingsScreen;
 import com.example.com.masterhelper.ui.enemies.EnemiesListView;
 import com.example.com.masterhelper.core.appconfig.GlobalApplication;
@@ -29,7 +30,6 @@ import com.example.com.masterhelper.core.factorys.DBAdapters.adapters.ScriptDBAd
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 
 import static android.content.DialogInterface.BUTTON_POSITIVE;
 
@@ -62,7 +62,7 @@ public class Scene extends AppCompatActivity implements ICommonItemEvents {
   private final int ADD_MUSIC_TO_SCENE_CODE = 3;
 
   /** временный кеш для списка скриптов */
-  public LinkedHashMap<Integer, ScriptModel> scriptsList = new LinkedHashMap<>();
+  public ModelList scriptsList = new ModelList();
 
   public void setSceneMusicStarted(boolean sceneMusicStarted) {
     this.sceneMusicStarted = sceneMusicStarted;
@@ -143,13 +143,13 @@ public class Scene extends AppCompatActivity implements ICommonItemEvents {
 
   /** обновить текущий скрипт  */
   public void onUpdateScriptNameButtonPressed(int id) {
-    ScriptModel scriptModel = scriptsList.get(id);
+    ScriptModel scriptModel = (ScriptModel) scriptsList.get(id);
     Intent intent = new Intent(this, CreateNewItemDialog.class);
     intent.putExtra(CreateNewItemDialog.TITLE, R.string.script_update_title);
     intent.putExtra(CreateNewItemDialog.IS_UPDATE, 1);
     intent.putExtra(CreateNewItemDialog.ID, id);
     if(scriptModel != null){
-      intent.putExtra(CreateNewItemDialog.OLD_NAME, scriptModel.getTitle());
+      intent.putExtra(CreateNewItemDialog.OLD_NAME, scriptModel.getName());
       intent.putExtra(CreateNewItemDialog.IS_BATTLE, scriptModel.hasBattleActionIcon ? 1 : 0);
       intent.putExtra(CreateNewItemDialog.DESCRIPTION, scriptModel.getDescription());
       intent.putExtra(CreateNewItemDialog.IS_SCRIPT, 1);
@@ -177,7 +177,7 @@ public class Scene extends AppCompatActivity implements ICommonItemEvents {
 
     if(id > 0){
       item = scriptDBAdapter.get(id);
-      item.setTitle(newName);
+      item.setName(newName);
       item.setDescription(description);
       item.hasBattleActionIcon = hasBattleSceneValue == 1;
     } else {
@@ -209,7 +209,7 @@ public class Scene extends AppCompatActivity implements ICommonItemEvents {
         if(currentData.hasBattleActionIcon){
           Intent intent = new Intent(this, EnemiesListView.class);
           intent.putExtra("scriptId", currId);
-          intent.putExtra("scriptName", currentData.getTitle());
+          intent.putExtra("scriptName", currentData.getName());
           startActivity(intent);
         }
         break;

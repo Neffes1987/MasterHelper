@@ -69,7 +69,7 @@ public class SceneItem<Model> extends CommonItem<Model>{
    * - scriptsTotal - сколько всего скриптов в сцене
    * */
   private void setScreenStepsValue(SceneModel item) {
-    String scripts = item.scriptsFinished +"/"+ item.scriptsTotal;
+    String scripts = item.getSceneProgress();
     this.screenStepsValue.setText(scripts);
   }
 
@@ -79,7 +79,7 @@ public class SceneItem<Model> extends CommonItem<Model>{
    * - scriptsTotal - сколько всего скриптов в сцене
    * */
   private void setSceneIsDone(SceneModel item) {
-    if(item.scriptsTotal <= item.scriptsFinished && item.scriptsTotal != 0) {
+    if(item.checkSceneIsFinished()) {
       this.isFinishedIcon.setVisibility(View.VISIBLE);
       titleBar.setBackgroundResource(R.color.colorPrimaryDark);
     } else {
@@ -94,8 +94,8 @@ public class SceneItem<Model> extends CommonItem<Model>{
    * - scriptsTotal - сколько всего скриптов в сцене
    * */
   private void setProgressBar(SceneModel item) {
-    this.progressBar.setMax(item.scriptsTotal);
-    this.progressBar.setProgress(item.scriptsFinished);
+    this.progressBar.setMax(item.getScriptsTotal());
+    this.progressBar.setProgress(item.getScriptsFinished());
     setSceneIsDone(item);
     setScreenStepsValue(item);
   }
@@ -106,8 +106,8 @@ public class SceneItem<Model> extends CommonItem<Model>{
    * */
   public void updateHolderByData(Model itemData, int position){
     SceneModel scene = (SceneModel) itemData;
-    setTitle((position+1) +": "+scene.title);
-    setDescription(scene.description);
+    setTitle((position+1) +": "+scene.getName());
+    setDescription(scene.getDescription());
     setProgressBar(scene);
     setPosition(position);
   }

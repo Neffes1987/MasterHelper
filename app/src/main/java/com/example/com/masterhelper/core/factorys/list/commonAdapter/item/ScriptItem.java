@@ -73,8 +73,8 @@ public class ScriptItem<Model> extends CommonItem<Model>{
    * */
   public void updateHolderByData(Model itemData, int position){
     ScriptModel script = (ScriptModel) itemData;
-    setTitle((position+1) +": "+script.title);
-    setDescription(script.description);
+    setTitle((position+1) +": "+script.getName());
+    setDescription(script.getDescription());
     setPosition(position);
     setSceneIsDone(script);
     setBattleButtonVisible(script.hasBattleActionIcon);

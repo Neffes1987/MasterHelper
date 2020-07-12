@@ -11,6 +11,7 @@ import android.os.Bundle;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
+import com.example.com.masterhelper.core.appconfig.models.utilities.ModelList;
 import com.example.com.masterhelper.ui.appBarFragment.MusicSettingsScreen;
 import com.example.masterhelper.R;
 import com.example.com.masterhelper.core.appconfig.GlobalApplication;
@@ -59,7 +60,7 @@ public class EnemiesListView extends AppCompatActivity implements ICommonItemEve
 
   ListFactory lsf;
 
-  LinkedHashMap<Integer, EnemyModel> enemies = new LinkedHashMap<>();
+  ModelList enemies = new ModelList();
 
   private String[] getMediaList(){
     HashMap<String, Integer> mediaList = scriptDBAdapter.getMediaForScript(scriptId);

@@ -1,14 +1,9 @@
 package com.example.com.masterhelper.core.appconfig.models;
 
-public class AbilityModel {
-  /** */
-  private String name="";
+public class AbilityModel extends DataModel {
 
   /** */
   private int value=0;
-
-  /** */
-  private int id=0;
 
   /** */
   private ACHIEVE_CONST_TAGS tag;
@@ -16,31 +11,20 @@ public class AbilityModel {
   /** */
   public AbilityModel(int id, String name, int value){
     setValue(value);
-    setName(name);
-    setId(id);
+    initGeneralFields(id, name, null);
   }
 
   /** */
   public AbilityModel(String name){
     setValue(0);
-    setName(name);
-    setId(0);
+    initGeneralFields(0, name, null);
   }
 
   /** */
   public AbilityModel(int id, String name, int value, ACHIEVE_CONST_TAGS tag){
     setValue(value);
-    setName(name);
-    setId(id);
     setTag(tag);
-  }
-
-  public int getId() {
-    return id;
-  }
-
-  public String getName() {
-    return name;
+    initGeneralFields(0, name, null);
   }
 
   public int getValue() {
@@ -56,16 +40,9 @@ public class AbilityModel {
     return tag;
   }
 
-  public void setId(int id) {
-    this.id = id;
-  }
 
   public void setValue(int value) {
     this.value = value;
-  }
-
-  public void setName(String name) {
-    this.name = name;
   }
 
   public enum ACHIEVE_CONST_TAGS {

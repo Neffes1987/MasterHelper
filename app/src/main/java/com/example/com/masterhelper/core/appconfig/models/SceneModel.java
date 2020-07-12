@@ -4,58 +4,35 @@ package com.example.com.masterhelper.core.appconfig.models;
  * Модель данных для адаптера поключения аккордиона в цеклический список сцены
  * @autor Neffes
  * */
-public class SceneModel {
-
-  /** название сцены выводится в строке списка(видна всегда)*/
-  public String title;
-
-  /** описание сцены, тескт внутри аккордиона, выводится если таб открыт*/
-  public String description;
+public class SceneModel extends DataModel {
 
   /** количество скриптов внутри сцены*/
-  public int scriptsTotal;
+  private int scriptsTotal;
 
   /** количество пройденых скриптов данной сцены */
-  public int scriptsFinished;
+  private int scriptsFinished;
 
   /** флаг, что таб открыт */
   public boolean isExpand;
 
-  /** уникальный ид закиси */
-  public int id;
-
   /**@constructor
    * генератор записи для адаптора
    * */
-  public SceneModel(String title){
-    setTitle(title);
-    setDescription("");
+  public SceneModel(String name){
+    initGeneralFields(0, name, "");
     setExpand(false);
-    setId(0);
     setScriptsFinished(0);
     setScriptsTotal(0);
   }
 
-  public SceneModel(String title, int id, String description, int scriptsFinished, int scriptsTotal, boolean isExpand ){
-    setTitle(title);
-    setDescription(description);
+  public SceneModel(String name, int id, String description, int scriptsFinished, int scriptsTotal, boolean isExpand ){
+    initGeneralFields(id, name, description);
+
     setExpand(isExpand);
-    setId(id);
     setScriptsFinished(scriptsFinished);
     setScriptsTotal(scriptsTotal);
   }
 
-  public void setId(int id) {
-    this.id = id;
-  }
-
-  public void setTitle(String title) {
-    this.title = title;
-  }
-
-  public void setDescription(String description) {
-    this.description = description;
-  }
 
   public void setExpand(boolean expand) {
     isExpand = expand;
@@ -69,14 +46,6 @@ public class SceneModel {
     this.scriptsTotal = scriptsTotal;
   }
 
-  public int getId() {
-    return id;
-  }
-
-  public String getTitle() {
-    return title;
-  }
-
   public int getScriptsFinished() {
     return scriptsFinished;
   }
@@ -85,7 +54,12 @@ public class SceneModel {
     return scriptsTotal;
   }
 
-  public String getDescription() {
-    return description;
+  public boolean checkSceneIsFinished(){
+    return scriptsTotal <= scriptsFinished && scriptsTotal != 0;
   }
+
+  public String getSceneProgress() {
+    return scriptsFinished +"/"+ scriptsTotal;
+  }
+
 }

@@ -71,7 +71,7 @@ public class MusicItem<Model> extends CommonItem<Model> {
 
   public void updateHolderByData(Model itemData, int position) {
     SoundFileModel soundFileModel = (SoundFileModel) itemData;
-    setTitle(soundFileModel.getFilename());
+    setTitle(soundFileModel.getName());
     setSelected(soundFileModel.getSelected());
     setPosition(position);
     setMusicStarted(false);

@@ -5,6 +5,7 @@ import com.example.com.masterhelper.core.appconfig.DbHelpers;
 import com.example.com.masterhelper.core.appconfig.GlobalApplication;
 import com.example.com.masterhelper.core.appconfig.contracts.JourneysContract;
 import com.example.com.masterhelper.core.appconfig.models.JourneyModel;
+import com.example.com.masterhelper.core.appconfig.models.utilities.ModelList;
 
 import java.util.LinkedHashMap;
 
@@ -48,16 +49,16 @@ public class JourneyDBAdapter extends CommonBDAdapter<JourneyModel> {
 
   /** получить список приключений */
   @Override
-  public LinkedHashMap<Integer, JourneyModel> getListByParentId(int parentId) {
+  public ModelList getListByParentId(int parentId) {
     String sqlQuery = JourneysContract.getListQuery(JourneysContract.TABLE_NAME, null, null, JourneysContract._ID + " DESC", 0);
-    LinkedHashMap<Integer, JourneyModel> result = new LinkedHashMap<>();
+    ModelList result = new ModelList();
     Cursor queryResult = dbHelpers.getList(sqlQuery);
     while (queryResult.moveToNext()) {
       // Используем индекс для получения строки или числа
       int titleColumnIndex = queryResult.getColumnIndex(JourneysContract.COLUMN_TITLE);
       int idColumnIndex = queryResult.getColumnIndex(JourneysContract._ID);
       JourneyModel journeyModel = new JourneyModel(queryResult.getString(titleColumnIndex), queryResult.getInt(idColumnIndex));
-      result.put(journeyModel.getId(),journeyModel);
+      result.addToList(journeyModel);
     }
     queryResult.close();
     return result;

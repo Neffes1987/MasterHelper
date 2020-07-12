@@ -5,6 +5,7 @@ import android.view.View;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBar;
 import com.example.com.masterhelper.core.appconfig.GlobalApplication;
+import com.example.com.masterhelper.core.appconfig.models.utilities.ModelList;
 import com.example.com.masterhelper.core.factorys.dialogs.dialogs.CreateNewItemDialog;
 import com.example.masterhelper.R;
 import com.example.com.masterhelper.core.appconfig.models.JourneyModel;
@@ -43,7 +44,7 @@ public class JourneyItemView extends AppCompatActivity implements ICommonItemEve
   JourneyModel currentJourney;
 
   /** временный кеш по списку сцен */
-  LinkedHashMap<Integer, SceneModel> scenesList = new LinkedHashMap<>();
+  ModelList scenesList = new ModelList();
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +59,7 @@ public class JourneyItemView extends AppCompatActivity implements ICommonItemEve
     currentJourney = journeyDBAdapter.get(journeyId);
     // получаем указатель на тулбар активированного в главном компоненте
     if(toolbar != null && currentJourney != null){
-      toolbar.setTitle(currentJourney.getTitle());
+      toolbar.setTitle(currentJourney.getName());
       toolbar.setSubtitle(R.string.scene_list);
     }
     
@@ -106,7 +107,7 @@ public class JourneyItemView extends AppCompatActivity implements ICommonItemEve
       intent.putExtra(CreateNewItemDialog.TITLE, R.string.screen_name_scene_update);
       intent.putExtra(CreateNewItemDialog.IS_UPDATE, 1);
       intent.putExtra(CreateNewItemDialog.ID, id);
-      intent.putExtra(CreateNewItemDialog.OLD_NAME, scene.getTitle());
+      intent.putExtra(CreateNewItemDialog.OLD_NAME, scene.getName());
       intent.putExtra(CreateNewItemDialog.DESCRIPTION, scene.getDescription());
       startActivityForResult(intent, 2);
     }
@@ -133,7 +134,7 @@ public class JourneyItemView extends AppCompatActivity implements ICommonItemEve
     } else {
       scene = new SceneModel(newName);
     }
-    scene.setTitle(newName);
+    scene.setName(newName);
     scene.setDescription(newDescription);
 
     switch (requestCode){
@@ -150,14 +151,14 @@ public class JourneyItemView extends AppCompatActivity implements ICommonItemEve
   /** обработчик кнопок сцены */
   @Override
   public void onClick(View elementFiredAction, int position) {
-    SceneModel currentData = (SceneModel) scenesList.values().toArray()[position];
+    SceneModel currentData = (SceneModel) scenesList.getItemByPosition(position);
     int btnId = elementFiredAction.getId();
     switch (btnId){
       case R.id.SCENE_START_BTN_ID:
         Intent intent = new Intent(this, Scene.class);
         intent.putExtra("sceneId", currentData.getId());
-        intent.putExtra("sceneName", currentData.getTitle());
-        intent.putExtra("journeyName", currentJourney.getTitle());
+        intent.putExtra("sceneName", currentData.getName());
+        intent.putExtra("journeyName", currentJourney.getName());
         startActivity(intent);
         break;
       case R.id.SCENE_DELETE_BTN_ID:

@@ -5,6 +5,8 @@ import android.widget.LinearLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import com.example.com.masterhelper.core.appconfig.models.DataModel;
+import com.example.com.masterhelper.core.appconfig.models.utilities.ModelList;
 import com.example.masterhelper.R;
 import com.example.com.masterhelper.core.appconfig.models.AbilityModel;
 
@@ -15,7 +17,7 @@ public class Abilities {
   /** Список характеристик */
   private LinkedHashMap<Integer, AbilityModel> abilitiesView = new LinkedHashMap<>();
 
-  private LinkedHashMap<Integer, AbilityModel> abilitiesListView = new LinkedHashMap<>();
+  private ModelList abilitiesListView = new ModelList();
 
   /** Менеджер фрагментов из активности */
   FragmentManager fm;
@@ -24,9 +26,8 @@ public class Abilities {
   int enemyAbilitiesRowWrapperId = R.id.ENEMY_ABILITIES_ROW_WRAPPER_ID;
   LinearLayout enemyAbilitiesRowWrapper;
 
-  public void setAbilityToList(AbilityModel item){
-    abilitiesView.put(item.getId(), item);
-
+  public void setAbilityToList(DataModel item){
+    abilitiesView.put(item.getId(), (AbilityModel) item);
   }
 
   public void setAbilityValue(int rowId, int value){
@@ -38,8 +39,8 @@ public class Abilities {
 
 
   /** обновить список характеристик */
-  public void setAbilitiesView(LinkedHashMap<Integer, AbilityModel> abilitiesView) {
-    for (AbilityModel item: abilitiesView.values()) {
+  public void setAbilitiesView(ModelList abilitiesView) {
+    for (DataModel item: abilitiesView.values()) {
       setAbilityToList(item);
     }
   }
@@ -105,15 +106,15 @@ public class Abilities {
 
 
 
-  public void setAbilitiesListView(LinkedHashMap<Integer, AbilityModel> abilitiesListView) {
+  public void setAbilitiesListView(ModelList abilitiesListView) {
     this.abilitiesListView = abilitiesListView;
   }
 
-  public LinkedHashMap<Integer, AbilityModel> getAbilitiesListView() {
-    LinkedHashMap<Integer, AbilityModel> result = new LinkedHashMap<>();
-    for (AbilityModel abilityModel: abilitiesListView.values()) {
+  public ModelList getAbilitiesListView() {
+    ModelList result = new ModelList();
+    for (DataModel abilityModel: abilitiesListView.values()) {
       if(abilitiesView.get(abilityModel.getId()) == null){
-        result.put(abilityModel.getId(), abilityModel);
+        result.addToList(abilityModel);
       }
     }
     return result;

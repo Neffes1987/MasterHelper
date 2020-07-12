@@ -6,6 +6,8 @@ import com.example.com.masterhelper.core.appconfig.GlobalApplication;
 import com.example.com.masterhelper.core.appconfig.contracts.AbilitiesContract;
 import com.example.com.masterhelper.core.appconfig.contracts.EnemyAbilitiesContract;
 import com.example.com.masterhelper.core.appconfig.models.AbilityModel;
+import com.example.com.masterhelper.core.appconfig.models.DataModel;
+import com.example.com.masterhelper.core.appconfig.models.utilities.ModelList;
 
 import java.util.LinkedHashMap;
 
@@ -20,7 +22,7 @@ public class AbilityDBAdapter extends CommonBDAdapter<AbilityModel> {
     StringBuilder updateQuery = new StringBuilder();
     StringBuilder deleteQuery = new StringBuilder();
 
-    LinkedHashMap<Integer, AbilityModel> existedAbilities = getListByParentId(enemyId);
+    ModelList existedAbilities = getListByParentId(enemyId);
 
     for (AbilityModel newItem: newItems.values()) {
       int newItemId = newItem.getId();
@@ -39,7 +41,7 @@ public class AbilityDBAdapter extends CommonBDAdapter<AbilityModel> {
     if(existedAbilities.size() > 0){
       deleteQuery.append("DELETE FROM " + EnemyAbilitiesContract.TABLE_NAME + " WHERE " + EnemyAbilitiesContract.COLUMN_ABILITY_ID + " IN (");
       int idx = 0;
-      for (AbilityModel deletedItem : existedAbilities.values()) {
+      for (DataModel deletedItem : existedAbilities.values()) {
            deleteQuery.append(deletedItem.getId());
           if(idx < existedAbilities.size() - 1){
             deleteQuery.append(",");
@@ -59,9 +61,9 @@ public class AbilityDBAdapter extends CommonBDAdapter<AbilityModel> {
   }
 
   /**  */
-  public LinkedHashMap<Integer, AbilityModel> getSettingsAbilitiesList(){
+  public ModelList getSettingsAbilitiesList(){
     String sqlQuery = AbilitiesContract.getListQuery(AbilitiesContract.TABLE_NAME, null, null, AbilitiesContract._ID + " DESC", 0);
-    LinkedHashMap<Integer, AbilityModel> result = new LinkedHashMap<>();
+    ModelList result = new ModelList();
     Cursor queryResult = dbHelpers.getList(sqlQuery);
 
     while (queryResult.moveToNext()) {
@@ -74,7 +76,7 @@ public class AbilityDBAdapter extends CommonBDAdapter<AbilityModel> {
         queryResult.getString(titleColumnIndex),
         0
       );
-      result.put(AbilityModel.getId(), AbilityModel);
+      result.addToList(AbilityModel);
     }
     queryResult.close();
     return result;
@@ -104,8 +106,8 @@ public class AbilityDBAdapter extends CommonBDAdapter<AbilityModel> {
   }
 
   @Override
-  public LinkedHashMap<Integer, AbilityModel> getListByParentId(int parentId) {
-    LinkedHashMap<Integer, AbilityModel> result = new LinkedHashMap<>();
+  public ModelList getListByParentId(int parentId) {
+    ModelList result = new ModelList();
 
     StringBuilder abilitiesByScriptQuery = new StringBuilder();
     abilitiesByScriptQuery
@@ -139,7 +141,7 @@ public class AbilityDBAdapter extends CommonBDAdapter<AbilityModel> {
         queryResult.getString(titleColumnIndex),
         queryResult.getInt(valueColumnIndex)
       );
-      result.put(AbilityModel.getId(), AbilityModel);
+      result.addToList(AbilityModel);
     }
     queryResult.close();
     return result;

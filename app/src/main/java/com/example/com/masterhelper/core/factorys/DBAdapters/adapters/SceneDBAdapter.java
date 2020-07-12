@@ -5,8 +5,10 @@ import com.example.com.masterhelper.core.appconfig.DbHelpers;
 import com.example.com.masterhelper.core.appconfig.GlobalApplication;
 import com.example.com.masterhelper.core.appconfig.contracts.SceneContract;
 import com.example.com.masterhelper.core.appconfig.contracts.SceneMusicContract;
+import com.example.com.masterhelper.core.appconfig.models.DataModel;
 import com.example.com.masterhelper.core.appconfig.models.SceneModel;
 import com.example.com.masterhelper.core.appconfig.models.ScriptModel;
+import com.example.com.masterhelper.core.appconfig.models.utilities.ModelList;
 import com.example.com.masterhelper.core.factorys.DBAdapters.AdaptersType;
 import com.example.com.masterhelper.core.factorys.DBAdapters.DBAdapterFactory;
 
@@ -102,10 +104,10 @@ public class SceneDBAdapter  extends CommonBDAdapter<SceneModel> {
   }
 
   @Override
-  public LinkedHashMap<Integer, SceneModel> getListByParentId(int parentId) {
+  public ModelList getListByParentId(int parentId) {
     String sqlQuery = SceneContract.getListQuery(SceneContract.TABLE_NAME, null, SceneContract.COLUMN_JOURNEY_ID+"="+ parentId, null, 0);
 
-    LinkedHashMap<Integer, SceneModel> result = new LinkedHashMap<>();
+    ModelList result = new ModelList();
 
 
     Cursor queryResult = dbHelpers.getList(sqlQuery);
@@ -117,11 +119,12 @@ public class SceneDBAdapter  extends CommonBDAdapter<SceneModel> {
       int idColumnIndex = queryResult.getColumnIndex(SceneContract._ID);
       int sceneId = queryResult.getInt(idColumnIndex);
 
-      LinkedHashMap<Integer, ScriptModel> scripts = scriptDBAdapter.getListByParentId(sceneId);
+      ModelList scripts = scriptDBAdapter.getListByParentId(sceneId);
       int finishedCounter = 0;
       StringBuilder goals = new StringBuilder();
 
-      for (ScriptModel script: scripts.values() ) {
+      for (DataModel model: scripts.values() ) {
+        ScriptModel script = (ScriptModel) model;
         boolean isFinished = script.isFinished;
         if(isFinished){
           finishedCounter+=1;
@@ -129,7 +132,7 @@ public class SceneDBAdapter  extends CommonBDAdapter<SceneModel> {
         goals
           .append("\r\n")
           .append("- ")
-          .append(script.getTitle())
+          .append(script.getName())
           .append(isFinished ? " [done]" : "")
           .append("\r\n");
       };
@@ -151,7 +154,7 @@ public class SceneDBAdapter  extends CommonBDAdapter<SceneModel> {
         scripts.size(),
         false
       );
-      result.put(sceneModel.getId(), sceneModel);
+      result.addToList(sceneModel);
     }
     queryResult.close();
     return result;

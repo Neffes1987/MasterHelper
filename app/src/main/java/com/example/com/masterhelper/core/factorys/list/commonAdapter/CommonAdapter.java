@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import com.example.com.masterhelper.core.appconfig.models.utilities.ModelList;
 import com.example.com.masterhelper.core.factorys.list.CustomListItemsEnum;
 import com.example.com.masterhelper.core.factorys.list.commonAdapter.item.ICommonItemEvents;
 
@@ -18,13 +19,13 @@ public class CommonAdapter<Model> extends RecyclerView.Adapter<CommonHolder<Mode
   int fragmentId;
 
   /** */
-  private LinkedHashMap<Integer, Model> mDataset;
+  private ModelList mDataset;
   private ICommonItemEvents parentScreenView;
 
   CustomListItemsEnum commonItemType;
 
   /** Инициализируем набор данных для списка и передаем указатель на активность */
-  public CommonAdapter(LinkedHashMap<Integer, Model> data, int listItemFragmentId,  CustomListItemsEnum viewType, ICommonItemEvents parentScreen) {
+  public CommonAdapter(ModelList data, int listItemFragmentId, CustomListItemsEnum viewType, ICommonItemEvents parentScreen) {
     mDataset = data;
     fragmentId = listItemFragmentId;
     commonItemType = viewType;
@@ -51,7 +52,7 @@ public class CommonAdapter<Model> extends RecyclerView.Adapter<CommonHolder<Mode
    * */
   @Override
   public void onBindViewHolder(CommonHolder<Model> holder, final int position) {
-    Model itemData = (Model) mDataset.values().toArray()[position];
+    Model itemData = (Model) mDataset.getItemByPosition(position);
     assert itemData != null;
     holder.initRecyclerView(itemData, position);
   }

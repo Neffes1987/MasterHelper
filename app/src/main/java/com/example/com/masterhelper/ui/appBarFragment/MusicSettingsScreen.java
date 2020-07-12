@@ -13,6 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.fragment.app.FragmentManager;
+import com.example.com.masterhelper.core.appconfig.models.utilities.ModelList;
 import com.example.masterhelper.R;
 import com.example.com.masterhelper.core.factorys.dialogs.DialogTypes;
 import com.example.com.masterhelper.core.factorys.dialogs.DialogsFactory;
@@ -177,12 +178,11 @@ public class MusicSettingsScreen extends AppCompatActivity implements ICommonIte
 
   /** метод обновляет список добавленных данных на вьюхе */
   private void updateViewList() {
-    LinkedHashMap<Integer, SoundFileModel> newData = new LinkedHashMap<>();
+    ModelList newData = new ModelList();
 
     mediaFiles.getFilesList().forEach(fileInList -> {
       boolean isSelected = selectedList.contains(fileInList.getPath());
-      newData.put(newData.size(),
-        new SoundFileModel(fileInList.getName(), fileInList.lastModified(), fileInList.getPath(), newData.size(), isSelected)
+      newData.addToList(new SoundFileModel(fileInList.getName(), fileInList.lastModified(), fileInList.getPath(), newData.size(), isSelected)
       );
     });
 

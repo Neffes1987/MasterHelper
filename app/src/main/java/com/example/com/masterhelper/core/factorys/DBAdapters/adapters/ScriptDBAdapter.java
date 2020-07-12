@@ -7,6 +7,7 @@ import com.example.com.masterhelper.core.appconfig.contracts.SceneContract;
 import com.example.com.masterhelper.core.appconfig.contracts.ScriptMusicContract;
 import com.example.com.masterhelper.core.appconfig.contracts.ScriptsContract;
 import com.example.com.masterhelper.core.appconfig.models.ScriptModel;
+import com.example.com.masterhelper.core.appconfig.models.utilities.ModelList;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -99,9 +100,9 @@ public class ScriptDBAdapter extends CommonBDAdapter<ScriptModel> {
   }
 
   @Override
-  public LinkedHashMap<Integer, ScriptModel> getListByParentId(int parentId) {
+  public ModelList getListByParentId(int parentId) {
     String sqlQuery = ScriptsContract.getListQuery(ScriptsContract.TABLE_NAME, null, ScriptsContract.COLUMN_SCENE_ID+"="+ parentId, null, 0);
-    LinkedHashMap<Integer, ScriptModel> result = new LinkedHashMap<>();
+    ModelList result = new ModelList();
     Cursor queryResult = dbHelpers.getList(sqlQuery);
 
     while (queryResult.moveToNext()) {
@@ -119,7 +120,7 @@ public class ScriptDBAdapter extends CommonBDAdapter<ScriptModel> {
         queryResult.getString(isBattleColumnIndex).equals("true"),
         queryResult.getString(isFinishedColumnIndex).equals("true")
       );
-      result.put(scriptModel.getId(), scriptModel);
+      result.addToList(scriptModel);
     }
     queryResult.close();
     return result;

@@ -38,8 +38,8 @@ public class ScriptsContract extends GeneralContract<ScriptModel> {
   public static  String[] INSERT_COLUMNS_PROPS = concat(UPDATE_COLUMNS_PROPS, new String[]{COLUMN_SCENE_ID});
 
   public String[] getValues(ScriptModel newScript, int sceneID){
-    String title = newScript.title;
-    String description = newScript.description;
+    String title = newScript.getName();
+    String description = newScript.getDescription();
       String hasBattle = newScript.hasBattleActionIcon + "";
         String isFinish = newScript.isFinished+"";
     String[] insertValue = new String[]{title, description, hasBattle, isFinish};
