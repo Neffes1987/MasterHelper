@@ -39,6 +39,9 @@ public class ListFactory extends Fragment implements ICommonItemEvents, IListFac
       case script:
         itemLayout = R.layout.fragment_view_script_list_item;
         break;
+      case force:
+        itemLayout = R.layout.fragment_view_forces_list_item;
+        break;
     }
   }
 

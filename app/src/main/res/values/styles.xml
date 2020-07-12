@@ -82,4 +82,18 @@
     <item name="android:textColor">@color/colorAttention</item>
 
   </style>
+
+  <style name="force_row_style">
+    <item name="android:layout_width">match_parent</item>
+    <item name="android:layout_height">match_parent</item>
+    <item name="android:background">@color/colorForceCaption</item>
+    <item name="android:layout_marginBottom">8dp</item>
+    <item name="android:paddingLeft">8dp</item>
+    <item name="android:paddingRight">8dp</item>
+  </style>
+  <style name="force_caption_style" parent="force_row_style">
+    <item name="android:paddingTop">4dp</item>
+    <item name="android:textSize">10sp</item>
+    <item name="android:layout_marginBottom">0dp</item>
+  </style>
 </resources>

@@ -8,4 +8,5 @@ public enum CustomListItemsEnum {
   journey,
   enemyIcon,
   abilities,
+  force
 }

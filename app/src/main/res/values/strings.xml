@@ -82,4 +82,16 @@
   <string name="add_enemy_title_placeholder">Имя врага…</string>
   <string name="add_enemy_warning_title_placeholder">Сначала добавьте название характеристики</string>
 
+  <!-- forces -->
+  <string name="force_menu_item_title">Фракции и NPC</string>
+  <string name="force_goal_motivation_title">Цели и мотивация: </string>
+  <string name="force_cooperators_title">Союзники: </string>
+  <string name="force_enemies_title">Противники: </string>
+  <string name="force_advantages_title">Преимущества: </string>
+  <string name="force_disadvantages_title">Слабости: </string>
+  <string name="force_owned_title">Владеет, помогает: </string>
+  <string name="force_depended_title">Пренадлежит, подчиняется: </string>
+  <string name="force_description_title">Краткая история: </string>
+  <string name="force_type_title">Тип: </string>
+  <string name="force_journeys_title">Активна в приключениях: </string>
 </resources>

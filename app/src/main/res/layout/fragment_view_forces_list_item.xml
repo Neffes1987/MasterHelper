@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+  <androidx.cardview.widget.CardView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:contentPadding="4dp">
+
+    <LinearLayout
+      android:orientation="vertical"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content">
+
+      <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:minHeight="40dp"
+        android:padding="2dp"
+        android:id="@+id/FORCE_ACCORDION_HEADER_ID">
+
+        <TextView
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:id="@+id/textView6"
+          android:layout_weight="10"
+          android:hint="@string/name"
+          android:gravity="center_vertical"
+          android:paddingLeft="8dp"/>
+
+        <ImageView
+          android:src="@mipmap/baseline_flare_black_18dp"
+          android:layout_width="wrap_content"
+          android:layout_height="match_parent"
+          android:id="@+id/imageView4"
+          android:layout_weight="1"/>
+
+        <ImageButton
+          android:src="@mipmap/baseline_filter_list_black_18dp"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:id="@+id/imageButton"
+          android:layout_weight="1"
+          style="@style/common_action_button"/>
+
+      </LinearLayout>
+
+      <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/FORCE_ACCORDION_BODY_ID">
+
+        <LinearLayout
+          android:orientation="vertical"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_weight="0"
+          >
+
+          <TextView
+            android:text="@string/force_journeys_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView26"
+            style="@style/force_caption_style"/>
+
+          <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/FORCE_JOURNEY_ID"
+            style="@style/force_row_style"/>
+
+          <TextView
+            android:text="@string/force_type_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView24"
+            style="@style/force_caption_style"
+            android:background="#12C3897C"/>
+
+          <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/FORCE_TYPE_ID"
+            style="@style/force_row_style"/>
+
+          <TextView
+            android:text="@string/force_goal_motivation_title"
+            android:id="@+id/textView8"
+            style="@style/force_caption_style"/>
+
+          <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/FORCE_GOALS_AND_MOTIVATION_ID"
+            style="@style/force_row_style"/>
+
+          <TextView
+            android:text="@string/force_cooperators_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView10"
+            style="@style/force_caption_style"/>
+
+          <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/FORCE_COOPERATORS_ID"
+            style="@style/force_row_style"/>
+
+          <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView12"
+            android:text="@string/force_enemies_title"
+            style="@style/force_caption_style"/>
+
+          <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/FORCE_ENEMIES_ID"
+            style="@style/force_row_style"/>
+
+          <TextView
+            android:text="@string/force_advantages_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView14"
+            style="@style/force_caption_style"/>
+
+          <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/FORCE_ADVANTAGES"
+            style="@style/force_row_style"/>
+
+          <TextView
+            android:text="@string/force_disadvantages_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView16"
+            style="@style/force_caption_style"/>
+
+          <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/FORCE_DISADVANTAGES_ID"
+            style="@style/force_row_style"/>
+
+          <TextView
+            android:text="@string/force_owned_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView18"
+            style="@style/force_caption_style"/>
+
+          <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/FORCE_OWN_ID"
+            style="@style/force_row_style"/>
+
+          <TextView
+            android:text="@string/force_depended_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView20"
+            style="@style/force_caption_style"/>
+
+          <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/FORCE_DEPENDED_ID"
+            style="@style/force_row_style"/>
+
+          <TextView
+            android:text="@string/force_description_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView22"
+            style="@style/force_caption_style"/>
+
+          <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/FORCE_DESCRIPTIONS_ID"
+            style="@style/force_row_style"/>
+
+        </LinearLayout>
+
+      </LinearLayout>
+    </LinearLayout>
+  </androidx.cardview.widget.CardView>
+</LinearLayout>

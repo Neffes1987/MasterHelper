@@ -3,6 +3,9 @@
       xmlns:tools="http://schemas.android.com/tools"
       tools:context="com.example.com.masterhelper.ui.journey.JourneysListView">
   <item
+    android:title="@string/force_menu_item_title"
+    android:id="@+id/FORCES_SETTINGS"/>
+  <item
     android:id="@+id/ACTION_SETTINGS"
     android:title="@string/action_settings"
     android:orderInCategory="100"

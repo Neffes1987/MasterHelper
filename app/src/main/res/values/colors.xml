@@ -12,4 +12,5 @@
   <color name="colorMusicStartedFloatTint">#D45127</color>
   <color name="colorAttention">#FFFFFF</color>
   <color name="colorFloatBtnBackground">#23353434</color>
+  <color name="colorForceCaption">#12C3897C</color>
 </resources>
