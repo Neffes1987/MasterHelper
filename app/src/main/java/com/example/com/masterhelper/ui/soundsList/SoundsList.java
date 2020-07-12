@@ -10,9 +10,9 @@ import android.view.ViewGroup;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.masterhelper.R;
-import com.example.com.masterhelper.core.listFactory.commonAdapter.CommonAdapter;
-import com.example.com.masterhelper.core.listFactory.CustomListItemsEnum;
-import com.example.com.masterhelper.core.listFactory.commonAdapter.item.ICommonItemEvents;
+import com.example.com.masterhelper.core.factorys.list.commonAdapter.CommonAdapter;
+import com.example.com.masterhelper.core.factorys.list.CustomListItemsEnum;
+import com.example.com.masterhelper.core.factorys.list.commonAdapter.item.ICommonItemEvents;
 import com.example.com.masterhelper.core.appconfig.models.SoundFileModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 

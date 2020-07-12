@@ -12,14 +12,14 @@ import com.example.com.masterhelper.ui.viewCharacteristicRow.ViewCharacteristicR
 import com.example.masterhelper.R;
 import com.example.com.masterhelper.core.appconfig.models.AbilityModel;
 import com.example.com.masterhelper.core.appconfig.models.EnemyModel;
-import com.example.com.masterhelper.core.dbAdaptersFactory.AdaptersType;
-import com.example.com.masterhelper.core.dbAdaptersFactory.DBAdapterFactory;
-import com.example.com.masterhelper.core.dbAdaptersFactory.adapters.AbilityDBAdapter;
-import com.example.com.masterhelper.core.dbAdaptersFactory.adapters.EnemyDBAdapter;
-import com.example.com.masterhelper.core.dialogsFactory.DialogTypes;
-import com.example.com.masterhelper.core.dialogsFactory.DialogsFactory;
-import com.example.com.masterhelper.core.dialogsFactory.dialogs.CommonDialog;
-import com.example.com.masterhelper.core.dialogsFactory.dialogs.MultiChooseDialog;
+import com.example.com.masterhelper.core.factorys.DBAdapters.AdaptersType;
+import com.example.com.masterhelper.core.factorys.DBAdapters.DBAdapterFactory;
+import com.example.com.masterhelper.core.factorys.DBAdapters.adapters.AbilityDBAdapter;
+import com.example.com.masterhelper.core.factorys.DBAdapters.adapters.EnemyDBAdapter;
+import com.example.com.masterhelper.core.factorys.dialogs.DialogTypes;
+import com.example.com.masterhelper.core.factorys.dialogs.DialogsFactory;
+import com.example.com.masterhelper.core.factorys.dialogs.dialogs.CommonDialog;
+import com.example.com.masterhelper.core.factorys.dialogs.dialogs.MultiChooseDialog;
 
 import java.util.LinkedHashMap;
 

@@ -23,7 +23,7 @@
     <activity android:name="com.example.com.masterhelper.ui.appBarFragment.MusicSettingsScreen">
     </activity>
     <activity
-      android:name="com.example.com.masterhelper.core.dialogsFactory.dialogs.CreateNewItemDialog"
+      android:name="com.example.com.masterhelper.core.factorys.dialogs.dialogs.CreateNewItemDialog"
       android:theme="@style/AppTheme.About">
     </activity>
     <activity

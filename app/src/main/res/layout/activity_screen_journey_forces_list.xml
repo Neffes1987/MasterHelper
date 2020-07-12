@@ -10,7 +10,7 @@
   <fragment
     android:layout_width="0dp"
     android:layout_height="0dp"
-    android:name="com.example.com.masterhelper.core.listFactory.ListFactory"
+    android:name="com.example.com.masterhelper.core.factorys.list.ListFactory"
     android:id="@+id/FORCES_LIST_ID"
     tools:layout="@layout/fragment_recycler_view"
     app:layout_constraintStart_toStartOf="parent"
