@@ -1,19 +1,27 @@
 package com.example.com.masterhelper.core.appconfig.models.forces;
 
 public class DependenciesModel extends RelationModal {
-  private DependencyType type;
+  private DirectionType direction;
 
-  DependenciesModel(int id, String name, String cause, DependencyType type) {
+  DependenciesModel(int id, String name, String cause, DirectionType direction) {
     super(id, name, cause);
-    setType(type);
+    setDirection(direction);
   }
 
-  public void setType(DependencyType type) {
-    this.type = type;
+
+  @Override
+  public RelationType getType() {
+    return RelationType.dependency;
   }
 
-  public DependencyType getType() {
-    return type;
+  @Override
+  public DirectionType getDirection() {
+    return direction;
+  }
+
+  @Override
+  public void setDirection(DirectionType directionType) {
+    direction = directionType;
   }
 
   @Override
@@ -21,8 +29,4 @@ public class DependenciesModel extends RelationModal {
     return getName();
   }
 
-  enum DependencyType {
-    depended,
-    owned
-  }
 }

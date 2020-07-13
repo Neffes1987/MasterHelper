@@ -2,7 +2,7 @@ package com.example.com.masterhelper.core.appconfig.models.forces;
 
 import com.example.com.masterhelper.core.appconfig.models.DataModel;
 
-public class RelationModal extends DataModel {
+public abstract class RelationModal extends DataModel implements IRelation {
   private ResultType result = ResultType.inProgress;
   private String resolveResult="";
   private String rejectResult="";
@@ -10,6 +10,7 @@ public class RelationModal extends DataModel {
   RelationModal(int id, String name, String cause){
     initGeneralFields(id, name, cause);
   }
+
 
   public void setRejectResult(String rejectResult) {
     this.rejectResult = rejectResult;
@@ -40,11 +41,28 @@ public class RelationModal extends DataModel {
     }
   }
 
-
+  public enum RelationType {
+    force,
+    goal,
+    advance,
+    dependency
+  }
 
   public enum ResultType {
     solved,
     failed,
     inProgress
   }
+
+  enum DirectionType {
+    enemy,
+    cooperators,
+    depended,
+    owned,
+    positive,
+    negative,
+    advantage,
+    disadvantage
+  }
+
 }

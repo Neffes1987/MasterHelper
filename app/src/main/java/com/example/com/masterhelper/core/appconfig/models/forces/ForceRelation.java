@@ -2,19 +2,20 @@ package com.example.com.masterhelper.core.appconfig.models.forces;
 
 
 public class ForceRelation extends RelationModal {
-  private RelationType type;
+  private DirectionType direction;
 
-  ForceRelation(int id, String name, String cause, RelationType type) {
+  ForceRelation(int id, String name, String cause, DirectionType direction) {
     super(id, name, cause);
-    setType(type);
+    setDirection(direction);
   }
 
-  public void setType(RelationType type) {
-    this.type = type;
+  public DirectionType getDirection() {
+    return direction;
   }
 
-  public RelationType getType() {
-    return type;
+  @Override
+  public void setDirection(DirectionType directionType) {
+    this.direction = directionType;
   }
 
   @Override
@@ -24,13 +25,13 @@ public class ForceRelation extends RelationModal {
       return result;
     }
 
-    String stringType = type == RelationType.enemy ? "[Враг] " : "[Союзник] ";
+    String stringType = direction == DirectionType.enemy ? "[Враг] " : "[Союзник] ";
 
     return stringType + getName();
   }
 
-  enum RelationType{
-    enemy,
-    cooperators
+  @Override
+  public RelationModal.RelationType getType() {
+    return RelationModal.RelationType.force;
   }
 }

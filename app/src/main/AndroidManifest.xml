@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          xmlns:tools="http://schemas.android.com/tools"
           package="com.example.masterhelper">
 
   <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
@@ -13,7 +14,10 @@
     android:label="@string/app_name"
     android:roundIcon="@mipmap/enemy1"
     android:supportsRtl="true"
-    android:theme="@style/Platform.MaterialComponents">
+    android:theme="@style/Platform.MaterialComponents"
+    tools:ignore="GoogleAppIndexingWarning">
+    <activity android:name="com.example.com.masterhelper.ui.forces.AddNewForce">
+    </activity>
     <activity android:name="com.example.com.masterhelper.ui.forces.ScreenJourneyForcesList">
     </activity>
     <activity android:name="com.example.com.masterhelper.ui.appBarFragment.AbilityNamesList">

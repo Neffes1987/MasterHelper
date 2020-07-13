@@ -27,7 +27,7 @@
         <TextView
           android:layout_width="match_parent"
           android:layout_height="match_parent"
-          android:id="@+id/textView6"
+          android:id="@+id/FORCE_TITLE_ID"
           android:layout_weight="10"
           android:hint="@string/name"
           android:gravity="center_vertical"
@@ -37,14 +37,14 @@
           android:src="@mipmap/baseline_flare_black_18dp"
           android:layout_width="wrap_content"
           android:layout_height="match_parent"
-          android:id="@+id/imageView4"
+          android:id="@+id/FORCE_ICON_ID"
           android:layout_weight="1"/>
 
         <ImageButton
           android:src="@mipmap/baseline_filter_list_black_18dp"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:id="@+id/imageButton"
+          android:id="@+id/FORCE_TOGGLER_ID"
           android:layout_weight="1"
           style="@style/common_action_button"/>
 

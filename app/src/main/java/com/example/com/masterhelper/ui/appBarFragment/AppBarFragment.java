@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.*;
 import androidx.fragment.app.Fragment;
+import com.example.com.masterhelper.ui.forces.ScreenJourneyForcesList;
 import com.example.masterhelper.R;
 
 
@@ -48,6 +49,10 @@ public class AppBarFragment extends Fragment {
         break;
       case R.id.ABILITIES_SETTINGS:
         intent = new Intent(getActivity(), AbilityNamesList.class);
+        startActivity(intent);
+        break;
+        case R.id.FORCES_SETTINGS:
+        intent = new Intent(getActivity(), ScreenJourneyForcesList.class);
         startActivity(intent);
         break;
       default:

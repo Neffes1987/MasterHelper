@@ -1,13 +1,12 @@
 package com.example.com.masterhelper.core.appconfig.models.forces;
 
-public class AdvanceModel extends RelationModal {
+public class GoalModel extends RelationModal {
   private DirectionType directionType;
 
-  AdvanceModel(int id, String name, String cause,DirectionType directionType) {
+  GoalModel(int id, String name, String cause) {
     super(id, name, cause);
-    setDirection(directionType);
+    setDirection(null);
   }
-
 
   @Override
   public String modelToString() {
@@ -16,7 +15,7 @@ public class AdvanceModel extends RelationModal {
 
   @Override
   public RelationType getType() {
-    return RelationType.advance;
+    return RelationType.goal;
   }
 
   @Override

@@ -1,6 +1,5 @@
 package com.example.com.masterhelper.core.appconfig.models.utilities;
 
-import androidx.annotation.NonNull;
 import com.example.com.masterhelper.core.appconfig.models.DataModel;
 
 import java.util.Collection;
