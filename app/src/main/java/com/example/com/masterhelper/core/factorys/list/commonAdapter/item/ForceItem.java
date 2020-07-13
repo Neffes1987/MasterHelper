@@ -5,6 +5,7 @@ import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import androidx.core.content.ContextCompat;
+import com.example.com.masterhelper.core.appconfig.models.DataModel;
 import com.example.com.masterhelper.core.appconfig.models.forces.ForceModel;
 import com.example.com.masterhelper.core.factorys.list.commonAdapter.CommonAdapter;
 import com.example.masterhelper.R;
@@ -12,12 +13,12 @@ import com.example.masterhelper.R;
 /** Модель для управления интерфейсом внутри элемента для циклического списка
  * Model - тип модели данных, который следует передать в обработчик жлемента списка для инициализаци
  * */
-public class ForceItem<Model> extends CommonItem<Model> {
+public class ForceItem extends CommonItem {
 
   /** текстовое поле в с именем приключения */
   private TextView title;
 
-  public ForceItem(View v, CommonAdapter<Model> adapter) {
+  public ForceItem(View v, CommonAdapter adapter) {
     super(v, adapter);
     title = itemView.findViewById(R.id.JOURNEY_TITLE_ID);
     title.setOnClickListener(commonListener);
@@ -35,7 +36,7 @@ public class ForceItem<Model> extends CommonItem<Model> {
     this.title.setText(title);
   }
 
-  public void updateHolderByData(Model itemData, int position) {
+  public void updateHolderByData(DataModel itemData, int position) {
     ForceModel forceModel = (ForceModel) itemData;
     setTitle(forceModel.getName());
     setPosition(position);

@@ -2,13 +2,14 @@ package com.example.com.masterhelper.core.factorys.list.commonAdapter.item;
 
 import android.view.View;
 import androidx.recyclerview.widget.RecyclerView;
+import com.example.com.masterhelper.core.appconfig.models.DataModel;
 import com.example.com.masterhelper.core.factorys.list.commonAdapter.CommonAdapter;
 
 /** Модель для управления интерфейсом внутри элемента для циклического списка
  * Model - тип модели данных, который следует передать в обработчик жлемента списка для инициализаци
  * */
-public class CommonItem<Model> extends RecyclerView.ViewHolder implements ICommonItem<Model> {
-  public CommonAdapter<Model> adapter;
+public class CommonItem extends RecyclerView.ViewHolder implements ICommonItem {
+  public CommonAdapter adapter;
   public int position;
 
   /**
@@ -16,12 +17,12 @@ public class CommonItem<Model> extends RecyclerView.ViewHolder implements ICommo
    * @param adapter - адаптер в рамках которого содержится элемент списка
    * @constructor генератор указателей на элементы UI для адаптера
    */
-  public CommonItem(View v, CommonAdapter<Model> adapter) {
+  public CommonItem(View v, CommonAdapter adapter) {
     super(v);
     this.adapter = adapter;
   }
 
-  public void updateHolderByData(Model itemData, int position) {}
+  public void updateHolderByData(DataModel itemData, int position) {}
 
   public void setPosition(int position) {
     this.position = position;

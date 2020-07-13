@@ -46,7 +46,7 @@ public class ListFactory extends Fragment implements ICommonItemEvents, IListFac
 
   public void updateListAdapter(ModelList data, CustomListItemsEnum itemType){
     setItemType(itemType);
-    CommonAdapter mAdapter = new CommonAdapter<>(data, itemLayout, itemType, this);
+    CommonAdapter mAdapter = new CommonAdapter(data, itemLayout, itemType, this);
     recyclerView.setAdapter(mAdapter);
   }
 

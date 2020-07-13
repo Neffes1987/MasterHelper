@@ -5,6 +5,7 @@ import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import androidx.core.content.ContextCompat;
+import com.example.com.masterhelper.core.appconfig.models.DataModel;
 import com.example.masterhelper.R;
 import com.example.com.masterhelper.core.factorys.list.commonAdapter.CommonAdapter;
 import com.example.com.masterhelper.core.appconfig.models.AbilityModel;
@@ -12,12 +13,12 @@ import com.example.com.masterhelper.core.appconfig.models.AbilityModel;
 /** Модель для управления интерфейсом внутри элемента для циклического списка
  * Model - тип модели данных, который следует передать в обработчик жлемента списка для инициализаци
  * */
-public class AbilityItem<Model> extends CommonItem<Model> {
+public class AbilityItem extends CommonItem {
 
   /** текстовое поле в с именем приключения */
   private TextView title;
 
-  public AbilityItem(View v, CommonAdapter<Model> adapter, boolean hideCheckboxes) {
+  public AbilityItem(View v, CommonAdapter adapter, boolean hideCheckboxes) {
     super(v, adapter);
     title = itemView.findViewById(R.id.JOURNEY_TITLE_ID);
     title.setOnClickListener(commonListener);
@@ -36,7 +37,7 @@ public class AbilityItem<Model> extends CommonItem<Model> {
     this.title.setText(title);
   }
 
-  public void updateHolderByData(Model itemData, int position) {
+  public void updateHolderByData(DataModel itemData, int position) {
     AbilityModel journeyModel = (AbilityModel) itemData;
     setTitle(journeyModel.getName());
     setPosition(position);

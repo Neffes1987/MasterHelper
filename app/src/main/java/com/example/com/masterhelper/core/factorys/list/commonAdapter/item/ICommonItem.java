@@ -1,6 +1,8 @@
 package com.example.com.masterhelper.core.factorys.list.commonAdapter.item;
 
-public interface ICommonItem<Model> {
-  void updateHolderByData(Model itemData, int position);
+import com.example.com.masterhelper.core.appconfig.models.DataModel;
+
+public interface ICommonItem {
+  void updateHolderByData(DataModel itemData, int position);
 }
 

@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import com.example.com.masterhelper.core.appconfig.models.DataModel;
 import com.example.com.masterhelper.core.appconfig.models.utilities.ModelList;
 import com.example.com.masterhelper.core.factorys.list.CustomListItemsEnum;
 import com.example.com.masterhelper.core.factorys.list.commonAdapter.item.ICommonItemEvents;
@@ -12,7 +13,7 @@ import com.example.com.masterhelper.core.factorys.list.commonAdapter.item.ICommo
 /**
  * Адаптор для работы с аккордионами внутри цеклического списка
  * */
-public class CommonAdapter<Model> extends RecyclerView.Adapter<CommonHolder<Model>> implements ICommonItemEvents{
+public class CommonAdapter extends RecyclerView.Adapter<CommonHolder> implements ICommonItemEvents{
   /** */
   int fragmentId;
 
@@ -34,10 +35,10 @@ public class CommonAdapter<Model> extends RecyclerView.Adapter<CommonHolder<Mode
    * Указатель на сцену нужен, чтобы прокинуть коллбек на кнопки */
   @NonNull
   @Override
-  public CommonHolder<Model> onCreateViewHolder(ViewGroup parent, int viewType) {
+  public CommonHolder onCreateViewHolder(ViewGroup parent, int viewType) {
     View v = LayoutInflater.from(parent.getContext()).inflate(fragmentId, parent, false);
     try {
-      return new CommonHolder<>(v, commonItemType, this);
+      return new CommonHolder(v, commonItemType, this);
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -49,8 +50,8 @@ public class CommonAdapter<Model> extends RecyclerView.Adapter<CommonHolder<Mode
    *  берем данные из маппы и инициализируем холдер
    * */
   @Override
-  public void onBindViewHolder(CommonHolder<Model> holder, final int position) {
-    Model itemData = (Model) mDataset.getItemByPosition(position);
+  public void onBindViewHolder(CommonHolder holder, final int position) {
+    DataModel itemData = mDataset.getItemByPosition(position);
     assert itemData != null;
     holder.initRecyclerView(itemData, position);
   }

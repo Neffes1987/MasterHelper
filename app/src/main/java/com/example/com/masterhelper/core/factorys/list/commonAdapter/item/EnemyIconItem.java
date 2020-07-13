@@ -6,11 +6,12 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.cardview.widget.CardView;
+import com.example.com.masterhelper.core.appconfig.models.DataModel;
 import com.example.masterhelper.R;
 import com.example.com.masterhelper.core.factorys.list.commonAdapter.CommonAdapter;
 import com.example.com.masterhelper.core.appconfig.models.EnemyModel;
 
-public class EnemyIconItem<Model> extends CommonItem<Model> {
+public class EnemyIconItem extends CommonItem {
   /**  */
   CardView enemyCard;
 
@@ -32,7 +33,7 @@ public class EnemyIconItem<Model> extends CommonItem<Model> {
   /**  */
   EnemyModel enemyData;
 
-  public EnemyIconItem(View enemyView, CommonAdapter<Model> adapter) {
+  public EnemyIconItem(View enemyView, CommonAdapter adapter) {
     super(enemyView, adapter);
 
     enemyCard = enemyView.findViewById(R.id.ENEMY_CARD);
@@ -48,7 +49,7 @@ public class EnemyIconItem<Model> extends CommonItem<Model> {
   }
 
   @Override
-  public void updateHolderByData(Model itemData, int position) {
+  public void updateHolderByData(DataModel itemData, int position) {
     enemyData = (EnemyModel)itemData;
     setPosition(position);
     int pos = position + 1;

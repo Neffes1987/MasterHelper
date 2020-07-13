@@ -4,6 +4,7 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import com.example.com.masterhelper.core.appconfig.models.DataModel;
 import com.example.masterhelper.R;
 import com.example.com.masterhelper.core.factorys.list.commonAdapter.CommonAdapter;
 import com.example.com.masterhelper.core.appconfig.models.SoundFileModel;
@@ -11,7 +12,7 @@ import com.example.com.masterhelper.core.appconfig.models.SoundFileModel;
 /** Модель для управления интерфейсом внутри элемента для циклического списка
  * Model - тип модели данных, который следует передать в обработчик жлемента списка для инициализаци
  * */
-public class MusicItem<Model> extends CommonItem<Model> {
+public class MusicItem extends CommonItem {
 
   /** текстовое поле в с именем файла */
   private TextView title;
@@ -25,7 +26,7 @@ public class MusicItem<Model> extends CommonItem<Model> {
   /** остановить проигрывание */
   private ImageButton stopSound;
 
-  public MusicItem(View v, CommonAdapter<Model> adapter, boolean isGeneral) {
+  public MusicItem(View v, CommonAdapter adapter, boolean isGeneral) {
     super(v, adapter);
     title = itemView.findViewById(R.id.FILE_NAME_ID);
     selected = itemView.findViewById(R.id.FILE_NAME_SELECTOR_ID);
@@ -69,7 +70,7 @@ public class MusicItem<Model> extends CommonItem<Model> {
     this.selected.setChecked(selected);
   }
 
-  public void updateHolderByData(Model itemData, int position) {
+  public void updateHolderByData(DataModel itemData, int position) {
     SoundFileModel soundFileModel = (SoundFileModel) itemData;
     setTitle(soundFileModel.getName());
     setSelected(soundFileModel.getSelected());

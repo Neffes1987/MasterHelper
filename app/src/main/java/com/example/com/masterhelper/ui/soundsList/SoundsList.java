@@ -70,7 +70,7 @@ public class SoundsList extends Fragment implements ICommonItemEvents {
       addBtn.setVisibility(View.VISIBLE);
     }
 
-    CommonAdapter<SoundFileModel> mAdapter = new CommonAdapter<>(
+    CommonAdapter mAdapter = new CommonAdapter(
       data,
       R.layout.fragment_sounds_item,
       isGeneral ? CustomListItemsEnum.musicGeneral : CustomListItemsEnum.music,

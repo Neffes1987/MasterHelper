@@ -5,12 +5,13 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.appcompat.widget.AppCompatImageButton;
+import com.example.com.masterhelper.core.appconfig.models.DataModel;
 import com.example.masterhelper.R;
 import com.example.com.masterhelper.core.factorys.list.commonAdapter.CommonAdapter;
 import com.example.com.masterhelper.core.appconfig.models.ScriptModel;
 
 /** Модель для управления интерфейсом внутри аккордиона для цеклического списка*/
-public class ScriptItem<Model> extends CommonItem<Model>{
+public class ScriptItem extends CommonItem{
 
   /** текстовое поле в с именем сцены */
   private TextView title;
@@ -71,7 +72,7 @@ public class ScriptItem<Model> extends CommonItem<Model>{
    * @param itemData - набор данных для инициализации сцены
    * @param position - текущая позиция холдера сцены в списке
    * */
-  public void updateHolderByData(Model itemData, int position){
+  public void updateHolderByData(DataModel itemData, int position){
     ScriptModel script = (ScriptModel) itemData;
     setTitle((position+1) +": "+script.getName());
     setDescription(script.getDescription());
@@ -85,7 +86,7 @@ public class ScriptItem<Model> extends CommonItem<Model>{
   }
 
   /** @constructor генератор указателей на элементы UI для адаптера */
-  public ScriptItem(View v, CommonAdapter<Model> adapter) {
+  public ScriptItem(View v, CommonAdapter adapter) {
     super(v, adapter);
 
     title = v.findViewById(R.id.SCRIPT_TITLE_ID);

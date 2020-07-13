@@ -2,44 +2,45 @@ package com.example.com.masterhelper.core.factorys.list.commonAdapter;
 
 import android.view.View;
 import androidx.recyclerview.widget.RecyclerView;
+import com.example.com.masterhelper.core.appconfig.models.DataModel;
 import com.example.com.masterhelper.core.factorys.list.CustomListItemsEnum;
 import com.example.com.masterhelper.core.factorys.list.commonAdapter.item.*;
 
 /** Промежуточный класс, который связывает адаптер и вьюху циклического списка*/
-public class CommonHolder<Model> extends RecyclerView.ViewHolder {
-  private CommonItem<Model> commonItem;
+public class CommonHolder extends RecyclerView.ViewHolder {
+  private CommonItem commonItem;
   /** @constructor передача параметров в элемент списка после инициализации */
-  public void initRecyclerView(Model item, int position) {
+  public void initRecyclerView(DataModel item, int position) {
     commonItem.updateHolderByData(item, position);
   }
 
   /** @constructor генератор указателей на элементы UI для адаптера */
-  public CommonHolder(View v, CustomListItemsEnum itemTemplateType, CommonAdapter<Model> adapter) {
+  public CommonHolder(View v, CustomListItemsEnum itemTemplateType, CommonAdapter adapter) {
     super(v);
     switch (itemTemplateType){
       case music:
-        commonItem = new MusicItem<>(v, adapter, false);
+        commonItem = new MusicItem(v, adapter, false);
         break;
       case musicGeneral:
-        commonItem = new MusicItem<>(v, adapter, true);
+        commonItem = new MusicItem(v, adapter, true);
         break;
       case scene:
-        commonItem = new SceneItem<>(v, adapter);
+        commonItem = new SceneItem(v, adapter);
         break;
       case script:
-        commonItem = new ScriptItem<>(v, adapter);
+        commonItem = new ScriptItem(v, adapter);
         break;
       case enemyIcon:
-        commonItem = new EnemyIconItem<>(v, adapter);
+        commonItem = new EnemyIconItem(v, adapter);
         break;
       case journey:
-        commonItem = new JourneyItem<>(v, adapter, true);
+        commonItem = new JourneyItem(v, adapter, true);
         break;
       case abilities:
-        commonItem = new AbilityItem<>(v, adapter, true);
+        commonItem = new AbilityItem(v, adapter, true);
         break;
       case force:
-        commonItem = new ForceItem<>(v, adapter);
+        commonItem = new ForceItem(v, adapter);
     }
   }
 }

@@ -3,12 +3,13 @@ package com.example.com.masterhelper.core.factorys.list.commonAdapter.item;
 import android.view.View;
 import android.widget.*;
 import androidx.appcompat.widget.AppCompatImageButton;
+import com.example.com.masterhelper.core.appconfig.models.DataModel;
 import com.example.masterhelper.R;
 import com.example.com.masterhelper.core.factorys.list.commonAdapter.CommonAdapter;
 import com.example.com.masterhelper.core.appconfig.models.SceneModel;
 
 /** Модель для управления интерфейсом внутри аккордиона для цеклического списка*/
-public class SceneItem<Model> extends CommonItem<Model>{
+public class SceneItem extends CommonItem{
 
   /** текстовое поле в с именем сцены */
   private TextView title;
@@ -104,7 +105,7 @@ public class SceneItem<Model> extends CommonItem<Model>{
    * @param itemData - набор данных для инициализации сцены
    * @param position - текущая позиция холдера сцены в списке
    * */
-  public void updateHolderByData(Model itemData, int position){
+  public void updateHolderByData(DataModel itemData, int position){
     SceneModel scene = (SceneModel) itemData;
     setTitle((position+1) +": "+scene.getName());
     setDescription(scene.getDescription());
@@ -113,7 +114,7 @@ public class SceneItem<Model> extends CommonItem<Model>{
   }
 
   /** @constructor генератор указателей на элементы UI для адаптера */
-  public SceneItem(View v, CommonAdapter<Model> adapter) {
+  public SceneItem(View v, CommonAdapter adapter) {
     super(v, adapter);
 
     title = v.findViewById(R.id.SCENE_TITLE_ID);
