@@ -25,42 +25,6 @@ public class SceneDBAdapter  extends CommonBDAdapter<SceneModel> {
     scriptDBAdapter = (ScriptDBAdapter) DBAdapterFactory.getAdapter(AdaptersType.script);
   }
 
-  public HashMap<String, Integer> getMediaForScene(int sceneId){
-    String sqlQuery = SceneMusicContract.getListQuery(SceneMusicContract.TABLE_NAME, null, SceneMusicContract.COLUMN_SCENE_ID+"="+ sceneId, SceneContract._ID + " DESC", 0);
-    HashMap<String, Integer> sceneMedia = new HashMap<>();
-    Cursor queryResult = dbHelpers.getList(sqlQuery);
-    while (queryResult.moveToNext()) {
-      // Используем индекс для получения строки или числа
-      int pathColumnIndex = queryResult.getColumnIndex(SceneMusicContract.COLUMN_FILE_PATH);
-      int idColumnIndex = queryResult.getColumnIndex(SceneMusicContract._ID);
-      sceneMedia.put(queryResult.getString(pathColumnIndex), queryResult.getInt(idColumnIndex));
-    }
-    queryResult.close();
-    return sceneMedia;
-  }
-
-  /** обновить медиа для сцены */
-  public void updateSceneMedia(String[] paths, int sceneId){
-    HashMap<String, Integer> currentPaths = getMediaForScene(sceneId);
-    if(paths == null){
-      return;
-    }
-    for (String path: paths ) {
-      if(!currentPaths.containsKey(path) && !path.equals("")){
-        String sqlQuery = dbHelpers.sceneMusicContract.addItemQuery(path, sceneId);
-        dbHelpers.addNewItem(sqlQuery);
-      } else {
-        currentPaths.remove(path);
-      }
-    }
-
-
-    if(currentPaths.size() > 0){
-      String sqlQuery = dbHelpers.sceneMusicContract.deleteRecordsByIds(currentPaths.values().toString().replaceAll("\\[|\\]|\\s", ""));
-      dbHelpers.addNewItem(sqlQuery);
-    }
-  }
-
   @Override
   public SceneModel get(int id) {
     String sqlQuery = SceneContract.getListQuery(SceneContract.TABLE_NAME, null, SceneContract._ID+"="+ id, SceneContract._ID + " DESC", 1);

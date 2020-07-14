@@ -12,6 +12,9 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 import com.example.com.masterhelper.core.appconfig.models.utilities.ModelList;
+import com.example.com.masterhelper.core.factorys.DBAdapters.settingsAdapters.media.SettingsAdapterType;
+import com.example.com.masterhelper.core.factorys.DBAdapters.settingsAdapters.media.SettingsMediaFactory;
+import com.example.com.masterhelper.core.factorys.DBAdapters.settingsAdapters.media.adapters.MediaSettings;
 import com.example.com.masterhelper.ui.appBarFragment.MusicSettingsScreen;
 import com.example.masterhelper.R;
 import com.example.com.masterhelper.core.appconfig.GlobalApplication;
@@ -24,11 +27,7 @@ import com.example.com.masterhelper.core.factorys.list.commonAdapter.item.ICommo
 import com.example.com.masterhelper.core.mediaworker.BackgroundMediaPlayer;
 import com.example.com.masterhelper.core.appconfig.models.EnemyModel;
 import com.example.com.masterhelper.core.factorys.list.ListFactory;
-import com.example.com.masterhelper.core.factorys.DBAdapters.adapters.ScriptDBAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
-import java.util.HashMap;
-import java.util.LinkedHashMap;
 
 @RequiresApi(api = Build.VERSION_CODES.M)
 public class EnemiesListView extends AppCompatActivity implements ICommonItemEvents, IAppBarFragment {
@@ -42,6 +41,7 @@ public class EnemiesListView extends AppCompatActivity implements ICommonItemEve
   FloatingActionButton musicControl;
 
   BackgroundMediaPlayer backgroundMediaPlayer = GlobalApplication.getBackgroundMediaPlayer();
+  MediaSettings scriptMediaSettings = SettingsMediaFactory.getAdapter(SettingsAdapterType.script);
 
   /** */
   FloatingActionButton createNewEnemy;
@@ -55,7 +55,6 @@ public class EnemiesListView extends AppCompatActivity implements ICommonItemEve
   int scriptId;
 
   EnemyDBAdapter enemyDBAdapter = (EnemyDBAdapter) DBAdapterFactory.getAdapter(AdaptersType.enemy);
-  ScriptDBAdapter scriptDBAdapter = (ScriptDBAdapter) DBAdapterFactory.getAdapter(AdaptersType.script);
 
 
   ListFactory lsf;
@@ -63,8 +62,8 @@ public class EnemiesListView extends AppCompatActivity implements ICommonItemEve
   ModelList enemies = new ModelList();
 
   private String[] getMediaList(){
-    HashMap<String, Integer> mediaList = scriptDBAdapter.getMediaForScript(scriptId);
-    return mediaList.keySet().toArray(new String[0]);
+    ModelList mediaList = scriptMediaSettings.get(scriptId);
+    return scriptMediaSettings.pathsToArray(mediaList);
   }
 
   @Override
@@ -151,7 +150,7 @@ public class EnemiesListView extends AppCompatActivity implements ICommonItemEve
       }
       if(requestCode ==  ADD_MUSIC_TO_SCRIPT_CODE && data != null ){
         String[] selectedPaths = data.getStringArrayExtra(MusicSettingsScreen.SELECTED_LIST);
-        scriptDBAdapter.updateScriptMedia(selectedPaths, scriptId);
+        scriptMediaSettings.update(selectedPaths, scriptId);
       }
     }
   }

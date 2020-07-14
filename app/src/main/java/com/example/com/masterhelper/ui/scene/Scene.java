@@ -10,6 +10,9 @@ import android.os.Bundle;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 import com.example.com.masterhelper.core.appconfig.models.utilities.ModelList;
+import com.example.com.masterhelper.core.factorys.DBAdapters.settingsAdapters.media.adapters.MediaSettings;
+import com.example.com.masterhelper.core.factorys.DBAdapters.settingsAdapters.media.SettingsAdapterType;
+import com.example.com.masterhelper.core.factorys.DBAdapters.settingsAdapters.media.SettingsMediaFactory;
 import com.example.com.masterhelper.ui.appBarFragment.MusicSettingsScreen;
 import com.example.com.masterhelper.ui.enemies.EnemiesListView;
 import com.example.com.masterhelper.core.appconfig.GlobalApplication;
@@ -29,8 +32,6 @@ import com.example.com.masterhelper.core.appconfig.models.ScriptModel;
 import com.example.com.masterhelper.core.factorys.DBAdapters.adapters.ScriptDBAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.util.HashMap;
-
 import static android.content.DialogInterface.BUTTON_POSITIVE;
 
 @RequiresApi(api = Build.VERSION_CODES.M)
@@ -40,6 +41,7 @@ public class Scene extends AppCompatActivity implements ICommonItemEvents {
 
   /** хелпер для работы с таблицей сцен в бд */
   SceneDBAdapter sceneDBAdapter = (SceneDBAdapter) DBAdapterFactory.getAdapter(AdaptersType.scene);
+  MediaSettings sceneMediaDBAdapter = SettingsMediaFactory.getAdapter(SettingsAdapterType.scene);
 
   /** указатель на кнопку создания нового скрипта сцены */
   FloatingActionButton newScriptBtn;
@@ -123,8 +125,8 @@ public class Scene extends AppCompatActivity implements ICommonItemEvents {
   }
 
   private String[] getMediaList(){
-    HashMap<String, Integer> mediaList = sceneDBAdapter.getMediaForScene(sceneId);
-    return mediaList.keySet().toArray(new String[0]);
+    ModelList mediaList = sceneMediaDBAdapter.get(sceneId);
+    return sceneMediaDBAdapter.pathsToArray(mediaList);
   }
 
   /** обновление списка скриптов */
@@ -192,7 +194,7 @@ public class Scene extends AppCompatActivity implements ICommonItemEvents {
         break;
       case ADD_MUSIC_TO_SCENE_CODE:
         String[] selectedPaths = result.getStringArrayExtra(MusicSettingsScreen.SELECTED_LIST);
-        sceneDBAdapter.updateSceneMedia(selectedPaths, sceneId);
+        sceneMediaDBAdapter.update(selectedPaths, sceneId);
         break;
     }
     setListData();

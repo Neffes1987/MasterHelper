@@ -29,6 +29,13 @@ public class SoundFileModel extends DataModel {
     setSelected(isSelected);
   }
 
+  public SoundFileModel(String path, int id){
+    initGeneralFields(id, null, null);
+    setCreateTime(0);
+    setPath(path);
+    setSelected(false);
+  }
+
   private void setCreateTime(long createTime) {
     this.createTime = createTime;
   }

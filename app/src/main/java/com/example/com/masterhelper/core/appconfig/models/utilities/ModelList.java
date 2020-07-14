@@ -3,6 +3,7 @@ package com.example.com.masterhelper.core.appconfig.models.utilities;
 import com.example.com.masterhelper.core.appconfig.models.DataModel;
 
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 
 public class ModelList {
@@ -32,6 +33,10 @@ public class ModelList {
     list.remove(id);
   }
 
+  public boolean containsKey(int id){
+    return list.containsKey(id);
+  }
+
   public Collection<DataModel> values(){
     return list.values();
   }
@@ -39,6 +44,10 @@ public class ModelList {
   public Collection<Integer> keySet(){
     return list.keySet();
   }
+
+  public String idsToString(){
+    return list.keySet().toString().replaceAll("\\[|\\]|\\s", "");
+  };
 
   public String listToString() {
     StringBuilder result = new StringBuilder();
