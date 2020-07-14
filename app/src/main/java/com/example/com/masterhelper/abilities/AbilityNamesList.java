@@ -1,4 +1,4 @@
-package com.example.com.masterhelper.ui.appBarFragment;
+package com.example.com.masterhelper.abilities;
 
 import android.view.View;
 import android.widget.EditText;
@@ -17,11 +17,8 @@ import com.example.com.masterhelper.core.factorys.dialogs.DialogsFactory;
 import com.example.com.masterhelper.core.factorys.dialogs.dialogs.CommonDialog;
 import com.example.com.masterhelper.core.factorys.list.CustomListItemsEnum;
 import com.example.com.masterhelper.core.factorys.list.commonAdapter.item.ICommonItemEvents;
-import com.example.com.masterhelper.core.appconfig.models.AbilityModel;
 import com.example.com.masterhelper.core.factorys.list.ListFactory;
 import com.example.com.masterhelper.core.factorys.DBAdapters.adapters.AbilityDBAdapter;
-
-import java.util.LinkedHashMap;
 
 import static android.content.DialogInterface.BUTTON_POSITIVE;
 

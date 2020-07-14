@@ -12,7 +12,7 @@ import com.example.com.masterhelper.core.appconfig.models.utilities.ModelList;
 import com.example.com.masterhelper.ui.viewCharacteristicRow.Abilities;
 import com.example.com.masterhelper.ui.viewCharacteristicRow.ViewCharacteristicRow;
 import com.example.masterhelper.R;
-import com.example.com.masterhelper.core.appconfig.models.AbilityModel;
+import com.example.com.masterhelper.abilities.AbilityModel;
 import com.example.com.masterhelper.core.appconfig.models.EnemyModel;
 import com.example.com.masterhelper.core.factorys.DBAdapters.AdaptersType;
 import com.example.com.masterhelper.core.factorys.DBAdapters.DBAdapterFactory;

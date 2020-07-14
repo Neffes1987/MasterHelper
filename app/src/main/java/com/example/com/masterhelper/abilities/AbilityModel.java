@@ -1,4 +1,6 @@
-package com.example.com.masterhelper.core.appconfig.models;
+package com.example.com.masterhelper.abilities;
+
+import com.example.com.masterhelper.core.appconfig.models.DataModel;
 
 public class AbilityModel extends DataModel {
 

@@ -1,4 +1,4 @@
-package com.example.com.masterhelper.core.mediaworker;
+package com.example.com.masterhelper.media.mediaworker;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.database.Cursor;

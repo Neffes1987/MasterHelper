@@ -10,7 +10,7 @@
   <fragment
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:name="com.example.com.masterhelper.ui.appBarFragment.AppBarFragment"
+    android:name="com.example.com.masterhelper.appbar.AppBarFragment"
     android:id="@+id/fragment2"
     tools:layout="@layout/fragment_app_bar"/>
 

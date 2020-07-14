@@ -8,7 +8,7 @@ import androidx.fragment.app.FragmentTransaction;
 import com.example.com.masterhelper.core.appconfig.models.DataModel;
 import com.example.com.masterhelper.core.appconfig.models.utilities.ModelList;
 import com.example.masterhelper.R;
-import com.example.com.masterhelper.core.appconfig.models.AbilityModel;
+import com.example.com.masterhelper.abilities.AbilityModel;
 
 import java.util.LinkedHashMap;
 

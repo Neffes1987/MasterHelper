@@ -1,4 +1,4 @@
-package com.example.com.masterhelper.ui.appBarFragment;
+package com.example.com.masterhelper.media;
 
 import android.Manifest;
 import android.content.ClipData;
@@ -14,14 +14,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.fragment.app.FragmentManager;
 import com.example.com.masterhelper.core.appconfig.models.utilities.ModelList;
+import com.example.com.masterhelper.media.adapters.SoundFileModel;
 import com.example.masterhelper.R;
 import com.example.com.masterhelper.core.factorys.dialogs.DialogTypes;
 import com.example.com.masterhelper.core.factorys.dialogs.DialogsFactory;
 import com.example.com.masterhelper.core.factorys.dialogs.dialogs.CommonDialog;
 import com.example.com.masterhelper.core.factorys.list.commonAdapter.item.ICommonItemEvents;
-import com.example.com.masterhelper.core.mediaworker.MediaFiles;
+import com.example.com.masterhelper.media.mediaworker.MediaFiles;
 import com.example.com.masterhelper.ui.soundsList.SoundsList;
-import com.example.com.masterhelper.core.appconfig.models.SoundFileModel;
 
 import java.util.Collections;
 import java.util.HashSet;

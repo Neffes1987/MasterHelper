@@ -2,7 +2,7 @@ package com.example.com.masterhelper.core.appconfig;
 
 import android.app.Application;
 import android.content.Context;
-import com.example.com.masterhelper.core.mediaworker.BackgroundMediaPlayer;
+import com.example.com.masterhelper.media.mediaworker.BackgroundMediaPlayer;
 
 public class GlobalApplication extends Application {
 

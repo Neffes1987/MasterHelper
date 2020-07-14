@@ -1,4 +1,4 @@
-package com.example.com.masterhelper.core.factorys.DBAdapters.settingsAdapters.media.adapters;
+package com.example.com.masterhelper.media.adapters;
 
 import com.example.com.masterhelper.core.appconfig.models.utilities.ModelList;
 

@@ -15,7 +15,7 @@ import com.example.com.masterhelper.core.factorys.dialogs.dialogs.CommonDialog;
 import com.example.com.masterhelper.core.factorys.list.CustomListItemsEnum;
 import com.example.com.masterhelper.core.factorys.list.commonAdapter.item.ICommonItemEvents;
 import com.example.com.masterhelper.core.appconfig.models.JourneyModel;
-import com.example.com.masterhelper.ui.appBarFragment.IAppBarFragment;
+import com.example.com.masterhelper.appbar.IAppBarFragment;
 import android.content.Intent;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;

@@ -1,9 +1,8 @@
-package com.example.com.masterhelper.core.factorys.DBAdapters.settingsAdapters.media.adapters;
+package com.example.com.masterhelper.media.adapters;
 
 import com.example.com.masterhelper.core.appconfig.DbHelpers;
 import com.example.com.masterhelper.core.appconfig.GlobalApplication;
 import com.example.com.masterhelper.core.appconfig.models.DataModel;
-import com.example.com.masterhelper.core.appconfig.models.SoundFileModel;
 import com.example.com.masterhelper.core.appconfig.models.utilities.ModelList;
 
 import java.util.Arrays;

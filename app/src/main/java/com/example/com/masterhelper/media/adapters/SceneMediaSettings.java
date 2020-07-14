@@ -1,10 +1,9 @@
-package com.example.com.masterhelper.core.factorys.DBAdapters.settingsAdapters.media.adapters;
+package com.example.com.masterhelper.media.adapters;
 
 import android.database.Cursor;
 import com.example.com.masterhelper.core.appconfig.contracts.SceneContract;
 import com.example.com.masterhelper.core.appconfig.contracts.SceneMusicContract;
 import com.example.com.masterhelper.core.appconfig.models.DataModel;
-import com.example.com.masterhelper.core.appconfig.models.SoundFileModel;
 import com.example.com.masterhelper.core.appconfig.models.utilities.ModelList;
 
 

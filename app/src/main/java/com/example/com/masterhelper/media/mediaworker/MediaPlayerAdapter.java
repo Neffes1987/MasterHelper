@@ -1,4 +1,4 @@
-package com.example.com.masterhelper.core.mediaworker;
+package com.example.com.masterhelper.media.mediaworker;
 
 import android.media.AudioManager;
 import android.media.MediaPlayer;

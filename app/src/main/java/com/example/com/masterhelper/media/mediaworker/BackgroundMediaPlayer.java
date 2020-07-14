@@ -1,4 +1,4 @@
-package com.example.com.masterhelper.core.mediaworker;
+package com.example.com.masterhelper.media.mediaworker;
 
 /** плеер фоновой музыки в сценах и в скриптах */
 public class BackgroundMediaPlayer implements IBackgroundMediaPlayer{

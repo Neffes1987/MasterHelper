@@ -7,7 +7,7 @@ import android.widget.TextView;
 import com.example.com.masterhelper.core.appconfig.models.DataModel;
 import com.example.masterhelper.R;
 import com.example.com.masterhelper.core.factorys.list.commonAdapter.CommonAdapter;
-import com.example.com.masterhelper.core.appconfig.models.SoundFileModel;
+import com.example.com.masterhelper.media.adapters.SoundFileModel;
 
 /** Модель для управления интерфейсом внутри элемента для циклического списка
  * Model - тип модели данных, который следует передать в обработчик жлемента списка для инициализаци
