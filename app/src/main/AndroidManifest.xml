@@ -24,7 +24,7 @@
     </activity>
     <activity android:name="com.example.com.masterhelper.ui.enemies.EditEnemy">
     </activity>
-    <activity android:name="com.example.com.masterhelper.media.MusicSettingsScreen">
+    <activity android:name="com.example.com.masterhelper.media.ui.MusicSettingsScreen">
     </activity>
     <activity
       android:name="com.example.com.masterhelper.core.factorys.dialogs.dialogs.CreateNewItemDialog"

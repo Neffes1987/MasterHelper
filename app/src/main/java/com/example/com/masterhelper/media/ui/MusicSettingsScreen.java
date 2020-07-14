@@ -1,4 +1,4 @@
-package com.example.com.masterhelper.media;
+package com.example.com.masterhelper.media.ui;
 
 import android.Manifest;
 import android.content.ClipData;
@@ -21,7 +21,6 @@ import com.example.com.masterhelper.core.factorys.dialogs.DialogsFactory;
 import com.example.com.masterhelper.core.factorys.dialogs.dialogs.CommonDialog;
 import com.example.com.masterhelper.core.factorys.list.commonAdapter.item.ICommonItemEvents;
 import com.example.com.masterhelper.media.mediaworker.MediaFiles;
-import com.example.com.masterhelper.ui.soundsList.SoundsList;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -145,6 +144,7 @@ public class MusicSettingsScreen extends AppCompatActivity implements ICommonIte
   private void StartFilePickerIntent(){
     Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
     intent.addCategory(Intent.CATEGORY_OPENABLE);
+    intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
     intent.setType(PICK_AUDIO_TYPE);
     startActivityForResult(intent, PICK_AUDIO_FILE);
   }

@@ -1,4 +1,4 @@
-package com.example.com.masterhelper.ui.soundsList;
+package com.example.com.masterhelper.media.ui;
 
 import android.annotation.SuppressLint;
 import android.content.Context;

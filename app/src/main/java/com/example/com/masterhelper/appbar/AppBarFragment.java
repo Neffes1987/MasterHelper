@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.*;
 import androidx.fragment.app.Fragment;
-import com.example.com.masterhelper.media.MusicSettingsScreen;
+import com.example.com.masterhelper.media.ui.MusicSettingsScreen;
 import com.example.com.masterhelper.abilities.AbilityNamesList;
 import com.example.com.masterhelper.ui.forces.ScreenJourneyForcesList;
 import com.example.masterhelper.R;
