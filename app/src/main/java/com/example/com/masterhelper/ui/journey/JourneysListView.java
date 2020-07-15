@@ -3,8 +3,8 @@ package com.example.com.masterhelper.ui.journey;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
+import com.example.com.masterhelper.core.appconfig.models.DataModel;
 import com.example.com.masterhelper.core.appconfig.models.utilities.ModelList;
-import com.example.com.masterhelper.core.factorys.dialogs.dialogs.CreateNewItemDialog;
 import com.example.masterhelper.R;
 import com.example.com.masterhelper.core.factorys.DBAdapters.AdaptersType;
 import com.example.com.masterhelper.core.factorys.DBAdapters.DBAdapterFactory;
@@ -25,9 +25,9 @@ import com.example.com.masterhelper.core.factorys.list.ListFactory;
 import com.example.com.masterhelper.ui.popupMenu.PopupMenuAdapter;
 import com.example.com.masterhelper.ui.popupMenu.PopupMenuEvents;
 
-import java.util.Objects;
 
 import static android.content.DialogInterface.BUTTON_POSITIVE;
+import static com.example.com.masterhelper.core.factorys.dialogs.DialogTypes.oneFieldDialog;
 
 public class JourneysListView extends AppCompatActivity implements ICommonItemEvents, IAppBarFragment, PopupMenuEvents {
   /** ид выбранного путешествия */
@@ -67,21 +67,18 @@ public class JourneysListView extends AppCompatActivity implements ICommonItemEv
 
   /** вызвать диалог создания новго путешествия */
   public void onCreateJourneyButtonPressed() {
-    Intent intent = new Intent(JourneysListView.this, CreateNewItemDialog.class);
-    intent.putExtra(CreateNewItemDialog.TITLE, R.string.journey_create_title);
-    intent.putExtra(CreateNewItemDialog.HIDE_DESCRIPTION, 1);
-    startActivityForResult(intent, 1);
+    CommonDialog dialog = DialogsFactory.createDialog(oneFieldDialog);
+    if(dialog != null){
+      dialog.show(this, null);
+    }
   }
 
   /** вызвать диалог редактирования нового путешествия */
   public void onUpdateJourneyButtonPressed(int id) {
-    Intent intent = new Intent(JourneysListView.this, CreateNewItemDialog.class);
-    intent.putExtra(CreateNewItemDialog.HIDE_DESCRIPTION, 1);
-    intent.putExtra(CreateNewItemDialog.TITLE, R.string.journey_update_title);
-    intent.putExtra(CreateNewItemDialog.IS_UPDATE, 1);
-    intent.putExtra(CreateNewItemDialog.ID, id);
-    intent.putExtra(CreateNewItemDialog.OLD_NAME, Objects.requireNonNull(journeys.get(id)).getName());
-    startActivityForResult(intent, 2);
+    CommonDialog dialog = DialogsFactory.createDialog(oneFieldDialog);
+    if(dialog != null){
+      dialog.show(this, journeys.get(id));
+    }
   }
 
   /** провалиться в выбранное путешествие */
@@ -115,10 +112,10 @@ public class JourneysListView extends AppCompatActivity implements ICommonItemEv
     }
     JourneyModel item = new JourneyModel(newName, id);
     switch (requestCode){
-      case 1:
+      case CommonDialog.DIALOG_CREATE_ACTIVITY_RESULT:
         journeyDBAdapter.add(item,0);
         break;
-      case 2:
+      case CommonDialog.DIALOG_UPDATE_ACTIVITY_RESULT:
         journeyDBAdapter.update(item);
         break;
     }
@@ -142,7 +139,7 @@ public class JourneysListView extends AppCompatActivity implements ICommonItemEv
   /**  */
   @Override
   public void onClick(View elementFiredAction, int position) {
-    JourneyModel journeyModel = (JourneyModel) journeys.values().toArray()[position];
+    DataModel journeyModel = journeys.getItemByPosition(position);
     selectedJourneyId = journeyModel.getId();
     switch (elementFiredAction.getId()){
       case R.id.JOURNEY_TITLE_ID:

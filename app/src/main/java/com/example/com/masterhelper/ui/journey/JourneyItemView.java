@@ -6,7 +6,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBar;
 import com.example.com.masterhelper.core.appconfig.GlobalApplication;
 import com.example.com.masterhelper.core.appconfig.models.utilities.ModelList;
-import com.example.com.masterhelper.core.factorys.dialogs.dialogs.CreateNewItemDialog;
+import com.example.com.masterhelper.core.factorys.dialogs.ui.CreateNewItemDialog;
 import com.example.masterhelper.R;
 import com.example.com.masterhelper.core.appconfig.models.JourneyModel;
 import com.example.com.masterhelper.core.factorys.DBAdapters.AdaptersType;
@@ -26,7 +26,6 @@ import android.os.Bundle;
 import androidx.fragment.app.FragmentManager;
 import com.example.com.masterhelper.core.factorys.DBAdapters.adapters.SceneDBAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import java.util.LinkedHashMap;
 
 import static android.content.DialogInterface.BUTTON_POSITIVE;
 

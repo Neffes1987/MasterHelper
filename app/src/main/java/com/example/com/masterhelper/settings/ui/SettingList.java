@@ -21,7 +21,7 @@ import com.example.masterhelper.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import static android.content.DialogInterface.BUTTON_POSITIVE;
-import static com.example.com.masterhelper.core.factorys.dialogs.DialogTypes.abilitySetting;
+import static com.example.com.masterhelper.core.factorys.dialogs.DialogTypes.oneFieldDialog;
 
 public class SettingList extends AppCompatActivity implements ICommonItemEvents {
   FragmentManager fragmentManager;
@@ -111,7 +111,7 @@ public class SettingList extends AppCompatActivity implements ICommonItemEvents 
 
   /** вызвать диалог редактирования нового путешествия */
   public void onAddButtonPressed(int id) {
-    CommonDialog dialog = DialogsFactory.createDialog(abilitySetting);
+    CommonDialog dialog = DialogsFactory.createDialog(oneFieldDialog);
     if(dialog != null){
       dialog.show(this, null);
     }

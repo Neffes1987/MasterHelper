@@ -1,4 +1,4 @@
-package com.example.com.masterhelper.core.factorys.dialogs.dialogs;
+package com.example.com.masterhelper.core.factorys.dialogs.ui;
 
 import android.content.Intent;
 import android.view.View;
