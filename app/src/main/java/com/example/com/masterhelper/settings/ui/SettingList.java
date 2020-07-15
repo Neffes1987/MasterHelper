@@ -7,21 +7,20 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import com.example.com.masterhelper.core.appconfig.models.DataModel;
-import com.example.com.masterhelper.core.appconfig.models.utilities.ModelList;
-import com.example.com.masterhelper.core.factorys.dialogs.DialogTypes;
-import com.example.com.masterhelper.core.factorys.dialogs.DialogsFactory;
-import com.example.com.masterhelper.core.factorys.dialogs.dialogs.CommonDialog;
-import com.example.com.masterhelper.core.factorys.list.CustomListItemsEnum;
-import com.example.com.masterhelper.core.factorys.list.ListFactory;
-import com.example.com.masterhelper.core.factorys.list.commonAdapter.item.ICommonItemEvents;
+import com.example.com.masterhelper.core.models.DataModel;
+import com.example.com.masterhelper.core.models.utilities.ModelList;
+import com.example.com.masterhelper.core.factories.dialogs.DialogTypes;
+import com.example.com.masterhelper.core.factories.dialogs.DialogsFactory;
+import com.example.com.masterhelper.core.factories.dialogs.dialogs.CommonDialog;
+import com.example.com.masterhelper.core.factories.list.CustomListItemsEnum;
+import com.example.com.masterhelper.core.factories.list.ListFactory;
+import com.example.com.masterhelper.core.factories.list.commonAdapter.item.ICommonItemEvents;
 import com.example.com.masterhelper.settings.SettingsFactory;
 import com.example.com.masterhelper.settings.adapters.AbstractSetting;
 import com.example.masterhelper.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import static android.content.DialogInterface.BUTTON_POSITIVE;
-import static com.example.com.masterhelper.core.factorys.dialogs.DialogTypes.oneFieldDialog;
 
 public class SettingList extends AppCompatActivity implements ICommonItemEvents {
   FragmentManager fragmentManager;
@@ -31,6 +30,7 @@ public class SettingList extends AppCompatActivity implements ICommonItemEvents 
   public static final String EXTRA_SETTING_TITLE = "caption";
 
   private CustomListItemsEnum listType;
+  SettingsFactory factory;
 
   FloatingActionButton addNewNameBtn;
 
@@ -60,7 +60,7 @@ public class SettingList extends AppCompatActivity implements ICommonItemEvents 
         e.printStackTrace();
       }
     } else {
-      SettingsFactory factory = new SettingsFactory(type);
+      factory = new SettingsFactory(type);
       settingsAdapter  = factory.getAdapter();
       listType = factory.getConvertListItemType();
       selectedIds = getIntent().getStringArrayExtra(EXTRA_SELECTED_IDS);
@@ -69,7 +69,7 @@ public class SettingList extends AppCompatActivity implements ICommonItemEvents 
     fragmentManager = getSupportFragmentManager();
 
     addNewNameBtn = findViewById(R.id.SETTING_EDIT_ADD_BTN_ID);
-    addNewNameBtn.setOnClickListener(v -> onAddButtonPressed(0));
+    addNewNameBtn.setOnClickListener(v -> onAddButtonPressed());
     updateList();
   }
 
@@ -95,7 +95,7 @@ public class SettingList extends AppCompatActivity implements ICommonItemEvents 
   @Override
   public void onClick(View elementFiredAction, int position) {
     DataModel row = settings.getItemByPosition(position);
-    if(row != null && elementFiredAction.getId() == R.id.JOURNEY_EDIT_ID ){
+    if(row != null && elementFiredAction.getId() == R.id.ITEM_EDIT_ID){
       CommonDialog dialog = DialogsFactory.createDialog(DialogTypes.delete);
       if(dialog != null){
         dialog.setOnResolveListener((dialogInterface, id) -> {
@@ -110,8 +110,8 @@ public class SettingList extends AppCompatActivity implements ICommonItemEvents 
 
 
   /** вызвать диалог редактирования нового путешествия */
-  public void onAddButtonPressed(int id) {
-    CommonDialog dialog = DialogsFactory.createDialog(oneFieldDialog);
+  public void onAddButtonPressed() {
+    CommonDialog dialog = factory.getDialog();
     if(dialog != null){
       dialog.show(this, null);
     }
@@ -126,7 +126,6 @@ public class SettingList extends AppCompatActivity implements ICommonItemEvents 
     }
     String newName = result.getStringExtra("name");
     String newDescription = result.getStringExtra("description");
-    int id = result.getIntExtra("id", -1);
     if(newName != null && newName.trim().length() == 0){
       return;
     }

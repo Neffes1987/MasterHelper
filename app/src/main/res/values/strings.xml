@@ -23,6 +23,7 @@
   <string name="app_name">Помошник настольщика</string>
   <string name="action_settings">Загрузить музыку</string>
   <string name="abilities_settings">Редактировать характеристики</string>
+  <string name="add_abilities_setting">Создать характеристику</string>
   <string name="screen_name_music">Музыка</string>
   <string name="background_music">Фоновая музыка</string>
   <string name="library_music">Фоновая музыка</string>
@@ -85,16 +86,17 @@
 
   <!-- forces -->
   <string name="force_menu_item_title">Фракции и NPC</string>
-  <string name="force_goal_motivation_title">Цели и мотивация: </string>
-  <string name="force_cooperators_title">Союзники: </string>
-  <string name="force_enemies_title">Противники: </string>
-  <string name="force_advantages_title">Преимущества: </string>
-  <string name="force_disadvantages_title">Слабости: </string>
-  <string name="force_owned_title">Владеет, помогает: </string>
-  <string name="force_depended_title">Пренадлежит, подчиняется: </string>
-  <string name="force_description_title">Краткая история: </string>
-  <string name="force_type_title">Тип: </string>
-  <string name="force_journeys_title">Активна в приключениях: </string>
+  <string name="force_menu_create_item_title">Список фракций</string>
+  <string name="force_goal_motivation_title">Цели и мотивация</string>
+  <string name="force_cooperators_title">Союзники</string>
+  <string name="force_enemies_title">Противники</string>
+  <string name="force_advantages_title">Преимущества</string>
+  <string name="force_disadvantages_title">Слабости</string>
+  <string name="force_owned_title">Владеет, помогает</string>
+  <string name="force_depended_title">Пренадлежит, подчиняется</string>
+  <string name="force_description_title">Краткая история</string>
+  <string name="force_type_title">Тип</string>
+  <string name="force_journeys_title">Активна в приключениях</string>
 
   <string name="force_enemy_type_title">Враги</string>
   <string name="force_cooperators_type_title">Союзники</string>

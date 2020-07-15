@@ -1,6 +1,6 @@
 package com.example.com.masterhelper.media.adapters;
 
-import com.example.com.masterhelper.core.appconfig.models.utilities.ModelList;
+import com.example.com.masterhelper.core.models.utilities.ModelList;
 
 public interface IMediaSettingsAdapterDB {
   ModelList get(int parent);

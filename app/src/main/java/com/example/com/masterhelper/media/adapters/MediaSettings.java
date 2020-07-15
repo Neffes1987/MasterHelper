@@ -2,8 +2,8 @@ package com.example.com.masterhelper.media.adapters;
 
 import com.example.com.masterhelper.core.appconfig.DbHelpers;
 import com.example.com.masterhelper.core.appconfig.GlobalApplication;
-import com.example.com.masterhelper.core.appconfig.models.DataModel;
-import com.example.com.masterhelper.core.appconfig.models.utilities.ModelList;
+import com.example.com.masterhelper.core.models.DataModel;
+import com.example.com.masterhelper.core.models.utilities.ModelList;
 
 import java.util.Arrays;
 import java.util.HashSet;

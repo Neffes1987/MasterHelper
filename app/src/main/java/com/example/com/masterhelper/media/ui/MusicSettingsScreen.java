@@ -13,13 +13,13 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.fragment.app.FragmentManager;
-import com.example.com.masterhelper.core.appconfig.models.utilities.ModelList;
+import com.example.com.masterhelper.core.models.utilities.ModelList;
 import com.example.com.masterhelper.media.adapters.SoundFileModel;
 import com.example.masterhelper.R;
-import com.example.com.masterhelper.core.factorys.dialogs.DialogTypes;
-import com.example.com.masterhelper.core.factorys.dialogs.DialogsFactory;
-import com.example.com.masterhelper.core.factorys.dialogs.dialogs.CommonDialog;
-import com.example.com.masterhelper.core.factorys.list.commonAdapter.item.ICommonItemEvents;
+import com.example.com.masterhelper.core.factories.dialogs.DialogTypes;
+import com.example.com.masterhelper.core.factories.dialogs.DialogsFactory;
+import com.example.com.masterhelper.core.factories.dialogs.dialogs.CommonDialog;
+import com.example.com.masterhelper.core.factories.list.commonAdapter.item.ICommonItemEvents;
 import com.example.com.masterhelper.media.mediaworker.MediaFiles;
 
 import java.util.Collections;

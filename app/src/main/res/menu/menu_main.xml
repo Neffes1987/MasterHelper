@@ -4,7 +4,20 @@
       tools:context="com.example.com.masterhelper.ui.journey.JourneysListView">
   <item
     android:title="@string/force_menu_item_title"
-    android:id="@+id/FORCES_SETTINGS"/>
+    >
+    <menu
+      >
+      <item
+        android:title="@string/force_advantages_title"
+        android:id="@+id/ADVANCE_SETTING_ID"/>
+      <item
+        android:title="@string/force_goal_motivation_title"
+        android:id="@+id/GOAL_SETTING_ID"/>
+      <item
+        android:title="@string/force_menu_create_item_title"
+        android:id="@+id/FORCES_SETTINGS"/>
+    </menu>
+  </item>
   <item
     android:id="@+id/ACTION_SETTINGS"
     android:title="@string/action_settings"

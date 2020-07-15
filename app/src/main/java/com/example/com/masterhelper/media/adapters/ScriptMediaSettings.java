@@ -1,10 +1,10 @@
 package com.example.com.masterhelper.media.adapters;
 
 import android.database.Cursor;
-import com.example.com.masterhelper.core.appconfig.contracts.SceneContract;
-import com.example.com.masterhelper.core.appconfig.contracts.ScriptMusicContract;
-import com.example.com.masterhelper.core.appconfig.models.DataModel;
-import com.example.com.masterhelper.core.appconfig.models.utilities.ModelList;
+import com.example.com.masterhelper.core.contracts.SceneContract;
+import com.example.com.masterhelper.core.contracts.ScriptMusicContract;
+import com.example.com.masterhelper.core.models.DataModel;
+import com.example.com.masterhelper.core.models.utilities.ModelList;
 
 
 public class ScriptMediaSettings extends MediaSettings {

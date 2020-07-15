@@ -9,30 +9,31 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
-import com.example.com.masterhelper.core.appconfig.models.utilities.ModelList;
+import com.example.com.masterhelper.core.models.utilities.ModelList;
 import com.example.com.masterhelper.media.adapters.MediaSettings;
 import com.example.com.masterhelper.media.adapters.SettingsAdapterType;
 import com.example.com.masterhelper.media.SettingsMediaFactory;
 import com.example.com.masterhelper.media.ui.MusicSettingsScreen;
 import com.example.com.masterhelper.ui.enemies.EnemiesListView;
 import com.example.com.masterhelper.core.appconfig.GlobalApplication;
-import com.example.com.masterhelper.core.factorys.dialogs.ui.CreateNewItemDialog;
+import com.example.com.masterhelper.core.factories.dialogs.ui.CreateNewItemDialog;
 import com.example.masterhelper.R;
-import com.example.com.masterhelper.core.factorys.DBAdapters.AdaptersType;
-import com.example.com.masterhelper.core.factorys.DBAdapters.DBAdapterFactory;
-import com.example.com.masterhelper.core.factorys.DBAdapters.adapters.SceneDBAdapter;
-import com.example.com.masterhelper.core.factorys.dialogs.DialogTypes;
-import com.example.com.masterhelper.core.factorys.dialogs.DialogsFactory;
-import com.example.com.masterhelper.core.factorys.dialogs.dialogs.CommonDialog;
+import com.example.com.masterhelper.core.factories.DBAdapters.AdaptersType;
+import com.example.com.masterhelper.core.factories.DBAdapters.DBAdapterFactory;
+import com.example.com.masterhelper.core.factories.DBAdapters.adapters.SceneDBAdapter;
+import com.example.com.masterhelper.core.factories.dialogs.DialogTypes;
+import com.example.com.masterhelper.core.factories.dialogs.DialogsFactory;
+import com.example.com.masterhelper.core.factories.dialogs.dialogs.CommonDialog;
 import com.example.com.masterhelper.media.mediaworker.BackgroundMediaPlayer;
-import com.example.com.masterhelper.core.factorys.list.CustomListItemsEnum;
-import com.example.com.masterhelper.core.factorys.list.commonAdapter.item.ICommonItemEvents;
-import com.example.com.masterhelper.core.factorys.list.ListFactory;
-import com.example.com.masterhelper.core.appconfig.models.ScriptModel;
-import com.example.com.masterhelper.core.factorys.DBAdapters.adapters.ScriptDBAdapter;
+import com.example.com.masterhelper.core.factories.list.CustomListItemsEnum;
+import com.example.com.masterhelper.core.factories.list.commonAdapter.item.ICommonItemEvents;
+import com.example.com.masterhelper.core.factories.list.ListFactory;
+import com.example.com.masterhelper.core.models.ScriptModel;
+import com.example.com.masterhelper.core.factories.DBAdapters.adapters.ScriptDBAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import static android.content.DialogInterface.BUTTON_POSITIVE;
+import static com.example.com.masterhelper.core.factories.dialogs.DialogTypes.scriptDialog;
 
 @RequiresApi(api = Build.VERSION_CODES.M)
 public class Scene extends AppCompatActivity implements ICommonItemEvents {
@@ -86,10 +87,11 @@ public class Scene extends AppCompatActivity implements ICommonItemEvents {
 
 
     newScriptBtn.setOnClickListener(v -> {
-      Intent intent = new Intent(this, CreateNewItemDialog.class);
-      intent.putExtra(CreateNewItemDialog.TITLE, R.string.script_create_title);
-      intent.putExtra(CreateNewItemDialog.IS_SCRIPT, 1);
-      startActivityForResult(intent, CREATE_NEW_SCRIPT_CODE);
+      CommonDialog dialog = DialogsFactory.createDialog(scriptDialog);
+      if(dialog != null){
+        dialog.setTitle(R.string.script_create_title);
+        dialog.show(this, null);
+      }
     });
 
 
@@ -146,16 +148,10 @@ public class Scene extends AppCompatActivity implements ICommonItemEvents {
   /** обновить текущий скрипт  */
   public void onUpdateScriptNameButtonPressed(int id) {
     ScriptModel scriptModel = (ScriptModel) scriptsList.get(id);
-    Intent intent = new Intent(this, CreateNewItemDialog.class);
-    intent.putExtra(CreateNewItemDialog.TITLE, R.string.script_update_title);
-    intent.putExtra(CreateNewItemDialog.IS_UPDATE, 1);
-    intent.putExtra(CreateNewItemDialog.ID, id);
-    if(scriptModel != null){
-      intent.putExtra(CreateNewItemDialog.OLD_NAME, scriptModel.getName());
-      intent.putExtra(CreateNewItemDialog.IS_BATTLE, scriptModel.hasBattleActionIcon ? 1 : 0);
-      intent.putExtra(CreateNewItemDialog.DESCRIPTION, scriptModel.getDescription());
-      intent.putExtra(CreateNewItemDialog.IS_SCRIPT, 1);
-      startActivityForResult(intent, UPDATE_SCRIPT_CODE);
+    CommonDialog dialog = DialogsFactory.createDialog(scriptDialog);
+    if(dialog != null){
+      dialog.setTitle(R.string.script_update_title);
+      dialog.show(this, scriptModel);
     }
   }
 
@@ -186,10 +182,10 @@ public class Scene extends AppCompatActivity implements ICommonItemEvents {
       item = new ScriptModel(newName, id, description, hasBattleSceneValue == 1, false);
     }
     switch (requestCode){
-      case CREATE_NEW_SCRIPT_CODE:
+      case CommonDialog.DIALOG_CREATE_ACTIVITY_RESULT:
         scriptDBAdapter.add(item, sceneId);
         break;
-      case UPDATE_SCRIPT_CODE:
+      case CommonDialog.DIALOG_UPDATE_ACTIVITY_RESULT:
         scriptDBAdapter.update(item);
         break;
       case ADD_MUSIC_TO_SCENE_CODE:

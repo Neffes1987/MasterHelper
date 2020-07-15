@@ -3,31 +3,31 @@ package com.example.com.masterhelper.ui.journey;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
-import com.example.com.masterhelper.core.appconfig.models.DataModel;
-import com.example.com.masterhelper.core.appconfig.models.utilities.ModelList;
+import com.example.com.masterhelper.core.models.DataModel;
+import com.example.com.masterhelper.core.models.utilities.ModelList;
 import com.example.masterhelper.R;
-import com.example.com.masterhelper.core.factorys.DBAdapters.AdaptersType;
-import com.example.com.masterhelper.core.factorys.DBAdapters.DBAdapterFactory;
-import com.example.com.masterhelper.core.factorys.DBAdapters.adapters.JourneyDBAdapter;
-import com.example.com.masterhelper.core.factorys.dialogs.DialogTypes;
-import com.example.com.masterhelper.core.factorys.dialogs.DialogsFactory;
-import com.example.com.masterhelper.core.factorys.dialogs.dialogs.CommonDialog;
-import com.example.com.masterhelper.core.factorys.list.CustomListItemsEnum;
-import com.example.com.masterhelper.core.factorys.list.commonAdapter.item.ICommonItemEvents;
-import com.example.com.masterhelper.core.appconfig.models.JourneyModel;
+import com.example.com.masterhelper.core.factories.DBAdapters.AdaptersType;
+import com.example.com.masterhelper.core.factories.DBAdapters.DBAdapterFactory;
+import com.example.com.masterhelper.core.factories.DBAdapters.adapters.JourneyDBAdapter;
+import com.example.com.masterhelper.core.factories.dialogs.DialogTypes;
+import com.example.com.masterhelper.core.factories.dialogs.DialogsFactory;
+import com.example.com.masterhelper.core.factories.dialogs.dialogs.CommonDialog;
+import com.example.com.masterhelper.core.factories.list.CustomListItemsEnum;
+import com.example.com.masterhelper.core.factories.list.commonAdapter.item.ICommonItemEvents;
+import com.example.com.masterhelper.core.models.JourneyModel;
 import com.example.com.masterhelper.appbar.IAppBarFragment;
 import android.content.Intent;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentManager;
-import com.example.com.masterhelper.core.factorys.list.ListFactory;
+import com.example.com.masterhelper.core.factories.list.ListFactory;
 import com.example.com.masterhelper.ui.popupMenu.PopupMenuAdapter;
 import com.example.com.masterhelper.ui.popupMenu.PopupMenuEvents;
 
 
 import static android.content.DialogInterface.BUTTON_POSITIVE;
-import static com.example.com.masterhelper.core.factorys.dialogs.DialogTypes.oneFieldDialog;
+import static com.example.com.masterhelper.core.factories.dialogs.DialogTypes.oneFieldDialog;
 
 public class JourneysListView extends AppCompatActivity implements ICommonItemEvents, IAppBarFragment, PopupMenuEvents {
   /** ид выбранного путешествия */
@@ -69,6 +69,7 @@ public class JourneysListView extends AppCompatActivity implements ICommonItemEv
   public void onCreateJourneyButtonPressed() {
     CommonDialog dialog = DialogsFactory.createDialog(oneFieldDialog);
     if(dialog != null){
+      dialog.setTitle(R.string.journey_create_title);
       dialog.show(this, null);
     }
   }
@@ -77,6 +78,7 @@ public class JourneysListView extends AppCompatActivity implements ICommonItemEv
   public void onUpdateJourneyButtonPressed(int id) {
     CommonDialog dialog = DialogsFactory.createDialog(oneFieldDialog);
     if(dialog != null){
+      dialog.setTitle(R.string.journey_update_title);
       dialog.show(this, journeys.get(id));
     }
   }
@@ -142,10 +144,10 @@ public class JourneysListView extends AppCompatActivity implements ICommonItemEv
     DataModel journeyModel = journeys.getItemByPosition(position);
     selectedJourneyId = journeyModel.getId();
     switch (elementFiredAction.getId()){
-      case R.id.JOURNEY_TITLE_ID:
+      case R.id.ITEM_TITLE_ID:
         onSelectJourneyPressed(journeyModel.getId());
         break;
-      case R.id.JOURNEY_EDIT_ID:
+      case R.id.ITEM_EDIT_ID:
         onShowJourneySettingsPopup(elementFiredAction);
         break;
     }

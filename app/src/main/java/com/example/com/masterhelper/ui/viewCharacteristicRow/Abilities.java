@@ -5,10 +5,10 @@ import android.widget.LinearLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import com.example.com.masterhelper.core.appconfig.models.DataModel;
-import com.example.com.masterhelper.core.appconfig.models.utilities.ModelList;
+import com.example.com.masterhelper.core.models.DataModel;
+import com.example.com.masterhelper.core.models.utilities.ModelList;
 import com.example.masterhelper.R;
-import com.example.com.masterhelper.core.appconfig.models.AbilityModel;
+import com.example.com.masterhelper.core.models.AbilityModel;
 
 import java.util.LinkedHashMap;
 

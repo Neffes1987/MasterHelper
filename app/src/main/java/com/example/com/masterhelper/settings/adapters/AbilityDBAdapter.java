@@ -1,10 +1,10 @@
 package com.example.com.masterhelper.settings.adapters;
 
 import android.database.Cursor;
-import com.example.com.masterhelper.core.appconfig.models.AbilityModel;
-import com.example.com.masterhelper.core.appconfig.contracts.AbilitiesContract;
-import com.example.com.masterhelper.core.appconfig.models.DataModel;
-import com.example.com.masterhelper.core.appconfig.models.utilities.ModelList;
+import com.example.com.masterhelper.core.models.AbilityModel;
+import com.example.com.masterhelper.core.contracts.AbilitiesContract;
+import com.example.com.masterhelper.core.models.DataModel;
+import com.example.com.masterhelper.core.models.utilities.ModelList;
 
 public class AbilityDBAdapter extends AbstractSetting {
   public AbilityDBAdapter(){}

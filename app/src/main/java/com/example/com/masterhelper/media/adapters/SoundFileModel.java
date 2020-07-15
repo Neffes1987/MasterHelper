@@ -1,6 +1,6 @@
 package com.example.com.masterhelper.media.adapters;
 
-import com.example.com.masterhelper.core.appconfig.models.DataModel;
+import com.example.com.masterhelper.core.models.DataModel;
 
 public class SoundFileModel extends DataModel {
   private long createTime;

@@ -10,10 +10,10 @@
   <fragment
     android:layout_width="0dp"
     android:layout_height="wrap_content"
-    android:name="com.example.com.masterhelper.core.factorys.list.ListFactory"
+    android:name="com.example.com.masterhelper.core.factories.list.ListFactory"
     android:id="@+id/EXISTED_SETTINGS_LIST_ID"
     android:layout_weight="1"
-    tools:layout="@layout/fragment_view_journey_item"
+    tools:layout="@layout/fragment_view_row_item"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
     android:layout_marginStart="8dp"

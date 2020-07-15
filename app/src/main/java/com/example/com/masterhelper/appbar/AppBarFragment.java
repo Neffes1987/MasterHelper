@@ -6,10 +6,10 @@ import android.view.*;
 import androidx.fragment.app.Fragment;
 import com.example.com.masterhelper.media.ui.MusicSettingsScreen;
 import com.example.com.masterhelper.settings.ui.SettingList;
-import com.example.com.masterhelper.ui.forces.ScreenJourneyForcesList;
 import com.example.masterhelper.R;
 
 import static com.example.com.masterhelper.settings.SettingsFactory.ABILITY_ITEM;
+import static com.example.com.masterhelper.settings.SettingsFactory.FORCE_ITEM;
 
 
 /**  */
@@ -57,12 +57,20 @@ public class AppBarFragment extends Fragment {
         intent.putExtra(SettingList.EXTRA_SETTING_TITLE, R.string.abilities_settings);
         startActivity(intent);
         break;
-        case R.id.FORCES_SETTINGS:
-        intent = new Intent(getActivity(), ScreenJourneyForcesList.class);
-        startActivity(intent);
+      case R.id.FORCES_SETTINGS:
+          intent = new Intent(getActivity(), SettingList.class);
+          intent.putExtra(SettingList.EXTRA_TYPE, FORCE_ITEM);
+          intent.putExtra(SettingList.EXTRA_SETTING_TITLE, R.string.force_menu_item_title);
+          startActivity(intent);
+        break;
+      case R.id.GOAL_SETTING_ID:
+          intent = new Intent(getActivity(), SettingList.class);
+          intent.putExtra(SettingList.EXTRA_TYPE, FORCE_ITEM);
+          intent.putExtra(SettingList.EXTRA_SETTING_TITLE, R.string.force_menu_item_title);
+          startActivity(intent);
         break;
       default:
-        mListener.onItemSelected(item);
+        //mListener.onItemSelected(item);
     }
     return super.onOptionsItemSelected(item);
   }

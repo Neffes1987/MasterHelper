@@ -5,29 +5,30 @@ import android.view.View;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBar;
 import com.example.com.masterhelper.core.appconfig.GlobalApplication;
-import com.example.com.masterhelper.core.appconfig.models.utilities.ModelList;
-import com.example.com.masterhelper.core.factorys.dialogs.ui.CreateNewItemDialog;
+import com.example.com.masterhelper.core.models.utilities.ModelList;
+import com.example.com.masterhelper.core.factories.dialogs.ui.CreateNewItemDialog;
 import com.example.masterhelper.R;
-import com.example.com.masterhelper.core.appconfig.models.JourneyModel;
-import com.example.com.masterhelper.core.factorys.DBAdapters.AdaptersType;
-import com.example.com.masterhelper.core.factorys.DBAdapters.DBAdapterFactory;
-import com.example.com.masterhelper.core.factorys.DBAdapters.adapters.JourneyDBAdapter;
-import com.example.com.masterhelper.core.factorys.dialogs.DialogTypes;
-import com.example.com.masterhelper.core.factorys.dialogs.DialogsFactory;
-import com.example.com.masterhelper.core.factorys.dialogs.dialogs.CommonDialog;
+import com.example.com.masterhelper.core.models.JourneyModel;
+import com.example.com.masterhelper.core.factories.DBAdapters.AdaptersType;
+import com.example.com.masterhelper.core.factories.DBAdapters.DBAdapterFactory;
+import com.example.com.masterhelper.core.factories.DBAdapters.adapters.JourneyDBAdapter;
+import com.example.com.masterhelper.core.factories.dialogs.DialogTypes;
+import com.example.com.masterhelper.core.factories.dialogs.DialogsFactory;
+import com.example.com.masterhelper.core.factories.dialogs.dialogs.CommonDialog;
 import com.example.com.masterhelper.ui.scene.Scene;
-import com.example.com.masterhelper.core.factorys.list.CustomListItemsEnum;
-import com.example.com.masterhelper.core.factorys.list.commonAdapter.item.ICommonItemEvents;
-import com.example.com.masterhelper.core.factorys.list.ListFactory;
-import com.example.com.masterhelper.core.appconfig.models.SceneModel;
+import com.example.com.masterhelper.core.factories.list.CustomListItemsEnum;
+import com.example.com.masterhelper.core.factories.list.commonAdapter.item.ICommonItemEvents;
+import com.example.com.masterhelper.core.factories.list.ListFactory;
+import com.example.com.masterhelper.core.models.SceneModel;
 import android.content.Intent;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.fragment.app.FragmentManager;
-import com.example.com.masterhelper.core.factorys.DBAdapters.adapters.SceneDBAdapter;
+import com.example.com.masterhelper.core.factories.DBAdapters.adapters.SceneDBAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import static android.content.DialogInterface.BUTTON_POSITIVE;
+import static com.example.com.masterhelper.core.factories.dialogs.DialogTypes.withDescription;
 
 
 public class JourneyItemView extends AppCompatActivity implements ICommonItemEvents {
@@ -93,22 +94,20 @@ public class JourneyItemView extends AppCompatActivity implements ICommonItemEve
 
   /** вызвать диалог создания сцены */
   public void onCreateButtonPressed() {
-    Intent intent = new Intent(this, CreateNewItemDialog.class);
-    intent.putExtra(CreateNewItemDialog.TITLE, R.string.scene_create_title);
-    startActivityForResult(intent, 1);
+    CommonDialog dialog = DialogsFactory.createDialog(withDescription);
+    if(dialog != null){
+      dialog.setTitle(R.string.scene_create_title);
+      dialog.show(this, null);
+    }
   }
 
   /** вызвать диалог редактирования сцены */
   public void onUpdateScreenNameButtonPressed(int id) {
     SceneModel scene = sceneDBAdapter.get(id);
-    if(scene != null){
-      Intent intent = new Intent(this, CreateNewItemDialog.class);
-      intent.putExtra(CreateNewItemDialog.TITLE, R.string.screen_name_scene_update);
-      intent.putExtra(CreateNewItemDialog.IS_UPDATE, 1);
-      intent.putExtra(CreateNewItemDialog.ID, id);
-      intent.putExtra(CreateNewItemDialog.OLD_NAME, scene.getName());
-      intent.putExtra(CreateNewItemDialog.DESCRIPTION, scene.getDescription());
-      startActivityForResult(intent, 2);
+    CommonDialog dialog = DialogsFactory.createDialog(withDescription);
+    if(dialog != null){
+      dialog.setTitle(R.string.screen_name_scene_update);
+      dialog.show(this, scene);
     }
   }
 
@@ -137,10 +136,10 @@ public class JourneyItemView extends AppCompatActivity implements ICommonItemEve
     scene.setDescription(newDescription);
 
     switch (requestCode){
-      case 1:
+      case CommonDialog.DIALOG_CREATE_ACTIVITY_RESULT:
         sceneDBAdapter.add(scene, currentJourney.getId());
         break;
-      case 2:
+      case CommonDialog.DIALOG_UPDATE_ACTIVITY_RESULT:
         sceneDBAdapter.update(scene);
         break;
     }
