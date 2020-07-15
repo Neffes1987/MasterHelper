@@ -1,6 +1,6 @@
 package com.example.com.masterhelper.ui.viewCharacteristicRow;
 
-import com.example.com.masterhelper.abilities.AbilityModel;
+import com.example.com.masterhelper.core.appconfig.models.AbilityModel;
 
 public class AbilityRowAdapter {
   /**  */

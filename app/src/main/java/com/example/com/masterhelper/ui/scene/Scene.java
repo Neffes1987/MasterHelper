@@ -227,7 +227,7 @@ public class Scene extends AppCompatActivity implements ICommonItemEvents {
               setListData();
             }
           });
-          dialog.show(this);
+          dialog.show(this, null);
         }
 
         break;

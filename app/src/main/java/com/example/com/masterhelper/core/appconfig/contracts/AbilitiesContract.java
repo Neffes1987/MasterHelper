@@ -1,6 +1,6 @@
 package com.example.com.masterhelper.core.appconfig.contracts;
 
-import com.example.com.masterhelper.abilities.AbilityModel;
+import com.example.com.masterhelper.core.appconfig.models.AbilityModel;
 
 public class AbilitiesContract extends GeneralContract<AbilityModel> {
   public final static String TABLE_NAME = "achieves";

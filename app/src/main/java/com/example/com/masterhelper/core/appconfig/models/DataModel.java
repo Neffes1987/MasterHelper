@@ -1,6 +1,8 @@
 package com.example.com.masterhelper.core.appconfig.models;
 
 public class DataModel {
+  public boolean isSelected;
+
   /** */
   private String name;
 
@@ -42,5 +44,9 @@ public class DataModel {
 
   public String modelToString(){
     return "";
+  }
+
+  public void setSelected(boolean selected) {
+    isSelected = selected;
   }
 }

@@ -5,7 +5,7 @@ import com.example.com.masterhelper.core.appconfig.DbHelpers;
 import com.example.com.masterhelper.core.appconfig.GlobalApplication;
 import com.example.com.masterhelper.core.appconfig.contracts.AbilitiesContract;
 import com.example.com.masterhelper.core.appconfig.contracts.EnemyAbilitiesContract;
-import com.example.com.masterhelper.abilities.AbilityModel;
+import com.example.com.masterhelper.core.appconfig.models.AbilityModel;
 import com.example.com.masterhelper.core.appconfig.models.DataModel;
 import com.example.com.masterhelper.core.appconfig.models.utilities.ModelList;
 

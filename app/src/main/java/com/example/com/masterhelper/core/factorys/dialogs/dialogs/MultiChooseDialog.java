@@ -1,10 +1,12 @@
 package com.example.com.masterhelper.core.factorys.dialogs.dialogs;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import com.example.com.masterhelper.core.appconfig.models.DataModel;
 
-public class MultiChooseDialog extends CommonDialog implements IDialog {
+public class MultiChooseDialog extends CommonDialog {
 
   private String[] listOfItems;
 
@@ -28,7 +30,7 @@ public class MultiChooseDialog extends CommonDialog implements IDialog {
   private  DialogInterface.OnMultiChoiceClickListener multiChoice = (dialog, which, isChecked) -> getSelectedItems()[which] = isChecked;
 
   @Override
-  public void show(Context context) {
+  public void show(Activity context) {
     int title = getTitle();
     AlertDialog.Builder builder = new AlertDialog.Builder(context);
     builder.setTitle(title)
@@ -39,4 +41,7 @@ public class MultiChooseDialog extends CommonDialog implements IDialog {
 
     builder.create().show();
   }
+
+  @Override
+  public void show(Activity context, DataModel settings) {}
 }

@@ -20,7 +20,7 @@
     </activity>
     <activity android:name="com.example.com.masterhelper.ui.forces.ScreenJourneyForcesList">
     </activity>
-    <activity android:name="com.example.com.masterhelper.abilities.AbilityNamesList">
+    <activity android:name="com.example.com.masterhelper.settings.ui.SettingList">
     </activity>
     <activity android:name="com.example.com.masterhelper.ui.enemies.EditEnemy">
     </activity>

@@ -2,6 +2,7 @@ package com.example.com.masterhelper.core.appconfig.models.utilities;
 
 import com.example.com.masterhelper.core.appconfig.models.DataModel;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
@@ -56,5 +57,24 @@ public class ModelList {
       result.append("\r\n");
     }
     return result.toString();
+  }
+
+  public void setSelectedItems(String[] selectedIds){
+    if(selectedIds == null){
+      return;
+    }
+    for (DataModel model : list.values()) {
+      model.setSelected(Arrays.asList(selectedIds).contains(model.getId()+""));
+    }
+  }
+
+  public String[] getSelectedItems(){
+    HashSet<String> result = new HashSet<>();
+    for (DataModel model : list.values()) {
+      if(model.isSelected){
+        result.add(model.getId()+"");
+      }
+    }
+    return result.toArray(new String[0]);
   }
 }

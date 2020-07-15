@@ -27,6 +27,7 @@
   <string name="background_music">Фоновая музыка</string>
   <string name="library_music">Фоновая музыка</string>
   <string name="screen_name_facts">Факты и Мифы</string>
+  <string name="screen_settings_default_caption">Настройки</string>
 
 
   <!-- abilities -->

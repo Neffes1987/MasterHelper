@@ -1,4 +1,4 @@
-package com.example.com.masterhelper.abilities;
+package com.example.com.masterhelper.core.appconfig.models;
 
 import com.example.com.masterhelper.core.appconfig.models.DataModel;
 

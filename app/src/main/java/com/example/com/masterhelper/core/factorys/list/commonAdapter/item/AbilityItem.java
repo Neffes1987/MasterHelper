@@ -8,7 +8,7 @@ import androidx.core.content.ContextCompat;
 import com.example.com.masterhelper.core.appconfig.models.DataModel;
 import com.example.masterhelper.R;
 import com.example.com.masterhelper.core.factorys.list.commonAdapter.CommonAdapter;
-import com.example.com.masterhelper.abilities.AbilityModel;
+import com.example.com.masterhelper.core.appconfig.models.AbilityModel;
 
 /** Модель для управления интерфейсом внутри элемента для циклического списка
  * Model - тип модели данных, который следует передать в обработчик жлемента списка для инициализаци

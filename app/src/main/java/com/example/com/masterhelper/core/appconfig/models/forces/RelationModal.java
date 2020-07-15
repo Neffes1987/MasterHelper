@@ -64,5 +64,4 @@ public abstract class RelationModal extends DataModel implements IRelation {
     advantage,
     disadvantage
   }
-
 }
