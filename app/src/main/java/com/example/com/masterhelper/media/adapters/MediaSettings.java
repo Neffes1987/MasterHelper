@@ -1,7 +1,7 @@
 package com.example.com.masterhelper.media.adapters;
 
-import com.example.com.masterhelper.core.appconfig.DbHelpers;
-import com.example.com.masterhelper.core.appconfig.GlobalApplication;
+import com.example.com.masterhelper.core.app.DbHelpers;
+import com.example.com.masterhelper.core.app.GlobalApplication;
 import com.example.com.masterhelper.core.models.DataModel;
 import com.example.com.masterhelper.core.models.utilities.ModelList;
 

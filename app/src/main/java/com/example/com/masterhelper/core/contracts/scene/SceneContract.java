@@ -1,8 +1,11 @@
-package com.example.com.masterhelper.core.contracts;
+package com.example.com.masterhelper.core.contracts.scene;
 
-import com.example.com.masterhelper.core.models.SceneModel;
+import android.provider.BaseColumns;
+import com.example.com.masterhelper.core.contracts.GeneralContract;
+import com.example.com.masterhelper.core.contracts.journey.JourneysContract;
+import com.example.com.masterhelper.core.models.DataModel;
 
-public class SceneContract extends GeneralContract<SceneModel> {
+public class SceneContract implements BaseColumns {
   public final static String TABLE_NAME = "scene";
 
   public final static String COLUMN_TITLE = "title";
@@ -27,9 +30,15 @@ public class SceneContract extends GeneralContract<SceneModel> {
     COLUMN_DESCRIPTION
   };
 
-  public static String[] INSERT_COLUMNS_PROPS = concat(UPDATE_COLUMNS_PROPS, new String[]{COLUMN_JOURNEY_ID});
+  public static String[] INSERT_COLUMNS_PROPS = GeneralContract.concat(UPDATE_COLUMNS_PROPS, new String[]{COLUMN_JOURNEY_ID});
 
-  public String[] getValues(SceneModel newScene, int journeyId){
+  GeneralContract contract = new GeneralContract(TABLE_NAME, CREATE_TABLE_COLUMNS, UPDATE_COLUMNS_PROPS, INSERT_COLUMNS_PROPS, this::getValues);
+
+  public GeneralContract getContract() {
+    return contract;
+  }
+
+  public String[] getValues(DataModel newScene, int journeyId){
     String title = newScene.getName();
     String description = newScene.getDescription();
     String[] insertValues = new String[]{title, description};
@@ -37,22 +46,6 @@ public class SceneContract extends GeneralContract<SceneModel> {
     if(journeyId == 0){
       return insertValues;
     }
-    return concat(insertValues, new String[]{journeyId+""});
-  }
-
-  public static String CREATE_TABLE = generateTableQuery(TABLE_NAME, CREATE_TABLE_COLUMNS);
-
-  public String addItemQuery(SceneModel newScene, int journeyId){
-    String[] values = getValues(newScene, journeyId);
-    return generateInsertQuery(TABLE_NAME, INSERT_COLUMNS_PROPS, values);
-  }
-
-  public String deleteItemQuery(int itemId){
-    return generateDeleteItemQuery(TABLE_NAME, itemId);
-  }
-
-  public String updateItemQuery(int itemId, SceneModel newScene){
-    String[] values = getValues(newScene, 0);
-    return generateUpdateValues(TABLE_NAME, itemId, UPDATE_COLUMNS_PROPS, values);
+    return GeneralContract.concat(insertValues, new String[]{journeyId+""});
   }
 }

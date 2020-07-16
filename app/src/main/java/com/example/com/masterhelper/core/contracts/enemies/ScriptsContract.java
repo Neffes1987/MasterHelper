@@ -1,8 +1,12 @@
-package com.example.com.masterhelper.core.contracts;
+package com.example.com.masterhelper.core.contracts.enemies;
 
+import android.provider.BaseColumns;
+import com.example.com.masterhelper.core.contracts.GeneralContract;
+import com.example.com.masterhelper.core.contracts.scene.SceneContract;
+import com.example.com.masterhelper.core.models.DataModel;
 import com.example.com.masterhelper.core.models.ScriptModel;
 
-public class ScriptsContract extends GeneralContract<ScriptModel> {
+public class ScriptsContract implements BaseColumns {
   public final static  String TABLE_NAME = "scripts";
 
   public final static  String COLUMN_TITLE = "title";
@@ -35,9 +39,16 @@ public class ScriptsContract extends GeneralContract<ScriptModel> {
     COLUMN_IS_FINISHED
   };
 
-  public static  String[] INSERT_COLUMNS_PROPS = concat(UPDATE_COLUMNS_PROPS, new String[]{COLUMN_SCENE_ID});
+  public static  String[] INSERT_COLUMNS_PROPS = GeneralContract.concat(UPDATE_COLUMNS_PROPS, new String[]{COLUMN_SCENE_ID});
 
-  public String[] getValues(ScriptModel newScript, int sceneID){
+  GeneralContract contract = new GeneralContract(TABLE_NAME, CREATE_TABLE_COLUMNS, UPDATE_COLUMNS_PROPS, INSERT_COLUMNS_PROPS, this::getValues);
+
+  public GeneralContract getContract() {
+    return contract;
+  }
+
+  public String[] getValues(DataModel model, int sceneID){
+    ScriptModel newScript = (ScriptModel) model;
     String title = newScript.getName();
     String description = newScript.getDescription();
       String hasBattle = newScript.hasBattleActionIcon + "";
@@ -46,22 +57,6 @@ public class ScriptsContract extends GeneralContract<ScriptModel> {
     if(sceneID == 0){
       return insertValue;
     }
-    return concat(insertValue, new String[]{sceneID+""});
-  }
-
-  public static String CREATE_TABLE = generateTableQuery(TABLE_NAME, CREATE_TABLE_COLUMNS);
-
-  public  String addItemQuery(ScriptModel newItem, int sceneID){
-    String[] values = getValues(newItem, sceneID);
-    return generateInsertQuery(TABLE_NAME, INSERT_COLUMNS_PROPS, values);
-  }
-
-  public  String deleteItemQuery(int itemId){
-    return generateDeleteItemQuery(TABLE_NAME, itemId);
-  }
-
-  public  String updateItemQuery(int itemId, ScriptModel newItem){
-    String[] values = getValues(newItem, 0);
-    return generateUpdateValues(TABLE_NAME, itemId, UPDATE_COLUMNS_PROPS, values);
+    return GeneralContract.concat(insertValue, new String[]{sceneID+""});
   }
 }

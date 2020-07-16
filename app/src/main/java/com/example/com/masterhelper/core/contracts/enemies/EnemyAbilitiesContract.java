@@ -1,9 +1,14 @@
-package com.example.com.masterhelper.core.contracts;
+package com.example.com.masterhelper.core.contracts.enemies;
 
+import android.provider.BaseColumns;
+import com.example.com.masterhelper.core.contracts.settings.AbilitiesContract;
+import com.example.com.masterhelper.core.contracts.GeneralContract;
 import com.example.com.masterhelper.core.models.AbilityModel;
+import com.example.com.masterhelper.core.models.DataModel;
 
 
-public class EnemyAbilitiesContract extends GeneralContract<AbilityModel> {
+public class EnemyAbilitiesContract implements BaseColumns {
+
   public final static String TABLE_NAME = "enemyAbilities";
 
   public final static String COLUMN_ENEMY_ID = "enemyId";
@@ -35,23 +40,14 @@ public class EnemyAbilitiesContract extends GeneralContract<AbilityModel> {
 
   public static String[] INSERT_COLUMNS_PROPS = UPDATE_COLUMNS_PROPS;
 
-  public String[] getValues(AbilityModel newItem, int scriptId){
-    return new String[]{ scriptId + "", newItem.getId()+"", newItem.getValue()+""};
+  GeneralContract contract = new GeneralContract(TABLE_NAME, CREATE_TABLE_COLUMNS, UPDATE_COLUMNS_PROPS, INSERT_COLUMNS_PROPS, this::getValues);
+
+  public GeneralContract getContract() {
+    return contract;
   }
 
-  public static String CREATE_TABLE = generateTableQuery(TABLE_NAME, CREATE_TABLE_COLUMNS);
-
-  public String addItemQuery(AbilityModel newItem, int scriptId){
-    String[] values = getValues(newItem, scriptId);
-    return generateInsertQuery(TABLE_NAME, INSERT_COLUMNS_PROPS, values);
-  }
-
-  public String deleteItemQuery(int itemId){
-    return generateDeleteItemQuery(TABLE_NAME, itemId);
-  }
-
-  public String updateItemQuery(int enemyId, AbilityModel newItem){
-    String[] values = getValues(newItem, enemyId);
-    return commonUpdateGenerator(TABLE_NAME, UPDATE_COLUMNS_PROPS, values);
+  public String[] getValues(DataModel newItem, int scriptId){
+    AbilityModel model = (AbilityModel) newItem;
+    return new String[]{ scriptId + "", model.getId()+"", model.getValue()+""};
   }
 }

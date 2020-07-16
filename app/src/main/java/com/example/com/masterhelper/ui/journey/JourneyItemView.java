@@ -4,7 +4,7 @@ import android.os.Build;
 import android.view.View;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBar;
-import com.example.com.masterhelper.core.appconfig.GlobalApplication;
+import com.example.com.masterhelper.core.app.GlobalApplication;
 import com.example.com.masterhelper.core.models.utilities.ModelList;
 import com.example.com.masterhelper.core.factories.dialogs.ui.CreateNewItemDialog;
 import com.example.masterhelper.R;

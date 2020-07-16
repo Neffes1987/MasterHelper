@@ -1,9 +1,10 @@
 package com.example.com.masterhelper.core.factories.DBAdapters.adapters;
 
 import android.database.Cursor;
-import com.example.com.masterhelper.core.appconfig.DbHelpers;
-import com.example.com.masterhelper.core.appconfig.GlobalApplication;
-import com.example.com.masterhelper.core.contracts.SceneContract;
+import com.example.com.masterhelper.core.app.DbHelpers;
+import com.example.com.masterhelper.core.app.GlobalApplication;
+import com.example.com.masterhelper.core.contracts.GeneralContract;
+import com.example.com.masterhelper.core.contracts.scene.SceneContract;
 import com.example.com.masterhelper.core.models.DataModel;
 import com.example.com.masterhelper.core.models.SceneModel;
 import com.example.com.masterhelper.core.models.ScriptModel;
@@ -23,7 +24,7 @@ public class SceneDBAdapter  extends CommonBDAdapter<SceneModel> {
 
   @Override
   public SceneModel get(int id) {
-    String sqlQuery = SceneContract.getListQuery(SceneContract.TABLE_NAME, null, SceneContract._ID+"="+ id, SceneContract._ID + " DESC", 1);
+    String sqlQuery = GeneralContract.getListQuery(SceneContract.TABLE_NAME, null, SceneContract._ID+"="+ id, SceneContract._ID + " DESC", 1);
     SceneModel sceneModel = null;
     Cursor queryResult = dbHelpers.getList(sqlQuery);
     while (queryResult.moveToNext()) {
@@ -47,25 +48,25 @@ public class SceneDBAdapter  extends CommonBDAdapter<SceneModel> {
 
   @Override
   public void add(SceneModel newItem, int parentId) {
-    String sqlQuery = dbHelpers.sceneContract.addItemQuery(newItem, parentId);
+    String sqlQuery = dbHelpers.sceneContract.add(newItem, parentId);
     dbHelpers.addNewItem(sqlQuery);
   }
 
   @Override
   public void delete(int deletedId) {
-    String sqlQuery = dbHelpers.sceneContract.deleteItemQuery(deletedId);
+    String sqlQuery = dbHelpers.sceneContract.delete(deletedId);
     dbHelpers.deleteItem(sqlQuery);
   }
 
   @Override
   public void update(SceneModel updatedModel) {
-    String sqlQuery = dbHelpers.sceneContract.updateItemQuery(updatedModel.getId(), updatedModel);
+    String sqlQuery = dbHelpers.sceneContract.update(updatedModel.getId(), updatedModel);
     dbHelpers.updateItem(sqlQuery);
   }
 
   @Override
   public ModelList getListByParentId(int parentId) {
-    String sqlQuery = SceneContract.getListQuery(SceneContract.TABLE_NAME, null, SceneContract.COLUMN_JOURNEY_ID+"="+ parentId, null, 0);
+    String sqlQuery = GeneralContract.getListQuery(SceneContract.TABLE_NAME, null, SceneContract.COLUMN_JOURNEY_ID+"="+ parentId, null, 0);
 
     ModelList result = new ModelList();
 

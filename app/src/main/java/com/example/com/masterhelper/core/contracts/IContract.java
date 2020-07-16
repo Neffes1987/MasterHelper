@@ -1,6 +1,8 @@
 package com.example.com.masterhelper.core.contracts;
 
-public interface IContract<Model> {
+import com.example.com.masterhelper.core.models.DataModel;
+
+public interface IContract {
 
   static String TABLE_NAME = null;
 
@@ -13,11 +15,11 @@ public interface IContract<Model> {
   static String CREATE_TABLE = null;
 
 
-  String[] getValues(Model newItem, int parentID);
+  String[] getValues(DataModel newItem, int parentID);
 
-  String addItemQuery(Model newItem, int parentID);
+  String add(DataModel newItem, int parentID);
 
-  String deleteItemQuery(int itemId);
+  String delete(int itemId);
 
-  String updateItemQuery(int parentID, Model newItem);
+  String update(int parentID, DataModel newItem);
 }

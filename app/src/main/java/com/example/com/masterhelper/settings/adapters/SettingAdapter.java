@@ -2,13 +2,13 @@ package com.example.com.masterhelper.settings.adapters;
 
 import android.database.Cursor;
 import com.example.com.masterhelper.core.contracts.GeneralContract;
-import com.example.com.masterhelper.core.models.AbilityModel;
 import com.example.com.masterhelper.core.contracts.settings.AbilitiesContract;
+import com.example.com.masterhelper.core.models.AbilityModel;
 import com.example.com.masterhelper.core.models.DataModel;
 import com.example.com.masterhelper.core.models.utilities.ModelList;
 
-public class AbilityDBAdapter extends AbstractSetting {
-  public AbilityDBAdapter(){}
+public class SettingAdapter extends AbstractSetting {
+  public SettingAdapter(){}
 
   @Override
   public void add(DataModel newModel) {

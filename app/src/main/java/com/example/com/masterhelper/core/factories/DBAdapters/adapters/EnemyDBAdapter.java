@@ -1,9 +1,10 @@
 package com.example.com.masterhelper.core.factories.DBAdapters.adapters;
 
 import android.database.Cursor;
-import com.example.com.masterhelper.core.appconfig.DbHelpers;
-import com.example.com.masterhelper.core.appconfig.GlobalApplication;
-import com.example.com.masterhelper.core.contracts.EnemyContract;
+import com.example.com.masterhelper.core.app.DbHelpers;
+import com.example.com.masterhelper.core.app.GlobalApplication;
+import com.example.com.masterhelper.core.contracts.GeneralContract;
+import com.example.com.masterhelper.core.contracts.enemies.EnemyContract;
 import com.example.com.masterhelper.core.models.EnemyModel;
 import com.example.com.masterhelper.core.models.utilities.ModelList;
 
@@ -17,7 +18,7 @@ public class EnemyDBAdapter  extends CommonBDAdapter<EnemyModel>  {
   @Override
   public EnemyModel get(int id) {
     String whereCondition = id > -1 ? EnemyContract._ID+"="+ id : null;
-    String sqlQuery = EnemyContract.getListQuery(EnemyContract.TABLE_NAME, null, whereCondition, EnemyContract._ID + " DESC", 1);
+    String sqlQuery = GeneralContract.getListQuery(EnemyContract.TABLE_NAME, null, whereCondition, EnemyContract._ID + " DESC", 1);
     Cursor queryResult = dbHelpers.getList(sqlQuery);
     EnemyModel enemyModel = null;
     while (queryResult.moveToNext()) {
@@ -43,25 +44,25 @@ public class EnemyDBAdapter  extends CommonBDAdapter<EnemyModel>  {
 
   @Override
   public void add(EnemyModel newItem, int parentId) {
-    String sqlQuery = dbHelpers.enemyContract.addItemQuery(newItem, parentId);
+    String sqlQuery = dbHelpers.enemyContract.add(newItem, parentId);
     dbHelpers.addNewItem(sqlQuery);
   }
 
   @Override
   public void delete(int deletedId) {
-    String sqlQuery = dbHelpers.enemyContract.deleteItemQuery(deletedId);
+    String sqlQuery = dbHelpers.enemyContract.delete(deletedId);
     dbHelpers.deleteItem(sqlQuery);
   }
 
   @Override
   public void update(EnemyModel updatedModel) {
-    String sqlQuery = dbHelpers.enemyContract.updateItemQuery(updatedModel.getId(), updatedModel);
+    String sqlQuery = dbHelpers.enemyContract.update(updatedModel.getId(), updatedModel);
     dbHelpers.updateItem(sqlQuery);
   }
 
   @Override
   public ModelList getListByParentId(int parentId) {
-    String sqlQuery = EnemyContract.getListQuery(EnemyContract.TABLE_NAME, null, EnemyContract.COLUMN_SCRIPT_ID +" = " + parentId, EnemyContract.COLUMN_CURRENT_ORDERING, 0);
+    String sqlQuery = GeneralContract.getListQuery(EnemyContract.TABLE_NAME, null, EnemyContract.COLUMN_SCRIPT_ID +" = " + parentId, EnemyContract.COLUMN_CURRENT_ORDERING, 0);
     ModelList result = new ModelList();
     Cursor queryResult = dbHelpers.getList(sqlQuery);
 

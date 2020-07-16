@@ -1,7 +1,7 @@
 package com.example.com.masterhelper.settings.adapters;
 
-import com.example.com.masterhelper.core.appconfig.DbHelpers;
-import com.example.com.masterhelper.core.appconfig.GlobalApplication;
+import com.example.com.masterhelper.core.app.DbHelpers;
+import com.example.com.masterhelper.core.app.GlobalApplication;
 
 public abstract class AbstractSetting implements ISetting {
   /** класс для работы с базой */

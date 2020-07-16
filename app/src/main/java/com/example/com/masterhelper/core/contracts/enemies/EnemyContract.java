@@ -1,8 +1,11 @@
-package com.example.com.masterhelper.core.contracts;
+package com.example.com.masterhelper.core.contracts.enemies;
 
+import android.provider.BaseColumns;
+import com.example.com.masterhelper.core.contracts.GeneralContract;
+import com.example.com.masterhelper.core.models.DataModel;
 import com.example.com.masterhelper.core.models.EnemyModel;
 
-public class EnemyContract extends GeneralContract<EnemyModel> {
+public class EnemyContract implements BaseColumns {
   public final static String TABLE_NAME = "enemies";
 
   public final static  String COLUMN_TITLE = "name";
@@ -40,9 +43,17 @@ public class EnemyContract extends GeneralContract<EnemyModel> {
     COLUMN_CURRENT_ORDERING
   };
 
-  public static  String[] INSERT_COLUMNS_PROPS =  concat(UPDATE_COLUMNS_PROPS, new String[]{COLUMN_SCRIPT_ID});
+  public static  String[] INSERT_COLUMNS_PROPS =  GeneralContract.concat(UPDATE_COLUMNS_PROPS, new String[]{COLUMN_SCRIPT_ID});
 
-  public String[] getValues(EnemyModel newItem, int scriptId){
+  GeneralContract contract = new GeneralContract(TABLE_NAME, CREATE_TABLE_COLUMNS, UPDATE_COLUMNS_PROPS, INSERT_COLUMNS_PROPS, this::getValues);
+
+  public GeneralContract getContract() {
+    return contract;
+  }
+
+
+  public String[] getValues(DataModel model, int scriptId){
+    EnemyModel newItem = (EnemyModel) model;
     String name = newItem.getName();
     String description = newItem.getDescription();
     String totalHealth = newItem.getTotalHealth() + "";
@@ -54,22 +65,7 @@ public class EnemyContract extends GeneralContract<EnemyModel> {
     if(scriptId == 0){
       return insertValues;
     }
-    return concat(insertValues, new String[]{scriptId+""});
+    return GeneralContract.concat(insertValues, new String[]{scriptId+""});
   }
 
-  public static String CREATE_TABLE = generateTableQuery(TABLE_NAME, CREATE_TABLE_COLUMNS);
-
-  public  String addItemQuery(EnemyModel newItem, int scriptId){
-    String[] values = getValues(newItem, scriptId);
-    return generateInsertQuery(TABLE_NAME, INSERT_COLUMNS_PROPS, values);
-  }
-
-  public  String deleteItemQuery(int itemId){
-    return generateDeleteItemQuery(TABLE_NAME, itemId);
-  }
-
-  public  String updateItemQuery(int itemId, EnemyModel newItem){
-    String[] values = getValues(newItem, 0);
-    return generateUpdateValues(TABLE_NAME, itemId, UPDATE_COLUMNS_PROPS, values);
-  }
 }

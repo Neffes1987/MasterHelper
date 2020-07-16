@@ -1,12 +1,42 @@
 package com.example.com.masterhelper.core.contracts;
 
 import android.provider.BaseColumns;
+import android.util.Log;
 import androidx.annotation.Nullable;
+import com.example.com.masterhelper.core.models.DataModel;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public abstract class GeneralContract<Model> implements BaseColumns, IContract<Model> {
+public class GeneralContract implements BaseColumns, IContract {
+  private String TABLE_NAME;
+
+  protected String[] CREATE_TABLE_COLUMNS;
+
+  protected String[] UPDATE_COLUMNS_PROPS;
+
+  protected String[] INSERT_COLUMNS_PROPS;
+
+  protected String CREATE_TABLE;
+
+  protected Callback getValueCallback;
+
+  public GeneralContract(String tableName, String[] createColumns, String[] updateColumns, String[] insertColumns, Callback callback){
+    TABLE_NAME = tableName;
+    CREATE_TABLE_COLUMNS = createColumns;
+    UPDATE_COLUMNS_PROPS = updateColumns;
+    INSERT_COLUMNS_PROPS = insertColumns;
+    CREATE_TABLE = generateTableQuery(TABLE_NAME, CREATE_TABLE_COLUMNS);
+    getValueCallback = callback;
+  }
+
+  public String getCreateTableQuery() {
+    return CREATE_TABLE;
+  }
+
+  public String getTableName(){
+    return TABLE_NAME;
+  };
 
   public final static String _ID = BaseColumns._ID;
 
@@ -99,6 +129,7 @@ public abstract class GeneralContract<Model> implements BaseColumns, IContract<M
 
   /** запрос в бд на создание таблицы */
   public static String generateTableQuery(String TableName, String[] columns){
+    Log.i("TAG", "generateTableQuery: "+TableName);
     StringBuilder result = new StringBuilder();
     if(columns.length == 0){
       return "";
@@ -117,14 +148,41 @@ public abstract class GeneralContract<Model> implements BaseColumns, IContract<M
   }
 
   /** удалить запись в таблице */
-  public static String generateDeleteItemQuery(String tableName, int deletedItemId){
+  public String generateDeleteItemQuery(String tableName, int deletedItemId){
     return "DELETE FROM " + tableName + " WHERE " + _ID + "='"+deletedItemId+"'";
   }
 
   /** функция конкатернации строк */
-  public static String [] concat(final String [] first, final String [] second) {
+  public static String [] concat(final String[] first, final String[] second) {
     final ArrayList<String> resultList = new ArrayList<>(Arrays.asList(first));
     resultList.addAll(new ArrayList<>(Arrays.asList(second)));
-    return resultList.toArray(new String [resultList.size()]);
+    return resultList.toArray(new String[0]);
+  }
+
+  @Override
+  public String[] getValues(DataModel newItem, int parentID) {
+    return getValueCallback.get(newItem, parentID);
+  }
+
+  public String add(DataModel newItem, int scriptId){
+    String[] values = getValues(newItem, scriptId);
+    return generateInsertQuery(TABLE_NAME, INSERT_COLUMNS_PROPS, values);
+  }
+
+  public String delete(int itemId){
+    return generateDeleteItemQuery(TABLE_NAME, itemId);
+  }
+
+  public String update(int enemyId, DataModel newItem){
+    String[] values = getValues(newItem, enemyId);
+    return commonUpdateGenerator(TABLE_NAME, UPDATE_COLUMNS_PROPS, values);
+  }
+
+  public String deleteRecordsByIds(String ids){
+    return "DELETE FROM " + TABLE_NAME + " WHERE " + _ID + " IN (" +ids+ ")";
+  }
+
+  public interface Callback{
+    String[] get(DataModel newItem, int parentID);
   }
 }

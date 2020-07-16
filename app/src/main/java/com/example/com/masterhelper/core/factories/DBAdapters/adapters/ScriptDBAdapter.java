@@ -1,9 +1,10 @@
 package com.example.com.masterhelper.core.factories.DBAdapters.adapters;
 
 import android.database.Cursor;
-import com.example.com.masterhelper.core.appconfig.DbHelpers;
-import com.example.com.masterhelper.core.appconfig.GlobalApplication;
-import com.example.com.masterhelper.core.contracts.ScriptsContract;
+import com.example.com.masterhelper.core.app.DbHelpers;
+import com.example.com.masterhelper.core.app.GlobalApplication;
+import com.example.com.masterhelper.core.contracts.GeneralContract;
+import com.example.com.masterhelper.core.contracts.enemies.ScriptsContract;
 import com.example.com.masterhelper.core.models.ScriptModel;
 import com.example.com.masterhelper.core.models.utilities.ModelList;
 
@@ -16,7 +17,7 @@ public class ScriptDBAdapter extends CommonBDAdapter<ScriptModel> {
 
   @Override
   public ScriptModel get(int id) {
-    String sqlQuery = ScriptsContract.getListQuery(ScriptsContract.TABLE_NAME, null, ScriptsContract._ID+"="+ id, ScriptsContract._ID + " DESC", 0);
+    String sqlQuery = GeneralContract.getListQuery(ScriptsContract.TABLE_NAME, null, ScriptsContract._ID+"="+ id, ScriptsContract._ID + " DESC", 0);
     ScriptModel result = null;
     Cursor queryResult = dbHelpers.getList(sqlQuery);
 
@@ -42,25 +43,25 @@ public class ScriptDBAdapter extends CommonBDAdapter<ScriptModel> {
 
   @Override
   public void add(ScriptModel newItem, int parentId) {
-    String sqlQuery = dbHelpers.scriptsContract.addItemQuery(newItem, parentId);
+    String sqlQuery = dbHelpers.scriptsContract.add(newItem, parentId);
     dbHelpers.addNewItem(sqlQuery);
   }
 
   @Override
   public void delete(int deletedId) {
-    String sqlQuery = dbHelpers.scriptsContract.deleteItemQuery(deletedId);
+    String sqlQuery = dbHelpers.scriptsContract.delete(deletedId);
     dbHelpers.deleteItem(sqlQuery);
   }
 
   @Override
   public void update(ScriptModel updatedModel) {
-    String sqlQuery = dbHelpers.scriptsContract.updateItemQuery(updatedModel.getId(), updatedModel);
+    String sqlQuery = dbHelpers.scriptsContract.update(updatedModel.getId(), updatedModel);
     dbHelpers.updateItem(sqlQuery);
   }
 
   @Override
   public ModelList getListByParentId(int parentId) {
-    String sqlQuery = ScriptsContract.getListQuery(ScriptsContract.TABLE_NAME, null, ScriptsContract.COLUMN_SCENE_ID+"="+ parentId, null, 0);
+    String sqlQuery = GeneralContract.getListQuery(ScriptsContract.TABLE_NAME, null, ScriptsContract.COLUMN_SCENE_ID+"="+ parentId, null, 0);
     ModelList result = new ModelList();
     Cursor queryResult = dbHelpers.getList(sqlQuery);
 

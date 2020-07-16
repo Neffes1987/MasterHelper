@@ -1,4 +1,4 @@
-package com.example.com.masterhelper.core.appconfig;
+package com.example.com.masterhelper.core.app;
 
 import android.app.Application;
 import android.content.Context;

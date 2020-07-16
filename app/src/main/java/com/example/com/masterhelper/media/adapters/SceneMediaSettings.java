@@ -1,8 +1,9 @@
 package com.example.com.masterhelper.media.adapters;
 
 import android.database.Cursor;
-import com.example.com.masterhelper.core.contracts.SceneContract;
-import com.example.com.masterhelper.core.contracts.SceneMusicContract;
+import com.example.com.masterhelper.core.contracts.GeneralContract;
+import com.example.com.masterhelper.core.contracts.scene.SceneContract;
+import com.example.com.masterhelper.core.contracts.scene.SceneMusicContract;
 import com.example.com.masterhelper.core.models.DataModel;
 import com.example.com.masterhelper.core.models.utilities.ModelList;
 
@@ -10,7 +11,7 @@ import com.example.com.masterhelper.core.models.utilities.ModelList;
 public class SceneMediaSettings extends MediaSettings {
   @Override
   public ModelList get(int sceneId) {
-    String sqlQuery = SceneMusicContract.getListQuery(SceneMusicContract.TABLE_NAME, null, SceneMusicContract.COLUMN_SCENE_ID+"="+ sceneId, SceneContract._ID + " DESC", 0);
+    String sqlQuery = GeneralContract.getListQuery(SceneMusicContract.TABLE_NAME, null, SceneMusicContract.COLUMN_SCENE_ID+"="+ sceneId, SceneContract._ID + " DESC", 0);
     ModelList sceneMedia = new ModelList();
     Cursor queryResult = dbHelpers.getList(sqlQuery);
     while (queryResult.moveToNext()) {
@@ -33,7 +34,7 @@ public class SceneMediaSettings extends MediaSettings {
     for (DataModel model: currentPaths.values()) {
       SoundFileModel sound = (SoundFileModel) model;
       if(!list.containsKey(model.getId())){
-        String sqlQuery = dbHelpers.sceneMusicContract.addItemQuery(sound.getPath(), sceneId);
+        String sqlQuery = dbHelpers.sceneMusicContract.add(sound, sceneId);
         dbHelpers.addNewItem(sqlQuery);
       } else {
         list.remove(model.getId());

@@ -15,7 +15,7 @@ import com.example.com.masterhelper.media.adapters.SettingsAdapterType;
 import com.example.com.masterhelper.media.SettingsMediaFactory;
 import com.example.com.masterhelper.media.ui.MusicSettingsScreen;
 import com.example.com.masterhelper.ui.enemies.EnemiesListView;
-import com.example.com.masterhelper.core.appconfig.GlobalApplication;
+import com.example.com.masterhelper.core.app.GlobalApplication;
 import com.example.com.masterhelper.core.factories.dialogs.ui.CreateNewItemDialog;
 import com.example.masterhelper.R;
 import com.example.com.masterhelper.core.factories.DBAdapters.AdaptersType;

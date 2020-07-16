@@ -1,10 +1,11 @@
 package com.example.com.masterhelper.core.factories.DBAdapters.adapters;
 
 import android.database.Cursor;
-import com.example.com.masterhelper.core.appconfig.DbHelpers;
-import com.example.com.masterhelper.core.appconfig.GlobalApplication;
-import com.example.com.masterhelper.core.contracts.AbilitiesContract;
-import com.example.com.masterhelper.core.contracts.EnemyAbilitiesContract;
+import com.example.com.masterhelper.core.app.DbHelpers;
+import com.example.com.masterhelper.core.app.GlobalApplication;
+import com.example.com.masterhelper.core.contracts.GeneralContract;
+import com.example.com.masterhelper.core.contracts.settings.AbilitiesContract;
+import com.example.com.masterhelper.core.contracts.enemies.EnemyAbilitiesContract;
 import com.example.com.masterhelper.core.models.AbilityModel;
 import com.example.com.masterhelper.core.models.DataModel;
 import com.example.com.masterhelper.core.models.utilities.ModelList;
@@ -27,9 +28,9 @@ public class AbilityDBAdapter extends CommonBDAdapter<AbilityModel> {
     for (AbilityModel newItem: newItems.values()) {
       int newItemId = newItem.getId();
       if(existedAbilities.get(newItemId) == null){
-        dbHelpers.addNewItem(dbHelpers.enemyAbilitiesContract.addItemQuery(newItem, enemyId));
+        dbHelpers.addNewItem(dbHelpers.enemyAbilitiesContract.add(newItem, enemyId));
       } else {
-        updateQuery.append(dbHelpers.enemyAbilitiesContract.updateItemQuery(enemyId, newItem))
+        updateQuery.append(dbHelpers.enemyAbilitiesContract.update(enemyId, newItem))
           .append(" WHERE "+ EnemyAbilitiesContract.COLUMN_ABILITY_ID)
           .append("=")
           .append(newItemId)
@@ -62,7 +63,7 @@ public class AbilityDBAdapter extends CommonBDAdapter<AbilityModel> {
 
   /**  */
   public ModelList getSettingsAbilitiesList(){
-    String sqlQuery = AbilitiesContract.getListQuery(AbilitiesContract.TABLE_NAME, null, null, AbilitiesContract._ID + " DESC", 0);
+    String sqlQuery = GeneralContract.getListQuery(AbilitiesContract.TABLE_NAME, null, null, AbilitiesContract._ID + " DESC", 0);
     ModelList result = new ModelList();
     Cursor queryResult = dbHelpers.getList(sqlQuery);
 
@@ -90,13 +91,13 @@ public class AbilityDBAdapter extends CommonBDAdapter<AbilityModel> {
 
   @Override
   public void add(AbilityModel newItem, int parentId) {
-    String sqlQuery = dbHelpers.abilitiesContract.addItemQuery(newItem, parentId);
+    String sqlQuery = dbHelpers.abilitiesContract.add(newItem, parentId);
     dbHelpers.addNewItem(sqlQuery);
   }
 
   @Override
   public void delete(int deletedId) {
-    String sqlQuery = dbHelpers.abilitiesContract.deleteItemQuery(deletedId);
+    String sqlQuery = dbHelpers.abilitiesContract.delete(deletedId);
     dbHelpers.deleteItem(sqlQuery);
   }
 
