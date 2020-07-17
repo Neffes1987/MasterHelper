@@ -1,10 +1,14 @@
 package com.example.com.masterhelper.settings.adapters;
 
 import android.database.Cursor;
+import com.example.com.masterhelper.core.app.GlobalApplication;
 import com.example.com.masterhelper.core.contracts.GeneralContract;
 import com.example.com.masterhelper.core.contracts.settings.GoalContract;
+import com.example.com.masterhelper.core.force.models.GoalModel;
+import com.example.com.masterhelper.core.force.models.RelationModal;
 import com.example.com.masterhelper.core.models.DataModel;
 import com.example.com.masterhelper.core.models.utilities.ModelList;
+import com.example.masterhelper.R;
 
 public class GoalDBAdapter extends AbstractSetting {
   GeneralContract contract = dbHelpers.goalContract;
@@ -15,16 +19,38 @@ public class GoalDBAdapter extends AbstractSetting {
     dbHelpers.addNewItem(sqlQuery);
   }
 
+  public void update(DataModel newModel) {
+    String sqlQuery = contract.update(newModel.getId(), newModel);
+    dbHelpers.updateItem(sqlQuery);
+  }
+
   @Override
   public void create(String name, String description) {
-    DataModel model = new DataModel();
-    model.initGeneralFields(0, name, description);
-    add(model);
+
   }
 
   @Override
   public void create(String name, String description, String[] selectedItems) {
+    GoalModel model = new GoalModel(0, name, description);
+    model.setResult(getEnumBySelection(selectedItems));
+    add(model);
+  }
 
+  private RelationModal.ResultType getEnumBySelection(String[] selectedItems){
+    int selectedItem = GlobalApplication.getAppContext().getResources().getIdentifier(selectedItems[0], "int", GlobalApplication.getAppContext().getPackageName());
+    switch (selectedItem){
+      case R.string.force_goal_status_in_progress: return RelationModal.ResultType.inProgress;
+      case R.string.force_goal_status_solved: return RelationModal.ResultType.solved;
+      case R.string.force_goal_status_failed: return RelationModal.ResultType.failed;
+      default: return null;
+    }
+  }
+
+  @Override
+  public void update(int id, String name, String description, String[] selectedItems) {
+    GoalModel model = new GoalModel(id, name, description);
+    model.setResult(getEnumBySelection(selectedItems));
+    update(model);
   }
 
   @Override
@@ -44,13 +70,14 @@ public class GoalDBAdapter extends AbstractSetting {
       int descriptionColumnIndex = queryResult.getColumnIndex(GoalContract.COLUMN_DESCRIPTION);
       int titleColumnIndex = queryResult.getColumnIndex(GoalContract.COLUMN_NAME);
       int idColumnIndex = queryResult.getColumnIndex(GoalContract._ID);
+      int statusColumnIndex = queryResult.getColumnIndex(GoalContract.COLUMN_GOAL_STATUS);
 
-      DataModel model = new DataModel();
-        model.initGeneralFields(
+      GoalModel model = new GoalModel(
         queryResult.getInt(idColumnIndex),
         queryResult.getString(titleColumnIndex),
         queryResult.getString(descriptionColumnIndex)
       );
+      model.setResult(GoalModel.ResultType.valueOf(queryResult.getString(statusColumnIndex)));
       result.addToList(model);
     }
     queryResult.close();

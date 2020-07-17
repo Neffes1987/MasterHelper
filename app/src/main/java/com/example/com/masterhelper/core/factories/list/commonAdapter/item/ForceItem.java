@@ -7,7 +7,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.example.com.masterhelper.core.models.DataModel;
-import com.example.com.masterhelper.core.models.forces.ForceModel;
+import com.example.com.masterhelper.core.force.models.ForceModel;
 import com.example.com.masterhelper.core.models.utilities.ModelList;
 import com.example.com.masterhelper.core.factories.list.commonAdapter.CommonAdapter;
 import com.example.masterhelper.R;

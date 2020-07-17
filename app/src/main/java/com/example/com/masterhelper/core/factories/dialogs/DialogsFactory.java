@@ -18,6 +18,10 @@ public class DialogsFactory implements IDialogsFactory {
         return new CreateScriptDialog();
       case setting:
         return new CreateAdvanceDialog();
+      case goal:
+        return new CreateGoalDialog();
+      case force:
+        return new CreateForceDialog();
     }
     return null;
   }

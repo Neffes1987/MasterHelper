@@ -1,4 +1,4 @@
-package com.example.com.masterhelper.core.models.forces;
+package com.example.com.masterhelper.core.force.models;
 
 import com.example.com.masterhelper.core.app.GlobalApplication;
 import com.example.masterhelper.R;
@@ -6,7 +6,7 @@ import com.example.masterhelper.R;
 public class GoalModel extends RelationModal {
   private DirectionType directionType;
 
-  GoalModel(int id, String name, String cause) {
+  public GoalModel(int id, String name, String cause) {
     super(id, name, cause);
     setDirection(null);
   }

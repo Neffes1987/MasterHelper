@@ -2,6 +2,7 @@ package com.example.com.masterhelper.settings.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -34,6 +35,8 @@ public class SettingList extends AppCompatActivity implements ICommonItemEvents 
 
   private CustomListItemsEnum listType;
   SettingsFactory factory;
+
+  int editItemPosition;
 
   FloatingActionButton addNewNameBtn;
 
@@ -98,7 +101,7 @@ public class SettingList extends AppCompatActivity implements ICommonItemEvents 
   @Override
   public void onClick(View elementFiredAction, int position) {
     DataModel row = settings.getItemByPosition(position);
-    if(row != null && elementFiredAction.getId() == R.id.ITEM_EDIT_ID){
+    if(row != null && elementFiredAction.getId() == R.id.ITEM_DELETE_BUTTON){
       CommonDialog dialog = DialogsFactory.createDialog(DialogTypes.delete);
       if(dialog != null){
         dialog.setOnResolveListener((dialogInterface, id) -> {
@@ -107,6 +110,13 @@ public class SettingList extends AppCompatActivity implements ICommonItemEvents 
           }
         });
         dialog.show(this);
+      }
+    }
+    if(row != null && elementFiredAction.getId() == R.id.ITEM_EDIT_ID){
+      CommonDialog dialog = factory.getDialog();
+      if(dialog != null){
+        editItemPosition = position;
+        dialog.show(this, row);
       }
     }
   }
@@ -128,6 +138,7 @@ public class SettingList extends AppCompatActivity implements ICommonItemEvents 
       return;
     }
     String newName = result.getStringExtra(CreateNewItemDialog.NAME);
+    int id = result.getIntExtra(CreateNewItemDialog.ID, 0);
     String newDescription = result.getStringExtra(CreateNewItemDialog.DESCRIPTION);
     ArrayList<String> newSelectedItems = result.getStringArrayListExtra(CreateNewItemDialog.SELECTED_ITEMS);
     if(newName != null && newName.trim().length() == 0){
@@ -137,8 +148,15 @@ public class SettingList extends AppCompatActivity implements ICommonItemEvents 
       case CommonDialog.DIALOG_CREATE_ACTIVITY_RESULT:
         settingsAdapter.create(newName, newDescription);
         break;
+      case CommonDialog.DIALOG_UPDATE_ACTIVITY_RESULT:
+        settingsAdapter.update(id, newName, newDescription, null);
+        break;
       case CommonDialog.DIALOG_CREATE_SETTING_ACTIVITY_RESULT:
         settingsAdapter.create(newName, newDescription, newSelectedItems.toArray(new String[0]));
+        break;
+      case CommonDialog.DIALOG_UPDATE_SETTING_ACTIVITY_RESULT:
+        editItemPosition = 0;
+        settingsAdapter.update(id, newName, newDescription, newSelectedItems.toArray(new String[0]));
         break;
       default:
         throw new IllegalStateException("Unexpected value: " + resultCode);

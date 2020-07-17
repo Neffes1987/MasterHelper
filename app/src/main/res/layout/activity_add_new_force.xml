@@ -5,7 +5,7 @@
   xmlns:app="http://schemas.android.com/apk/res-auto"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  tools:context="com.example.com.masterhelper.ui.forces.AddNewForce">
+  tools:context="com.example.com.masterhelper.core.force.ui.AddNewForce">
 
   <LinearLayout
     android:orientation="vertical"
@@ -14,16 +14,18 @@
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintBottom_toBottomOf="parent">
+    app:layout_constraintBottom_toBottomOf="parent"
+    android:layout_marginStart="8dp"
+    android:layout_marginEnd="8dp">
 
     <EditText
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:text="@string/name"
       android:ems="10"
-      android:id="@+id/editText"
+      android:id="@+id/FORCE_TITLE_NAME_ID"
       android:layout_marginTop="9dp"
-      android:inputType="textMultiLine"/>
+      android:inputType="textMultiLine"
+      android:hint="@string/name"/>
 
     <EditText
       android:layout_width="match_parent"
@@ -31,83 +33,317 @@
       android:inputType="textMultiLine"
       android:gravity="start|top"
       android:ems="10"
-      android:id="@+id/editText2"
-      android:text="@string/description"/>
+      android:id="@+id/FORCE_DESCCRIPTION_ID"
+      android:hint="@string/description"/>
 
-    <LinearLayout
-      android:orientation="horizontal"
+    <RadioGroup
       android:layout_width="match_parent"
-      android:layout_height="wrap_content">
+      android:layout_height="wrap_content"
+      android:orientation="horizontal"
+      android:checkedButton="@id/radioButton"
+      android:layout_marginBottom="4dp">
 
-      <TextView
-        android:text="TextView"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:id="@+id/textView6"
-        android:layout_weight="1"/>
-
-      <ImageButton
-        android:src="@mipmap/baseline_add_black_18dp"
+      <RadioButton
+        android:text="@string/person"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/imageButton"
-        style="@style/common_action_button"/>
+        android:id="@+id/radioButton"
+        android:layout_weight="1"/>
+
+      <RadioButton
+        android:text="@string/group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/radioButton2"
+        android:layout_weight="1"/>
+
+    </RadioGroup>
+
+    <LinearLayout
+      android:orientation="horizontal"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="4dp">
+
+      <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+
+        <TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:textSize="10sp"
+          android:text="@string/force_goal_motivation_title"/>
+
+        <TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:id="@+id/FORCE_GOALS_DESCRIPTIONS_ID"
+          />
+
+      </LinearLayout>
+
+      <ImageButton
+        android:src="@mipmap/baseline_create_black_18dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/common_action_button"
+        android:id="@+id/FORCE_GOALS_ADD_ID"/>
 
     </LinearLayout>
 
     <LinearLayout
       android:orientation="horizontal"
       android:layout_width="match_parent"
-      android:layout_height="match_parent">
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="4dp">
+
+      <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+
+        <TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:textSize="10sp"
+          android:text="@string/force_disadvantages_title"/>
+
+        <TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:id="@+id/FORCE_DISADVANTAGES_DESCRIPTIONS_ID"/>
+
+      </LinearLayout>
+
+      <ImageButton
+        android:src="@mipmap/baseline_create_black_18dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/common_action_button"
+        android:id="@+id/FORCE_DISADVANTAGES_ADD_ID"/>
+
     </LinearLayout>
 
     <LinearLayout
       android:orientation="horizontal"
       android:layout_width="match_parent"
-      android:layout_height="match_parent">
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="4dp">
+
+      <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+
+        <TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:textSize="10sp"
+          android:text="@string/force_advantages_title"/>
+
+        <TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:id="@+id/FORCE_ADVANCE_DESCRIPTIONS_ID"/>
+
+      </LinearLayout>
+
+      <ImageButton
+        android:src="@mipmap/baseline_create_black_18dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/common_action_button"
+        android:id="@+id/FORCE_ADVANCE_ADD_ID"/>
+
     </LinearLayout>
 
     <LinearLayout
       android:orientation="horizontal"
       android:layout_width="match_parent"
-      android:layout_height="match_parent">
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="4dp">
+
+      <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+
+        <TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:textSize="10sp"
+          android:text="@string/force_depended_title"
+          tools:text="@string/force_owned_title"/>
+
+        <TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:id="@+id/FORCE_OWNER_DESCRIPTIONS_ID"/>
+
+      </LinearLayout>
+
+      <ImageButton
+        android:src="@mipmap/baseline_create_black_18dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/common_action_button"
+        android:id="@+id/FORCE_OWNER_ADD_ID"/>
+
     </LinearLayout>
 
     <LinearLayout
       android:orientation="horizontal"
       android:layout_width="match_parent"
-      android:layout_height="match_parent">
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="4dp">
+
+      <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+
+        <TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:textSize="10sp"
+          android:text="@string/force_depended_title"/>
+
+        <TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:id="@+id/FORCE_DEPENDENCIES_DESCRIPTIONS_ID"
+          />
+
+      </LinearLayout>
+
+      <ImageButton
+        android:src="@mipmap/baseline_create_black_18dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/common_action_button"
+        android:id="@+id/FORCE_DEPENDENCIES_ADD_ID"/>
+
     </LinearLayout>
 
     <LinearLayout
       android:orientation="horizontal"
       android:layout_width="match_parent"
-      android:layout_height="match_parent">
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="4dp">
+
+      <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+
+        <TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:textSize="10sp"
+          android:text="@string/force_enemies_title"/>
+
+        <TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:id="@+id/FORCE_ENEMIES_DESCRIPTIONS_ID"/>
+
+      </LinearLayout>
+
+      <ImageButton
+        android:src="@mipmap/baseline_create_black_18dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/common_action_button"
+        android:id="@+id/FORCE_ENEMIES_ADD_ID"/>
+
     </LinearLayout>
 
     <LinearLayout
       android:orientation="horizontal"
       android:layout_width="match_parent"
-      android:layout_height="match_parent">
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="4dp">
+
+      <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+
+        <TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:textSize="10sp"
+          android:text="@string/force_cooperators_title"/>
+
+        <TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:id="@+id/FORCE_COOPIRATORS_DESCRIPTIONS_ID"/>
+
+      </LinearLayout>
+
+      <ImageButton
+        android:src="@mipmap/baseline_create_black_18dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/common_action_button"
+        android:id="@+id/FORCE_COOPERATORS_ADD_ID"/>
+
     </LinearLayout>
 
     <LinearLayout
       android:orientation="horizontal"
       android:layout_width="match_parent"
-      android:layout_height="match_parent">
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="4dp">
+
+      <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+
+        <TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:textSize="10sp"
+          android:text="@string/force_journeys_title"/>
+
+        <TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:id="@+id/FORCE_INVOLVED_IN_JOURNEYS_ID"/>
+
+      </LinearLayout>
+
+      <ImageButton
+        android:src="@mipmap/baseline_create_black_18dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/common_action_button"
+        android:id="@+id/FORCE_ADD_TO_JOURNEY_ID"/>
+
     </LinearLayout>
 
-    <LinearLayout
-      android:orientation="horizontal"
-      android:layout_width="match_parent"
-      android:layout_height="match_parent">
-    </LinearLayout>
-
-    <LinearLayout
-      android:orientation="horizontal"
-      android:layout_width="match_parent"
-      android:layout_height="match_parent">
-    </LinearLayout>
   </LinearLayout>
+
+  <com.google.android.material.floatingactionbutton.FloatingActionButton
+    android:src="@mipmap/baseline_done_black_18dp"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    android:id="@+id/floatingActionButton"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintBottom_toBottomOf="parent"
+    style="@style/float_button_styles"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

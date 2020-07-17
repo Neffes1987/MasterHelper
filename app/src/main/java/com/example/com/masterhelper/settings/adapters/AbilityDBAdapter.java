@@ -29,6 +29,13 @@ public class AbilityDBAdapter extends AbstractSetting {
   }
 
   @Override
+  public void update(int id, String name, String description, String[] selectedItems) {
+    AbilityModel model = new AbilityModel(id, name, 0);
+    String sqlQuery = dbHelpers.abilitiesContract.update(0, model);
+    dbHelpers.updateItem(sqlQuery);
+  }
+
+  @Override
   public void delete(int deletedId) {
     String sqlQuery = dbHelpers.abilitiesContract.delete(deletedId);
     dbHelpers.deleteItem(sqlQuery);

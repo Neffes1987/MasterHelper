@@ -36,7 +36,7 @@ public class GeneralContract implements BaseColumns, IContract {
 
   public String getTableName(){
     return TABLE_NAME;
-  };
+  }
 
   public final static String _ID = BaseColumns._ID;
 

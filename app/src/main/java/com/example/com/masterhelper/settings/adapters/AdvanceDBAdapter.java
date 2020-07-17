@@ -1,12 +1,13 @@
 package com.example.com.masterhelper.settings.adapters;
 
 import android.database.Cursor;
+import android.util.Log;
 import com.example.com.masterhelper.core.app.GlobalApplication;
 import com.example.com.masterhelper.core.contracts.GeneralContract;
 import com.example.com.masterhelper.core.contracts.settings.AdvanceContract;
 import com.example.com.masterhelper.core.models.DataModel;
-import com.example.com.masterhelper.core.models.forces.AdvanceModel;
-import com.example.com.masterhelper.core.models.forces.RelationModal;
+import com.example.com.masterhelper.core.force.models.AdvanceModel;
+import com.example.com.masterhelper.core.force.models.RelationModal;
 import com.example.com.masterhelper.core.models.utilities.ModelList;
 import com.example.masterhelper.R;
 
@@ -19,21 +20,38 @@ public class AdvanceDBAdapter extends AbstractSetting {
     dbHelpers.addNewItem(sqlQuery);
   }
 
+  public void update(DataModel newModel) {
+    String sqlQuery = contract.update(newModel.getId(), newModel);
+    dbHelpers.updateItem(sqlQuery);
+  }
+
   @Override
   public void create(String name, String description) {}
 
-  @Override
-  public void create(String name, String description, String[] selectedItems) {
+  private RelationModal.DirectionType getEnumBySelection(String[] selectedItems){
     RelationModal.DirectionType type;
-    int selectedItem = GlobalApplication.getAppContext().getResources().getIdentifier(selectedItems[0], "int", GlobalApplication.getAppContext().getPackageName());
-    if(selectedItem == R.string.force_advantages_title){
+    String selectedItem = selectedItems[0];
+    String advance = GlobalApplication.getAppContext().getResources().getString(R.string.force_advantages_title);
+    if(selectedItem.equals(advance)){
       type = RelationModal.DirectionType.advantage;
     } else {
       type = RelationModal.DirectionType.disadvantage;
     }
+    return type;
+  }
 
+  @Override
+  public void create(String name, String description, String[] selectedItems) {
+    RelationModal.DirectionType type = getEnumBySelection(selectedItems);
     AdvanceModel model = new AdvanceModel(0, name, description, type);
     add(model);
+  }
+
+  @Override
+  public void update(int id, String name, String description, String[] selectedItems) {
+    RelationModal.DirectionType type = getEnumBySelection(selectedItems);
+    AdvanceModel model = new AdvanceModel(id, name, description, type);
+    update(model);
   }
 
   @Override

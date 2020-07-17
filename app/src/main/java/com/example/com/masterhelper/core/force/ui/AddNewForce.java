@@ -1,10 +1,12 @@
-package com.example.com.masterhelper.ui.forces;
+package com.example.com.masterhelper.core.force.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import com.example.masterhelper.R;
 
 public class AddNewForce extends AppCompatActivity {
+  public static final String ID = "id";
+
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {

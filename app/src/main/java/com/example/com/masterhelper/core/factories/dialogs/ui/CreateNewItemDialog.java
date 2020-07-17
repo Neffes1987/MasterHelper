@@ -1,6 +1,7 @@
 package com.example.com.masterhelper.core.factories.dialogs.ui;
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,6 +10,7 @@ import com.example.masterhelper.R;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 
 public class CreateNewItemDialog extends AppCompatActivity {
 
@@ -164,6 +166,17 @@ public class CreateNewItemDialog extends AppCompatActivity {
     }
   }
 
+  boolean checkSelectable(int[] list, int value){
+    boolean isSelected = false;
+    for (int listItem : list) {
+      if(listItem == value){
+        isSelected = true;
+        break;
+      }
+    }
+    return isSelected;
+  }
+
   void setSelectionList(Boolean isMulti){
     listLayout = findViewById(R.id.ITEM_LIST_ID);
     radioGroup = findViewById(R.id.ITEM_SINGLE_CHOOSE_ID);
@@ -181,7 +194,7 @@ public class CreateNewItemDialog extends AppCompatActivity {
     }
 
     for (int item : titles) {
-      boolean isSelected = Arrays.asList(titlesSelected).contains(item);
+      boolean isSelected = checkSelectable(titlesSelected, item);
       if(isMulti){
         CheckBox checkBox = new CheckBox(this);
         checkBox.setChecked(isSelected);
@@ -189,9 +202,11 @@ public class CreateNewItemDialog extends AppCompatActivity {
         listLayout.addView(checkBox);
       } else {
         RadioButton radioButton = new RadioButton(this);
-        radioButton.setChecked(isSelected);
         radioButton.setText(item);
         radioGroup.addView(radioButton);
+        if(isSelected){
+          radioGroup.check(radioButton.getId());
+        }
       }
 
     }

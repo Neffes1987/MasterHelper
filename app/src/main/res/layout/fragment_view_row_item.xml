@@ -41,4 +41,13 @@
     android:id="@+id/ITEM_EDIT_ID"
     android:layout_weight="0"
     style="@style/common_action_button"/>
+
+  <ImageButton
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:srcCompat="@mipmap/baseline_clear_black_18dp"
+    android:id="@+id/ITEM_DELETE_BUTTON"
+    android:layout_weight="0"
+    style="@style/delete_action_button"
+    android:visibility="gone"/>
 </LinearLayout>

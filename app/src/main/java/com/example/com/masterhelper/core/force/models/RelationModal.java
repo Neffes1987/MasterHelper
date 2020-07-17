@@ -1,4 +1,4 @@
-package com.example.com.masterhelper.core.models.forces;
+package com.example.com.masterhelper.core.force.models;
 
 import com.example.com.masterhelper.core.models.DataModel;
 
@@ -22,6 +22,10 @@ public abstract class RelationModal extends DataModel implements IRelation {
 
   public void setResult(ResultType result) {
     this.result = result;
+  }
+
+  public ResultType getResult() {
+    return result;
   }
 
   public String getRejectResult() {

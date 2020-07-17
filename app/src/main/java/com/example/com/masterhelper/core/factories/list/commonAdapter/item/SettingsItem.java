@@ -6,7 +6,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import androidx.core.content.ContextCompat;
 import com.example.com.masterhelper.core.models.DataModel;
-import com.example.com.masterhelper.core.models.forces.RelationModal;
+import com.example.com.masterhelper.core.force.models.RelationModal;
 import com.example.masterhelper.R;
 import com.example.com.masterhelper.core.factories.list.commonAdapter.CommonAdapter;
 
@@ -31,7 +31,7 @@ public class SettingsItem extends CommonItem {
     initItem(hideCheckboxes, hideDescription, changeIcon);
   }
 
-  private void initItem(boolean hideCheckboxes, boolean hideDescription, boolean changeIcon){
+  private void initItem(boolean hideCheckboxes, boolean hideDescription, boolean showDeleteButton){
     title = itemView.findViewById(R.id.ITEM_TITLE_ID);
     description = itemView.findViewById(R.id.ITEM_DESCRIPTION_ID);
 
@@ -48,11 +48,13 @@ public class SettingsItem extends CommonItem {
     selected.setVisibility(hideCheckboxes ? View.GONE : View.VISIBLE);
 
     ImageButton editPopup = itemView.findViewById(R.id.ITEM_EDIT_ID);
-    if(changeIcon){
-      editPopup.setImageResource(R.mipmap.baseline_clear_black_18dp);
-      editPopup.setColorFilter(ContextCompat.getColor(editPopup.getContext(), R.color.colorDelete), android.graphics.PorterDuff.Mode.SRC_IN);
+    ImageButton deleteButton = itemView.findViewById(R.id.ITEM_DELETE_BUTTON);
+
+    if(showDeleteButton){
+      deleteButton.setVisibility(View.VISIBLE);
     }
     editPopup.setOnClickListener(commonListener);
+    deleteButton.setOnClickListener(commonListener);
   }
 
 

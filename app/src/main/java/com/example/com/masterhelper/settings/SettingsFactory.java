@@ -33,11 +33,15 @@ public final class SettingsFactory {
       case FORCE_ITEM:
         dbSettingAdapter = new AbilityDBAdapter();
         listType = CustomListItemsEnum.force;
+        dialog = DialogsFactory.createDialog(force);
+        if(dialog != null){
+          dialog.setTitle(R.string.force_settings_create);
+        }
         break;
       case GOAL_ITEM:
         dbSettingAdapter = new GoalDBAdapter();
         listType = CustomListItemsEnum.setting;
-        dialog = DialogsFactory.createDialog(withDescription);
+        dialog = DialogsFactory.createDialog(setting);
         if(dialog != null){
           dialog.setTitle(R.string.goal_settings_create);
         }
