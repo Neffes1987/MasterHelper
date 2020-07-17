@@ -14,6 +14,11 @@ public class ForceRelation extends RelationModal {
   }
 
   @Override
+  public String getDirectionString() {
+    return null;
+  }
+
+  @Override
   public void setDirection(DirectionType directionType) {
     this.direction = directionType;
   }

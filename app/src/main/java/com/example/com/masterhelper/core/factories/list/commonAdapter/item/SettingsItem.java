@@ -6,6 +6,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import androidx.core.content.ContextCompat;
 import com.example.com.masterhelper.core.models.DataModel;
+import com.example.com.masterhelper.core.models.forces.RelationModal;
 import com.example.masterhelper.R;
 import com.example.com.masterhelper.core.factories.list.commonAdapter.CommonAdapter;
 
@@ -59,7 +60,12 @@ public class SettingsItem extends CommonItem {
     this.title.setText(title);
   }
 
-  public void setDescription(String description) {
+  public void setDescription(DataModel item) {
+    String description = item.getDescription();
+    if(item instanceof RelationModal){
+      RelationModal model = (RelationModal) item;
+      description= "["+model.getDirectionString() + "]: " + description;
+    }
     if(description == null || description.length() == 0){
       this.description.setVisibility(View.GONE);
       return;
@@ -69,7 +75,7 @@ public class SettingsItem extends CommonItem {
 
   public void updateHolderByData(DataModel itemData, int position) {
     setTitle(itemData.getName());
-    setDescription(itemData.getDescription());
+    setDescription(itemData);
     setPosition(position);
   }
 }

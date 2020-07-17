@@ -23,6 +23,11 @@ public class GoalDBAdapter extends AbstractSetting {
   }
 
   @Override
+  public void create(String name, String description, String[] selectedItems) {
+
+  }
+
+  @Override
   public void delete(int deletedId) {
     String sqlQuery = contract.delete(deletedId);
     dbHelpers.deleteItem(sqlQuery);

@@ -1,15 +1,14 @@
 package com.example.com.masterhelper.core.factories.dialogs.ui;
 
 import android.content.Intent;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.EditText;
-import android.widget.TextView;
+import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import com.example.masterhelper.R;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class CreateNewItemDialog extends AppCompatActivity {
 
@@ -29,6 +28,9 @@ public class CreateNewItemDialog extends AppCompatActivity {
 
   TextView titleField;
 
+  LinearLayout listLayout;
+  RadioGroup radioGroup;
+
 
   public final static String CONFIGURATION = "configuration";
   public final static String IS_BATTLE = "hasBattleSceneValue";
@@ -37,6 +39,8 @@ public class CreateNewItemDialog extends AppCompatActivity {
   public final static String NAME = "name";
   public final static String ID = "id";
   public final static String TITLE = "title";
+  public final static String LIST_TITLES = "listTitle";
+  public final static String SELECTED_ITEMS = "selectedItems";
 
 
   @Override
@@ -53,7 +57,6 @@ public class CreateNewItemDialog extends AppCompatActivity {
 
   void setConfigurationType(){
     String configuration = getIntent().getStringExtra(CONFIGURATION);
-    Log.i("TAG", "setConfigurationType: " + configuration);
     switch(Configurations.valueOf(configuration)){
       case script:
         showDescription(true);
@@ -66,6 +69,11 @@ public class CreateNewItemDialog extends AppCompatActivity {
       case singleField:
         showDescription(false);
         setScriptBlock(false);
+        break;
+      case setting:
+        showDescription(true);
+        setScriptBlock(false);
+        setSelectionList(false);
         break;
     }
   }
@@ -96,6 +104,10 @@ public class CreateNewItemDialog extends AppCompatActivity {
         sendDescription(result);
         break;
       case singleField:
+        break;
+      case setting:
+        sendSelectionsFromList(result);
+        sendDescription(result);
         break;
     }
     return result;
@@ -152,6 +164,68 @@ public class CreateNewItemDialog extends AppCompatActivity {
     }
   }
 
+  void setSelectionList(Boolean isMulti){
+    listLayout = findViewById(R.id.ITEM_LIST_ID);
+    radioGroup = findViewById(R.id.ITEM_SINGLE_CHOOSE_ID);
+    int[] titles = getIntent().getIntArrayExtra(LIST_TITLES);
+    int[] titlesSelected = getIntent().getIntArrayExtra(SELECTED_ITEMS);
+
+    if(titlesSelected == null){
+      titlesSelected = new int[]{};
+    }
+
+    if(titles == null){
+      listLayout.setVisibility(View.GONE);
+      radioGroup.setVisibility(View.GONE);
+      return;
+    }
+
+    for (int item : titles) {
+      boolean isSelected = Arrays.asList(titlesSelected).contains(item);
+      if(isMulti){
+        CheckBox checkBox = new CheckBox(this);
+        checkBox.setChecked(isSelected);
+        checkBox.setText(item);
+        listLayout.addView(checkBox);
+      } else {
+        RadioButton radioButton = new RadioButton(this);
+        radioButton.setChecked(isSelected);
+        radioButton.setText(item);
+        radioGroup.addView(radioButton);
+      }
+
+    }
+  }
+
+  void sendSelectionsFromList(Intent result){
+    int childrenCount = listLayout.getChildCount();
+    ArrayList<String> selections = new ArrayList<>();
+
+    if(childrenCount > 0){
+      for (int i = 0; i < childrenCount; i++) {
+        View item = listLayout.getChildAt(i);
+        if(item instanceof CheckBox){
+          CheckBox radioButton = (CheckBox) item;
+          if(radioButton.isChecked()){
+            selections.add(radioButton.getText().toString());
+          }
+        }
+      }
+    } else {
+      childrenCount = radioGroup.getChildCount();
+      for (int i = 0; i < childrenCount; i++) {
+        View item = radioGroup.getChildAt(i);
+        if(item instanceof RadioButton){
+          RadioButton radioButton = (RadioButton) item;
+          if(radioButton.isChecked()){
+            selections.add(radioButton.getText().toString());
+          }
+        }
+      }
+    }
+    result.putStringArrayListExtra(SELECTED_ITEMS, selections);
+  }
+
 
   View.OnClickListener createDialogListener = v -> {
     if(v.getId() == createBtnId){
@@ -166,7 +240,7 @@ public class CreateNewItemDialog extends AppCompatActivity {
   public enum Configurations{
     script,
     withDescription,
-    singleField,
+    singleField, setting,
   }
 }
 

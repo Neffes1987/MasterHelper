@@ -7,6 +7,8 @@ import com.example.masterhelper.R;
 public abstract class CommonDialog extends AppCompatDialogFragment implements IDialog {
   public  static final int DIALOG_CREATE_ACTIVITY_RESULT = 1000;
   public  static final int DIALOG_UPDATE_ACTIVITY_RESULT = 2000;
+  public  static final int DIALOG_UPDATE_SETTING_ACTIVITY_RESULT = 3000;
+  public  static final int DIALOG_CREATE_SETTING_ACTIVITY_RESULT = 4000;
   private int title = R.string.add_enemy_achieve_placeholder;
 
   private DialogInterface.OnClickListener emptyListener = (dialog, id) -> {};

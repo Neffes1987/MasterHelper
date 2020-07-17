@@ -62,6 +62,9 @@
   <string name="default_enemy_stat">20</string>
   <string name="attack_icon">attack_icon</string>
   <string name="heart_icon">heart_icon</string>
+  <string name="goal">Цель</string>
+  <string name="advantage">Преимущество</string>
+  <string name="disadvantage">Слабость</string>
 
 
   <!-- actions -->

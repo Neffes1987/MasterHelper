@@ -16,6 +16,8 @@ public class DialogsFactory implements IDialogsFactory {
         return new CreateDialogWithDescription();
       case scriptDialog:
         return new CreateScriptDialog();
+      case setting:
+        return new CreateAdvanceDialog();
     }
     return null;
   }

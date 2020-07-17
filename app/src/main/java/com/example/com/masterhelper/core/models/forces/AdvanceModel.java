@@ -1,9 +1,12 @@
 package com.example.com.masterhelper.core.models.forces;
 
+import com.example.com.masterhelper.core.app.GlobalApplication;
+import com.example.masterhelper.R;
+
 public class AdvanceModel extends RelationModal {
   private DirectionType directionType;
 
-  AdvanceModel(int id, String name, String cause,DirectionType directionType) {
+  public AdvanceModel(int id, String name, String cause, DirectionType directionType) {
     super(id, name, cause);
     setDirection(directionType);
   }
@@ -22,6 +25,14 @@ public class AdvanceModel extends RelationModal {
   @Override
   public DirectionType getDirection() {
     return directionType;
+  }
+
+  @Override
+  public String getDirectionString() {
+    if(directionType == DirectionType.advantage){
+      return GlobalApplication.getAppContext().getString(R.string.advantage);
+    }
+    return GlobalApplication.getAppContext().getString(R.string.disadvantage);
   }
 
   @Override

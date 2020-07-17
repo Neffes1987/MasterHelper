@@ -1,5 +1,8 @@
 package com.example.com.masterhelper.core.models.forces;
 
+import com.example.com.masterhelper.core.app.GlobalApplication;
+import com.example.masterhelper.R;
+
 public class GoalModel extends RelationModal {
   private DirectionType directionType;
 
@@ -21,6 +24,11 @@ public class GoalModel extends RelationModal {
   @Override
   public DirectionType getDirection() {
     return directionType;
+  }
+
+  @Override
+  public String getDirectionString() {
+    return GlobalApplication.getAppContext().getString(R.string.goal);
   }
 
   @Override

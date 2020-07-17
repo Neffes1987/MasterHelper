@@ -9,8 +9,7 @@ import com.example.com.masterhelper.settings.adapters.AdvanceDBAdapter;
 import com.example.com.masterhelper.settings.adapters.GoalDBAdapter;
 import com.example.masterhelper.R;
 
-import static com.example.com.masterhelper.core.factories.dialogs.DialogTypes.oneFieldDialog;
-import static com.example.com.masterhelper.core.factories.dialogs.DialogTypes.withDescription;
+import static com.example.com.masterhelper.core.factories.dialogs.DialogTypes.*;
 
 public final class SettingsFactory {
   public static final String ABILITY_ITEM = "ability";
@@ -46,7 +45,7 @@ public final class SettingsFactory {
       case ADVANCE_ITEM:
         dbSettingAdapter = new AdvanceDBAdapter();
         listType = CustomListItemsEnum.setting;
-        dialog = DialogsFactory.createDialog(withDescription);
+        dialog = DialogsFactory.createDialog(setting);
         if(dialog != null){
           dialog.setTitle(R.string.advance_settings_create);
         }

@@ -20,6 +20,11 @@ public class DependenciesModel extends RelationModal {
   }
 
   @Override
+  public String getDirectionString() {
+    return null;
+  }
+
+  @Override
   public void setDirection(DirectionType directionType) {
     direction = directionType;
   }

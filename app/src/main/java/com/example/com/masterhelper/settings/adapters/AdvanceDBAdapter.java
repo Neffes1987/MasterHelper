@@ -1,10 +1,14 @@
 package com.example.com.masterhelper.settings.adapters;
 
 import android.database.Cursor;
+import com.example.com.masterhelper.core.app.GlobalApplication;
 import com.example.com.masterhelper.core.contracts.GeneralContract;
 import com.example.com.masterhelper.core.contracts.settings.AdvanceContract;
 import com.example.com.masterhelper.core.models.DataModel;
+import com.example.com.masterhelper.core.models.forces.AdvanceModel;
+import com.example.com.masterhelper.core.models.forces.RelationModal;
 import com.example.com.masterhelper.core.models.utilities.ModelList;
+import com.example.masterhelper.R;
 
 public class AdvanceDBAdapter extends AbstractSetting {
   GeneralContract contract = dbHelpers.advanceContract;
@@ -16,9 +20,19 @@ public class AdvanceDBAdapter extends AbstractSetting {
   }
 
   @Override
-  public void create(String name, String description) {
-    DataModel model = new DataModel();
-    model.initGeneralFields(0, name, description);
+  public void create(String name, String description) {}
+
+  @Override
+  public void create(String name, String description, String[] selectedItems) {
+    RelationModal.DirectionType type;
+    int selectedItem = GlobalApplication.getAppContext().getResources().getIdentifier(selectedItems[0], "int", GlobalApplication.getAppContext().getPackageName());
+    if(selectedItem == R.string.force_advantages_title){
+      type = RelationModal.DirectionType.advantage;
+    } else {
+      type = RelationModal.DirectionType.disadvantage;
+    }
+
+    AdvanceModel model = new AdvanceModel(0, name, description, type);
     add(model);
   }
 
@@ -36,16 +50,18 @@ public class AdvanceDBAdapter extends AbstractSetting {
 
     while (queryResult.moveToNext()) {
       // Используем индекс для получения строки или числа
+      int typeColumnIndex = queryResult.getColumnIndex(AdvanceContract.COLUMN_TYPE);
       int descriptionColumnIndex = queryResult.getColumnIndex(AdvanceContract.COLUMN_DESCRIPTION);
       int titleColumnIndex = queryResult.getColumnIndex(AdvanceContract.COLUMN_NAME);
       int idColumnIndex = queryResult.getColumnIndex(AdvanceContract._ID);
 
-      DataModel model = new DataModel();
-        model.initGeneralFields(
+      AdvanceModel model = new AdvanceModel(
         queryResult.getInt(idColumnIndex),
         queryResult.getString(titleColumnIndex),
-        queryResult.getString(descriptionColumnIndex)
+        queryResult.getString(descriptionColumnIndex),
+        RelationModal.DirectionType.valueOf(queryResult.getString(typeColumnIndex))
       );
+
       result.addToList(model);
     }
     queryResult.close();

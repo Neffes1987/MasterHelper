@@ -54,7 +54,7 @@ public abstract class RelationModal extends DataModel implements IRelation {
     inProgress
   }
 
-  enum DirectionType {
+  public enum DirectionType {
     enemy,
     cooperators,
     depended,

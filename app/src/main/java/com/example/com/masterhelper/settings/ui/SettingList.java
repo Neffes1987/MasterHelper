@@ -7,6 +7,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import com.example.com.masterhelper.core.factories.dialogs.ui.CreateNewItemDialog;
 import com.example.com.masterhelper.core.models.DataModel;
 import com.example.com.masterhelper.core.models.utilities.ModelList;
 import com.example.com.masterhelper.core.factories.dialogs.DialogTypes;
@@ -19,6 +20,8 @@ import com.example.com.masterhelper.settings.SettingsFactory;
 import com.example.com.masterhelper.settings.adapters.AbstractSetting;
 import com.example.masterhelper.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import java.util.ArrayList;
 
 import static android.content.DialogInterface.BUTTON_POSITIVE;
 
@@ -124,12 +127,22 @@ public class SettingList extends AppCompatActivity implements ICommonItemEvents 
     if(resultCode != RESULT_OK){
       return;
     }
-    String newName = result.getStringExtra("name");
-    String newDescription = result.getStringExtra("description");
+    String newName = result.getStringExtra(CreateNewItemDialog.NAME);
+    String newDescription = result.getStringExtra(CreateNewItemDialog.DESCRIPTION);
+    ArrayList<String> newSelectedItems = result.getStringArrayListExtra(CreateNewItemDialog.SELECTED_ITEMS);
     if(newName != null && newName.trim().length() == 0){
       return;
     }
-    settingsAdapter.create(newName, newDescription);
+    switch (requestCode){
+      case CommonDialog.DIALOG_CREATE_ACTIVITY_RESULT:
+        settingsAdapter.create(newName, newDescription);
+        break;
+      case CommonDialog.DIALOG_CREATE_SETTING_ACTIVITY_RESULT:
+        settingsAdapter.create(newName, newDescription, newSelectedItems.toArray(new String[0]));
+        break;
+      default:
+        throw new IllegalStateException("Unexpected value: " + resultCode);
+    }
     updateList();
   }
 
