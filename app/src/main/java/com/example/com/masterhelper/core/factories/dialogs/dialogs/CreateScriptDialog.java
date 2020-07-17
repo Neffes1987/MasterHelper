@@ -14,12 +14,10 @@ public class CreateScriptDialog extends CommonDialog {
 
   public void show(Activity context, DataModel settings) {
     Intent intent = new Intent(context, CreateNewItemDialog.class);
-    intent.putExtra(CreateNewItemDialog.HIDE_DESCRIPTION, 0);
-    intent.putExtra(CreateNewItemDialog.IS_SCRIPT, 1);
+    intent.putExtra(CreateNewItemDialog.CONFIGURATION, CreateNewItemDialog.Configurations.script.name());
     intent.putExtra(CreateNewItemDialog.TITLE, getTitle());
     if(settings != null){
       ScriptModel scriptModel = (ScriptModel) settings;
-      intent.putExtra(CreateNewItemDialog.IS_UPDATE, 1);
       intent.putExtra(CreateNewItemDialog.ID, settings.getId());
       intent.putExtra(CreateNewItemDialog.OLD_NAME, settings.getName());
       intent.putExtra(CreateNewItemDialog.DESCRIPTION, settings.getDescription());

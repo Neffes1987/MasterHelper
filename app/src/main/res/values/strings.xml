@@ -74,6 +74,8 @@
   <string name="popup_menu_update">Изменить</string>
   <string name="popup_menu_delete">Удалить</string>
   <string name="popup_menu_order">Сортировать</string>
+  <string name="goal_settings_create">Создать цель фракции</string>
+  <string name="advance_settings_create">Создать преимущество или слабость фракции</string>
 
   <!-- dialogs -->
   <string name="delete_dialog_caption">Удалить выбранный элемент?</string>

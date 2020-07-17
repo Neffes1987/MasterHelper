@@ -53,6 +53,13 @@
       android:visibility="gone"/>
 
     <LinearLayout
+      android:orientation="vertical"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:id="@+id/ITEM_LIST_ID">
+    </LinearLayout>
+
+    <LinearLayout
       android:orientation="horizontal"
       android:layout_width="match_parent"
       android:layout_height="match_parent">

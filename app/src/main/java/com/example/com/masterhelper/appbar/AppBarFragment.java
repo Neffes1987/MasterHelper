@@ -8,8 +8,7 @@ import com.example.com.masterhelper.media.ui.MusicSettingsScreen;
 import com.example.com.masterhelper.settings.ui.SettingList;
 import com.example.masterhelper.R;
 
-import static com.example.com.masterhelper.settings.SettingsFactory.ABILITY_ITEM;
-import static com.example.com.masterhelper.settings.SettingsFactory.FORCE_ITEM;
+import static com.example.com.masterhelper.settings.SettingsFactory.*;
 
 
 /**  */
@@ -65,8 +64,14 @@ public class AppBarFragment extends Fragment {
         break;
       case R.id.GOAL_SETTING_ID:
           intent = new Intent(getActivity(), SettingList.class);
-          intent.putExtra(SettingList.EXTRA_TYPE, FORCE_ITEM);
-          intent.putExtra(SettingList.EXTRA_SETTING_TITLE, R.string.force_menu_item_title);
+          intent.putExtra(SettingList.EXTRA_TYPE, GOAL_ITEM);
+          intent.putExtra(SettingList.EXTRA_SETTING_TITLE, R.string.force_goal_motivation_title);
+          startActivity(intent);
+        break;
+      case R.id.ADVANCE_SETTING_ID:
+          intent = new Intent(getActivity(), SettingList.class);
+          intent.putExtra(SettingList.EXTRA_TYPE, ADVANCE_ITEM);
+          intent.putExtra(SettingList.EXTRA_SETTING_TITLE, R.string.force_advantages_title);
           startActivity(intent);
         break;
       default:

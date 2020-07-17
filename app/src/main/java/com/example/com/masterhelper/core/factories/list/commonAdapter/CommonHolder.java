@@ -40,7 +40,7 @@ public class CommonHolder extends RecyclerView.ViewHolder {
         commonItem = new SettingsItem(v, adapter, true, true, true);
         break;
       case setting:
-        commonItem = new SettingsItem(v, adapter, false, false, true);
+        commonItem = new SettingsItem(v, adapter, true, false, true);
         break;
       case force:
         commonItem = new ForceItem(v, adapter);

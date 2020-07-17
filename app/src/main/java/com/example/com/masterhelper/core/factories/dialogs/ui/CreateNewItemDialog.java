@@ -1,6 +1,7 @@
 package com.example.com.masterhelper.core.factories.dialogs.ui;
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -28,15 +29,13 @@ public class CreateNewItemDialog extends AppCompatActivity {
 
   TextView titleField;
 
-  public final static String IS_SCRIPT = "isScript";
-  public final static String IS_UPDATE = "isUpdate";
+
+  public final static String CONFIGURATION = "configuration";
   public final static String IS_BATTLE = "hasBattleSceneValue";
   public final static String DESCRIPTION = "description";
-  public final static String HIDE_DESCRIPTION = "hideDescription";
   public final static String OLD_NAME = "oldName";
   public final static String NAME = "name";
   public final static String ID = "id";
-
   public final static String TITLE = "title";
 
 
@@ -44,72 +43,131 @@ public class CreateNewItemDialog extends AppCompatActivity {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_create_new_item);
+    itemId = getIntent().getIntExtra(ID, -1);
+    setName();
+    setTitle();
+    setCreateButton();
+    setCancelButton();
+    setConfigurationType();
+  }
 
+  void setConfigurationType(){
+    String configuration = getIntent().getStringExtra(CONFIGURATION);
+    Log.i("TAG", "setConfigurationType: " + configuration);
+    switch(Configurations.valueOf(configuration)){
+      case script:
+        showDescription(true);
+        setScriptBlock(true);
+        break;
+      case withDescription:
+        showDescription(true);
+        setScriptBlock(false);
+        break;
+      case singleField:
+        showDescription(false);
+        setScriptBlock(false);
+        break;
+    }
+  }
+
+  void sendName(Intent intent){
+    intent.putExtra(NAME, nameEditField.getText().toString());
+    intent.putExtra(ID, itemId);
+  }
+
+  void sendDescription(Intent intent){
+    intent.putExtra(DESCRIPTION, descriptionEditField.getText().toString());
+  }
+
+  void sendScriptBlock(Intent intent){
+    intent.putExtra(IS_BATTLE, hasBattleSwitch.isChecked() ? 1 : 0);
+  }
+
+  Intent sendData(){
+    String configuration = getIntent().getStringExtra(CONFIGURATION);
+    Intent result = new Intent();
+    sendName(result);
+    switch(Configurations.valueOf(configuration)){
+      case script:
+        sendDescription(result);
+        sendScriptBlock(result);
+        break;
+      case withDescription:
+        sendDescription(result);
+        break;
+      case singleField:
+        break;
+    }
+    return result;
+  }
+
+
+  void setCreateButton(){
     createBtn = findViewById(createBtnId);
     createBtn.setOnClickListener(createDialogListener);
+    if(itemId > 0){
+      createBtn.setText(R.string.update);
+    }
+  }
 
+  void setCancelButton(){
     cancelBtn = findViewById(cancelBtnId);
     cancelBtn.setOnClickListener(createDialogListener);
 
-    nameEditField = findViewById(R.id.ITEM_NAME_ID);
-    int isScript = getIntent().getIntExtra(IS_SCRIPT, 0);
-    boolean hideDescription = getIntent().getIntExtra(HIDE_DESCRIPTION, 0) == 1;
-    int isUpdate = getIntent().getIntExtra(IS_UPDATE, 0);
-    if(isUpdate > 0){
-      createBtn.setText(R.string.update);
-    }
-    if(!hideDescription){
-      String description = getIntent().getStringExtra(DESCRIPTION);
-      descriptionEditField = findViewById(R.id.ITEM_DESCRIPTION_ID);
-      descriptionEditField.setVisibility(View.VISIBLE);
-      descriptionEditField.setText(description);
-    }
+  }
 
-    if(isScript == 1){
-
+  void setScriptBlock(boolean show){
+    hasBattleSwitch = findViewById(R.id.SCRIPT_HAS_BATTLE_SCENE_ID);
+    if(show){
       int hasBattleSceneValue = getIntent().getIntExtra(IS_BATTLE, 0);
-
-      hasBattleSwitch = findViewById(R.id.SCRIPT_HAS_BATTLE_SCENE_ID);
       hasBattleSwitch.setVisibility(View.VISIBLE);
       hasBattleSwitch.setChecked(hasBattleSceneValue == 1);
+    } else {
+      hasBattleSwitch.setVisibility(View.GONE);
     }
+  }
 
-    int title = getIntent().getIntExtra(TITLE, 0);
-    itemId = getIntent().getIntExtra(ID, -1);
+  void showDescription(boolean show){
+    descriptionEditField = findViewById(R.id.ITEM_DESCRIPTION_ID);
+    if(show){
+      String description = getIntent().getStringExtra(DESCRIPTION);
+      descriptionEditField.setVisibility(View.VISIBLE);
+      descriptionEditField.setText(description);
+    } else {
+      descriptionEditField.setVisibility(View.GONE);
+    }
+  }
 
+  void setName(){
     String oldName = getIntent().getStringExtra(OLD_NAME);
+    nameEditField = findViewById(R.id.ITEM_NAME_ID);
+    nameEditField.setText(oldName);
+  }
 
+  void setTitle(){
+    int title = getIntent().getIntExtra(TITLE, 0);
     if(title != 0){
       titleField = findViewById(R.id.CREATE_ITEM_TITLE_ID);
       titleField.setText(title);
     }
-
-    nameEditField.setText(oldName);
-
   }
 
-  View.OnClickListener createDialogListener = new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-      if(v.getId() == createBtnId){
-        Intent result = new Intent();
-        result.putExtra(NAME, nameEditField.getText().toString());
-        result.putExtra(ID, itemId);
-        boolean hideDescription = getIntent().getIntExtra(HIDE_DESCRIPTION, 0) == 1;
-        if(!hideDescription){
-          result.putExtra(DESCRIPTION, descriptionEditField.getText().toString());
-        }
-        int isScript = getIntent().getIntExtra(IS_SCRIPT, 0);
-        if(isScript == 1) {
-          result.putExtra(IS_BATTLE, hasBattleSwitch.isChecked() ? 1 : 0);
-        }
-        setResult(RESULT_OK, result);
-      } else {
-        setResult(RESULT_CANCELED);
-      }
-      finish();
+
+  View.OnClickListener createDialogListener = v -> {
+    if(v.getId() == createBtnId){
+      Intent result = sendData();
+      setResult(RESULT_OK, result);
+    } else {
+      setResult(RESULT_CANCELED);
     }
+    finish();
   };
+
+  public enum Configurations{
+    script,
+    withDescription,
+    singleField,
+  }
 }
 
 

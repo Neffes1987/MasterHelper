@@ -26,6 +26,7 @@ public class ListFactory extends Fragment implements ICommonItemEvents, IListFac
     this.itemType = itemType;
     switch (itemType){
       case abilities:
+      case setting:
       case journey:
         itemLayout = R.layout.fragment_view_row_item;
         break;

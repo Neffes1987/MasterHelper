@@ -60,6 +60,10 @@ public class SettingsItem extends CommonItem {
   }
 
   public void setDescription(String description) {
+    if(description == null || description.length() == 0){
+      this.description.setVisibility(View.GONE);
+      return;
+    }
     this.description.setText(description);
   }
 

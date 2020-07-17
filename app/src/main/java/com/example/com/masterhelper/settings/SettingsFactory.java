@@ -5,9 +5,12 @@ import com.example.com.masterhelper.core.factories.dialogs.dialogs.CommonDialog;
 import com.example.com.masterhelper.core.factories.list.CustomListItemsEnum;
 import com.example.com.masterhelper.settings.adapters.AbilityDBAdapter;
 import com.example.com.masterhelper.settings.adapters.AbstractSetting;
+import com.example.com.masterhelper.settings.adapters.AdvanceDBAdapter;
+import com.example.com.masterhelper.settings.adapters.GoalDBAdapter;
 import com.example.masterhelper.R;
 
 import static com.example.com.masterhelper.core.factories.dialogs.DialogTypes.oneFieldDialog;
+import static com.example.com.masterhelper.core.factories.dialogs.DialogTypes.withDescription;
 
 public final class SettingsFactory {
   public static final String ABILITY_ITEM = "ability";
@@ -33,12 +36,20 @@ public final class SettingsFactory {
         listType = CustomListItemsEnum.force;
         break;
       case GOAL_ITEM:
-        dbSettingAdapter = new AbilityDBAdapter();
+        dbSettingAdapter = new GoalDBAdapter();
         listType = CustomListItemsEnum.setting;
+        dialog = DialogsFactory.createDialog(withDescription);
+        if(dialog != null){
+          dialog.setTitle(R.string.goal_settings_create);
+        }
         break;
       case ADVANCE_ITEM:
-        dbSettingAdapter = new AbilityDBAdapter();
+        dbSettingAdapter = new AdvanceDBAdapter();
         listType = CustomListItemsEnum.setting;
+        dialog = DialogsFactory.createDialog(withDescription);
+        if(dialog != null){
+          dialog.setTitle(R.string.advance_settings_create);
+        }
         break;
     }
   }
