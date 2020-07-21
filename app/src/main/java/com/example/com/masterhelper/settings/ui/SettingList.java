@@ -23,7 +23,6 @@ import com.example.masterhelper.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 
 import static android.content.DialogInterface.BUTTON_POSITIVE;
 
@@ -33,9 +32,10 @@ public class SettingList extends AppCompatActivity implements ICommonItemEvents 
   public static final String EXTRA_TYPE = "settingType";
   public static final String EXTRA_IS_SELECTABLE = "isSelectable";
   public static final String EXTRA_SELECTED_IDS = "selectedIds";
+  public static final String EXTRA_SELECTED_LIST_ITEMS_IDS = "selectedListItemsIds";
   public static final String EXTRA_SETTING_TITLE = "caption";
 
-  private static final HashSet<Integer> selectedListItemsIds = new HashSet<>();
+  private static final ArrayList<String> selectedListItemsIds = new ArrayList<>();
 
   private CustomListItemsEnum listType;
   SettingsFactory factory;
@@ -113,7 +113,7 @@ public class SettingList extends AppCompatActivity implements ICommonItemEvents 
   public void onClick(View elementFiredAction, int position) {
     DataModel row = settings.getItemByPosition(position);
     if(elementFiredAction.getId() == R.id.ITEM_SELECTOR_ID){
-      int id = row.getId();
+      String id = row.getId()+"";
       if(selectedListItemsIds.contains(id)){
         selectedListItemsIds.remove(id);
       } else {
@@ -151,7 +151,10 @@ public class SettingList extends AppCompatActivity implements ICommonItemEvents 
 
   /**   */
   public void onApplyButtonPressed(View v) {
-    Toast.makeText(this, selectedListItemsIds.size()+"", Toast.LENGTH_LONG).show();
+    Intent intent = new Intent();
+    intent.putStringArrayListExtra(EXTRA_SELECTED_LIST_ITEMS_IDS, selectedListItemsIds);
+    setResult(RESULT_OK, intent);
+    finish();
   }
 
   /** обработчик результатов диалогов создания и редактирования */
