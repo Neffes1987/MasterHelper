@@ -42,6 +42,9 @@ public class CommonHolder extends RecyclerView.ViewHolder {
       case setting:
         commonItem = new SettingsItem(v, adapter, true, false, true);
         break;
+      case setting_selectable:
+        commonItem = new SettingsItem(v, adapter, false, false, true);
+        break;
       case force:
         commonItem = new ForceItem(v, adapter);
     }

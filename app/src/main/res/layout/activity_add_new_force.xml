@@ -5,7 +5,7 @@
   xmlns:app="http://schemas.android.com/apk/res-auto"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  tools:context="com.example.com.masterhelper.core.force.ui.AddNewForce">
+  tools:context="com.example.com.masterhelper.force.ui.AddNewForce">
 
   <LinearLayout
     android:orientation="vertical"
@@ -40,21 +40,22 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:orientation="horizontal"
-      android:checkedButton="@id/radioButton"
-      android:layout_marginBottom="4dp">
+      android:checkedButton="@id/FORCE_TYPE_SINGLE_ID"
+      android:layout_marginBottom="4dp"
+      android:id="@+id/FORCE_TYPE_ID">
 
       <RadioButton
         android:text="@string/person"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/radioButton"
+        android:id="@+id/FORCE_TYPE_SINGLE_ID"
         android:layout_weight="1"/>
 
       <RadioButton
         android:text="@string/group"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/radioButton2"
+        android:id="@+id/FORCE_TYPE_GROUP_ID"
         android:layout_weight="1"/>
 
     </RadioGroup>
@@ -178,8 +179,8 @@
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:textSize="10sp"
-          android:text="@string/force_depended_title"
-          tools:text="@string/force_owned_title"/>
+          android:text="@string/force_owned_title"
+          />
 
         <TextView
           android:layout_width="match_parent"
@@ -341,7 +342,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:clickable="true"
-    android:id="@+id/floatingActionButton"
+    android:id="@+id/FORCE_DONE_BTN_ID"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintBottom_toBottomOf="parent"
     style="@style/float_button_styles"/>

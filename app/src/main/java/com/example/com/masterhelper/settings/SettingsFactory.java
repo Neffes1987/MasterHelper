@@ -20,7 +20,7 @@ public final class SettingsFactory {
   public CustomListItemsEnum listType;
   public CommonDialog dialog;
 
-  public SettingsFactory(String type) {
+  public SettingsFactory(String type, boolean isSelectable) {
     switch (type){
       case ABILITY_ITEM:
         dbSettingAdapter = new AbilityDBAdapter();
@@ -40,15 +40,16 @@ public final class SettingsFactory {
         break;
       case GOAL_ITEM:
         dbSettingAdapter = new GoalDBAdapter();
-        listType = CustomListItemsEnum.setting;
-        dialog = DialogsFactory.createDialog(setting);
+        listType = isSelectable ? CustomListItemsEnum.setting_selectable : CustomListItemsEnum.setting;
+        dialog = DialogsFactory.createDialog(goal);
+
         if(dialog != null){
           dialog.setTitle(R.string.goal_settings_create);
         }
         break;
       case ADVANCE_ITEM:
         dbSettingAdapter = new AdvanceDBAdapter();
-        listType = CustomListItemsEnum.setting;
+        listType = isSelectable ? CustomListItemsEnum.setting_selectable : CustomListItemsEnum.setting;
         dialog = DialogsFactory.createDialog(setting);
         if(dialog != null){
           dialog.setTitle(R.string.advance_settings_create);

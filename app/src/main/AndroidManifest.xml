@@ -16,7 +16,7 @@
     android:supportsRtl="true"
     android:theme="@style/Platform.MaterialComponents"
     tools:ignore="GoogleAppIndexingWarning">
-    <activity android:name="com.example.com.masterhelper.core.force.ui.AddNewForce">
+    <activity android:name="com.example.com.masterhelper.force.ui.AddNewForce">
     </activity>
     <activity android:name="com.example.com.masterhelper.settings.ui.SettingList">
     </activity>

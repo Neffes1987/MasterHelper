@@ -1,8 +1,9 @@
 package com.example.com.masterhelper.core.contracts.settings;
 
 import android.provider.BaseColumns;
+import android.util.Log;
 import com.example.com.masterhelper.core.contracts.GeneralContract;
-import com.example.com.masterhelper.core.force.models.GoalModel;
+import com.example.com.masterhelper.force.models.GoalModel;
 import com.example.com.masterhelper.core.models.DataModel;
 
 public class GoalContract implements BaseColumns {
@@ -38,6 +39,7 @@ public class GoalContract implements BaseColumns {
 
   public String[] getValues(DataModel goal, int id){
     GoalModel goalModel = (GoalModel) goal;
+    Log.i("TAG", "getValues: "+((GoalModel) goal).getResult());
     return new String[]{goalModel.getName(), goalModel.getDescription(), goalModel.getResult().name()};
   }
 }

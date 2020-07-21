@@ -3,7 +3,7 @@ package com.example.com.masterhelper.core.contracts.settings;
 import android.provider.BaseColumns;
 import com.example.com.masterhelper.core.contracts.GeneralContract;
 import com.example.com.masterhelper.core.models.DataModel;
-import com.example.com.masterhelper.core.force.models.AdvanceModel;
+import com.example.com.masterhelper.force.models.AdvanceModel;
 
 public class AdvanceContract implements BaseColumns {
   public final static String TABLE_NAME = "advance_setting";

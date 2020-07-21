@@ -15,6 +15,7 @@ import com.example.com.masterhelper.core.contracts.scene.SceneMusicContract;
 import com.example.com.masterhelper.core.contracts.settings.AbilitiesContract;
 import com.example.com.masterhelper.core.contracts.settings.AdvanceContract;
 import com.example.com.masterhelper.core.contracts.settings.GoalContract;
+import com.example.com.masterhelper.force.contracts.ForceContract;
 
 public class DbHelpers extends SQLiteOpenHelper {
   private String SQLCreateTemplate ="DROP TABLE IF EXISTS ";
@@ -29,6 +30,7 @@ public class DbHelpers extends SQLiteOpenHelper {
   public GeneralContract scriptMusicContract = new ScriptMusicContract().getContract();
   public GeneralContract goalContract = new GoalContract().getContract();
   public GeneralContract advanceContract = new AdvanceContract().getContract();
+  public GeneralContract forceContract = new ForceContract().getContract();
 
 
   /**
@@ -38,13 +40,19 @@ public class DbHelpers extends SQLiteOpenHelper {
   /**
    * Версия базы данных. При изменении схемы увеличить на единицу
    */
-  private static final int DATABASE_VERSION = 32;
+  private static final int DATABASE_VERSION = 34;
 
   SQLiteDatabase db;
 
   private void generateJourneyTable(){
     db.execSQL(SQLCreateTemplate + journeysContract.getTableName());
     String SQL_CREATE_TABLE = journeysContract.getCreateTableQuery();
+    db.execSQL(SQL_CREATE_TABLE);
+  }
+
+  private void generateForcesTable(){
+    db.execSQL(SQLCreateTemplate + forceContract.getTableName());
+    String SQL_CREATE_TABLE = forceContract.getCreateTableQuery();
     db.execSQL(SQL_CREATE_TABLE);
   }
 
@@ -123,6 +131,7 @@ public class DbHelpers extends SQLiteOpenHelper {
     generateScriptMusicTable();
     generateGoalsTable();
     generateAdvanceTable();
+    generateForcesTable();
   }
 
   @Override
@@ -150,6 +159,7 @@ public class DbHelpers extends SQLiteOpenHelper {
     generateScriptMusicTable();
     generateGoalsTable();
     generateAdvanceTable();
+    generateForcesTable();
   }
 
   public Cursor getList(String query){

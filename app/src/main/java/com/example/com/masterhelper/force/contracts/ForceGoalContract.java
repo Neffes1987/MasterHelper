@@ -1,4 +1,4 @@
-package com.example.com.masterhelper.core.force.contracts;
+package com.example.com.masterhelper.force.contracts;
 
 import android.provider.BaseColumns;
 import com.example.com.masterhelper.core.contracts.GeneralContract;

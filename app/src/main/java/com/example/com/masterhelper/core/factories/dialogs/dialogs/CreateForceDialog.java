@@ -2,7 +2,7 @@ package com.example.com.masterhelper.core.factories.dialogs.dialogs;
 
 import android.app.Activity;
 import android.content.Intent;
-import com.example.com.masterhelper.core.force.ui.AddNewForce;
+import com.example.com.masterhelper.force.ui.AddNewForce;
 import com.example.com.masterhelper.core.models.DataModel;
 
 public class CreateForceDialog extends CommonDialog {

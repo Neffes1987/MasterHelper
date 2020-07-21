@@ -1,4 +1,4 @@
-package com.example.com.masterhelper.core.force.models;
+package com.example.com.masterhelper.force.models;
 
 public class DependenciesModel extends RelationModal {
   private DirectionType direction;

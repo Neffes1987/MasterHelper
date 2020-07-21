@@ -2,8 +2,8 @@ package com.example.com.masterhelper.settings.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -23,6 +23,7 @@ import com.example.masterhelper.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
 import static android.content.DialogInterface.BUTTON_POSITIVE;
 
@@ -30,8 +31,11 @@ public class SettingList extends AppCompatActivity implements ICommonItemEvents 
   FragmentManager fragmentManager;
 
   public static final String EXTRA_TYPE = "settingType";
+  public static final String EXTRA_IS_SELECTABLE = "isSelectable";
   public static final String EXTRA_SELECTED_IDS = "selectedIds";
   public static final String EXTRA_SETTING_TITLE = "caption";
+
+  private static final HashSet<Integer> selectedListItemsIds = new HashSet<>();
 
   private CustomListItemsEnum listType;
   SettingsFactory factory;
@@ -39,11 +43,11 @@ public class SettingList extends AppCompatActivity implements ICommonItemEvents 
   int editItemPosition;
 
   FloatingActionButton addNewNameBtn;
+  FloatingActionButton applySelectedItems;
 
   AbstractSetting settingsAdapter;
   String[] selectedIds = {};
 
-  /** Характеристики врага */
   private ModelList settings = new ModelList();
 
   @Override
@@ -52,6 +56,13 @@ public class SettingList extends AppCompatActivity implements ICommonItemEvents 
     setContentView(R.layout.activity_settings_list);
 
     String type = getIntent().getStringExtra(EXTRA_TYPE);
+    boolean isSelectable = getIntent().getBooleanExtra(EXTRA_IS_SELECTABLE, false);
+
+    if(isSelectable){
+      applySelectedItems = findViewById(R.id.SETTINGS_APPLY_BTN_ID);
+      applySelectedItems.show();
+      applySelectedItems.setOnClickListener(this::onApplyButtonPressed);
+    }
 
     int caption = getIntent().getIntExtra(EXTRA_SETTING_TITLE, R.string.screen_settings_default_caption);
     ActionBar bar = getSupportActionBar();
@@ -66,7 +77,7 @@ public class SettingList extends AppCompatActivity implements ICommonItemEvents 
         e.printStackTrace();
       }
     } else {
-      factory = new SettingsFactory(type);
+      factory = new SettingsFactory(type, isSelectable);
       settingsAdapter  = factory.getAdapter();
       listType = factory.getConvertListItemType();
       selectedIds = getIntent().getStringArrayExtra(EXTRA_SELECTED_IDS);
@@ -101,6 +112,14 @@ public class SettingList extends AppCompatActivity implements ICommonItemEvents 
   @Override
   public void onClick(View elementFiredAction, int position) {
     DataModel row = settings.getItemByPosition(position);
+    if(elementFiredAction.getId() == R.id.ITEM_SELECTOR_ID){
+      int id = row.getId();
+      if(selectedListItemsIds.contains(id)){
+        selectedListItemsIds.remove(id);
+      } else {
+        selectedListItemsIds.add(id);
+      }
+    }
     if(row != null && elementFiredAction.getId() == R.id.ITEM_DELETE_BUTTON){
       CommonDialog dialog = DialogsFactory.createDialog(DialogTypes.delete);
       if(dialog != null){
@@ -122,12 +141,17 @@ public class SettingList extends AppCompatActivity implements ICommonItemEvents 
   }
 
 
-  /** вызвать диалог редактирования нового путешествия */
+  /**   */
   public void onAddButtonPressed() {
     CommonDialog dialog = factory.getDialog();
     if(dialog != null){
       dialog.show(this, null);
     }
+  }
+
+  /**   */
+  public void onApplyButtonPressed(View v) {
+    Toast.makeText(this, selectedListItemsIds.size()+"", Toast.LENGTH_LONG).show();
   }
 
   /** обработчик результатов диалогов создания и редактирования */

@@ -1,13 +1,12 @@
 package com.example.com.masterhelper.settings.adapters;
 
 import android.database.Cursor;
-import android.util.Log;
 import com.example.com.masterhelper.core.app.GlobalApplication;
 import com.example.com.masterhelper.core.contracts.GeneralContract;
 import com.example.com.masterhelper.core.contracts.settings.AdvanceContract;
 import com.example.com.masterhelper.core.models.DataModel;
-import com.example.com.masterhelper.core.force.models.AdvanceModel;
-import com.example.com.masterhelper.core.force.models.RelationModal;
+import com.example.com.masterhelper.force.models.AdvanceModel;
+import com.example.com.masterhelper.force.models.RelationModal;
 import com.example.com.masterhelper.core.models.utilities.ModelList;
 import com.example.masterhelper.R;
 

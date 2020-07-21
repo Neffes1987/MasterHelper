@@ -4,8 +4,8 @@ import android.database.Cursor;
 import com.example.com.masterhelper.core.app.GlobalApplication;
 import com.example.com.masterhelper.core.contracts.GeneralContract;
 import com.example.com.masterhelper.core.contracts.settings.GoalContract;
-import com.example.com.masterhelper.core.force.models.GoalModel;
-import com.example.com.masterhelper.core.force.models.RelationModal;
+import com.example.com.masterhelper.force.models.GoalModel;
+import com.example.com.masterhelper.force.models.RelationModal;
 import com.example.com.masterhelper.core.models.DataModel;
 import com.example.com.masterhelper.core.models.utilities.ModelList;
 import com.example.masterhelper.R;
@@ -32,18 +32,26 @@ public class GoalDBAdapter extends AbstractSetting {
   @Override
   public void create(String name, String description, String[] selectedItems) {
     GoalModel model = new GoalModel(0, name, description);
+
     model.setResult(getEnumBySelection(selectedItems));
     add(model);
   }
 
   private RelationModal.ResultType getEnumBySelection(String[] selectedItems){
-    int selectedItem = GlobalApplication.getAppContext().getResources().getIdentifier(selectedItems[0], "int", GlobalApplication.getAppContext().getPackageName());
-    switch (selectedItem){
-      case R.string.force_goal_status_in_progress: return RelationModal.ResultType.inProgress;
-      case R.string.force_goal_status_solved: return RelationModal.ResultType.solved;
-      case R.string.force_goal_status_failed: return RelationModal.ResultType.failed;
-      default: return null;
+    String inProgress = GlobalApplication.getAppContext().getResources().getString(R.string.force_goal_status_in_progress);
+    String solved  = GlobalApplication.getAppContext().getResources().getString(R.string.force_goal_status_solved);
+    String failed  = GlobalApplication.getAppContext().getResources().getString(R.string.force_goal_status_failed);
+    if(inProgress.equals(selectedItems[0]))  {
+      return RelationModal.ResultType.inProgress;
     }
+    if(solved.equals(selectedItems[0]))  {
+      return RelationModal.ResultType.solved;
+    }
+    if(failed.equals(selectedItems[0]))  {
+      return RelationModal.ResultType.failed;
+    }
+
+    return null;
   }
 
   @Override

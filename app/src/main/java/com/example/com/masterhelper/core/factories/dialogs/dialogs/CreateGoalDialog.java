@@ -3,8 +3,8 @@ package com.example.com.masterhelper.core.factories.dialogs.dialogs;
 import android.app.Activity;
 import android.content.Intent;
 import com.example.com.masterhelper.core.factories.dialogs.ui.CreateNewItemDialog;
-import com.example.com.masterhelper.core.force.models.GoalModel;
-import com.example.com.masterhelper.core.force.models.RelationModal;
+import com.example.com.masterhelper.force.models.GoalModel;
+import com.example.com.masterhelper.force.models.RelationModal;
 import com.example.com.masterhelper.core.models.DataModel;
 import com.example.masterhelper.R;
 

@@ -111,7 +111,7 @@
 
   <string name="force_goal_status_in_progress">Не завершено</string>
   <string name="force_goal_status_solved">Выполнено</string>
-  <string name="force_goal_status_failed">Провелено</string>
+  <string name="force_goal_status_failed">Провалено</string>
 
 
 </resources>

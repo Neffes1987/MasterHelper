@@ -1,16 +1,15 @@
-package com.example.com.masterhelper.core.force.models;
+package com.example.com.masterhelper.force.models;
 
 import com.example.com.masterhelper.core.app.GlobalApplication;
 import com.example.masterhelper.R;
 
-public class AdvanceModel extends RelationModal {
+public class GoalModel extends RelationModal {
   private DirectionType directionType;
 
-  public AdvanceModel(int id, String name, String cause, DirectionType directionType) {
+  public GoalModel(int id, String name, String cause) {
     super(id, name, cause);
-    setDirection(directionType);
+    setDirection(null);
   }
-
 
   @Override
   public String modelToString() {
@@ -19,7 +18,7 @@ public class AdvanceModel extends RelationModal {
 
   @Override
   public RelationType getType() {
-    return RelationType.advance;
+    return RelationType.goal;
   }
 
   @Override
@@ -29,10 +28,7 @@ public class AdvanceModel extends RelationModal {
 
   @Override
   public String getDirectionString() {
-    if(directionType == DirectionType.advantage){
-      return GlobalApplication.getAppContext().getString(R.string.advantage);
-    }
-    return GlobalApplication.getAppContext().getString(R.string.disadvantage);
+    return GlobalApplication.getAppContext().getString(R.string.goal);
   }
 
   @Override

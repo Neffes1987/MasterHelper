@@ -1,7 +1,6 @@
 package com.example.com.masterhelper.core.factories.dialogs.ui;
 
 import android.content.Intent;
-import android.util.Log;
 import android.view.View;
 import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,8 +8,6 @@ import android.os.Bundle;
 import com.example.masterhelper.R;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 
 public class CreateNewItemDialog extends AppCompatActivity {
 

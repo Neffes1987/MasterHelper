@@ -1,4 +1,4 @@
-package com.example.com.masterhelper.core.force.models;
+package com.example.com.masterhelper.force.models;
 
 public interface IRelation {
   RelationModal.RelationType getType();

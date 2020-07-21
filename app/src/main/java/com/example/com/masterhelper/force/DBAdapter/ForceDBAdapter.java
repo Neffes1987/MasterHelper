@@ -1,13 +1,15 @@
-package com.example.com.masterhelper.core.force.DBAdapter;
+package com.example.com.masterhelper.force.DBAdapter;
 
 import android.database.Cursor;
+import android.util.Log;
 import com.example.com.masterhelper.core.app.DbHelpers;
 import com.example.com.masterhelper.core.app.GlobalApplication;
 import com.example.com.masterhelper.core.contracts.GeneralContract;
 import com.example.com.masterhelper.core.contracts.enemies.EnemyAbilitiesContract;
 import com.example.com.masterhelper.core.contracts.settings.AbilitiesContract;
 import com.example.com.masterhelper.core.factories.DBAdapters.adapters.CommonBDAdapter;
-import com.example.com.masterhelper.core.force.models.ForceModel;
+import com.example.com.masterhelper.force.contracts.ForceContract;
+import com.example.com.masterhelper.force.models.ForceModel;
 import com.example.com.masterhelper.core.models.AbilityModel;
 import com.example.com.masterhelper.core.models.DataModel;
 import com.example.com.masterhelper.core.models.utilities.ModelList;
@@ -17,7 +19,7 @@ import java.util.LinkedHashMap;
 public class ForceDBAdapter extends CommonBDAdapter<ForceModel> {
   /** класс для работы с базой */
   private DbHelpers dbHelpers = GlobalApplication.getDbHelpers();
-
+  GeneralContract contract = dbHelpers.forceContract;
 
   public ForceDBAdapter(){}
 
@@ -88,12 +90,30 @@ public class ForceDBAdapter extends CommonBDAdapter<ForceModel> {
 
   @Override
   public ForceModel get(int id) {
-    return null;
+    String forceByByIdQuery = GeneralContract.getListQuery(ForceContract.TABLE_NAME, null, ForceContract._ID +"="+id, null, 1);
+    Cursor queryResult = dbHelpers.getList(forceByByIdQuery);
+
+    ForceModel forceModel = new ForceModel();
+
+    while (queryResult.moveToNext()) {
+      // Используем индекс для получения строки или числа
+      int idColumnIndex = queryResult.getColumnIndex(ForceContract._ID);
+      int titleColumnIndex = queryResult.getColumnIndex(ForceContract.COLUMN_FORCE_NAME);
+      int descriptionColumnIndex = queryResult.getColumnIndex(ForceContract.COLUMN_FORCE_DESCRIPTION);
+      int typeColumnIndex = queryResult.getColumnIndex(ForceContract.COLUMN_FORCE_TYPE);
+
+      forceModel.setName(queryResult.getString(titleColumnIndex));
+      forceModel.setDescription(queryResult.getString(descriptionColumnIndex));
+      forceModel.setId(queryResult.getInt(idColumnIndex));
+      forceModel.setType(ForceModel.ForceType.valueOf(queryResult.getString(typeColumnIndex)));
+    }
+    queryResult.close();
+    return forceModel;
   }
 
   @Override
   public void add(ForceModel newItem, int parentId) {
-    String sqlQuery = dbHelpers.abilitiesContract.add(newItem, parentId);
+    String sqlQuery = contract.add(newItem, parentId);
     dbHelpers.addNewItem(sqlQuery);
   }
 

@@ -1,4 +1,4 @@
-package com.example.com.masterhelper.core.force.models;
+package com.example.com.masterhelper.force.models;
 
 import com.example.com.masterhelper.core.models.DataModel;
 import com.example.com.masterhelper.core.models.utilities.ModelList;

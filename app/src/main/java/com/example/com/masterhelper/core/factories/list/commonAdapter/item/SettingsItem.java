@@ -4,9 +4,8 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import androidx.core.content.ContextCompat;
 import com.example.com.masterhelper.core.models.DataModel;
-import com.example.com.masterhelper.core.force.models.RelationModal;
+import com.example.com.masterhelper.force.models.RelationModal;
 import com.example.masterhelper.R;
 import com.example.com.masterhelper.core.factories.list.commonAdapter.CommonAdapter;
 
