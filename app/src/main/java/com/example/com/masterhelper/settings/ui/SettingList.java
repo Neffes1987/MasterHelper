@@ -2,6 +2,7 @@ package com.example.com.masterhelper.settings.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 import androidx.appcompat.app.ActionBar;
@@ -150,6 +151,15 @@ public class SettingList extends AppCompatActivity implements ICommonItemEvents 
   }
 
   /**   */
+  public void onUpdateButtonPressed(int position) {
+    DataModel model = settings.getItemByPosition(position);
+    CommonDialog dialog = factory.getDialog();
+    if(dialog != null){
+      dialog.show(this, model);
+    }
+  }
+
+  /**   */
   public void onApplyButtonPressed(View v) {
     Intent intent = new Intent();
     intent.putStringArrayListExtra(EXTRA_SELECTED_LIST_ITEMS_IDS, selectedListItemsIds);
@@ -164,6 +174,12 @@ public class SettingList extends AppCompatActivity implements ICommonItemEvents 
     if(resultCode != RESULT_OK){
       return;
     }
+
+    if(result == null){
+      updateList();
+      return;
+    }
+
     String newName = result.getStringExtra(CreateNewItemDialog.NAME);
     int id = result.getIntExtra(CreateNewItemDialog.ID, 0);
     String newDescription = result.getStringExtra(CreateNewItemDialog.DESCRIPTION);
@@ -171,19 +187,24 @@ public class SettingList extends AppCompatActivity implements ICommonItemEvents 
     if(newName != null && newName.trim().length() == 0){
       return;
     }
+
     switch (requestCode){
       case CommonDialog.DIALOG_CREATE_ACTIVITY_RESULT:
         settingsAdapter.create(newName, newDescription);
+        Toast.makeText(this, newName+" добавлен", Toast.LENGTH_LONG).show();
         break;
       case CommonDialog.DIALOG_UPDATE_ACTIVITY_RESULT:
         settingsAdapter.update(id, newName, newDescription, null);
+        Toast.makeText(this, newName+" добавлен", Toast.LENGTH_LONG).show();
         break;
       case CommonDialog.DIALOG_CREATE_SETTING_ACTIVITY_RESULT:
         settingsAdapter.create(newName, newDescription, newSelectedItems.toArray(new String[0]));
+        Toast.makeText(this, newName+" обновлен", Toast.LENGTH_LONG).show();
         break;
       case CommonDialog.DIALOG_UPDATE_SETTING_ACTIVITY_RESULT:
-        editItemPosition = 0;
+        editItemPosition = -1;
         settingsAdapter.update(id, newName, newDescription, newSelectedItems.toArray(new String[0]));
+        Toast.makeText(this, newName+" обновлен", Toast.LENGTH_LONG).show();
         break;
       default:
         throw new IllegalStateException("Unexpected value: " + resultCode);

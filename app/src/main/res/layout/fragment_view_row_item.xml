@@ -2,52 +2,104 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:app="http://schemas.android.com/apk/res-auto"
               android:layout_width="match_parent"
-              android:layout_height="wrap_content">
-
-  <CheckBox
-    android:layout_width="wrap_content"
-    android:layout_height="match_parent"
-    android:id="@+id/ITEM_SELECTOR_ID"
-    android:layout_weight="0"/>
+              android:layout_height="wrap_content"
+              android:layout_marginBottom="4dp"
+  >
 
   <LinearLayout
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_weight="1">
+    android:layout_weight="0"
+    android:background="@color/colorCardBG"
+    android:padding="4dp">
 
-    <TextView
+    <LinearLayout
+      android:orientation="horizontal"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:id="@+id/ITEM_TITLE_ID"
-      android:layout_weight="1"
-      android:gravity="center_vertical"
-      android:text="@string/name"/>
+      >
 
-    <TextView
+      <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:id="@+id/ITEM_SELECTOR_ID"
+        android:layout_weight="0"/>
+
+      <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:id="@+id/ITEM_TITLE_ID"
+          android:layout_weight="1"
+          android:gravity="center_vertical"
+          android:text="@string/name"/>
+
+        <TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:id="@+id/ITEM_DESCRIPTION_ID"
+          android:layout_weight="1"
+          android:text="@string/description"
+          android:visibility="visible"
+          android:textSize="10sp"/>
+      </LinearLayout>
+
+      <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        app:srcCompat="@android:drawable/ic_menu_preferences"
+        android:id="@+id/ITEM_EDIT_ID"
+        android:layout_weight="0"
+        style="@style/common_action_button"/>
+
+      <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@mipmap/baseline_clear_black_18dp"
+        android:id="@+id/ITEM_DELETE_BUTTON"
+        android:layout_weight="0"
+        style="@style/delete_action_button"
+        android:visibility="gone"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+      android:orientation="horizontal"
       android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:id="@+id/ITEM_DESCRIPTION_ID"
-      android:layout_weight="1"
-      android:text="@string/description"
-      android:visibility="visible"
-      android:textSize="10sp"/>
+      android:layout_height="match_parent"
+      android:layout_weight="0"
+      android:id="@+id/RELATION_BLOCK_ID"
+      android:visibility="gone">
+
+      <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:id="@+id/RELATION_POSITIVE_STATUS_ID"
+          android:inputType="textMultiLine"/>
+
+        <TextView
+          android:text="TextView"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:id="@+id/RELATION_NEGATIVE_STATUS_ID"
+          android:inputType="textMultiLine"/>
+
+      </LinearLayout>
+
+    </LinearLayout>
+
   </LinearLayout>
 
-  <ImageButton
-    android:layout_width="wrap_content"
-    android:layout_height="match_parent"
-    app:srcCompat="@android:drawable/ic_menu_preferences"
-    android:id="@+id/ITEM_EDIT_ID"
-    android:layout_weight="0"
-    style="@style/common_action_button"/>
-
-  <ImageButton
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    app:srcCompat="@mipmap/baseline_clear_black_18dp"
-    android:id="@+id/ITEM_DELETE_BUTTON"
-    android:layout_weight="0"
-    style="@style/delete_action_button"
-    android:visibility="gone"/>
 </LinearLayout>

@@ -113,5 +113,11 @@
   <string name="force_goal_status_solved">Выполнено</string>
   <string name="force_goal_status_failed">Провалено</string>
 
+  <string name="force_relation_status_positive">Выгоды</string>
+  <string name="force_relation_status_negative">Осложнения</string>
+
+  <!-- TODO: Remove or change this placeholder text -->
+  <string name="hello_blank_fragment">Hello blank fragment</string>
+
 
 </resources>

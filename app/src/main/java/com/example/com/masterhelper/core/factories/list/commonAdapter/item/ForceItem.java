@@ -17,92 +17,75 @@ import com.example.masterhelper.R;
  * */
 public class ForceItem extends CommonItem {
 
-  /** текстовое поле в с именем приключения */
-  private TextView title;
-  private TextView journeyList;
-  private TextView type;
-  private TextView goals;
-  private TextView cooperators;
-  private TextView enemies;
-  private TextView advantage;
-  private TextView disadvantage;
-  private TextView owned;
-  private TextView depended;
-  private TextView description;
-
-  private ImageView icon;
-  private ImageButton expand;
-
-  private LinearLayout body;
-
-
   public ForceItem(View v, CommonAdapter adapter) {
     super(v, adapter);
-    title = itemView.findViewById(R.id.FORCE_TITLE_ID);
-    journeyList = itemView.findViewById(R.id.FORCE_JOURNEY_ID);
-    type = itemView.findViewById(R.id.FORCE_TYPE_ID);
-    goals = itemView.findViewById(R.id.FORCE_GOALS_AND_MOTIVATION_ID);
-    cooperators = itemView.findViewById(R.id.FORCE_COOPERATORS_ID);
-    enemies = itemView.findViewById(R.id.FORCE_ENEMIES_ID);
-    advantage = itemView.findViewById(R.id.FORCE_ADVANTAGES);
-    disadvantage = itemView.findViewById(R.id.FORCE_DISADVANTAGES_ID);
-    owned = itemView.findViewById(R.id.FORCE_OWN_ID);
-    depended = itemView.findViewById(R.id.FORCE_DEPENDED_ID);
-    description = itemView.findViewById(R.id.FORCE_DESCRIPTIONS_ID);
-    icon = itemView.findViewById(R.id.FORCE_ICON_ID);
-    expand = itemView.findViewById(R.id.FORCE_TOGGLER_ID);
-
-    body = itemView.findViewById(R.id.FORCE_ACCORDION_BODY_ID);
     LinearLayout titleBar = v.findViewById(R.id.FORCE_ACCORDION_HEADER_ID);
     titleBar.setOnClickListener(itemToggle);
   }
 
   public void setTitle(String title) {
-    this.title.setText(title);
+    TextView title1 = itemView.findViewById(R.id.FORCE_TITLE_ID);
+    title1.setText(title);
   }
 
   public void setType(String type) {
-    this.type.setText(type);
+    TextView type1 = itemView.findViewById(R.id.FORCE_TYPE_ID);
+    type1.setText(type);
   }
 
   public void setDisadvantage(ModelList disadvantage) {
-    this.disadvantage.setText(disadvantage.listToString());
+    TextView disadvantage1 = itemView.findViewById(R.id.FORCE_DISADVANTAGES_ID);
+    disadvantage1.setText(disadvantage.listToString());
   }
 
   public void setIcon(String icon) {
-    this.icon.setImageURI(Uri.parse(icon));
+    ImageView icon1 = itemView.findViewById(R.id.FORCE_ICON_ID);
+    if(icon != null){
+      icon1.setImageURI(Uri.parse(icon));
+    }
   }
 
   public void setEnemies(ModelList enemies) {
-    this.enemies.setText(enemies.listToString());
+    TextView enemies1 = itemView.findViewById(R.id.FORCE_ENEMIES_ID);
+    enemies1.setText(enemies.listToString());
   }
 
   public void setCooperators(ModelList cooperators) {
-    this.cooperators.setText(cooperators.listToString());
+    TextView cooperators1 = itemView.findViewById(R.id.FORCE_COOPERATORS_ID);
+    cooperators1.setText(cooperators.listToString());
   }
 
   public void setGoals(ModelList goals) {
-    this.goals.setText(goals.listToString());
+    TextView goals1 = itemView.findViewById(R.id.FORCE_GOALS_AND_MOTIVATION_ID);
+    goals1.setText(goals.listToString());
   }
 
   public void setDescription(String description) {
-    this.description.setText(description);
+    TextView description1 = itemView.findViewById(R.id.FORCE_DESCRIPTIONS_ID);
+    description1.setText(description);
   }
 
   public void setAdvantage(ModelList advantage) {
-    this.advantage.setText(advantage.listToString());
+    TextView advantage1 = itemView.findViewById(R.id.FORCE_ADVANTAGES);
+    advantage1.setText(advantage.listToString());
   }
 
   public void setDepended(ModelList depended) {
-    this.depended.setText(depended.listToString());
+    TextView depended1 = itemView.findViewById(R.id.FORCE_DEPENDED_ID);
+    depended1.setText(depended.listToString());
   }
 
   public void setOwned(ModelList owned) {
-    this.owned.setText(owned.listToString());
+    TextView owned1 = itemView.findViewById(R.id.FORCE_OWN_ID);
+    owned1.setText(owned.listToString());
   }
 
   public void setJourneyList(ModelList journeyList) {
-    this.journeyList.setText(journeyList.listToString());
+    if(journeyList == null){
+      return;
+    }
+    TextView journeyList1 = itemView.findViewById(R.id.FORCE_JOURNEY_ID);
+    journeyList1.setText(journeyList.listToString());
   }
 
   public void updateHolderByData(DataModel itemData, int position) {
@@ -120,17 +103,16 @@ public class ForceItem extends CommonItem {
     setJourneyList(forceModel.getInvolvedJourneys());
     setOwned(forceModel.getOwners());
     setDisadvantage(forceModel.getDisadvantagesRelations());
+    setEditBtn();
   }
 
-  View.OnClickListener itemToggle =  new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-      toggleVisibility(body);
-      if(body.getVisibility() == View.VISIBLE){
-        expand.setRotation(180);
-      } else {
-        expand.setRotation(0);
-      }
-    }
+  public void setEditBtn() {
+    ImageButton editBtn = itemView.findViewById(R.id.ITEM_EDIT_ID);
+    editBtn.setOnClickListener(commonListener);
+  }
+
+  View.OnClickListener itemToggle = v -> {
+    LinearLayout body = itemView.findViewById(R.id.FORCE_ACCORDION_BODY_ID);
+    toggleVisibility(body);
   };
 }

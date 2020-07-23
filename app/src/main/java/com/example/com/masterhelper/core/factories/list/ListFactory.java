@@ -16,17 +16,19 @@ import com.example.masterhelper.R;
 public class ListFactory extends Fragment implements ICommonItemEvents, IListFactory {
   /** */
   RecyclerView recyclerView;
+  int recyclerViewId = R.id.RECYCLER_LIST_VIEW_ID;
 
   int itemLayout = 0;
   CustomListItemsEnum itemType;
 
   public ListFactory() {}
 
-  public void setItemType(CustomListItemsEnum itemType) {
+  private void setItemType(CustomListItemsEnum itemType) {
     this.itemType = itemType;
     switch (itemType){
       case abilities:
       case setting:
+      case relation:
       case setting_selectable:
       case journey:
         itemLayout = R.layout.fragment_view_row_item;
@@ -49,7 +51,7 @@ public class ListFactory extends Fragment implements ICommonItemEvents, IListFac
   public void updateListAdapter(ModelList data, CustomListItemsEnum itemType){
     setItemType(itemType);
     CommonAdapter mAdapter = new CommonAdapter(data, itemLayout, itemType, this);
-    recyclerView.setAdapter(mAdapter);
+    if(recyclerView != null) recyclerView.setAdapter(mAdapter);
   }
 
   @Override

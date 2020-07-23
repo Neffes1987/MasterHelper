@@ -173,9 +173,9 @@ public class GeneralContract implements BaseColumns, IContract {
     return generateDeleteItemQuery(TABLE_NAME, itemId);
   }
 
-  public String update(int enemyId, DataModel newItem){
-    String[] values = getValues(newItem, enemyId);
-    return commonUpdateGenerator(TABLE_NAME, UPDATE_COLUMNS_PROPS, values);
+  public String update(int recordId, DataModel newItem){
+    String[] values = getValues(newItem, recordId);
+    return generateUpdateValues(TABLE_NAME, recordId, UPDATE_COLUMNS_PROPS, values);
   }
 
   public String deleteRecordsByIds(String ids){

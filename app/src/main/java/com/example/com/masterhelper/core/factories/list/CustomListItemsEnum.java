@@ -9,6 +9,7 @@ public enum CustomListItemsEnum {
   enemyIcon,
   abilities,
   setting,
+  relation,
   setting_selectable,
   force
 }

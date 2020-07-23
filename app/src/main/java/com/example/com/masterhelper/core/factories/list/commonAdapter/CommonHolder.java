@@ -34,16 +34,18 @@ public class CommonHolder extends RecyclerView.ViewHolder {
         commonItem = new EnemyIconItem(v, adapter);
         break;
       case journey:
-        commonItem = new SettingsItem(v, adapter);
+        commonItem = new SettingsItem(v, adapter, SettingsItem.SettingsType.journey);
         break;
       case abilities:
-        commonItem = new SettingsItem(v, adapter, true, true, true);
+        commonItem = new SettingsItem(v, adapter, SettingsItem.SettingsType.abilities);
         break;
       case setting:
-        commonItem = new SettingsItem(v, adapter, true, false, true);
+        commonItem = new SettingsItem(v, adapter, SettingsItem.SettingsType.global);
         break;
       case setting_selectable:
-        commonItem = new SettingsItem(v, adapter, false, false, true);
+        commonItem = new SettingsItem(v, adapter, SettingsItem.SettingsType.selectable);
+      case relation:
+        commonItem = new SettingsItem(v, adapter, SettingsItem.SettingsType.relation);
         break;
       case force:
         commonItem = new ForceItem(v, adapter);

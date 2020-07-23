@@ -42,6 +42,9 @@ public class ForceModel extends DataModel {
 
   private ModelList getListByType(RelationModal.RelationType type, RelationModal.DirectionType directionType){
     ModelList result = new ModelList();
+    if(relations == null){
+      return result;
+    }
     for (DataModel model: relations.values()) {
       RelationModal relationModal =  (RelationModal) model;
       if(relationModal.getType() == type && relationModal.getDirection() == directionType){

@@ -139,7 +139,7 @@
             android:layout_weight="1"
             android:minHeight="40dp"
             android:contentDescription="@string/screen_name_scene_start"
-            style="@style/play_action_button"/>
+            style="@style/secondary_action_button"/>
         </LinearLayout>
 
         <TextView

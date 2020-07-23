@@ -65,8 +65,7 @@
   <style name="float_button_styles" parent="common_action_button">
     <item name="android:layout_height">wrap_content</item>
     <item name="android:clickable">true</item>
-    <item name="android:layout_marginBottom">8dp</item>
-    <item name="android:layout_marginRight">8dp</item>
+    <item name="android:layout_margin">8dp</item>
     <item name="android:backgroundTint">@color/colorFloatBtnBackground</item>
     <item name="android:focusable">true</item>
   </style>
@@ -77,7 +76,7 @@
     <item name="android:foregroundGravity">clip_horizontal|center_horizontal</item>
   </style>
 
-  <style name="play_action_button"  parent="common_action_button">
+  <style name="secondary_action_button" parent="common_action_button">
     <item name="android:tint">@color/colorAttention</item>
     <item name="android:textColor">@color/colorAttention</item>
   </style>
@@ -85,6 +84,11 @@
   <style name="float_secondary_button"  parent="float_button_styles">
     <item name="android:tint">@color/colorAttention</item>
     <item name="android:textColor">@color/colorAttention</item>
+  </style>
+
+  <style name="float_alert_button"  parent="float_button_styles">
+    <item name="android:tint">@color/colorDelete</item>
+    <item name="android:textColor">@color/colorDelete</item>
   </style>
 
   <style name="force_row_style">

@@ -1,6 +1,7 @@
 package com.example.com.masterhelper.settings.adapters;
 
 import android.database.Cursor;
+import android.util.Log;
 import com.example.com.masterhelper.core.contracts.GeneralContract;
 import com.example.com.masterhelper.core.models.AbilityModel;
 import com.example.com.masterhelper.core.contracts.settings.AbilitiesContract;
@@ -31,7 +32,8 @@ public class AbilityDBAdapter extends AbstractSetting {
   @Override
   public void update(int id, String name, String description, String[] selectedItems) {
     AbilityModel model = new AbilityModel(id, name, 0);
-    String sqlQuery = dbHelpers.abilitiesContract.update(0, model);
+    String sqlQuery = dbHelpers.abilitiesContract.update(id, model);
+    Log.i("TAG", "update: " + id);
     dbHelpers.updateItem(sqlQuery);
   }
 

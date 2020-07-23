@@ -76,6 +76,45 @@
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:textSize="10sp"
+          android:text="@string/force_journeys_title"/>
+
+        <TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:id="@+id/FORCE_INVOLVED_IN_JOURNEYS_ID"/>
+
+      </LinearLayout>
+
+      <ImageButton
+        android:src="@mipmap/baseline_create_black_18dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/common_action_button"
+        android:id="@+id/RELATION_ADD_TO_JOURNEY_ID"/>
+
+    </LinearLayout>
+
+    <androidx.viewpager.widget.ViewPager
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:id="@+id/FORCE_RELATIONS_VIEWER_ID"/>
+
+    <LinearLayout
+      android:orientation="horizontal"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="4dp">
+
+      <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+
+        <TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:textSize="10sp"
           android:text="@string/force_goal_motivation_title"/>
 
         <TextView
@@ -301,40 +340,6 @@
 
     </LinearLayout>
 
-    <LinearLayout
-      android:orientation="horizontal"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_marginBottom="4dp">
-
-      <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1">
-
-        <TextView
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:textSize="10sp"
-          android:text="@string/force_journeys_title"/>
-
-        <TextView
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:id="@+id/FORCE_INVOLVED_IN_JOURNEYS_ID"/>
-
-      </LinearLayout>
-
-      <ImageButton
-        android:src="@mipmap/baseline_create_black_18dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        style="@style/common_action_button"
-        android:id="@+id/FORCE_ADD_TO_JOURNEY_ID"/>
-
-    </LinearLayout>
-
   </LinearLayout>
 
   <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -346,5 +351,15 @@
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintBottom_toBottomOf="parent"
     style="@style/float_button_styles"/>
+
+  <com.google.android.material.floatingactionbutton.FloatingActionButton
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    app:srcCompat="@mipmap/baseline_clear_black_18dp"
+    android:id="@+id/FORCE_DELETE_BTN_ID"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    style="@style/float_alert_button"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,6 +3,7 @@ package com.example.com.masterhelper.settings;
 import com.example.com.masterhelper.core.factories.dialogs.DialogsFactory;
 import com.example.com.masterhelper.core.factories.dialogs.dialogs.CommonDialog;
 import com.example.com.masterhelper.core.factories.list.CustomListItemsEnum;
+import com.example.com.masterhelper.settings.adapters.ForceDBAdapter;
 import com.example.com.masterhelper.settings.adapters.AbilityDBAdapter;
 import com.example.com.masterhelper.settings.adapters.AbstractSetting;
 import com.example.com.masterhelper.settings.adapters.AdvanceDBAdapter;
@@ -31,7 +32,7 @@ public final class SettingsFactory {
         }
         break;
       case FORCE_ITEM:
-        dbSettingAdapter = new AbilityDBAdapter();
+        dbSettingAdapter = new ForceDBAdapter();
         listType = CustomListItemsEnum.force;
         dialog = DialogsFactory.createDialog(force);
         if(dialog != null){

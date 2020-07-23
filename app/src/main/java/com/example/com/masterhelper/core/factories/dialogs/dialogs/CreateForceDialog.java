@@ -14,6 +14,7 @@ public class CreateForceDialog extends CommonDialog {
   public void show(Activity context, DataModel settings) {
     Intent intent = new Intent(context, AddNewForce.class);
     if(settings != null){
+      intent.putExtra(AddNewForce.ID, settings.getId());
       context.startActivityForResult(intent, DIALOG_UPDATE_ACTIVITY_RESULT);
       return;
     }

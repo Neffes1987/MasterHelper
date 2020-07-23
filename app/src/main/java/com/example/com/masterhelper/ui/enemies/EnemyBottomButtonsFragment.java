@@ -117,7 +117,7 @@ public class EnemyBottomButtonsFragment extends Fragment {
       mListener = (IScriptBottomButtonsFragment) context;
     } else {
       throw new RuntimeException(context.toString()
-        + " must implement OnFragmentInteractionListener");
+        + " must implement IScriptBottomButtonsFragment");
     }
   }
 
