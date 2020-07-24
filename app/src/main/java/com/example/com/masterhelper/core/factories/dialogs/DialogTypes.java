@@ -7,6 +7,6 @@ public enum DialogTypes {
   withDescription,
   scriptDialog,
   force,
-  setting,
+  advance,
   goal,
 }

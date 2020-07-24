@@ -1,7 +1,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
       xmlns:app="http://schemas.android.com/apk/res-auto"
       xmlns:tools="http://schemas.android.com/tools"
-      tools:context="com.example.com.masterhelper.ui.journey.JourneysListView">
+      tools:context="com.example.com.masterhelper.journey.ui.JourneysListView">
   <item
     android:title="@string/force_menu_item_title"
     >
@@ -10,9 +10,6 @@
       <item
         android:title="@string/force_advantages_title"
         android:id="@+id/ADVANCE_SETTING_ID"/>
-      <item
-        android:title="@string/force_goal_motivation_title"
-        android:id="@+id/GOAL_SETTING_ID"/>
       <item
         android:title="@string/force_menu_create_item_title"
         android:id="@+id/FORCES_SETTINGS"/>

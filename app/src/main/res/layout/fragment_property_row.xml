@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             tools:context="com.example.com.masterhelper.fragments.PropertyRow.PropertyRow">
+  <TableLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="4dp"
+    style="@style/force_row_style">
+
+    <TableRow
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:baselineAligned="false">
+
+      <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:text="@string/hello_blank_fragment"
+        android:layout_weight="1"
+        android:id="@+id/PROPERTY_TITLE_ID"
+        android:gravity="center_vertical"
+        android:textSize="10sp"
+        tools:ignore="SmallSp"/>
+
+      <ImageButton
+        android:src="@mipmap/baseline_create_black_18dp"
+        android:layout_width="wrap_content"
+        android:id="@+id/PROPERTY_EDIT_BUTTON"
+        android:layout_weight="0"
+        style="@style/secondary_action_button"
+        android:visibility="gone"/>
+    </TableRow>
+
+    <TableRow
+      android:layout_width="match_parent"
+      android:layout_height="match_parent">
+
+      <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/PROPERTY_CONTENT_ID"
+        android:layout_weight="1"/>
+    </TableRow>
+
+  </TableLayout>
+
+</FrameLayout>

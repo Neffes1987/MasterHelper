@@ -11,9 +11,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.com.masterhelper.core.models.utilities.ModelList;
 import com.example.masterhelper.R;
-import com.example.com.masterhelper.core.factories.list.commonAdapter.CommonAdapter;
-import com.example.com.masterhelper.core.factories.list.CustomListItemsEnum;
-import com.example.com.masterhelper.core.factories.list.commonAdapter.item.ICommonItemEvents;
+import com.example.com.masterhelper.listFactory.commonAdapter.CommonAdapter;
+import com.example.com.masterhelper.listFactory.CustomListItemsEnum;
+import com.example.com.masterhelper.listFactory.commonAdapter.item.ICommonItemEvents;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 

@@ -12,7 +12,8 @@
     android:layout_height="match_parent"
     android:layout_weight="0"
     android:background="@color/colorCardBG"
-    android:padding="4dp">
+    android:padding="4dp"
+    android:id="@+id/ROW_ITEM_CLICKABLE_ID">
 
     <LinearLayout
       android:orientation="horizontal"
@@ -73,7 +74,6 @@
       android:orientation="horizontal"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
-      android:layout_weight="0"
       android:id="@+id/RELATION_BLOCK_ID"
       android:visibility="gone">
 

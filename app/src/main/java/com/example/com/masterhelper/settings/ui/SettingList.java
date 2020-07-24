@@ -2,7 +2,6 @@ package com.example.com.masterhelper.settings.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 import androidx.appcompat.app.ActionBar;
@@ -15,9 +14,9 @@ import com.example.com.masterhelper.core.models.utilities.ModelList;
 import com.example.com.masterhelper.core.factories.dialogs.DialogTypes;
 import com.example.com.masterhelper.core.factories.dialogs.DialogsFactory;
 import com.example.com.masterhelper.core.factories.dialogs.dialogs.CommonDialog;
-import com.example.com.masterhelper.core.factories.list.CustomListItemsEnum;
-import com.example.com.masterhelper.core.factories.list.ListFactory;
-import com.example.com.masterhelper.core.factories.list.commonAdapter.item.ICommonItemEvents;
+import com.example.com.masterhelper.listFactory.CustomListItemsEnum;
+import com.example.com.masterhelper.listFactory.ListFactory;
+import com.example.com.masterhelper.listFactory.commonAdapter.item.ICommonItemEvents;
 import com.example.com.masterhelper.settings.SettingsFactory;
 import com.example.com.masterhelper.settings.adapters.AbstractSetting;
 import com.example.masterhelper.R;
@@ -31,6 +30,7 @@ public class SettingList extends AppCompatActivity implements ICommonItemEvents 
   FragmentManager fragmentManager;
 
   public static final String EXTRA_TYPE = "settingType";
+  public static final String EXTRA_PARENT_ID = "parentId";
   public static final String EXTRA_IS_SELECTABLE = "isSelectable";
   public static final String EXTRA_SELECTED_IDS = "selectedIds";
   public static final String EXTRA_SELECTED_LIST_ITEMS_IDS = "selectedListItemsIds";
@@ -50,6 +50,7 @@ public class SettingList extends AppCompatActivity implements ICommonItemEvents 
   String[] selectedIds = {};
 
   private ModelList settings = new ModelList();
+  int parentId;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +59,7 @@ public class SettingList extends AppCompatActivity implements ICommonItemEvents 
 
     String type = getIntent().getStringExtra(EXTRA_TYPE);
     boolean isSelectable = getIntent().getBooleanExtra(EXTRA_IS_SELECTABLE, false);
+    parentId = getIntent().getIntExtra(EXTRA_PARENT_ID, 0);
 
     if(isSelectable){
       applySelectedItems = findViewById(R.id.SETTINGS_APPLY_BTN_ID);
@@ -78,6 +80,7 @@ public class SettingList extends AppCompatActivity implements ICommonItemEvents 
         e.printStackTrace();
       }
     } else {
+
       factory = new SettingsFactory(type, isSelectable);
       settingsAdapter  = factory.getAdapter();
       listType = factory.getConvertListItemType();
@@ -93,7 +96,7 @@ public class SettingList extends AppCompatActivity implements ICommonItemEvents 
 
   /** обновить вьюху по списку сцен */
   void updateList(){
-    settings = settingsAdapter.list();
+    settings = settingsAdapter.list(parentId);
     settings.setSelectedItems(selectedIds);
     FragmentManager fm = getSupportFragmentManager();
     Fragment lsf =  fm.findFragmentById(R.id.EXISTED_SETTINGS_LIST_ID);
@@ -182,6 +185,7 @@ public class SettingList extends AppCompatActivity implements ICommonItemEvents 
 
     String newName = result.getStringExtra(CreateNewItemDialog.NAME);
     int id = result.getIntExtra(CreateNewItemDialog.ID, 0);
+
     String newDescription = result.getStringExtra(CreateNewItemDialog.DESCRIPTION);
     ArrayList<String> newSelectedItems = result.getStringArrayListExtra(CreateNewItemDialog.SELECTED_ITEMS);
     if(newName != null && newName.trim().length() == 0){
@@ -190,7 +194,7 @@ public class SettingList extends AppCompatActivity implements ICommonItemEvents 
 
     switch (requestCode){
       case CommonDialog.DIALOG_CREATE_ACTIVITY_RESULT:
-        settingsAdapter.create(newName, newDescription);
+        settingsAdapter.create(newName, newDescription, parentId);
         Toast.makeText(this, newName+" добавлен", Toast.LENGTH_LONG).show();
         break;
       case CommonDialog.DIALOG_UPDATE_ACTIVITY_RESULT:
@@ -198,7 +202,7 @@ public class SettingList extends AppCompatActivity implements ICommonItemEvents 
         Toast.makeText(this, newName+" добавлен", Toast.LENGTH_LONG).show();
         break;
       case CommonDialog.DIALOG_CREATE_SETTING_ACTIVITY_RESULT:
-        settingsAdapter.create(newName, newDescription, newSelectedItems.toArray(new String[0]));
+        settingsAdapter.create(newName, newDescription, parentId, newSelectedItems.toArray(new String[0]));
         Toast.makeText(this, newName+" обновлен", Toast.LENGTH_LONG).show();
         break;
       case CommonDialog.DIALOG_UPDATE_SETTING_ACTIVITY_RESULT:

@@ -14,8 +14,8 @@ public class AdvanceDBAdapter extends AbstractSetting {
   GeneralContract contract = dbHelpers.advanceContract;
 
   @Override
-  public void add(DataModel newModel) {
-    String sqlQuery = contract.add(newModel, 0);
+  public void add(DataModel newModel, int parentId) {
+    String sqlQuery = contract.add(newModel, parentId);
     dbHelpers.addNewItem(sqlQuery);
   }
 
@@ -25,7 +25,7 @@ public class AdvanceDBAdapter extends AbstractSetting {
   }
 
   @Override
-  public void create(String name, String description) {}
+  public void create(String name, String description, int parentId) {}
 
   private RelationModal.DirectionType getEnumBySelection(String[] selectedItems){
     RelationModal.DirectionType type;
@@ -40,10 +40,10 @@ public class AdvanceDBAdapter extends AbstractSetting {
   }
 
   @Override
-  public void create(String name, String description, String[] selectedItems) {
+  public void create(String name, String description, int parentId, String[] selectedItems) {
     RelationModal.DirectionType type = getEnumBySelection(selectedItems);
     AdvanceModel model = new AdvanceModel(0, name, description, type);
-    add(model);
+    add(model, parentId);
   }
 
   @Override
@@ -83,5 +83,10 @@ public class AdvanceDBAdapter extends AbstractSetting {
     }
     queryResult.close();
     return result;
+  }
+
+  @Override
+  public ModelList list(int parentId) {
+    return list();
   }
 }

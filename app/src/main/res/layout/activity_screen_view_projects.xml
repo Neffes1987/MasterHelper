@@ -5,7 +5,7 @@
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  tools:context="com.example.com.masterhelper.ui.journey.JourneysListView">
+  tools:context="com.example.com.masterhelper.journey.ui.JourneysListView">
 
   <fragment
     android:layout_width="match_parent"
@@ -17,7 +17,7 @@
   <fragment
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:name="com.example.com.masterhelper.core.factories.list.ListFactory"
+    android:name="com.example.com.masterhelper.listFactory.ListFactory"
     android:id="@+id/JOURNEYS_ID"
     tools:layout="@layout/fragment_recycler_view"
     android:layout_marginTop="?attr/actionBarSize"

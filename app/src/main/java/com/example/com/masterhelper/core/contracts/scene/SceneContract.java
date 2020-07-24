@@ -2,7 +2,7 @@ package com.example.com.masterhelper.core.contracts.scene;
 
 import android.provider.BaseColumns;
 import com.example.com.masterhelper.core.contracts.GeneralContract;
-import com.example.com.masterhelper.core.contracts.journey.JourneysContract;
+import com.example.com.masterhelper.journey.contracts.JourneysContract;
 import com.example.com.masterhelper.core.models.DataModel;
 
 public class SceneContract implements BaseColumns {

@@ -52,25 +52,19 @@ public class AppBarFragment extends Fragment {
         break;
       case R.id.ABILITIES_SETTINGS:
         intent = new Intent(getActivity(), SettingList.class);
-        intent.putExtra(SettingList.EXTRA_TYPE, ABILITY_ITEM);
+        intent.putExtra(SettingList.EXTRA_TYPE, SettingsFactoryType.ability.name());
         intent.putExtra(SettingList.EXTRA_SETTING_TITLE, R.string.abilities_settings);
         startActivity(intent);
         break;
       case R.id.FORCES_SETTINGS:
           intent = new Intent(getActivity(), SettingList.class);
-          intent.putExtra(SettingList.EXTRA_TYPE, FORCE_ITEM);
+          intent.putExtra(SettingList.EXTRA_TYPE, SettingsFactoryType.force.name());
           intent.putExtra(SettingList.EXTRA_SETTING_TITLE, R.string.force_menu_item_title);
-          startActivity(intent);
-        break;
-      case R.id.GOAL_SETTING_ID:
-          intent = new Intent(getActivity(), SettingList.class);
-          intent.putExtra(SettingList.EXTRA_TYPE, GOAL_ITEM);
-          intent.putExtra(SettingList.EXTRA_SETTING_TITLE, R.string.force_goal_motivation_title);
           startActivity(intent);
         break;
       case R.id.ADVANCE_SETTING_ID:
           intent = new Intent(getActivity(), SettingList.class);
-          intent.putExtra(SettingList.EXTRA_TYPE, ADVANCE_ITEM);
+          intent.putExtra(SettingList.EXTRA_TYPE, SettingsFactoryType.advance.name());
           intent.putExtra(SettingList.EXTRA_SETTING_TITLE, R.string.force_advantages_title);
           startActivity(intent);
         break;

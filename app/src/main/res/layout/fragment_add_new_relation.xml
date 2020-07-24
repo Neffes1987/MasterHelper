@@ -31,7 +31,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         style="@style/secondary_action_button"
-        android:id="@+id/RELATION_ADD_TO_JOURNEY_ID"
+        android:id="@+id/RELATION_ADD_TO_FORCE_ID"
         />
 
     </LinearLayout>
@@ -39,7 +39,7 @@
     <fragment
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:name="com.example.com.masterhelper.core.factories.list.ListFactory"
+      android:name="com.example.com.masterhelper.listFactory.ListFactory"
       tools:layout="@layout/fragment_recycler_view"
       android:id="@+id/RELATION_LIST_VIEW_ID"/>
 

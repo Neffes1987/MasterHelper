@@ -9,7 +9,6 @@ public class DBAdapterFactory {
       case scene: return new SceneDBAdapter();
       case enemy: return new EnemyDBAdapter();
       case ability: return new AbilityDBAdapter();
-      case journey: return new JourneyDBAdapter();
       default: return null;
     }
   }

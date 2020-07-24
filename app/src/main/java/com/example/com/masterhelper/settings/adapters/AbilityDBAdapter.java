@@ -12,20 +12,20 @@ public class AbilityDBAdapter extends AbstractSetting {
   public AbilityDBAdapter(){}
 
   @Override
-  public void add(DataModel newModel) {
+  public void add(DataModel newModel, int parentId) {
     AbilityModel model = (AbilityModel) newModel;
-    String sqlQuery = dbHelpers.abilitiesContract.add(model, 0);
+    String sqlQuery = dbHelpers.abilitiesContract.add(model, parentId);
     dbHelpers.addNewItem(sqlQuery);
   }
 
   @Override
-  public void create(String name, String description) {
+  public void create(String name, String description, int parentId) {
     AbilityModel model = new AbilityModel(name);
-    add(model);
+    add(model, parentId);
   }
 
   @Override
-  public void create(String name, String description, String[] selectedItems) {
+  public void create(String name, String description, int parentId, String[] selectedItems) {
 
   }
 
@@ -63,5 +63,10 @@ public class AbilityDBAdapter extends AbstractSetting {
     }
     queryResult.close();
     return result;
+  }
+
+  @Override
+  public ModelList list(int parentId) {
+    return list();
   }
 }

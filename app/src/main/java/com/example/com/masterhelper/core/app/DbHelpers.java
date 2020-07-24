@@ -9,13 +9,16 @@ import com.example.com.masterhelper.core.contracts.enemies.EnemyAbilitiesContrac
 import com.example.com.masterhelper.core.contracts.enemies.EnemyContract;
 import com.example.com.masterhelper.core.contracts.enemies.ScriptMusicContract;
 import com.example.com.masterhelper.core.contracts.enemies.ScriptsContract;
-import com.example.com.masterhelper.core.contracts.journey.JourneysContract;
+import com.example.com.masterhelper.force.contracts.ForceJourneyContract;
+import com.example.com.masterhelper.journey.contracts.JourneysContract;
 import com.example.com.masterhelper.core.contracts.scene.SceneContract;
 import com.example.com.masterhelper.core.contracts.scene.SceneMusicContract;
 import com.example.com.masterhelper.core.contracts.settings.AbilitiesContract;
 import com.example.com.masterhelper.core.contracts.settings.AdvanceContract;
-import com.example.com.masterhelper.core.contracts.settings.GoalContract;
+import com.example.com.masterhelper.journey.contracts.GoalContract;
+import com.example.com.masterhelper.force.contracts.ForceAdvancesContract;
 import com.example.com.masterhelper.force.contracts.ForceContract;
+import com.example.com.masterhelper.force.contracts.ForceGoalsContract;
 
 public class DbHelpers extends SQLiteOpenHelper {
   private String SQLCreateTemplate ="DROP TABLE IF EXISTS ";
@@ -28,9 +31,14 @@ public class DbHelpers extends SQLiteOpenHelper {
   public GeneralContract sceneContract =new SceneContract().getContract();
   public GeneralContract sceneMusicContract = new SceneMusicContract().getContract();
   public GeneralContract scriptMusicContract = new ScriptMusicContract().getContract();
+
   public GeneralContract goalContract = new GoalContract().getContract();
   public GeneralContract advanceContract = new AdvanceContract().getContract();
+
   public GeneralContract forceContract = new ForceContract().getContract();
+  public GeneralContract forceGoalContract = new ForceGoalsContract().getContract();
+  public GeneralContract forceAdvancesContract = new ForceAdvancesContract().getContract();
+  public GeneralContract forceJourneyContract = new ForceJourneyContract().getContract();
 
 
   /**
@@ -40,13 +48,31 @@ public class DbHelpers extends SQLiteOpenHelper {
   /**
    * Версия базы данных. При изменении схемы увеличить на единицу
    */
-  private static final int DATABASE_VERSION = 34;
+  private static final int DATABASE_VERSION = 40;
 
   SQLiteDatabase db;
 
   private void generateJourneyTable(){
     db.execSQL(SQLCreateTemplate + journeysContract.getTableName());
     String SQL_CREATE_TABLE = journeysContract.getCreateTableQuery();
+    db.execSQL(SQL_CREATE_TABLE);
+  }
+
+  private void generateForceJourneyTable(){
+    db.execSQL(SQLCreateTemplate + forceJourneyContract.getTableName());
+    String SQL_CREATE_TABLE = forceJourneyContract.getCreateTableQuery();
+    db.execSQL(SQL_CREATE_TABLE);
+  }
+
+  private void generateForceAdvancesTable(){
+    db.execSQL(SQLCreateTemplate + forceAdvancesContract.getTableName());
+    String SQL_CREATE_TABLE = forceAdvancesContract.getCreateTableQuery();
+    db.execSQL(SQL_CREATE_TABLE);
+  }
+
+  private void generateForceGoalTable(){
+    db.execSQL(SQLCreateTemplate + forceGoalContract.getTableName());
+    String SQL_CREATE_TABLE = forceGoalContract.getCreateTableQuery();
     db.execSQL(SQL_CREATE_TABLE);
   }
 
@@ -131,7 +157,11 @@ public class DbHelpers extends SQLiteOpenHelper {
     generateScriptMusicTable();
     generateGoalsTable();
     generateAdvanceTable();
+
     generateForcesTable();
+    generateForceGoalTable();
+    generateForceAdvancesTable();
+    generateForceJourneyTable();
   }
 
   @Override
@@ -159,7 +189,11 @@ public class DbHelpers extends SQLiteOpenHelper {
     generateScriptMusicTable();
     generateGoalsTable();
     generateAdvanceTable();
+
     generateForcesTable();
+    generateForceGoalTable();
+    generateForceAdvancesTable();
+    generateForceJourneyTable();
   }
 
   public Cursor getList(String query){

@@ -7,7 +7,7 @@ public abstract class RelationModal extends DataModel implements IRelation {
   private String resolveResult="";
   private String rejectResult="";
 
-  RelationModal(int id, String name, String cause){
+  protected RelationModal(int id, String name, String cause){
     initGeneralFields(id, name, cause);
   }
 
@@ -28,6 +28,14 @@ public abstract class RelationModal extends DataModel implements IRelation {
     return result;
   }
 
+  public String getResultToString() {
+    switch (result){
+      case failed: return getRejectResult();
+      case solved: return getResolveResult();
+      default: return "in progress";
+    }
+  }
+
   public String getRejectResult() {
     return rejectResult;
   }
@@ -38,11 +46,7 @@ public abstract class RelationModal extends DataModel implements IRelation {
 
   @Override
   public String modelToString() {
-    switch (result){
-      case failed: return getRejectResult();
-      case solved: return getResolveResult();
-      default: return "";
-    }
+    return getResultToString();
   }
 
   public enum RelationType {

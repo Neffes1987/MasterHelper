@@ -43,7 +43,7 @@ public class DataModel {
   }
 
   public String modelToString(){
-    return "";
+    return name;
   }
 
   public void setSelected(boolean selected) {

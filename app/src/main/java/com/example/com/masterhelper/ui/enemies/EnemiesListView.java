@@ -22,11 +22,11 @@ import com.example.com.masterhelper.appbar.IAppBarFragment;
 import com.example.com.masterhelper.core.factories.DBAdapters.AdaptersType;
 import com.example.com.masterhelper.core.factories.DBAdapters.DBAdapterFactory;
 import com.example.com.masterhelper.core.factories.DBAdapters.adapters.EnemyDBAdapter;
-import com.example.com.masterhelper.core.factories.list.CustomListItemsEnum;
-import com.example.com.masterhelper.core.factories.list.commonAdapter.item.ICommonItemEvents;
+import com.example.com.masterhelper.listFactory.CustomListItemsEnum;
+import com.example.com.masterhelper.listFactory.commonAdapter.item.ICommonItemEvents;
 import com.example.com.masterhelper.media.mediaworker.BackgroundMediaPlayer;
 import com.example.com.masterhelper.core.models.EnemyModel;
-import com.example.com.masterhelper.core.factories.list.ListFactory;
+import com.example.com.masterhelper.listFactory.ListFactory;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 @RequiresApi(api = Build.VERSION_CODES.M)

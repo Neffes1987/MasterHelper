@@ -5,12 +5,12 @@
   xmlns:app="http://schemas.android.com/apk/res-auto"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  tools:context="com.example.com.masterhelper.abilities.AbilityNamesList">
+  tools:context="com.example.com.masterhelper.settings.ui.SettingList">
 
   <fragment
     android:layout_width="0dp"
     android:layout_height="wrap_content"
-    android:name="com.example.com.masterhelper.core.factories.list.ListFactory"
+    android:name="com.example.com.masterhelper.listFactory.ListFactory"
     android:id="@+id/EXISTED_SETTINGS_LIST_ID"
     android:layout_weight="1"
     tools:layout="@layout/fragment_view_row_item"
