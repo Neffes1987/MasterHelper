@@ -1,4 +1,4 @@
-package com.example.com.masterhelper.ui.viewCharacteristicRow;
+package com.example.com.masterhelper.viewCharacteristicRow;
 
 import com.example.com.masterhelper.core.models.AbilityModel;
 

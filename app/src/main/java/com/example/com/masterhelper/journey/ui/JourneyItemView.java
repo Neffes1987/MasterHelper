@@ -15,7 +15,7 @@ import com.example.com.masterhelper.journey.adapters.JourneyDBAdapter;
 import com.example.com.masterhelper.core.factories.dialogs.DialogTypes;
 import com.example.com.masterhelper.core.factories.dialogs.DialogsFactory;
 import com.example.com.masterhelper.core.factories.dialogs.dialogs.CommonDialog;
-import com.example.com.masterhelper.ui.scene.Scene;
+import com.example.com.masterhelper.scene.Scene;
 import com.example.com.masterhelper.listFactory.CustomListItemsEnum;
 import com.example.com.masterhelper.listFactory.commonAdapter.item.ICommonItemEvents;
 import com.example.com.masterhelper.listFactory.ListFactory;

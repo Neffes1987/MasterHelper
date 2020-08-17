@@ -1,4 +1,4 @@
-package com.example.com.masterhelper.ui.enemies;
+package com.example.com.masterhelper.enemies;
 
 import android.content.Context;
 import android.os.Bundle;
