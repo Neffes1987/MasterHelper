@@ -5,9 +5,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.appcompat.widget.AppCompatImageButton;
+import androidx.recyclerview.widget.RecyclerView;
 import com.example.com.masterhelper.core.models.DataModel;
 import com.example.masterhelper.R;
-import com.example.com.masterhelper.listFactory.commonAdapter.CommonAdapter;
 import com.example.com.masterhelper.core.models.ScriptModel;
 
 /** Модель для управления интерфейсом внутри аккордиона для цеклического списка*/
@@ -70,13 +70,11 @@ public class ScriptItem extends CommonItem{
 
   /** инициализировать все поля холдера данными, а так же назначить порядковый номер сцены в списке
    * @param itemData - набор данных для инициализации сцены
-   * @param position - текущая позиция холдера сцены в списке
    * */
-  public void updateHolderByData(DataModel itemData, int position){
+  public void updateHolderByData(DataModel itemData) {
     ScriptModel script = (ScriptModel) itemData;
-    setTitle((position+1) +": "+script.getName());
+    setTitle(script.getName());
     setDescription(script.getDescription());
-    setPosition(position);
     setSceneIsDone(script);
     setBattleButtonVisible(script.hasBattleActionIcon);
   }
@@ -86,8 +84,8 @@ public class ScriptItem extends CommonItem{
   }
 
   /** @constructor генератор указателей на элементы UI для адаптера */
-  public ScriptItem(View v, CommonAdapter adapter) {
-    super(v, adapter);
+  public ScriptItem() {
+    View v = itemView;
 
     title = v.findViewById(R.id.SCRIPT_TITLE_ID);
 

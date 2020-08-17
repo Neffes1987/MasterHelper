@@ -10,7 +10,7 @@ public class PopupMenuAdapter {
   private PopupMenuEvents parentView;
   public PopupMenu popupMenu;
 
-  public final static int ORDERING_ITEM_INDEX = 2;
+  public final static int ORDERING_ITEM_INDEX = 3;
 
   public PopupMenuAdapter(Context context, View v, Boolean ShowOrdering) throws Exception {
     popupMenu = new PopupMenu(context, v);

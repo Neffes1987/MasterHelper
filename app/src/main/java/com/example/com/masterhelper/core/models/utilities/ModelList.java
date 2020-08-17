@@ -1,5 +1,6 @@
 package com.example.com.masterhelper.core.models.utilities;
 
+import android.util.Log;
 import com.example.com.masterhelper.core.models.DataModel;
 
 import java.util.Arrays;
@@ -27,7 +28,21 @@ public class ModelList {
   }
 
   public DataModel getItemByPosition(int position){
+    DataModel model = (DataModel) list.values().toArray()[position];
+    Log.i("TAG", "getItemByPosition: position " + position);
+    Log.i("TAG", "getItemByPosition: getName " + model.getName());
     return (DataModel) list.values().toArray()[position];
+  }
+
+  public int getPositionById(int id){
+    int result = -1;
+    for (DataModel model: list.values()) {
+      result +=1;
+      if(model.getId() == id){
+        break;
+      }
+    }
+    return result;
   }
 
   public void remove(int id){

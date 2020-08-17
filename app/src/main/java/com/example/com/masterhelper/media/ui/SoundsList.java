@@ -10,9 +10,10 @@ import android.view.ViewGroup;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.com.masterhelper.core.models.utilities.ModelList;
+import com.example.com.masterhelper.listFactory.commonAdapter.item.CommonItem;
+import com.example.com.masterhelper.listFactory.commonAdapter.item.MusicItem;
 import com.example.masterhelper.R;
 import com.example.com.masterhelper.listFactory.commonAdapter.CommonAdapter;
-import com.example.com.masterhelper.listFactory.CustomListItemsEnum;
 import com.example.com.masterhelper.listFactory.commonAdapter.item.ICommonItemEvents;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -69,10 +70,12 @@ public class SoundsList extends Fragment implements ICommonItemEvents {
       addBtn.setVisibility(View.VISIBLE);
     }
 
+    CommonItem item = new MusicItem(isGeneral);
+
     CommonAdapter mAdapter = new CommonAdapter(
       data,
       R.layout.fragment_sounds_item,
-      isGeneral ? CustomListItemsEnum.musicGeneral : CustomListItemsEnum.music,
+      item,
       this
     );
     recyclerView.setAdapter(mAdapter);

@@ -9,7 +9,6 @@ import com.example.com.masterhelper.core.factories.dialogs.dialogs.MultiChooseDi
 import com.example.com.masterhelper.core.models.DataModel;
 import com.example.com.masterhelper.force.models.ForceModel;
 import com.example.com.masterhelper.fragments.PropertyRow.PropertyRow;
-import com.example.com.masterhelper.listFactory.commonAdapter.CommonAdapter;
 import com.example.masterhelper.R;
 
 import static android.content.DialogInterface.BUTTON_POSITIVE;
@@ -36,16 +35,14 @@ public class ForceItem extends CommonItem {
     PropertyRow.setValue(journeysProperty, value);
   }
 
-  public ForceItem(View v, CommonAdapter adapter) {
-    super(v, adapter);
-    view = v;
-    LinearLayout titleBar = v.findViewById(R.id.FORCE_ACCORDION_HEADER_ID);
+  public ForceItem() {
+    view = itemView;
+    LinearLayout titleBar = view.findViewById(R.id.FORCE_ACCORDION_HEADER_ID);
     titleBar.setOnClickListener(itemToggle);
   }
 
-  public void updateHolderByData(DataModel itemData, int position) {
+  public void updateHolderByData(DataModel itemData) {
     forceModel = (ForceModel) itemData;
-    setPosition(position);
     setJourneyProperties(view, forceModel.getInvolvedJourneys().listToString());
     setGoalsProperties(view, "goals");
     setEditBtn();

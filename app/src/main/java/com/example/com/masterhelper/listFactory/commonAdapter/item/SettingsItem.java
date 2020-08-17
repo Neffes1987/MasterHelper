@@ -2,10 +2,10 @@ package com.example.com.masterhelper.listFactory.commonAdapter.item;
 
 import android.view.View;
 import android.widget.*;
+import androidx.recyclerview.widget.RecyclerView;
 import com.example.com.masterhelper.core.models.DataModel;
 import com.example.com.masterhelper.force.models.RelationModal;
 import com.example.masterhelper.R;
-import com.example.com.masterhelper.listFactory.commonAdapter.CommonAdapter;
 
 /** Модель для управления интерфейсом внутри элемента для циклического списка
  * Model - тип модели данных, который следует передать в обработчик жлемента списка для инициализаци
@@ -17,8 +17,8 @@ public class SettingsItem extends CommonItem {
   private boolean showDeleteButton = true;
   private boolean showRelationBlock = false;
 
-  public SettingsItem(View v, CommonAdapter adapter, SettingsType type) {
-    super(v, adapter);
+
+  public SettingsItem(SettingsType type) {
     switch (type){
       case abilities:
         break;
@@ -109,18 +109,19 @@ public class SettingsItem extends CommonItem {
     deleteButton.setOnClickListener(commonListener);
   }
 
-  private void setEditBtn(){
+  private void setEditBtn(int id){
     ImageButton editPopup = itemView.findViewById(R.id.ITEM_EDIT_ID);
-    editPopup.setOnClickListener(commonListener);
+    editPopup.setOnClickListener(v -> {
+      ((ICommonItemEvents) adapter).onClick(v, id);
+    });
   }
 
-  public void updateHolderByData(DataModel itemData, int position) {
+  public void updateHolderByData(DataModel itemData) {
     setTitle(itemData.getName());
     setDescription(itemData);
     setCheckbox(itemData.isSelected);
-    setPosition(position);
     setDeleteBtn();
-    setEditBtn();
+    setEditBtn(itemData.getId());
     setClickableZone();
     setRelationBlock(itemData);
   }

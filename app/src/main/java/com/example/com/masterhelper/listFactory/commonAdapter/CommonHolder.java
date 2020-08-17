@@ -1,24 +1,24 @@
 package com.example.com.masterhelper.listFactory.commonAdapter;
 
-import android.util.Log;
 import android.view.View;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.com.masterhelper.core.models.DataModel;
-import com.example.com.masterhelper.listFactory.CustomListItemsEnum;
 import com.example.com.masterhelper.listFactory.commonAdapter.item.*;
 
 /** Промежуточный класс, который связывает адаптер и вьюху циклического списка*/
 public class CommonHolder extends RecyclerView.ViewHolder {
   private CommonItem commonItem;
   /** @constructor передача параметров в элемент списка после инициализации */
-  public void initRecyclerView(DataModel item, int position) {
-    commonItem.updateHolderByData(item, position);
+  public void initRecyclerView(DataModel item) {
+    commonItem.updateHolderByData(item);
   }
 
   /** @constructor генератор указателей на элементы UI для адаптера */
-  public CommonHolder(View v, CustomListItemsEnum itemTemplateType, CommonAdapter adapter) {
+  public CommonHolder(View v, CommonItem commonItem) {
     super(v);
-    Log.i("TAG", "updateListAdapter: " + itemTemplateType);
+    commonItem.attachItemView(v);
+    this.commonItem = commonItem;
+    /**
     switch (itemTemplateType){
       case music:
         commonItem = new MusicItem(v, adapter, false);
@@ -52,6 +52,6 @@ public class CommonHolder extends RecyclerView.ViewHolder {
         break;
       case force:
         commonItem = new ForceItem(v, adapter);
-    }
+    } */
   }
 }

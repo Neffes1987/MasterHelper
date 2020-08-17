@@ -135,7 +135,6 @@ public class Scene extends AppCompatActivity implements ICommonItemEvents {
   void setListData(){
     scriptsList = scriptDBAdapter.getListByParentId(sceneId);
     if(scriptsViewList != null && scriptsViewList.getView() != null){
-      scriptsViewList.updateListAdapter(scriptsList, CustomListItemsEnum.script);
     }
   }
 

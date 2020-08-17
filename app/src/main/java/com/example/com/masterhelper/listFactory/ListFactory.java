@@ -1,7 +1,5 @@
 package com.example.com.masterhelper.listFactory;
 
-import android.util.Log;
-import com.example.com.masterhelper.core.models.utilities.ModelList;
 import com.example.com.masterhelper.listFactory.commonAdapter.CommonAdapter;
 import com.example.com.masterhelper.listFactory.commonAdapter.item.ICommonItemEvents;
 import android.os.Bundle;
@@ -13,12 +11,23 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.masterhelper.R;
 
-public class ListFactory extends Fragment implements ICommonItemEvents, IListFactory {
+public class ListFactory extends Fragment implements ICommonItemEvents {
   /** */
   RecyclerView recyclerView;
 
   int itemLayout = 0;
   CustomListItemsEnum itemType;
+
+  CommonAdapter mAdapter;
+
+  public void setAdapter(CommonAdapter mAdapter) {
+
+    this.mAdapter = mAdapter;
+
+    if(recyclerView != null) {
+      recyclerView.setAdapter(mAdapter);
+    }
+  }
 
   public ListFactory() {}
 
@@ -47,15 +56,6 @@ public class ListFactory extends Fragment implements ICommonItemEvents, IListFac
     }
   }
 
-  public void updateListAdapter(ModelList data, CustomListItemsEnum itemType){
-    setItemType(itemType);
-    CommonAdapter mAdapter = new CommonAdapter(data, itemLayout, itemType, this);
-    Log.i("TAG", "updateListAdapter: " + recyclerView);
-    if(recyclerView != null) {
-      recyclerView.setAdapter(mAdapter);
-    }
-  }
-
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
     LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
@@ -63,7 +63,6 @@ public class ListFactory extends Fragment implements ICommonItemEvents, IListFac
     Object tag = fr.getTag();
     if(tag != null){
       recyclerView = fr.findViewWithTag(tag);
-      Log.i("TAG", "updateListAdapter: tag " + recyclerView);
     } else {
       recyclerView = fr.findViewById(R.id.RECYCLER_LIST_VIEW_ID);
     }

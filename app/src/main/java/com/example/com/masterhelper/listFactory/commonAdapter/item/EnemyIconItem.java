@@ -8,7 +8,6 @@ import android.widget.TextView;
 import androidx.cardview.widget.CardView;
 import com.example.com.masterhelper.core.models.DataModel;
 import com.example.masterhelper.R;
-import com.example.com.masterhelper.listFactory.commonAdapter.CommonAdapter;
 import com.example.com.masterhelper.core.models.EnemyModel;
 
 public class EnemyIconItem extends CommonItem {
@@ -33,8 +32,8 @@ public class EnemyIconItem extends CommonItem {
   /**  */
   EnemyModel enemyData;
 
-  public EnemyIconItem(View enemyView, CommonAdapter adapter) {
-    super(enemyView, adapter);
+  public EnemyIconItem() {
+    View enemyView = itemView;
 
     enemyCard = enemyView.findViewById(R.id.ENEMY_CARD);
     enemyDamageMask = enemyView.findViewById(R.id.DAMAGE_MASK);
@@ -48,11 +47,8 @@ public class EnemyIconItem extends CommonItem {
     enemyView.setOnClickListener(commonListener);
   }
 
-  @Override
-  public void updateHolderByData(DataModel itemData, int position) {
+  public void updateHolderByData(DataModel itemData) {
     enemyData = (EnemyModel)itemData;
-    setPosition(position);
-    int pos = position + 1;
     positionNumber.setText(enemyData.getOrdering() + "");
     enemyHealthValue.setText(enemyData.getCurrentHealth() + " / " + enemyData.getTotalHealth());
     enemyTitle.setText(enemyData.getName());

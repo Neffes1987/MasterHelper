@@ -1,10 +1,12 @@
 package com.example.com.masterhelper.journey.ui;
 
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import com.example.com.masterhelper.core.models.DataModel;
-import com.example.com.masterhelper.core.models.utilities.ModelList;
+import com.example.com.masterhelper.listFactory.commonAdapter.CommonAdapter;
+import com.example.com.masterhelper.listFactory.commonAdapter.item.SettingsItem;
 import com.example.com.masterhelper.settings.SettingsFactory;
 import com.example.com.masterhelper.settings.adapters.AbstractSetting;
 import com.example.com.masterhelper.settings.ui.SettingList;
@@ -13,7 +15,6 @@ import com.example.com.masterhelper.journey.adapters.JourneyDBAdapter;
 import com.example.com.masterhelper.core.factories.dialogs.DialogTypes;
 import com.example.com.masterhelper.core.factories.dialogs.DialogsFactory;
 import com.example.com.masterhelper.core.factories.dialogs.dialogs.CommonDialog;
-import com.example.com.masterhelper.listFactory.CustomListItemsEnum;
 import com.example.com.masterhelper.listFactory.commonAdapter.item.ICommonItemEvents;
 import com.example.com.masterhelper.journey.models.JourneyModel;
 import com.example.com.masterhelper.appbar.IAppBarFragment;
@@ -46,8 +47,9 @@ public class JourneysListView extends AppCompatActivity implements ICommonItemEv
   /** хелпер для управлением таблицей путешествий в бд */
   AbstractSetting journeyDBAdapter = new JourneyDBAdapter();
 
-  /** временный кеш списка путешествий */
-  ModelList journeys = new ModelList();
+
+  CommonAdapter listAdapter;
+
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +60,17 @@ public class JourneysListView extends AppCompatActivity implements ICommonItemEv
     journeyCreateBtn.setOnClickListener(v -> onCreateJourneyButtonPressed());
     initToolBar();
     updateJourneysList();
+  }
+
+  private void updateJourneysList(){
+    SettingsItem item = new SettingsItem(SettingsItem.SettingsType.journey);
+    FragmentManager fm = getSupportFragmentManager();
+    listAdapter = new CommonAdapter(journeyDBAdapter.list(), R.layout.fragment_view_row_item, item, this);
+    ListFactory lsf = (ListFactory) fm.findFragmentById(R.id.JOURNEYS_ID);
+    if(lsf != null && lsf.getView() != null){
+      lsf.setAdapter(listAdapter);
+      listAdapter.notifyDataSetChanged();
+    }
   }
 
   private void initToolBar(){
@@ -80,7 +93,7 @@ public class JourneysListView extends AppCompatActivity implements ICommonItemEv
     CommonDialog dialog = DialogsFactory.createDialog(oneFieldDialog);
     if(dialog != null){
       dialog.setTitle(R.string.journey_update_title);
-      dialog.show(this, journeys.get(id));
+      dialog.show(this, listAdapter.getItemById(id));
     }
   }
 
@@ -97,16 +110,6 @@ public class JourneysListView extends AppCompatActivity implements ICommonItemEv
     intent.putExtra(SettingList.EXTRA_PARENT_ID, id);
     intent.putExtra(SettingList.EXTRA_SETTING_TITLE, R.string.force_goal_motivation_title);
     startActivity(intent);
-  }
-
-  /** обновить вьюху списка путешествий */
-  void updateJourneysList(){
-    journeys = journeyDBAdapter.list();
-    FragmentManager fm = getSupportFragmentManager();
-    ListFactory lsf = (ListFactory) fm.findFragmentById(R.id.JOURNEYS_ID);
-    if(lsf != null && lsf.getView() != null){
-      lsf.updateListAdapter(journeys, CustomListItemsEnum.journey);
-    }
   }
 
   /** обработчик результатов диалогов создания и редактирования */
@@ -149,8 +152,9 @@ public class JourneysListView extends AppCompatActivity implements ICommonItemEv
 
   /**  */
   @Override
-  public void onClick(View elementFiredAction, int position) {
-    DataModel journeyModel = journeys.getItemByPosition(position);
+  public void onClick(View elementFiredAction, int id) {
+    Log.i("TAG", "onClick: " + id);
+    DataModel journeyModel = listAdapter.getItemById(id);
     selectedJourneyId = journeyModel.getId();
     switch (elementFiredAction.getId()){
       case R.id.ITEM_TITLE_ID:
@@ -165,8 +169,8 @@ public class JourneysListView extends AppCompatActivity implements ICommonItemEv
 
   private void deleteJourney(){
     journeyDBAdapter.delete(selectedJourneyId);
+    listAdapter.deleteItem(selectedJourneyId);
     selectedJourneyId = -1;
-    updateJourneysList();
   }
 
   /** обработчик выбора пункта меню путешествия*/

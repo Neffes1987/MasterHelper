@@ -16,7 +16,6 @@ import com.example.com.masterhelper.core.factories.dialogs.DialogTypes;
 import com.example.com.masterhelper.core.factories.dialogs.DialogsFactory;
 import com.example.com.masterhelper.core.factories.dialogs.dialogs.CommonDialog;
 import com.example.com.masterhelper.scene.Scene;
-import com.example.com.masterhelper.listFactory.CustomListItemsEnum;
 import com.example.com.masterhelper.listFactory.commonAdapter.item.ICommonItemEvents;
 import com.example.com.masterhelper.listFactory.ListFactory;
 import com.example.com.masterhelper.core.models.SceneModel;
@@ -88,7 +87,6 @@ public class JourneyItemView extends AppCompatActivity implements ICommonItemEve
     ListFactory lsf = (ListFactory) fm.findFragmentById(R.id.SCREEN_FRAGMENT_ID);
 
     if(lsf != null && lsf.getView() != null){
-      lsf.updateListAdapter(scenesList, CustomListItemsEnum.scene);
     }
   }
 

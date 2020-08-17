@@ -103,7 +103,6 @@ public class SettingList extends AppCompatActivity implements ICommonItemEvents 
 
     if(lsf != null && lsf.getView() != null){
       ListFactory list = (ListFactory) lsf;
-      list.updateListAdapter(settings, listType);
     }
   }
 

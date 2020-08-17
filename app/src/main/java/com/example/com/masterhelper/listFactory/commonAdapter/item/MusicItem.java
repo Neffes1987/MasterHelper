@@ -6,7 +6,6 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import com.example.com.masterhelper.core.models.DataModel;
 import com.example.masterhelper.R;
-import com.example.com.masterhelper.listFactory.commonAdapter.CommonAdapter;
 import com.example.com.masterhelper.media.adapters.SoundFileModel;
 
 /** Модель для управления интерфейсом внутри элемента для циклического списка
@@ -26,8 +25,7 @@ public class MusicItem extends CommonItem {
   /** остановить проигрывание */
   private ImageButton stopSound;
 
-  public MusicItem(View v, CommonAdapter adapter, boolean isGeneral) {
-    super(v, adapter);
+  public MusicItem(boolean isGeneral) {
     title = itemView.findViewById(R.id.FILE_NAME_ID);
     selected = itemView.findViewById(R.id.FILE_NAME_SELECTOR_ID);
     selected.setOnClickListener(commonListener);
@@ -70,11 +68,10 @@ public class MusicItem extends CommonItem {
     this.selected.setChecked(selected);
   }
 
-  public void updateHolderByData(DataModel itemData, int position) {
+  public void updateHolderByData(DataModel itemData) {
     SoundFileModel soundFileModel = (SoundFileModel) itemData;
     setTitle(soundFileModel.getName());
     setSelected(soundFileModel.getSelected());
-    setPosition(position);
     setMusicStarted(false);
   }
 }

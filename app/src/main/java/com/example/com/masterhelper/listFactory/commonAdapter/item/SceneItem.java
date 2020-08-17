@@ -5,7 +5,6 @@ import android.widget.*;
 import androidx.appcompat.widget.AppCompatImageButton;
 import com.example.com.masterhelper.core.models.DataModel;
 import com.example.masterhelper.R;
-import com.example.com.masterhelper.listFactory.commonAdapter.CommonAdapter;
 import com.example.com.masterhelper.core.models.SceneModel;
 
 /** Модель для управления интерфейсом внутри аккордиона для цеклического списка*/
@@ -103,19 +102,17 @@ public class SceneItem extends CommonItem{
 
   /** инициализировать все поля холдера данными, а так же назначить порядковый номер сцены в списке
    * @param itemData - набор данных для инициализации сцены
-   * @param position - текущая позиция холдера сцены в списке
    * */
-  public void updateHolderByData(DataModel itemData, int position){
+  public void updateHolderByData(DataModel itemData) {
     SceneModel scene = (SceneModel) itemData;
-    setTitle((position+1) +": "+scene.getName());
+    setTitle(scene.getName());
     setDescription(scene.getDescription());
     setProgressBar(scene);
-    setPosition(position);
   }
 
   /** @constructor генератор указателей на элементы UI для адаптера */
-  public SceneItem(View v, CommonAdapter adapter) {
-    super(v, adapter);
+  public SceneItem() {
+    View v = itemView;
 
     title = v.findViewById(R.id.SCENE_TITLE_ID);
     description = v.findViewById(R.id.SCENE_DESCRIPTION_ID);
