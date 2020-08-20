@@ -14,9 +14,10 @@ public class AdvanceDBAdapter extends AbstractSetting {
   GeneralContract contract = dbHelpers.advanceContract;
 
   @Override
-  public void add(DataModel newModel, int parentId) {
+  public int add(DataModel newModel, int parentId) {
     String sqlQuery = contract.add(newModel, parentId);
     dbHelpers.addNewItem(sqlQuery);
+    return get(0).getId();
   }
 
   public void update(DataModel newModel) {
@@ -59,7 +60,33 @@ public class AdvanceDBAdapter extends AbstractSetting {
     dbHelpers.deleteItem(sqlQuery);
   }
 
-  @Override
+  public DataModel get(int id) {
+    String where = null;
+    if(id != 0){
+      where = AdvanceContract._ID+"="+ id;
+    }
+    AdvanceModel model = null;
+    String sqlQuery = GeneralContract.getListQuery(AdvanceContract.TABLE_NAME, null, where, AdvanceContract._ID + " DESC", 1);
+    Cursor queryResult = dbHelpers.getList(sqlQuery);
+
+    while (queryResult.moveToNext()) {
+      // Используем индекс для получения строки или числа
+      int typeColumnIndex = queryResult.getColumnIndex(AdvanceContract.COLUMN_TYPE);
+      int descriptionColumnIndex = queryResult.getColumnIndex(AdvanceContract.COLUMN_DESCRIPTION);
+      int titleColumnIndex = queryResult.getColumnIndex(AdvanceContract.COLUMN_NAME);
+      int idColumnIndex = queryResult.getColumnIndex(AdvanceContract._ID);
+
+      model = new AdvanceModel(
+        queryResult.getInt(idColumnIndex),
+        queryResult.getString(titleColumnIndex),
+        queryResult.getString(descriptionColumnIndex),
+        RelationModal.DirectionType.valueOf(queryResult.getString(typeColumnIndex))
+      );
+    }
+    queryResult.close();
+    return model;
+  }
+
   public ModelList list() {
     String sqlQuery = GeneralContract.getListQuery(AdvanceContract.TABLE_NAME, null, null, AdvanceContract._ID + " DESC", 0);
     ModelList result = new ModelList();

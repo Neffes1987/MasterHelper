@@ -75,7 +75,6 @@ public class SoundsList extends Fragment implements ICommonItemEvents {
     CommonAdapter mAdapter = new CommonAdapter(
       data,
       R.layout.fragment_sounds_item,
-      item,
       this
     );
     recyclerView.setAdapter(mAdapter);
@@ -122,4 +121,5 @@ public class SoundsList extends Fragment implements ICommonItemEvents {
   public void onClick(View elementFiredAction, int position) {
     mListener.onClick(elementFiredAction, position);
   }
+
 }

@@ -14,7 +14,7 @@ public class CommonItem implements ICommonItem {
 
   public CommonItem() {}
 
-  View.OnClickListener commonListener =  v -> {};
+  public View.OnClickListener commonListener = v -> {};
 
   public void attachItemView(View v){
     itemView = v;

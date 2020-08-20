@@ -10,7 +10,6 @@ import com.example.com.masterhelper.core.models.utilities.ModelList;
 import com.example.com.masterhelper.listFactory.commonAdapter.item.CommonItem;
 import com.example.com.masterhelper.listFactory.commonAdapter.item.ICommonItemEvents;
 
-
 /**
  * Адаптор для работы с аккордионами внутри цеклического списка
  * */
@@ -22,16 +21,18 @@ public class CommonAdapter extends RecyclerView.Adapter<CommonHolder> implements
   private ModelList mDataset;
   private ICommonItemEvents parentScreenView;
 
-  private CommonItem commonItemView;
+  private GetCommonItemInstance CommonItemInstance;
+
+  public void setCommonItemInstanceGetter(GetCommonItemInstance instance) {
+    this.CommonItemInstance = instance;
+  }
 
   /** Инициализируем набор данных для списка и передаем указатель на активность */
-  public CommonAdapter(ModelList data, int listItemFragmentId, CommonItem commonItemView, ICommonItemEvents parentScreen) {
+  public CommonAdapter(ModelList data, int listItemFragmentId, ICommonItemEvents parentScreen) {
     mDataset = data;
     fragmentId = listItemFragmentId;
     parentScreenView = parentScreen;
-
-    commonItemView.attachAdapter(this);
-    this.commonItemView = commonItemView;
+    setHasStableIds(true);
   }
 
   private int getItemPosition(int itemId){
@@ -42,11 +43,27 @@ public class CommonAdapter extends RecyclerView.Adapter<CommonHolder> implements
     return mDataset.get(id);
   }
 
+  @Override
+  public long getItemId(int position) {
+    return mDataset.getItemByPosition(position).getId();
+  }
+
   public void deleteItem(int itemId){
     int position = getItemPosition(itemId);
     mDataset.remove(itemId);
     notifyItemRemoved(position);
-    notifyItemRangeChanged(position, mDataset.size());
+  }
+
+  public void updateItem(DataModel updatedData){
+    mDataset.update(updatedData);
+    int position = getItemPosition(updatedData.getId());
+    notifyItemChanged(position, updatedData);
+  }
+
+  public void addItem(DataModel updatedData, boolean toFirst){
+    mDataset.addToList(updatedData, toFirst);
+    int position = getItemPosition(updatedData.getId());
+    notifyItemInserted(position);
   }
 
 
@@ -57,7 +74,7 @@ public class CommonAdapter extends RecyclerView.Adapter<CommonHolder> implements
   public CommonHolder onCreateViewHolder(ViewGroup parent, int viewType) {
     View v = LayoutInflater.from(parent.getContext()).inflate(fragmentId, parent, false);
     try {
-      return new CommonHolder(v, commonItemView);
+      return new CommonHolder(v, CommonItemInstance.getCommonItemInstance(this));
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -67,7 +84,6 @@ public class CommonAdapter extends RecyclerView.Adapter<CommonHolder> implements
   @Override
   public void onBindViewHolder(@NonNull CommonHolder holder, int position) {
     DataModel itemData = mDataset.getItemByPosition(position);
-    assert itemData != null;
     holder.initRecyclerView(itemData);
   }
 
@@ -84,5 +100,9 @@ public class CommonAdapter extends RecyclerView.Adapter<CommonHolder> implements
   @Override
   public void onClick(View elementFiredAction, int position) {
     parentScreenView.onClick(elementFiredAction, position);
+  }
+
+  public interface GetCommonItemInstance{
+    CommonItem getCommonItemInstance(CommonAdapter adapter);
   }
 }

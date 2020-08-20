@@ -1,10 +1,11 @@
-package com.example.com.masterhelper.listFactory.commonAdapter.item;
+package com.example.com.masterhelper.settings.ui;
 
 import android.view.View;
 import android.widget.*;
-import androidx.recyclerview.widget.RecyclerView;
 import com.example.com.masterhelper.core.models.DataModel;
 import com.example.com.masterhelper.force.models.RelationModal;
+import com.example.com.masterhelper.listFactory.commonAdapter.item.CommonItem;
+import com.example.com.masterhelper.listFactory.commonAdapter.item.ICommonItemEvents;
 import com.example.masterhelper.R;
 
 /** Модель для управления интерфейсом внутри элемента для циклического списка

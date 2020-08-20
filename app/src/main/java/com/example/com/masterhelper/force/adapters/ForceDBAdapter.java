@@ -24,9 +24,10 @@ public class ForceDBAdapter extends AbstractSetting {
   public ForceDBAdapter(){}
 
   @Override
-  public void add(DataModel newModel, int parentId) {
+  public int add(DataModel newModel, int parentId) {
     String sqlQuery = contract.add(newModel, 0);
     dbHelpers.addNewItem(sqlQuery);
+    return get(0).getId();
   }
 
   @Override
@@ -87,7 +88,11 @@ public class ForceDBAdapter extends AbstractSetting {
 
 
   public ForceModel get(int id) {
-    String forceByByIdQuery = GeneralContract.getListQuery(ForceContract.TABLE_NAME, null, ForceContract._ID +"="+id, null, 1);
+    String where = null;
+    if(id != 0){
+      where = ForceContract._ID+"="+ id;
+    }
+    String forceByByIdQuery = GeneralContract.getListQuery(ForceContract.TABLE_NAME, null, where, null, 1);
     Cursor queryResult = dbHelpers.getList(forceByByIdQuery);
 
     ForceModel forceModel = new ForceModel();

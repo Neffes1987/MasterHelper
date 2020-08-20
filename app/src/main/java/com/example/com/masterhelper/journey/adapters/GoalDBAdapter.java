@@ -1,7 +1,6 @@
 package com.example.com.masterhelper.journey.adapters;
 
 import android.database.Cursor;
-import android.util.Log;
 import com.example.com.masterhelper.core.app.GlobalApplication;
 import com.example.com.masterhelper.core.contracts.GeneralContract;
 import com.example.com.masterhelper.journey.contracts.GoalContract;
@@ -16,10 +15,10 @@ public class GoalDBAdapter extends AbstractSetting {
   GeneralContract contract = dbHelpers.goalContract;
 
   @Override
-  public void add(DataModel newModel, int parentId) {
+  public int add(DataModel newModel, int parentId) {
     String sqlQuery = contract.add(newModel, parentId);
-    Log.i("TAG", "add: " + sqlQuery);
     dbHelpers.addNewItem(sqlQuery);
+    return get(0).getId();
   }
 
   public void update(DataModel newModel) {
@@ -98,5 +97,32 @@ public class GoalDBAdapter extends AbstractSetting {
     }
     queryResult.close();
     return result;
+  }
+
+  public DataModel get(int id) {
+    String where = null;
+    if(id != 0){
+      where = GoalContract._ID+"="+ id;
+    }
+    String sqlQuery = GeneralContract.getListQuery(GoalContract.TABLE_NAME, null, where, GoalContract._ID + " DESC", 0);
+    GoalModel model = null;
+    Cursor queryResult = dbHelpers.getList(sqlQuery);
+
+    while (queryResult.moveToNext()) {
+      // Используем индекс для получения строки или числа
+      int descriptionColumnIndex = queryResult.getColumnIndex(GoalContract.COLUMN_DESCRIPTION);
+      int titleColumnIndex = queryResult.getColumnIndex(GoalContract.COLUMN_NAME);
+      int idColumnIndex = queryResult.getColumnIndex(GoalContract._ID);
+      int statusColumnIndex = queryResult.getColumnIndex(GoalContract.COLUMN_GOAL_STATUS);
+
+      model = new GoalModel(
+        queryResult.getInt(idColumnIndex),
+        queryResult.getString(titleColumnIndex),
+        queryResult.getString(descriptionColumnIndex)
+      );
+      model.setResult(GoalModel.ResultType.valueOf(queryResult.getString(statusColumnIndex)));
+    }
+    queryResult.close();
+    return model;
   }
 }

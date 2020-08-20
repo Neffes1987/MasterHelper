@@ -1,6 +1,7 @@
 package com.example.com.masterhelper.journey.adapters;
 
 import android.database.Cursor;
+import android.util.Log;
 import com.example.com.masterhelper.core.app.DbHelpers;
 import com.example.com.masterhelper.core.app.GlobalApplication;
 import com.example.com.masterhelper.core.contracts.GeneralContract;
@@ -29,9 +30,15 @@ public class JourneyDBAdapter extends AbstractSetting {
   }
 
   @Override
-  public void add(DataModel newItem, int parentId) {
+  public int add(DataModel newItem, int parentId) {
     String sqlQuery = dbHelpers.journeysContract.add(newItem, 0);
     dbHelpers.addNewItem(sqlQuery);
+    sqlQuery = GeneralContract.getListQuery(JourneysContract.TABLE_NAME, null, null, JourneysContract._ID + " DESC", 1);
+
+    Cursor queryResult = dbHelpers.getList(sqlQuery);
+    queryResult.moveToNext();
+    int idColumnIndex = queryResult.getColumnIndex(JourneysContract._ID);
+    return queryResult.getInt(idColumnIndex);
   }
 
 
@@ -59,6 +66,7 @@ public class JourneyDBAdapter extends AbstractSetting {
 
   @Override
   public ModelList list() {
+
     String sqlQuery = GeneralContract.getListQuery(JourneysContract.TABLE_NAME, null, null, JourneysContract._ID + " DESC", 0);
     ModelList result = new ModelList();
     Cursor queryResult = dbHelpers.getList(sqlQuery);

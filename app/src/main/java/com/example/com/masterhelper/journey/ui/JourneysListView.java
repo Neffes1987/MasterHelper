@@ -6,7 +6,8 @@ import android.view.View;
 import android.widget.ImageButton;
 import com.example.com.masterhelper.core.models.DataModel;
 import com.example.com.masterhelper.listFactory.commonAdapter.CommonAdapter;
-import com.example.com.masterhelper.listFactory.commonAdapter.item.SettingsItem;
+import com.example.com.masterhelper.listFactory.commonAdapter.item.CommonItem;
+import com.example.com.masterhelper.settings.ui.SettingsItem;
 import com.example.com.masterhelper.settings.SettingsFactory;
 import com.example.com.masterhelper.settings.adapters.AbstractSetting;
 import com.example.com.masterhelper.settings.ui.SettingList;
@@ -49,6 +50,7 @@ public class JourneysListView extends AppCompatActivity implements ICommonItemEv
 
 
   CommonAdapter listAdapter;
+  ListFactory lsf;
 
 
   @Override
@@ -62,14 +64,19 @@ public class JourneysListView extends AppCompatActivity implements ICommonItemEv
     updateJourneysList();
   }
 
-  private void updateJourneysList(){
+  public CommonItem getCommonItemInstance(CommonAdapter adapter) {
     SettingsItem item = new SettingsItem(SettingsItem.SettingsType.journey);
+    item.attachAdapter(adapter);
+    return item;
+  }
+
+  private void updateJourneysList(){
     FragmentManager fm = getSupportFragmentManager();
-    listAdapter = new CommonAdapter(journeyDBAdapter.list(), R.layout.fragment_view_row_item, item, this);
-    ListFactory lsf = (ListFactory) fm.findFragmentById(R.id.JOURNEYS_ID);
+    listAdapter = new CommonAdapter(journeyDBAdapter.list(), R.layout.fragment_view_row_item, this);
+    listAdapter.setCommonItemInstanceGetter(this::getCommonItemInstance);
+    lsf = (ListFactory) fm.findFragmentById(R.id.JOURNEYS_ID);
     if(lsf != null && lsf.getView() != null){
       lsf.setAdapter(listAdapter);
-      listAdapter.notifyDataSetChanged();
     }
   }
 
@@ -127,13 +134,15 @@ public class JourneysListView extends AppCompatActivity implements ICommonItemEv
     JourneyModel item = new JourneyModel(newName, id);
     switch (requestCode){
       case CommonDialog.DIALOG_CREATE_ACTIVITY_RESULT:
-        journeyDBAdapter.add(item,0);
+        int newId = journeyDBAdapter.add(item,0);
+        item.setId(newId);
+        listAdapter.addItem(item, true);
         break;
       case CommonDialog.DIALOG_UPDATE_ACTIVITY_RESULT:
         journeyDBAdapter.update(id, newName, "", null);
+        listAdapter.updateItem(item);
         break;
     }
-    updateJourneysList();
   }
 
   /** обработчик вызова музыкальных настроек */

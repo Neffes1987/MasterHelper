@@ -7,15 +7,17 @@ import com.example.com.masterhelper.core.models.AbilityModel;
 import com.example.com.masterhelper.core.contracts.settings.AbilitiesContract;
 import com.example.com.masterhelper.core.models.DataModel;
 import com.example.com.masterhelper.core.models.utilities.ModelList;
+import com.example.com.masterhelper.force.contracts.ForceContract;
 
 public class AbilityDBAdapter extends AbstractSetting {
   public AbilityDBAdapter(){}
 
   @Override
-  public void add(DataModel newModel, int parentId) {
+  public int add(DataModel newModel, int parentId) {
     AbilityModel model = (AbilityModel) newModel;
     String sqlQuery = dbHelpers.abilitiesContract.add(model, parentId);
     dbHelpers.addNewItem(sqlQuery);
+    return get(0).getId();
   }
 
   @Override
@@ -33,7 +35,6 @@ public class AbilityDBAdapter extends AbstractSetting {
   public void update(int id, String name, String description, String[] selectedItems) {
     AbilityModel model = new AbilityModel(id, name, 0);
     String sqlQuery = dbHelpers.abilitiesContract.update(id, model);
-    Log.i("TAG", "update: " + id);
     dbHelpers.updateItem(sqlQuery);
   }
 
@@ -41,6 +42,30 @@ public class AbilityDBAdapter extends AbstractSetting {
   public void delete(int deletedId) {
     String sqlQuery = dbHelpers.abilitiesContract.delete(deletedId);
     dbHelpers.deleteItem(sqlQuery);
+  }
+
+  public DataModel get(int id) {
+    String where = null;
+    if(id != 0){
+      where = AbilitiesContract._ID+"="+ id;
+    }
+    String sqlQuery = GeneralContract.getListQuery(AbilitiesContract.TABLE_NAME, null, where, AbilitiesContract._ID + " DESC", 1);
+    AbilityModel AbilityModel = null;
+    Cursor queryResult = dbHelpers.getList(sqlQuery);
+
+    while (queryResult.moveToNext()) {
+      // Используем индекс для получения строки или числа
+      int titleColumnIndex = queryResult.getColumnIndex(AbilitiesContract.COLUMN_NAME);
+      int idColumnIndex = queryResult.getColumnIndex(AbilitiesContract._ID);
+
+      AbilityModel = new AbilityModel(
+        queryResult.getInt(idColumnIndex),
+        queryResult.getString(titleColumnIndex),
+        0
+      );
+    }
+    queryResult.close();
+    return AbilityModel;
   }
 
   @Override
