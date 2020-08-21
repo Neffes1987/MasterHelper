@@ -187,8 +187,9 @@ public class MusicSettingsScreen extends AppCompatActivity implements ICommonIte
 
     FragmentManager fragmentManager = getSupportFragmentManager();
     soundListFragment = (SoundsList) fragmentManager.findFragmentById(R.id.SOUND_LIST_FRAGMENT_ID);
-    assert soundListFragment != null;
-    soundListFragment.updateListAdapter(newData, isGeneral);
+    if(soundListFragment != null){
+      soundListFragment.updateListAdapter(newData, isGeneral);
+    }
   }
 
 }

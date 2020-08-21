@@ -1,18 +1,21 @@
-package com.example.com.masterhelper.core.factories.DBAdapters.adapters;
+package com.example.com.masterhelper.scene.adapters;
 
 import android.database.Cursor;
 import com.example.com.masterhelper.core.app.DbHelpers;
 import com.example.com.masterhelper.core.app.GlobalApplication;
 import com.example.com.masterhelper.core.contracts.GeneralContract;
-import com.example.com.masterhelper.core.contracts.scene.SceneContract;
+import com.example.com.masterhelper.scene.contracts.SceneContract;
+import com.example.com.masterhelper.core.factories.DBAdapters.adapters.ScriptDBAdapter;
 import com.example.com.masterhelper.core.models.DataModel;
 import com.example.com.masterhelper.core.models.SceneModel;
 import com.example.com.masterhelper.core.models.ScriptModel;
 import com.example.com.masterhelper.core.models.utilities.ModelList;
 import com.example.com.masterhelper.core.factories.DBAdapters.AdaptersType;
 import com.example.com.masterhelper.core.factories.DBAdapters.DBAdapterFactory;
+import com.example.com.masterhelper.journey.contracts.JourneysContract;
+import com.example.com.masterhelper.settings.adapters.AbstractSetting;
 
-public class SceneDBAdapter  extends CommonBDAdapter<SceneModel> {
+public class SceneDBAdapter extends AbstractSetting {
   /** хелпер для работы с базой */
   private DbHelpers dbHelpers = GlobalApplication.getDbHelpers();
   private ScriptDBAdapter scriptDBAdapter;
@@ -22,7 +25,6 @@ public class SceneDBAdapter  extends CommonBDAdapter<SceneModel> {
     scriptDBAdapter = (ScriptDBAdapter) DBAdapterFactory.getAdapter(AdaptersType.script);
   }
 
-  @Override
   public SceneModel get(int id) {
     String sqlQuery = GeneralContract.getListQuery(SceneContract.TABLE_NAME, null, SceneContract._ID+"="+ id, SceneContract._ID + " DESC", 1);
     SceneModel sceneModel = null;
@@ -47,9 +49,29 @@ public class SceneDBAdapter  extends CommonBDAdapter<SceneModel> {
   }
 
   @Override
-  public void add(SceneModel newItem, int parentId) {
+  public int add(DataModel newItem, int parentId) {
     String sqlQuery = dbHelpers.sceneContract.add(newItem, parentId);
     dbHelpers.addNewItem(sqlQuery);
+    sqlQuery = GeneralContract.getListQuery(SceneContract.TABLE_NAME, null, null, SceneContract._ID + " DESC", 1);
+    Cursor queryResult = dbHelpers.getList(sqlQuery);
+    queryResult.moveToNext();
+    int idColumnIndex = queryResult.getColumnIndex(JourneysContract._ID);
+    return queryResult.getInt(idColumnIndex);
+  }
+
+  @Override
+  public void create(String name, String description, int parentId) {
+
+  }
+
+  @Override
+  public void create(String name, String description, int parentId, String[] selectedItems) {
+
+  }
+
+  @Override
+  public void update(int id, String name, String description, String[] selectedItems) {
+
   }
 
   @Override
@@ -59,12 +81,20 @@ public class SceneDBAdapter  extends CommonBDAdapter<SceneModel> {
   }
 
   @Override
+  public ModelList list() {
+    return null;
+  }
+
+  @Override
+  public ModelList list(int parentId) {
+    return null;
+  }
+
   public void update(SceneModel updatedModel) {
     String sqlQuery = dbHelpers.sceneContract.update(updatedModel.getId(), updatedModel);
     dbHelpers.updateItem(sqlQuery);
   }
 
-  @Override
   public ModelList getListByParentId(int parentId) {
     String sqlQuery = GeneralContract.getListQuery(SceneContract.TABLE_NAME, null, SceneContract.COLUMN_JOURNEY_ID+"="+ parentId, null, 0);
 

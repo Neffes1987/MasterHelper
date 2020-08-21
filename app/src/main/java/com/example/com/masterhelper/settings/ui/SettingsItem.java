@@ -5,19 +5,16 @@ import android.widget.*;
 import com.example.com.masterhelper.core.models.DataModel;
 import com.example.com.masterhelper.force.models.RelationModal;
 import com.example.com.masterhelper.listFactory.commonAdapter.item.CommonItem;
-import com.example.com.masterhelper.listFactory.commonAdapter.item.ICommonItemEvents;
 import com.example.masterhelper.R;
 
 /** Модель для управления интерфейсом внутри элемента для циклического списка
  * Model - тип модели данных, который следует передать в обработчик жлемента списка для инициализаци
  * */
 public class SettingsItem extends CommonItem {
-
   private boolean hideDescription = true;
   private boolean hideCheckboxes = true;
   private boolean showDeleteButton = true;
   private boolean showRelationBlock = false;
-
 
   public SettingsItem(SettingsType type) {
     switch (type){
@@ -43,6 +40,7 @@ public class SettingsItem extends CommonItem {
   }
 
   private void setRelationBlock(DataModel model){
+    id = model.getId();
     LinearLayout relation = itemView.findViewById(R.id.RELATION_BLOCK_ID);
     if(!showRelationBlock){
       relation.setVisibility(View.GONE);
@@ -110,19 +108,18 @@ public class SettingsItem extends CommonItem {
     deleteButton.setOnClickListener(commonListener);
   }
 
-  private void setEditBtn(int id){
+  private void setEditBtn(){
     ImageButton editPopup = itemView.findViewById(R.id.ITEM_EDIT_ID);
-    editPopup.setOnClickListener(v -> {
-      ((ICommonItemEvents) adapter).onClick(v, id);
-    });
+    editPopup.setOnClickListener(commonListener);
   }
 
   public void updateHolderByData(DataModel itemData) {
+    super.updateHolderByData(itemData);
     setTitle(itemData.getName());
     setDescription(itemData);
     setCheckbox(itemData.isSelected);
     setDeleteBtn();
-    setEditBtn(itemData.getId());
+    setEditBtn();
     setClickableZone();
     setRelationBlock(itemData);
   }

@@ -13,34 +13,11 @@ import com.example.com.masterhelper.media.adapters.SoundFileModel;
  * */
 public class MusicItem extends CommonItem {
 
-  /** текстовое поле в с именем файла */
-  private TextView title;
 
-  /** файл выделен */
-  private CheckBox selected;
-
-  /** запустить проигрывание медиафайла */
-  private ImageButton startSound;
-
-  /** остановить проигрывание */
-  private ImageButton stopSound;
+  private boolean isGeneral;
 
   public MusicItem(boolean isGeneral) {
-    title = itemView.findViewById(R.id.FILE_NAME_ID);
-    selected = itemView.findViewById(R.id.FILE_NAME_SELECTOR_ID);
-    selected.setOnClickListener(commonListener);
-    selected.setVisibility(isGeneral ? View.GONE : View.VISIBLE);
-
-
-    startSound = itemView.findViewById(R.id.RUN_MUSIC_FILE_ID);
-    stopSound = itemView.findViewById(R.id.STOP_MUSIC_FILE_ID);
-
-    startSound.setOnClickListener(toggleSoundPlaying);
-    stopSound.setOnClickListener(toggleSoundPlaying);
-
-    ImageButton deleteSound = itemView.findViewById(R.id.MUSIC_DELETE_ROW_ID);
-    deleteSound.setVisibility(!isGeneral ? View.GONE : View.VISIBLE);
-    deleteSound.setOnClickListener(commonListener);
+    this.isGeneral=isGeneral;
   }
 
   View.OnClickListener toggleSoundPlaying = v->{
@@ -55,23 +32,40 @@ public class MusicItem extends CommonItem {
     }
   };
 
+  private void setDeleteControl(){
+    ImageButton deleteSound = itemView.findViewById(R.id.MUSIC_DELETE_ROW_ID);
+    deleteSound.setVisibility(!isGeneral ? View.GONE : View.VISIBLE);
+    deleteSound.setOnClickListener(commonListener);
+  }
+
   private void setMusicStarted(boolean isStarted){
+    ImageButton startSound = itemView.findViewById(R.id.RUN_MUSIC_FILE_ID);
+    ImageButton stopSound = itemView.findViewById(R.id.STOP_MUSIC_FILE_ID);
+
+    startSound.setOnClickListener(toggleSoundPlaying);
+    stopSound.setOnClickListener(toggleSoundPlaying);
     startSound.setVisibility(isStarted ? View.GONE : View.VISIBLE);
     stopSound.setVisibility(isStarted ? View.VISIBLE : View.GONE);
   }
 
   public void setTitle(String title) {
-    this.title.setText(title);
+    TextView title1 = itemView.findViewById(R.id.FILE_NAME_ID);
+    title1.setText(title);
   }
 
   public void setSelected(boolean selected) {
-    this.selected.setChecked(selected);
+    CheckBox selectedView = itemView.findViewById(R.id.FILE_NAME_SELECTOR_ID);
+    selectedView.setOnClickListener(commonListener);
+    selectedView.setVisibility(isGeneral ? View.GONE : View.VISIBLE);
+    selectedView.setChecked(selected);
   }
 
   public void updateHolderByData(DataModel itemData) {
+    super.updateHolderByData(itemData);
     SoundFileModel soundFileModel = (SoundFileModel) itemData;
     setTitle(soundFileModel.getName());
     setSelected(soundFileModel.getSelected());
     setMusicStarted(false);
+    setDeleteControl();
   }
 }

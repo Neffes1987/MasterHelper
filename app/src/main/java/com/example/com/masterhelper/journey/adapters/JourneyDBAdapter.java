@@ -1,7 +1,6 @@
 package com.example.com.masterhelper.journey.adapters;
 
 import android.database.Cursor;
-import android.util.Log;
 import com.example.com.masterhelper.core.app.DbHelpers;
 import com.example.com.masterhelper.core.app.GlobalApplication;
 import com.example.com.masterhelper.core.contracts.GeneralContract;

@@ -1,38 +1,21 @@
-package com.example.com.masterhelper.listFactory.commonAdapter.item;
+package com.example.com.masterhelper.scene.ui;
 
 import android.view.View;
 import android.widget.*;
 import androidx.appcompat.widget.AppCompatImageButton;
 import com.example.com.masterhelper.core.models.DataModel;
+import com.example.com.masterhelper.listFactory.commonAdapter.item.CommonItem;
 import com.example.masterhelper.R;
 import com.example.com.masterhelper.core.models.SceneModel;
 
 /** Модель для управления интерфейсом внутри аккордиона для цеклического списка*/
-public class SceneItem extends CommonItem{
-
-  /** текстовое поле в с именем сцены */
-  private TextView title;
+public class SceneItem extends CommonItem {
 
   /** текстовое поле с описание сцены */
   private TextView description;
 
-  /** текстовое поле с указанием процденых/всех скриптов в сцене */
-  private TextView screenStepsValue;
-
-  /** блок тела аккордиона, чтобы сворачивать разворачицвать его */
-  private LinearLayout body;
-
   /** блок заголовка аккордиона */
   private LinearLayout titleBar;
-
-  /** виджет прогресса по сцене, виден всегда */
-  private ProgressBar progressBar;
-
-  /** иконка окончания сцены, появляется в заголовке аккордиона */
-  private ImageView isFinishedIcon;
-
-  /** Кнопка переключения состояния аккордиона */
-  public AppCompatImageButton expandButton;
 
   /** Кнопка запуска сцены */
   public AppCompatImageButton startScene;
@@ -42,12 +25,15 @@ public class SceneItem extends CommonItem{
 
   /** кнопка удаления сцены */
   public AppCompatImageButton deleteBtn;
+  private LinearLayout body;
+  private View expandButton;
 
   /** установить название сцены в виджет
    * @param title - имя сцены
    * */
   private void setTitle(String title) {
-    this.title.setText(title);
+    TextView title1 = itemView.findViewById(R.id.SCENE_TITLE_ID);
+    title1.setText(title);
   }
 
   /** передать описание сцены в виджет
@@ -55,6 +41,7 @@ public class SceneItem extends CommonItem{
    * */
   private void setDescription(String description) {
     if(description.length() > 0){
+      this.description = itemView.findViewById(R.id.SCENE_DESCRIPTION_ID);
       this.description.setText(description);
       this.description.setVisibility(View.VISIBLE);
     } else {
@@ -70,7 +57,8 @@ public class SceneItem extends CommonItem{
    * */
   private void setScreenStepsValue(SceneModel item) {
     String scripts = item.getSceneProgress();
-    this.screenStepsValue.setText(scripts);
+    TextView screenStepsValue = itemView.findViewById(R.id.SCREEN_STEPS_VALUE_ID);
+    screenStepsValue.setText(scripts);
   }
 
   /** указать состояние флага пройденной сцены
@@ -79,11 +67,12 @@ public class SceneItem extends CommonItem{
    * - scriptsTotal - сколько всего скриптов в сцене
    * */
   private void setSceneIsDone(SceneModel item) {
+    ImageView isFinishedIcon = itemView.findViewById(R.id.SCREEN_IS_DONE_FLAG_ID);
     if(item.checkSceneIsFinished()) {
-      this.isFinishedIcon.setVisibility(View.VISIBLE);
+      isFinishedIcon.setVisibility(View.VISIBLE);
       titleBar.setBackgroundResource(R.color.colorPrimaryDark);
     } else {
-      this.isFinishedIcon.setVisibility(View.GONE);
+      isFinishedIcon.setVisibility(View.GONE);
       titleBar.setBackgroundResource( R.color.colorPrimary);
     }
   }
@@ -94,8 +83,11 @@ public class SceneItem extends CommonItem{
    * - scriptsTotal - сколько всего скриптов в сцене
    * */
   private void setProgressBar(SceneModel item) {
-    this.progressBar.setMax(item.getScriptsTotal());
-    this.progressBar.setProgress(item.getScriptsFinished());
+    titleBar = itemView.findViewById(R.id.SCENE_TITLE_BAR_ID);
+    titleBar.setOnClickListener(itemToggle);
+    ProgressBar progressBar = itemView.findViewById(R.id.SCENE_PROGRESS_ID);
+    progressBar.setMax(item.getScriptsTotal());
+    progressBar.setProgress(item.getScriptsFinished());
     setSceneIsDone(item);
     setScreenStepsValue(item);
   }
@@ -104,51 +96,38 @@ public class SceneItem extends CommonItem{
    * @param itemData - набор данных для инициализации сцены
    * */
   public void updateHolderByData(DataModel itemData) {
+    super.updateHolderByData(itemData);
     SceneModel scene = (SceneModel) itemData;
     setTitle(scene.getName());
     setDescription(scene.getDescription());
     setProgressBar(scene);
+    setControls();
+
+    body = itemView.findViewById(R.id.SCREEN_ACCORDION_BODY_ID);
+    expandButton = itemView.findViewById(R.id.SCREEN_TOGGLER_ID);
+    body.setVisibility(View.GONE);
+  }
+
+  public void setControls(){
+    startScene = itemView.findViewById(R.id.SCENE_START_BTN_ID);
+    startScene.setOnClickListener(commonListener);
+
+    editBtn = itemView.findViewById(R.id.SCENE_EDIT_BTN_ID);
+    editBtn.setOnClickListener(commonListener);
+
+    deleteBtn = itemView.findViewById(R.id.SCENE_DELETE_BTN_ID);
+    deleteBtn.setOnClickListener(commonListener);
   }
 
   /** @constructor генератор указателей на элементы UI для адаптера */
-  public SceneItem() {
-    View v = itemView;
+  public SceneItem() {}
 
-    title = v.findViewById(R.id.SCENE_TITLE_ID);
-    description = v.findViewById(R.id.SCENE_DESCRIPTION_ID);
-    screenStepsValue = v.findViewById(R.id.SCREEN_STEPS_VALUE_ID);
-
-    titleBar = v.findViewById(R.id.SCENE_TITLE_BAR_ID);
-    titleBar.setOnClickListener(itemToggle);
-
-    body = v.findViewById(R.id.SCREEN_ACCORDION_BODY_ID);
-    body.setVisibility(View.GONE);
-
-    progressBar = v.findViewById(R.id.SCENE_PROGRESS_ID);
-
-    isFinishedIcon = v.findViewById(R.id.SCREEN_IS_DONE_FLAG_ID);
-
-    startScene = v.findViewById(R.id.SCENE_START_BTN_ID);
-    startScene.setOnClickListener(commonListener);
-
-    editBtn = v.findViewById(R.id.SCENE_EDIT_BTN_ID);
-    editBtn.setOnClickListener(commonListener);
-
-    deleteBtn = v.findViewById(R.id.SCENE_DELETE_BTN_ID);
-    deleteBtn.setOnClickListener(commonListener);
-
-    expandButton = v.findViewById(R.id.SCREEN_TOGGLER_ID);
-  }
-
-  View.OnClickListener itemToggle =  new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-      toggleVisibility(body);
-      if(body.getVisibility() == View.VISIBLE){
-        expandButton.setRotation(180);
-      } else {
-        expandButton.setRotation(0);
-      }
+  View.OnClickListener itemToggle = v -> {
+    toggleVisibility(body);
+    if(body.getVisibility() == View.VISIBLE){
+      expandButton.setRotation(180);
+    } else {
+      expandButton.setRotation(0);
     }
   };
 

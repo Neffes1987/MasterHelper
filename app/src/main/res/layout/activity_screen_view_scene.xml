@@ -6,7 +6,7 @@
   android:layout_width="match_parent"
   android:layout_height="match_parent"
   style="@style/ConstraintLayoutStyled"
-  tools:context="com.example.com.masterhelper.scene.Scene"
+  tools:context="com.example.com.masterhelper.scene.ui.Scene"
   android:isScrollContainer="true">
 
   <fragment

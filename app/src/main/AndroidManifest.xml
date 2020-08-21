@@ -32,7 +32,7 @@
       android:name="com.example.com.masterhelper.enemies.EnemiesListView"
       android:theme="@style/CustomTheme">
     </activity>
-    <activity android:name="com.example.com.masterhelper.scene.Scene">
+    <activity android:name="com.example.com.masterhelper.scene.ui.Scene">
     </activity>
     <activity android:name="com.example.com.masterhelper.journey.ui.JourneyItemView">
     </activity>

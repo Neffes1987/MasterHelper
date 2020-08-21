@@ -5,17 +5,17 @@ import android.view.View;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBar;
 import com.example.com.masterhelper.core.app.GlobalApplication;
-import com.example.com.masterhelper.core.models.utilities.ModelList;
 import com.example.com.masterhelper.core.factories.dialogs.ui.CreateNewItemDialog;
+import com.example.com.masterhelper.listFactory.commonAdapter.CommonAdapter;
+import com.example.com.masterhelper.listFactory.commonAdapter.item.CommonItem;
+import com.example.com.masterhelper.scene.ui.SceneItem;
 import com.example.masterhelper.R;
 import com.example.com.masterhelper.journey.models.JourneyModel;
-import com.example.com.masterhelper.core.factories.DBAdapters.AdaptersType;
-import com.example.com.masterhelper.core.factories.DBAdapters.DBAdapterFactory;
 import com.example.com.masterhelper.journey.adapters.JourneyDBAdapter;
 import com.example.com.masterhelper.core.factories.dialogs.DialogTypes;
 import com.example.com.masterhelper.core.factories.dialogs.DialogsFactory;
 import com.example.com.masterhelper.core.factories.dialogs.dialogs.CommonDialog;
-import com.example.com.masterhelper.scene.Scene;
+import com.example.com.masterhelper.scene.ui.Scene;
 import com.example.com.masterhelper.listFactory.commonAdapter.item.ICommonItemEvents;
 import com.example.com.masterhelper.listFactory.ListFactory;
 import com.example.com.masterhelper.core.models.SceneModel;
@@ -23,7 +23,7 @@ import android.content.Intent;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.fragment.app.FragmentManager;
-import com.example.com.masterhelper.core.factories.DBAdapters.adapters.SceneDBAdapter;
+import com.example.com.masterhelper.scene.adapters.SceneDBAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import static android.content.DialogInterface.BUTTON_POSITIVE;
@@ -38,12 +38,11 @@ public class JourneyItemView extends AppCompatActivity implements ICommonItemEve
   JourneyDBAdapter journeyDBAdapter = new JourneyDBAdapter();
 
   /** хелпер для управления данными по сценам в базе */
-  SceneDBAdapter sceneDBAdapter = (SceneDBAdapter) DBAdapterFactory.getAdapter(AdaptersType.scene);
+  SceneDBAdapter sceneDBAdapter = new SceneDBAdapter();
 
   JourneyModel currentJourney;
 
-  /** временный кеш по списку сцен */
-  ModelList scenesList = new ModelList();
+  CommonAdapter listAdapter;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -80,13 +79,20 @@ public class JourneyItemView extends AppCompatActivity implements ICommonItemEve
     GlobalApplication.getBackgroundMediaPlayer().stopMediaList();
   }
 
+  public CommonItem getCommonItemInstance(CommonAdapter adapter) {
+    SceneItem item = new SceneItem();
+    item.attachAdapter(adapter);
+    return item;
+  }
+
   /** обновить вьюху по списку сцен */
   void updateScenesList(){
-    scenesList = sceneDBAdapter.getListByParentId(currentJourney.getId());
     FragmentManager fm = getSupportFragmentManager();
+    listAdapter = new CommonAdapter(sceneDBAdapter.getListByParentId(currentJourney.getId()), R.layout.fragment_view_scene_list_item, this);
     ListFactory lsf = (ListFactory) fm.findFragmentById(R.id.SCREEN_FRAGMENT_ID);
-
+    listAdapter.setCommonItemInstanceGetter(this::getCommonItemInstance);
     if(lsf != null && lsf.getView() != null){
+      lsf.setAdapter(listAdapter);
     }
   }
 
@@ -135,19 +141,21 @@ public class JourneyItemView extends AppCompatActivity implements ICommonItemEve
 
     switch (requestCode){
       case CommonDialog.DIALOG_CREATE_ACTIVITY_RESULT:
-        sceneDBAdapter.add(scene, currentJourney.getId());
+        int itemId = sceneDBAdapter.add(scene, currentJourney.getId());
+        scene.setId(itemId);
+        listAdapter.addItem(scene,true);
         break;
       case CommonDialog.DIALOG_UPDATE_ACTIVITY_RESULT:
         sceneDBAdapter.update(scene);
+        listAdapter.updateItem(scene);
         break;
     }
-    updateScenesList();
   }
 
   /** обработчик кнопок сцены */
   @Override
-  public void onClick(View elementFiredAction, int position) {
-    SceneModel currentData = (SceneModel) scenesList.getItemByPosition(position);
+  public void onClick(View elementFiredAction, int itemId) {
+    SceneModel currentData = (SceneModel) listAdapter.getItemById(itemId);
     int btnId = elementFiredAction.getId();
     switch (btnId){
       case R.id.SCENE_START_BTN_ID:
@@ -163,7 +171,7 @@ public class JourneyItemView extends AppCompatActivity implements ICommonItemEve
           dialog.setOnResolveListener((dialogInterface, id) -> {
             if(id == BUTTON_POSITIVE){
               sceneDBAdapter.delete(currentData.getId());
-              updateScenesList();
+              listAdapter.deleteItem(currentData.getId());
             }
           });
           dialog.show(this);

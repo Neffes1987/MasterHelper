@@ -70,13 +70,20 @@ public class SoundsList extends Fragment implements ICommonItemEvents {
       addBtn.setVisibility(View.VISIBLE);
     }
 
-    CommonItem item = new MusicItem(isGeneral);
+
 
     CommonAdapter mAdapter = new CommonAdapter(
       data,
       R.layout.fragment_sounds_item,
       this
     );
+
+    mAdapter.setCommonItemInstanceGetter(currAdapter -> {
+      CommonItem item = new MusicItem(isGeneral);
+      item.attachAdapter(currAdapter);
+      return item;
+    });
+
     recyclerView.setAdapter(mAdapter);
   }
 

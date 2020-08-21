@@ -1,60 +1,39 @@
-package com.example.com.masterhelper.listFactory.commonAdapter.item;
+package com.example.com.masterhelper.scene.ui;
 
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.appcompat.widget.AppCompatImageButton;
-import androidx.recyclerview.widget.RecyclerView;
 import com.example.com.masterhelper.core.models.DataModel;
+import com.example.com.masterhelper.listFactory.commonAdapter.item.CommonItem;
 import com.example.masterhelper.R;
 import com.example.com.masterhelper.core.models.ScriptModel;
 
 /** Модель для управления интерфейсом внутри аккордиона для цеклического списка*/
-public class ScriptItem extends CommonItem{
-
-  /** текстовое поле в с именем сцены */
-  private TextView title;
-
-  /** текстовое поле с описание сцены */
-  private TextView description;
+public class ScriptItem extends CommonItem {
 
   /** блок тела аккордиона, чтобы сворачивать разворачицвать его */
   private LinearLayout body;
 
-  /** блок шапки аккордиона */
-  private LinearLayout titleBar;
-
-  /** иконка окончания сцены, появляется в заголовке аккордиона */
-  private ImageView isFinishedIcon;
-
   /** Кнопка переключения состояния аккордиона */
-  public AppCompatImageButton expandButton;
+  private AppCompatImageButton expandButton;
 
-  /** Кнопка запуска сцены */
-  public AppCompatImageButton startScene;
-
-  /** кнопка редактирования сцены */
-  public AppCompatImageButton editBtn;
-
-  /** кнопка удаления сцены */
-  public AppCompatImageButton deleteBtn;
-
-  /** кнопка удаления сцены */
-  public AppCompatImageButton doneBtn;
 
   /** установить название сцены в виджет
    * @param title - имя сцены
    * */
   private void setTitle(String title) {
-    this.title.setText(title);
+    TextView title1 = itemView.findViewById(R.id.SCRIPT_TITLE_ID);
+    title1.setText(title);
   }
 
   /** передать описание сцены в виджет
    * @param description - описание сцены
    * */
   private void setDescription(String description) {
-    this.description.setText(description);
+    TextView description1 = itemView.findViewById(R.id.SCRIPT_DESCRIPTION_ID);
+    description1.setText(description);
   }
 
   /** указать состояние флага пройденной сцены
@@ -64,7 +43,10 @@ public class ScriptItem extends CommonItem{
    * */
   private void setSceneIsDone(ScriptModel item) {
     boolean isFinished = item.isFinished;
-    this.isFinishedIcon.setVisibility(isFinished ? View.VISIBLE : View.GONE);
+    ImageView isFinishedIcon = itemView.findViewById(R.id.IS_SCRIPT_DONE_FLAG_ID);
+    isFinishedIcon.setVisibility(isFinished ? View.VISIBLE : View.GONE);
+    LinearLayout titleBar = itemView.findViewById(R.id.SCRIPT_TITLE_BAR_ID);
+    titleBar.setOnClickListener(itemToggle);
     titleBar.setBackgroundResource(!isFinished ? R.color.colorPrimary : R.color.colorPrimaryDark);
   }
 
@@ -72,43 +54,37 @@ public class ScriptItem extends CommonItem{
    * @param itemData - набор данных для инициализации сцены
    * */
   public void updateHolderByData(DataModel itemData) {
+    super.updateHolderByData(itemData);
+    body = itemView.findViewById(R.id.ACCORDION_SCRIPT_BODY_ID);
+    body.setVisibility(View.GONE);
     ScriptModel script = (ScriptModel) itemData;
     setTitle(script.getName());
     setDescription(script.getDescription());
     setSceneIsDone(script);
     setBattleButtonVisible(script.hasBattleActionIcon);
+    setControls();
   }
 
   private void setBattleButtonVisible(boolean visible){
+    AppCompatImageButton startScene = itemView.findViewById(R.id.SCRIPT_START_BTN_ID);
+    startScene.setOnClickListener(commonListener);
     startScene.setVisibility(visible ? View.VISIBLE : View.GONE);
+
   }
 
   /** @constructor генератор указателей на элементы UI для адаптера */
-  public ScriptItem() {
+  public ScriptItem() {}
+
+  private void setControls(){
     View v = itemView;
 
-    title = v.findViewById(R.id.SCRIPT_TITLE_ID);
-
-    titleBar = v.findViewById(R.id.SCRIPT_TITLE_BAR_ID);
-    titleBar.setOnClickListener(itemToggle);
-
-    description = v.findViewById(R.id.SCRIPT_DESCRIPTION_ID);
-
-    body = v.findViewById(R.id.ACCORDION_SCRIPT_BODY_ID);
-    body.setVisibility(View.GONE);
-
-    isFinishedIcon = v.findViewById(R.id.IS_SCRIPT_DONE_FLAG_ID);
-
-    startScene = v.findViewById(R.id.SCRIPT_START_BTN_ID);
-    startScene.setOnClickListener(commonListener);
-
-    editBtn = v.findViewById(R.id.SCRIPT_EDIT_BTN_ID);
+    AppCompatImageButton editBtn = v.findViewById(R.id.SCRIPT_EDIT_BTN_ID);
     editBtn.setOnClickListener(commonListener);
 
-    deleteBtn = v.findViewById(R.id.SCRIPT_DELETE_BTN_ID);
+    AppCompatImageButton deleteBtn = v.findViewById(R.id.SCRIPT_DELETE_BTN_ID);
     deleteBtn.setOnClickListener(commonListener);
 
-    doneBtn = v.findViewById(R.id.SCRIPT_BTN_DONE_ID);
+    AppCompatImageButton doneBtn = v.findViewById(R.id.SCRIPT_BTN_DONE_ID);
     doneBtn.setOnClickListener(commonListener);
 
     expandButton = v.findViewById(R.id.SCRIPT_TOGGLER_ID);

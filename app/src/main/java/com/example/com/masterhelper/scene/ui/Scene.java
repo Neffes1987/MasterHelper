@@ -1,4 +1,4 @@
-package com.example.com.masterhelper.scene;
+package com.example.com.masterhelper.scene.ui;
 
 import android.content.Intent;
 import android.os.Build;
@@ -10,6 +10,7 @@ import android.os.Bundle;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 import com.example.com.masterhelper.core.models.utilities.ModelList;
+import com.example.com.masterhelper.listFactory.commonAdapter.CommonAdapter;
 import com.example.com.masterhelper.media.adapters.MediaSettings;
 import com.example.com.masterhelper.media.adapters.SettingsAdapterType;
 import com.example.com.masterhelper.media.SettingsMediaFactory;
@@ -20,12 +21,10 @@ import com.example.com.masterhelper.core.factories.dialogs.ui.CreateNewItemDialo
 import com.example.masterhelper.R;
 import com.example.com.masterhelper.core.factories.DBAdapters.AdaptersType;
 import com.example.com.masterhelper.core.factories.DBAdapters.DBAdapterFactory;
-import com.example.com.masterhelper.core.factories.DBAdapters.adapters.SceneDBAdapter;
 import com.example.com.masterhelper.core.factories.dialogs.DialogTypes;
 import com.example.com.masterhelper.core.factories.dialogs.DialogsFactory;
 import com.example.com.masterhelper.core.factories.dialogs.dialogs.CommonDialog;
 import com.example.com.masterhelper.media.mediaworker.BackgroundMediaPlayer;
-import com.example.com.masterhelper.listFactory.CustomListItemsEnum;
 import com.example.com.masterhelper.listFactory.commonAdapter.item.ICommonItemEvents;
 import com.example.com.masterhelper.listFactory.ListFactory;
 import com.example.com.masterhelper.core.models.ScriptModel;
@@ -40,8 +39,6 @@ public class Scene extends AppCompatActivity implements ICommonItemEvents {
   /** хелпер для работы с таблицей скриптов в бд */
   ScriptDBAdapter scriptDBAdapter = (ScriptDBAdapter) DBAdapterFactory.getAdapter(AdaptersType.script);
 
-  /** хелпер для работы с таблицей сцен в бд */
-  SceneDBAdapter sceneDBAdapter = (SceneDBAdapter) DBAdapterFactory.getAdapter(AdaptersType.scene);
   MediaSettings sceneMediaDBAdapter = SettingsMediaFactory.getAdapter(SettingsAdapterType.scene);
 
   /** указатель на кнопку создания нового скрипта сцены */
@@ -60,12 +57,10 @@ public class Scene extends AppCompatActivity implements ICommonItemEvents {
   /** фоновая музыка проигрывается */
   boolean sceneMusicStarted = false;
 
-  private final int CREATE_NEW_SCRIPT_CODE = 1;
-  private final int UPDATE_SCRIPT_CODE = 2;
   private final int ADD_MUSIC_TO_SCENE_CODE = 3;
 
   /** временный кеш для списка скриптов */
-  public ModelList scriptsList = new ModelList();
+  private CommonAdapter adapter;
 
   public void setSceneMusicStarted(boolean sceneMusicStarted) {
     this.sceneMusicStarted = sceneMusicStarted;
@@ -133,8 +128,14 @@ public class Scene extends AppCompatActivity implements ICommonItemEvents {
 
   /** обновление списка скриптов */
   void setListData(){
-    scriptsList = scriptDBAdapter.getListByParentId(sceneId);
+    adapter = new CommonAdapter(scriptDBAdapter.getListByParentId(sceneId), R.layout.fragment_view_script_list_item, this );
+    adapter.setCommonItemInstanceGetter(currentAdapter -> {
+      ScriptItem item = new ScriptItem();
+      item.attachAdapter(currentAdapter);
+      return item;
+    });
     if(scriptsViewList != null && scriptsViewList.getView() != null){
+      scriptsViewList.setAdapter(adapter);
     }
   }
 
@@ -146,7 +147,7 @@ public class Scene extends AppCompatActivity implements ICommonItemEvents {
 
   /** обновить текущий скрипт  */
   public void onUpdateScriptNameButtonPressed(int id) {
-    ScriptModel scriptModel = (ScriptModel) scriptsList.get(id);
+    ScriptModel scriptModel = (ScriptModel) adapter.getItemById(id);
     CommonDialog dialog = DialogsFactory.createDialog(scriptDialog);
     if(dialog != null){
       dialog.setTitle(R.string.script_update_title);
@@ -183,22 +184,23 @@ public class Scene extends AppCompatActivity implements ICommonItemEvents {
     switch (requestCode){
       case CommonDialog.DIALOG_CREATE_ACTIVITY_RESULT:
         scriptDBAdapter.add(item, sceneId);
+        adapter.addItem(item, true);
         break;
       case CommonDialog.DIALOG_UPDATE_ACTIVITY_RESULT:
         scriptDBAdapter.update(item);
+        adapter.updateItem(item);
         break;
       case ADD_MUSIC_TO_SCENE_CODE:
         String[] selectedPaths = result.getStringArrayExtra(MusicSettingsScreen.SELECTED_LIST);
         sceneMediaDBAdapter.update(selectedPaths, sceneId);
         break;
     }
-    setListData();
   }
 
   /** обработчик нажатия на кнопки управления скриптом */
   @Override
-  public void onClick(View elementFiredAction, int position) {
-    ScriptModel currentData = (ScriptModel) scriptsList.values().toArray()[position];
+  public void onClick(View elementFiredAction, int itemId) {
+    ScriptModel currentData = (ScriptModel) adapter.getItemById(itemId);
     int btnId = elementFiredAction.getId();
     int currId = currentData.getId();
     switch (btnId){
@@ -219,7 +221,7 @@ public class Scene extends AppCompatActivity implements ICommonItemEvents {
           dialog.setOnResolveListener((dialogInterface, id) -> {
             if(id == BUTTON_POSITIVE){
               scriptDBAdapter.delete(currentData.getId());
-              setListData();
+              adapter.deleteItem(currentData.getId());
             }
           });
           dialog.show(this, null);
@@ -230,7 +232,7 @@ public class Scene extends AppCompatActivity implements ICommonItemEvents {
         boolean isFinished = !currentData.isFinished;
         currentData.setFinished(isFinished);
         scriptDBAdapter.update(currentData);
-        setListData();
+        adapter.updateItem(currentData);
         break;
     }
   }

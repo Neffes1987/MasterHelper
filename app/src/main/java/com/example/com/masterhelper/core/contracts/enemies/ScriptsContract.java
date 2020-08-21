@@ -2,7 +2,7 @@ package com.example.com.masterhelper.core.contracts.enemies;
 
 import android.provider.BaseColumns;
 import com.example.com.masterhelper.core.contracts.GeneralContract;
-import com.example.com.masterhelper.core.contracts.scene.SceneContract;
+import com.example.com.masterhelper.scene.contracts.SceneContract;
 import com.example.com.masterhelper.core.models.DataModel;
 import com.example.com.masterhelper.core.models.ScriptModel;
 

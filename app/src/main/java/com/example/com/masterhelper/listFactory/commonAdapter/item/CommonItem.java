@@ -11,10 +11,16 @@ public class CommonItem implements ICommonItem {
   public CommonAdapter adapter;
 
   protected View itemView;
+  protected int id;
 
   public CommonItem() {}
 
-  public View.OnClickListener commonListener = v -> {};
+  protected View.OnClickListener commonListener =  new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+      ((ICommonItemEvents) adapter).onClick(v, id);
+    }
+  };
 
   public void attachItemView(View v){
     itemView = v;
@@ -24,7 +30,9 @@ public class CommonItem implements ICommonItem {
     this.adapter = adapter;
   }
 
-  public void updateHolderByData(DataModel itemData) {}
+  public void updateHolderByData(DataModel itemData) {
+    id = itemData.getId();
+  }
 
   public void toggleVisibility(View v){
     int currentToggle = v.getVisibility();

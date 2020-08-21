@@ -1,7 +1,6 @@
 package com.example.com.masterhelper.listFactory;
 
 import com.example.com.masterhelper.listFactory.commonAdapter.CommonAdapter;
-import com.example.com.masterhelper.listFactory.commonAdapter.item.CommonItem;
 import com.example.com.masterhelper.listFactory.commonAdapter.item.ICommonItemEvents;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
