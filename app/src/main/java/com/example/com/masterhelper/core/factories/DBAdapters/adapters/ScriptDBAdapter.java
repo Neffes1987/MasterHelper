@@ -4,8 +4,8 @@ import android.database.Cursor;
 import com.example.com.masterhelper.core.app.DbHelpers;
 import com.example.com.masterhelper.core.app.GlobalApplication;
 import com.example.com.masterhelper.core.contracts.GeneralContract;
-import com.example.com.masterhelper.core.contracts.enemies.ScriptsContract;
-import com.example.com.masterhelper.core.models.ScriptModel;
+import com.example.com.masterhelper.scene.contracts.ScriptsContract;
+import com.example.com.masterhelper.scene.models.ScriptModel;
 import com.example.com.masterhelper.core.models.utilities.ModelList;
 
 public class ScriptDBAdapter extends CommonBDAdapter<ScriptModel> {

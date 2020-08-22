@@ -1,4 +1,4 @@
-package com.example.com.masterhelper.core.contracts.enemies;
+package com.example.com.masterhelper.enemies.contracts;
 
 import android.provider.BaseColumns;
 import com.example.com.masterhelper.core.contracts.settings.AbilitiesContract;

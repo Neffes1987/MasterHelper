@@ -1,10 +1,9 @@
-package com.example.com.masterhelper.core.contracts.enemies;
+package com.example.com.masterhelper.scene.contracts;
 
 import android.provider.BaseColumns;
 import com.example.com.masterhelper.core.contracts.GeneralContract;
-import com.example.com.masterhelper.scene.contracts.SceneContract;
 import com.example.com.masterhelper.core.models.DataModel;
-import com.example.com.masterhelper.core.models.ScriptModel;
+import com.example.com.masterhelper.scene.models.ScriptModel;
 
 public class ScriptsContract implements BaseColumns {
   public final static  String TABLE_NAME = "scripts";

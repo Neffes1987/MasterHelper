@@ -1,4 +1,4 @@
-package com.example.com.masterhelper.enemies;
+package com.example.com.masterhelper.enemies.ui;
 
 import android.content.Intent;
 import android.os.Build;
@@ -11,7 +11,9 @@ import android.os.Bundle;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
+import com.example.com.masterhelper.core.models.DataModel;
 import com.example.com.masterhelper.core.models.utilities.ModelList;
+import com.example.com.masterhelper.listFactory.commonAdapter.CommonAdapter;
 import com.example.com.masterhelper.media.adapters.SettingsAdapterType;
 import com.example.com.masterhelper.media.SettingsMediaFactory;
 import com.example.com.masterhelper.media.adapters.MediaSettings;
@@ -24,7 +26,6 @@ import com.example.com.masterhelper.core.factories.DBAdapters.DBAdapterFactory;
 import com.example.com.masterhelper.core.factories.DBAdapters.adapters.EnemyDBAdapter;
 import com.example.com.masterhelper.listFactory.commonAdapter.item.ICommonItemEvents;
 import com.example.com.masterhelper.media.mediaworker.BackgroundMediaPlayer;
-import com.example.com.masterhelper.core.models.EnemyModel;
 import com.example.com.masterhelper.listFactory.ListFactory;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -57,7 +58,7 @@ public class EnemiesListView extends AppCompatActivity implements ICommonItemEve
 
   ListFactory lsf;
 
-  ModelList enemies = new ModelList();
+  CommonAdapter adapter;
 
   private String[] getMediaList(){
     ModelList mediaList = scriptMediaSettings.get(scriptId);
@@ -109,14 +110,17 @@ public class EnemiesListView extends AppCompatActivity implements ICommonItemEve
       }
     });
 
+    adapter = new CommonAdapter(enemyDBAdapter.getListByParentId(scriptId), R.layout.fragment_view_enemy_icon, this);
+    adapter.setCommonItemInstanceGetter(curAdapter -> {
+      EnemyIconItem item = new EnemyIconItem();
+      item.attachAdapter(curAdapter);
+      return item;
+    });
     FragmentManager fm = getSupportFragmentManager();
     lsf = (ListFactory) fm.findFragmentById(R.id.ENEMIES_GRID_ID);
-
-    updateEnemiesList();
-  }
-
-  void updateEnemiesList(){
-    enemies = enemyDBAdapter.getListByParentId(scriptId);
+    if(lsf != null){
+      lsf.setAdapter(adapter);
+    }
   }
 
    /**  */
@@ -138,12 +142,24 @@ public class EnemiesListView extends AppCompatActivity implements ICommonItemEve
   @Override
   protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
     super.onActivityResult(requestCode, resultCode, data);
+    DataModel enemy = null;
+    boolean isDeleted = false;
+    int enemyId = 0;
+    if(data != null){
+      enemyId = data.getIntExtra("enemyId", 0);
+      isDeleted = data.getBooleanExtra("deleted", false);
+      enemy = !isDeleted ? enemyDBAdapter.getListByParentId(scriptId).get(enemyId) : null;
+    }
     if(resultCode == RESULT_OK){
-      if(requestCode == CREATE_NEW_ENEMY_CODE){
-        updateEnemiesList();
+      if(requestCode == CREATE_NEW_ENEMY_CODE  && enemy != null){
+        adapter.addItem(enemy, true);
       }
       if(requestCode == EDIT_ENEMY_CODE){
-        updateEnemiesList();
+        if(isDeleted){
+          adapter.deleteItem(enemyId);
+        } else if(enemy != null) {
+          adapter.updateItem(enemy);
+        }
       }
       if(requestCode ==  ADD_MUSIC_TO_SCRIPT_CODE && data != null ){
         String[] selectedPaths = data.getStringArrayExtra(MusicSettingsScreen.SELECTED_LIST);
@@ -154,9 +170,8 @@ public class EnemiesListView extends AppCompatActivity implements ICommonItemEve
 
   /**  */
   @Override
-  public void onClick(View elementFiredAction, int position) {
-    EnemyModel currentData = (EnemyModel) enemies.values().toArray()[position];
-    openEnemyDetails(currentData.getId());
+  public void onClick(View elementFiredAction, int id) {
+    openEnemyDetails(id);
   }
 
   @Override

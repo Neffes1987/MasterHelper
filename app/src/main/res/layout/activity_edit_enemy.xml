@@ -7,7 +7,7 @@
   android:layout_height="match_parent"
   android:focusable="true"
   android:focusableInTouchMode="true"
-  tools:context="com.example.com.masterhelper.enemies.EditEnemy">
+  tools:context="com.example.com.masterhelper.enemies.ui.EditEnemy">
 
   <EditText
     android:layout_width="0dp"
@@ -96,7 +96,7 @@
   <fragment
     android:layout_width="0dp"
     android:layout_height="wrap_content"
-    android:name="com.example.com.masterhelper.enemies.EnemyBottomButtonsFragment"
+    android:name="com.example.com.masterhelper.enemies.ui.EnemyBottomButtonsFragment"
     android:id="@+id/SCRIPT_ENEMY_BOTTOM_BUTTONS"
     tools:layout="@layout/fragment_script_bottom_buttons"
     app:layout_constraintEnd_toEndOf="parent"

@@ -18,7 +18,7 @@ import com.example.com.masterhelper.core.factories.dialogs.dialogs.CommonDialog;
 import com.example.com.masterhelper.scene.ui.Scene;
 import com.example.com.masterhelper.listFactory.commonAdapter.item.ICommonItemEvents;
 import com.example.com.masterhelper.listFactory.ListFactory;
-import com.example.com.masterhelper.core.models.SceneModel;
+import com.example.com.masterhelper.scene.models.SceneModel;
 import android.content.Intent;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;

@@ -6,7 +6,7 @@ import androidx.appcompat.widget.AppCompatImageButton;
 import com.example.com.masterhelper.core.models.DataModel;
 import com.example.com.masterhelper.listFactory.commonAdapter.item.CommonItem;
 import com.example.masterhelper.R;
-import com.example.com.masterhelper.core.models.SceneModel;
+import com.example.com.masterhelper.scene.models.SceneModel;
 
 /** Модель для управления интерфейсом внутри аккордиона для цеклического списка*/
 public class SceneItem extends CommonItem {

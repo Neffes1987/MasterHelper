@@ -1,4 +1,6 @@
-package com.example.com.masterhelper.core.models;
+package com.example.com.masterhelper.scene.models;
+
+import com.example.com.masterhelper.core.models.DataModel;
 
 /**
  * Модель данных для адаптера поключения аккордиона в цеклический список сцены

@@ -1,4 +1,4 @@
-package com.example.com.masterhelper.listFactory.commonAdapter.item;
+package com.example.com.masterhelper.enemies.ui;
 
 import android.view.Gravity;
 import android.view.View;
@@ -7,6 +7,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.cardview.widget.CardView;
 import com.example.com.masterhelper.core.models.DataModel;
+import com.example.com.masterhelper.listFactory.commonAdapter.item.CommonItem;
 import com.example.masterhelper.R;
 import com.example.com.masterhelper.core.models.EnemyModel;
 
@@ -32,22 +33,22 @@ public class EnemyIconItem extends CommonItem {
   /**  */
   EnemyModel enemyData;
 
-  public EnemyIconItem() {
-    View enemyView = itemView;
-
-    enemyCard = enemyView.findViewById(R.id.ENEMY_CARD);
-    enemyDamageMask = enemyView.findViewById(R.id.DAMAGE_MASK);
-    enemyIcon = enemyView.findViewById(R.id.ENEMY_ICON);
-    lastChanged = enemyView.findViewById(R.id.LAST_CHANGED);
-    lastChanged.setVisibility(View.GONE);
-    positionNumber = enemyView.findViewById(R.id.POSITION_NUMBER_ID);
-    enemyTitle = enemyView.findViewById(R.id.ENEMY_NAME_ID);
-    enemyHealthValue = enemyView.findViewById(R.id.ENEMY_HEALTH_VALUE_ID);
-
-    enemyView.setOnClickListener(commonListener);
-  }
+  public EnemyIconItem() {}
 
   public void updateHolderByData(DataModel itemData) {
+    super.updateHolderByData(itemData);
+
+    enemyCard = itemView.findViewById(R.id.ENEMY_CARD);
+    enemyDamageMask = itemView.findViewById(R.id.DAMAGE_MASK);
+    enemyIcon = itemView.findViewById(R.id.ENEMY_ICON);
+    lastChanged = itemView.findViewById(R.id.LAST_CHANGED);
+    lastChanged.setVisibility(View.GONE);
+    positionNumber = itemView.findViewById(R.id.POSITION_NUMBER_ID);
+    enemyTitle = itemView.findViewById(R.id.ENEMY_NAME_ID);
+    enemyHealthValue = itemView.findViewById(R.id.ENEMY_HEALTH_VALUE_ID);
+
+    itemView.setOnClickListener(commonListener);
+
     enemyData = (EnemyModel)itemData;
     positionNumber.setText(enemyData.getOrdering() + "");
     enemyHealthValue.setText(enemyData.getCurrentHealth() + " / " + enemyData.getTotalHealth());

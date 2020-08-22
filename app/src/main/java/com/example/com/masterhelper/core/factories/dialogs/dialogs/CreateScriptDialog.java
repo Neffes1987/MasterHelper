@@ -3,7 +3,7 @@ package com.example.com.masterhelper.core.factories.dialogs.dialogs;
 import android.app.Activity;
 import android.content.Intent;
 import com.example.com.masterhelper.core.models.DataModel;
-import com.example.com.masterhelper.core.models.ScriptModel;
+import com.example.com.masterhelper.scene.models.ScriptModel;
 import com.example.com.masterhelper.core.factories.dialogs.ui.CreateNewItemDialog;
 
 public class CreateScriptDialog extends CommonDialog {

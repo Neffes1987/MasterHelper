@@ -1,5 +1,6 @@
-package com.example.com.masterhelper.enemies;
+package com.example.com.masterhelper.enemies.ui;
 
+import android.content.Intent;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -161,10 +162,13 @@ public class EditEnemy extends AppCompatActivity implements ViewCharacteristicRo
     currentEnemy.setDescription(description);
     currentEnemy.setOrdering(currentOrdering);
 
+    Intent intent = new Intent();
+
     if(currentEnemy.getId() != 0){
       enemyDBAdapter.update(currentEnemy);
       abilityDBAdapter.addAbilitiesByEnemyId(abilities.getUntaggedAbilities(), currentEnemy.getId());
       Toast.makeText(this, title + " обновлен", Toast.LENGTH_LONG).show();
+      intent.putExtra("enemyId", currentEnemy.getId());
     } else {
 
       if(currentHealth == 0){
@@ -176,9 +180,10 @@ public class EditEnemy extends AppCompatActivity implements ViewCharacteristicRo
       currentEnemy.setId(lastAddedEnemy);
       abilityDBAdapter.addAbilitiesByEnemyId(abilities.getUntaggedAbilities(), currentEnemy.getId());
       Toast.makeText(this, title + " добавлен", Toast.LENGTH_LONG).show();
+      intent.putExtra("enemyId", lastAddedEnemy);
     }
 
-    setResult(RESULT_OK);
+    setResult(RESULT_OK, intent);
     finish();
   }
 
@@ -196,7 +201,10 @@ public class EditEnemy extends AppCompatActivity implements ViewCharacteristicRo
   private void deletePerson(){
     enemyDBAdapter.delete(enemyId);
     Toast.makeText(this, currentEnemy.getName() + " удален", Toast.LENGTH_LONG).show();
-    setResult(RESULT_OK);
+    Intent intent = new Intent();
+    intent.putExtra("deleted", true);
+    intent.putExtra("enemyId", enemyId);
+    setResult(RESULT_OK, intent);
     finish();
   }
 
