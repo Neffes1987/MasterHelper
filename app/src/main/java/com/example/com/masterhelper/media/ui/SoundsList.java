@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.com.masterhelper.core.models.utilities.ModelList;
 import com.example.com.masterhelper.listFactory.commonAdapter.item.CommonItem;
-import com.example.com.masterhelper.listFactory.commonAdapter.item.MusicItem;
 import com.example.masterhelper.R;
 import com.example.com.masterhelper.listFactory.commonAdapter.CommonAdapter;
 import com.example.com.masterhelper.listFactory.commonAdapter.item.ICommonItemEvents;

@@ -1,10 +1,11 @@
-package com.example.com.masterhelper.listFactory.commonAdapter.item;
+package com.example.com.masterhelper.media.ui;
 
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import com.example.com.masterhelper.core.models.DataModel;
+import com.example.com.masterhelper.listFactory.commonAdapter.item.CommonItem;
 import com.example.masterhelper.R;
 import com.example.com.masterhelper.media.adapters.SoundFileModel;
 
@@ -12,7 +13,6 @@ import com.example.com.masterhelper.media.adapters.SoundFileModel;
  * Model - тип модели данных, который следует передать в обработчик жлемента списка для инициализаци
  * */
 public class MusicItem extends CommonItem {
-
 
   private boolean isGeneral;
 
