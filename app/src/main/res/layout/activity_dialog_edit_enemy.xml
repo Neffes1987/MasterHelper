@@ -98,7 +98,7 @@
     android:layout_height="wrap_content"
     android:name="com.example.com.masterhelper.enemies.ui.EnemyBottomButtonsFragment"
     android:id="@+id/SCRIPT_ENEMY_BOTTOM_BUTTONS"
-    tools:layout="@layout/fragment_script_bottom_buttons"
+    tools:layout="@layout/fragment_dialog_script_bottom_buttons"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintBottom_toBottomOf="parent"

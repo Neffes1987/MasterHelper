@@ -10,15 +10,16 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import com.example.com.masterhelper.core.factories.dialogs.ui.CreateNewItemDialog;
 import com.example.com.masterhelper.core.models.DataModel;
-import com.example.com.masterhelper.core.models.utilities.ModelList;
 import com.example.com.masterhelper.core.factories.dialogs.DialogTypes;
 import com.example.com.masterhelper.core.factories.dialogs.DialogsFactory;
 import com.example.com.masterhelper.core.factories.dialogs.dialogs.CommonDialog;
-import com.example.com.masterhelper.listFactory.CustomListItemsEnum;
 import com.example.com.masterhelper.listFactory.ListFactory;
+import com.example.com.masterhelper.listFactory.commonAdapter.CommonAdapter;
 import com.example.com.masterhelper.listFactory.commonAdapter.item.ICommonItemEvents;
 import com.example.com.masterhelper.settings.SettingsFactory;
-import com.example.com.masterhelper.settings.adapters.AbstractSetting;
+import com.example.com.masterhelper.settings.SettingsType;
+import com.example.com.masterhelper.settings.adapters.SettingsListDBAdapter;
+import com.example.com.masterhelper.settings.models.SettingModel;
 import com.example.masterhelper.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -30,93 +31,108 @@ public class SettingList extends AppCompatActivity implements ICommonItemEvents 
   FragmentManager fragmentManager;
 
   public static final String EXTRA_TYPE = "settingType";
-  public static final String EXTRA_PARENT_ID = "parentId";
-  public static final String EXTRA_IS_SELECTABLE = "isSelectable";
+  public static final String EXTRA_RECORD_TYPE = "settingRecordType";
   public static final String EXTRA_SELECTED_IDS = "selectedIds";
   public static final String EXTRA_SELECTED_LIST_ITEMS_IDS = "selectedListItemsIds";
   public static final String EXTRA_SETTING_TITLE = "caption";
+  public static final String EXTRA_DIALOG_TITLE = "dialog_caption";
 
   private static final ArrayList<String> selectedListItemsIds = new ArrayList<>();
 
-  private CustomListItemsEnum listType;
   SettingsFactory factory;
 
-  int editItemPosition;
+  int editItemId;
 
   FloatingActionButton addNewNameBtn;
   FloatingActionButton applySelectedItems;
 
-  AbstractSetting settingsAdapter;
+  SettingsListDBAdapter settingsAdapter;
+  CommonAdapter viewAdapter;
   String[] selectedIds = {};
 
-  private ModelList settings = new ModelList();
   int parentId;
+  private String type;
+  private String recordType;
 
-  @Override
-  protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_settings_list);
 
-    String type = getIntent().getStringExtra(EXTRA_TYPE);
-    boolean isSelectable = getIntent().getBooleanExtra(EXTRA_IS_SELECTABLE, false);
-    parentId = getIntent().getIntExtra(EXTRA_PARENT_ID, 0);
-
-    if(isSelectable){
-      applySelectedItems = findViewById(R.id.SETTINGS_APPLY_BTN_ID);
-      applySelectedItems.show();
-      applySelectedItems.setOnClickListener(this::onApplyButtonPressed);
-    }
-
-    int caption = getIntent().getIntExtra(EXTRA_SETTING_TITLE, R.string.screen_settings_default_caption);
-    ActionBar bar = getSupportActionBar();
-    if(bar != null){
-      bar.setTitle(caption);
-    }
-
-    if(type == null){
+  private void initSettingsFactory(){
+    int caption = getIntent().getIntExtra(EXTRA_DIALOG_TITLE, 0);
+    if(type == null || caption == 0){
       try {
-        throw new Exception("не указан тип списка настроек");
+        throw new Exception("не указан тип списка настроек или название диалога");
       } catch (Exception e) {
         e.printStackTrace();
       }
     } else {
 
-      factory = new SettingsFactory(type, isSelectable);
-      settingsAdapter  = factory.getAdapter();
-      listType = factory.getConvertListItemType();
+      factory = new SettingsFactory(SettingsType.valueOf(type), caption);
       selectedIds = getIntent().getStringArrayExtra(EXTRA_SELECTED_IDS);
     }
+  }
 
-    fragmentManager = getSupportFragmentManager();
+  private void setSelectable(){
+    if(SettingsType.valueOf(type) == SettingsType.selectable){
+      applySelectedItems = findViewById(R.id.SETTINGS_APPLY_BTN_ID);
+      applySelectedItems.show();
+      applySelectedItems.setOnClickListener(this::onApplyButtonPressed);
+    }
+  }
+
+  private void setListTitle(){
+    int caption = getIntent().getIntExtra(EXTRA_SETTING_TITLE, R.string.screen_settings_default_caption);
+    ActionBar bar = getSupportActionBar();
+    if(bar != null){
+      bar.setTitle(caption);
+    }
+  }
+
+  private void initViewAdapter(){
+    settingsAdapter = new SettingsListDBAdapter();
+    viewAdapter = new CommonAdapter(settingsAdapter.list(recordType), R.layout.fragment_view_list_item_row, this);
+  }
+
+
+
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_settings_list);
+    type = getIntent().getStringExtra(EXTRA_TYPE);
+    recordType = getIntent().getStringExtra(EXTRA_RECORD_TYPE);
+
+    initSettingsFactory();
+    setSelectable();
+    setListTitle();
+    initViewAdapter();
 
     addNewNameBtn = findViewById(R.id.SETTING_EDIT_ADD_BTN_ID);
     addNewNameBtn.setOnClickListener(v -> onAddButtonPressed());
-    updateList();
+    setList();
   }
 
   /** обновить вьюху по списку сцен */
-  void updateList(){
-    settings = settingsAdapter.list(parentId);
-    settings.setSelectedItems(selectedIds);
+  void setList(){
+    fragmentManager = getSupportFragmentManager();
+    viewAdapter.setSelectedItems(selectedIds);
     FragmentManager fm = getSupportFragmentManager();
     Fragment lsf =  fm.findFragmentById(R.id.EXISTED_SETTINGS_LIST_ID);
 
     if(lsf != null && lsf.getView() != null){
       ListFactory list = (ListFactory) lsf;
+      list.setAdapter(viewAdapter);
     }
   }
 
-
   public void deleteRow(int rowId) {
     settingsAdapter.delete(rowId);
-    updateList();
+    viewAdapter.deleteItem(rowId);
   }
 
   @Override
-  public void onClick(View elementFiredAction, int position) {
-    DataModel row = settings.getItemByPosition(position);
+  public void onClick(View elementFiredAction, int itemId) {
+    DataModel row = viewAdapter.getItemById(itemId);
     if(elementFiredAction.getId() == R.id.ITEM_SELECTOR_ID){
-      String id = row.getId()+"";
+      String id = itemId+"";
       if(selectedListItemsIds.contains(id)){
         selectedListItemsIds.remove(id);
       } else {
@@ -137,7 +153,7 @@ public class SettingList extends AppCompatActivity implements ICommonItemEvents 
     if(row != null && elementFiredAction.getId() == R.id.ITEM_EDIT_ID){
       CommonDialog dialog = factory.getDialog();
       if(dialog != null){
-        editItemPosition = position;
+        editItemId = itemId;
         dialog.show(this, row);
       }
     }
@@ -149,15 +165,6 @@ public class SettingList extends AppCompatActivity implements ICommonItemEvents 
     CommonDialog dialog = factory.getDialog();
     if(dialog != null){
       dialog.show(this, null);
-    }
-  }
-
-  /**   */
-  public void onUpdateButtonPressed(int position) {
-    DataModel model = settings.getItemByPosition(position);
-    CommonDialog dialog = factory.getDialog();
-    if(dialog != null){
-      dialog.show(this, model);
     }
   }
 
@@ -178,7 +185,7 @@ public class SettingList extends AppCompatActivity implements ICommonItemEvents 
     }
 
     if(result == null){
-      updateList();
+      setList();
       return;
     }
 
@@ -191,28 +198,29 @@ public class SettingList extends AppCompatActivity implements ICommonItemEvents 
       return;
     }
 
+    SettingModel model = new SettingModel(id, newName, newDescription, recordType);
     switch (requestCode){
       case CommonDialog.DIALOG_CREATE_ACTIVITY_RESULT:
-        settingsAdapter.create(newName, newDescription, parentId);
+        settingsAdapter.add(model,parentId);
         Toast.makeText(this, newName+" добавлен", Toast.LENGTH_LONG).show();
         break;
       case CommonDialog.DIALOG_UPDATE_ACTIVITY_RESULT:
-        settingsAdapter.update(id, newName, newDescription, null);
-        Toast.makeText(this, newName+" добавлен", Toast.LENGTH_LONG).show();
+        settingsAdapter.update(model);
+        Toast.makeText(this, newName+" обновлен", Toast.LENGTH_LONG).show();
         break;
       case CommonDialog.DIALOG_CREATE_SETTING_ACTIVITY_RESULT:
         settingsAdapter.create(newName, newDescription, parentId, newSelectedItems.toArray(new String[0]));
-        Toast.makeText(this, newName+" обновлен", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, newName+" добавлен", Toast.LENGTH_LONG).show();
         break;
       case CommonDialog.DIALOG_UPDATE_SETTING_ACTIVITY_RESULT:
-        editItemPosition = -1;
+        editItemId = -1;
         settingsAdapter.update(id, newName, newDescription, newSelectedItems.toArray(new String[0]));
         Toast.makeText(this, newName+" обновлен", Toast.LENGTH_LONG).show();
         break;
       default:
         throw new IllegalStateException("Unexpected value: " + resultCode);
     }
-    updateList();
+    setList();
   }
 
 }

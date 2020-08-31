@@ -1,4 +1,6 @@
-package com.example.com.masterhelper.core.models;
+package com.example.com.masterhelper.enemies.models;
+
+import com.example.com.masterhelper.core.models.DataModel;
 
 public class EnemyModel extends DataModel {
 

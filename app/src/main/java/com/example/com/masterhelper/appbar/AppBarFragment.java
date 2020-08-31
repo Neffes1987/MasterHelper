@@ -5,11 +5,9 @@ import android.os.Bundle;
 import android.view.*;
 import androidx.fragment.app.Fragment;
 import com.example.com.masterhelper.media.ui.MusicSettingsScreen;
+import com.example.com.masterhelper.settings.SettingsType;
 import com.example.com.masterhelper.settings.ui.SettingList;
 import com.example.masterhelper.R;
-
-import static com.example.com.masterhelper.settings.SettingsFactory.*;
-
 
 /**  */
 public class AppBarFragment extends Fragment {
@@ -18,8 +16,6 @@ public class AppBarFragment extends Fragment {
 
   /** выпадающее меню  */
   int mainMenuMenu = R.menu.menu_main;
-
-  IAppBarFragment mListener;
 
   public AppBarFragment() {
     // Required empty public constructor
@@ -52,20 +48,18 @@ public class AppBarFragment extends Fragment {
         break;
       case R.id.ABILITIES_SETTINGS:
         intent = new Intent(getActivity(), SettingList.class);
-        intent.putExtra(SettingList.EXTRA_TYPE, SettingsFactoryType.ability.name());
+        intent.putExtra(SettingList.EXTRA_TYPE, SettingsType.global.name());
+        intent.putExtra(SettingList.EXTRA_RECORD_TYPE,"ability");
         intent.putExtra(SettingList.EXTRA_SETTING_TITLE, R.string.abilities_settings);
+        intent.putExtra(SettingList.EXTRA_DIALOG_TITLE, R.string.abilities_settings);
         startActivity(intent);
-        break;
-      case R.id.FORCES_SETTINGS:
-          intent = new Intent(getActivity(), SettingList.class);
-          intent.putExtra(SettingList.EXTRA_TYPE, SettingsFactoryType.force.name());
-          intent.putExtra(SettingList.EXTRA_SETTING_TITLE, R.string.force_menu_item_title);
-          startActivity(intent);
         break;
       case R.id.ADVANCE_SETTING_ID:
           intent = new Intent(getActivity(), SettingList.class);
-          intent.putExtra(SettingList.EXTRA_TYPE, SettingsFactoryType.advance.name());
+          intent.putExtra(SettingList.EXTRA_TYPE, SettingsType.global.name());
+          intent.putExtra(SettingList.EXTRA_RECORD_TYPE,"advance");
           intent.putExtra(SettingList.EXTRA_SETTING_TITLE, R.string.force_advantages_title);
+          intent.putExtra(SettingList.EXTRA_DIALOG_TITLE, R.string.force_advantages_title);
           startActivity(intent);
         break;
       default:

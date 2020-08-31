@@ -47,7 +47,7 @@ public class JourneyItemView extends AppCompatActivity implements ICommonItemEve
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_project_view_screen);
+    setContentView(R.layout.activity_list_project_view_screen);
     int journeyId = getIntent().getIntExtra("id", -1);
     if(journeyId == -1){
       setResult(RESULT_CANCELED);
@@ -88,7 +88,7 @@ public class JourneyItemView extends AppCompatActivity implements ICommonItemEve
   /** обновить вьюху по списку сцен */
   void updateScenesList(){
     FragmentManager fm = getSupportFragmentManager();
-    listAdapter = new CommonAdapter(sceneDBAdapter.getListByParentId(currentJourney.getId()), R.layout.fragment_view_scene_list_item, this);
+    listAdapter = new CommonAdapter(sceneDBAdapter.getListByParentId(currentJourney.getId()), R.layout.fragment_view_list_item_scene_list, this);
     ListFactory lsf = (ListFactory) fm.findFragmentById(R.id.SCREEN_FRAGMENT_ID);
     listAdapter.setCommonItemInstanceGetter(this::getCommonItemInstance);
     if(lsf != null && lsf.getView() != null){

@@ -98,7 +98,7 @@ public class AddNewForce extends AppCompatActivity {
     } else {
       currentModel = coreForceAdapter.get(currentId);
     }
-    setContentView(R.layout.activity_add_new_force);
+    setContentView(R.layout.activity_dialog_add_new_force);
     setName(currentModel.getName());
     setDescription(currentModel.getDescription());
     setType(currentModel.getType());

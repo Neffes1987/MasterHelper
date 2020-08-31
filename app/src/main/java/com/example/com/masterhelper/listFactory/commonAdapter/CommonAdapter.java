@@ -67,6 +67,10 @@ public class CommonAdapter extends RecyclerView.Adapter<CommonHolder> implements
     notifyItemInserted(position);
   }
 
+  public void setSelectedItems(String[] selectedItems){
+    mDataset.setSelectedItems(selectedItems);
+  }
+
 
   /** создаем UI слой для холдера и инициализируем его.
    * Указатель на сцену нужен, чтобы прокинуть коллбек на кнопки */

@@ -13,7 +13,7 @@
     android:name="com.example.com.masterhelper.listFactory.ListFactory"
     android:id="@+id/EXISTED_SETTINGS_LIST_ID"
     android:layout_weight="1"
-    tools:layout="@layout/fragment_view_row_item"
+    tools:layout="@layout/fragment_view_list_item_row"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
     android:layout_marginStart="8dp"

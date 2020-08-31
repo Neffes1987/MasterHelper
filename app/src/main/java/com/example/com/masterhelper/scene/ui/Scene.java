@@ -19,8 +19,6 @@ import com.example.com.masterhelper.enemies.ui.EnemiesListView;
 import com.example.com.masterhelper.core.app.GlobalApplication;
 import com.example.com.masterhelper.core.factories.dialogs.ui.CreateNewItemDialog;
 import com.example.masterhelper.R;
-import com.example.com.masterhelper.core.factories.DBAdapters.AdaptersType;
-import com.example.com.masterhelper.core.factories.DBAdapters.DBAdapterFactory;
 import com.example.com.masterhelper.core.factories.dialogs.DialogTypes;
 import com.example.com.masterhelper.core.factories.dialogs.DialogsFactory;
 import com.example.com.masterhelper.core.factories.dialogs.dialogs.CommonDialog;
@@ -28,7 +26,7 @@ import com.example.com.masterhelper.media.mediaworker.BackgroundMediaPlayer;
 import com.example.com.masterhelper.listFactory.commonAdapter.item.ICommonItemEvents;
 import com.example.com.masterhelper.listFactory.ListFactory;
 import com.example.com.masterhelper.scene.models.ScriptModel;
-import com.example.com.masterhelper.core.factories.DBAdapters.adapters.ScriptDBAdapter;
+import com.example.com.masterhelper.scene.adapters.ScriptDBAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import static android.content.DialogInterface.BUTTON_POSITIVE;
@@ -37,7 +35,7 @@ import static com.example.com.masterhelper.core.factories.dialogs.DialogTypes.sc
 @RequiresApi(api = Build.VERSION_CODES.M)
 public class Scene extends AppCompatActivity implements ICommonItemEvents {
   /** хелпер для работы с таблицей скриптов в бд */
-  ScriptDBAdapter scriptDBAdapter = (ScriptDBAdapter) DBAdapterFactory.getAdapter(AdaptersType.script);
+  ScriptDBAdapter scriptDBAdapter = new ScriptDBAdapter();
 
   MediaSettings sceneMediaDBAdapter = SettingsMediaFactory.getAdapter(SettingsAdapterType.scene);
 
@@ -69,7 +67,7 @@ public class Scene extends AppCompatActivity implements ICommonItemEvents {
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_screen_view_scene);
+    setContentView(R.layout.activity_list_screen_view_scene);
 
     String journeyName = getIntent().getStringExtra("journeyName");
     String sceneName = getIntent().getStringExtra("sceneName");
@@ -128,7 +126,7 @@ public class Scene extends AppCompatActivity implements ICommonItemEvents {
 
   /** обновление списка скриптов */
   void setListData(){
-    adapter = new CommonAdapter(scriptDBAdapter.getListByParentId(sceneId), R.layout.fragment_view_script_list_item, this );
+    adapter = new CommonAdapter(scriptDBAdapter.getListByParentId(sceneId), R.layout.fragment_view_list_item_script, this );
     adapter.setCommonItemInstanceGetter(currentAdapter -> {
       ScriptItem item = new ScriptItem();
       item.attachAdapter(currentAdapter);

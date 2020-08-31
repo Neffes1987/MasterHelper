@@ -5,7 +5,6 @@ import com.example.com.masterhelper.core.app.DbHelpers;
 import com.example.com.masterhelper.core.app.GlobalApplication;
 import com.example.com.masterhelper.core.contracts.GeneralContract;
 import com.example.com.masterhelper.scene.contracts.SceneContract;
-import com.example.com.masterhelper.core.factories.DBAdapters.adapters.ScriptDBAdapter;
 import com.example.com.masterhelper.core.models.DataModel;
 import com.example.com.masterhelper.scene.models.SceneModel;
 import com.example.com.masterhelper.scene.models.ScriptModel;
@@ -22,7 +21,7 @@ public class SceneDBAdapter extends AbstractSetting {
 
   /** конструктор */
   public SceneDBAdapter(){
-    scriptDBAdapter = (ScriptDBAdapter) DBAdapterFactory.getAdapter(AdaptersType.script);
+    scriptDBAdapter = new ScriptDBAdapter();
   }
 
   public SceneModel get(int id) {

@@ -13,12 +13,10 @@ import com.example.com.masterhelper.core.models.utilities.ModelList;
 import com.example.com.masterhelper.viewCharacteristicRow.Abilities;
 import com.example.com.masterhelper.viewCharacteristicRow.ViewCharacteristicRow;
 import com.example.masterhelper.R;
-import com.example.com.masterhelper.core.models.AbilityModel;
-import com.example.com.masterhelper.core.models.EnemyModel;
-import com.example.com.masterhelper.core.factories.DBAdapters.AdaptersType;
-import com.example.com.masterhelper.core.factories.DBAdapters.DBAdapterFactory;
+import com.example.com.masterhelper.abilities.models.AbilityModel;
+import com.example.com.masterhelper.enemies.models.EnemyModel;
 import com.example.com.masterhelper.core.factories.DBAdapters.adapters.AbilityDBAdapter;
-import com.example.com.masterhelper.core.factories.DBAdapters.adapters.EnemyDBAdapter;
+import com.example.com.masterhelper.enemies.adapters.EnemyDBAdapter;
 import com.example.com.masterhelper.core.factories.dialogs.DialogTypes;
 import com.example.com.masterhelper.core.factories.dialogs.DialogsFactory;
 import com.example.com.masterhelper.core.factories.dialogs.dialogs.CommonDialog;
@@ -46,11 +44,11 @@ public class EditEnemy extends AppCompatActivity implements ViewCharacteristicRo
   Abilities abilities;
 
   /** класс для работы с данными противника */
-  EnemyDBAdapter enemyDBAdapter = (EnemyDBAdapter) DBAdapterFactory.getAdapter(AdaptersType.enemy);
+  EnemyDBAdapter enemyDBAdapter = new EnemyDBAdapter();
 
   FragmentManager fragmentManager;
 
-  AbilityDBAdapter abilityDBAdapter = (AbilityDBAdapter) DBAdapterFactory.getAdapter((AdaptersType.ability));
+  AbilityDBAdapter abilityDBAdapter = new AbilityDBAdapter();
 
   int scriptID;
   int enemyId;
@@ -62,7 +60,7 @@ public class EditEnemy extends AppCompatActivity implements ViewCharacteristicRo
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_edit_enemy);
+    setContentView(R.layout.activity_dialog_edit_enemy);
 
     scriptID = getIntent().getIntExtra("scriptId", 0);
     enemyId = getIntent().getIntExtra("enemyId", 0);

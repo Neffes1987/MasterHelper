@@ -10,7 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.example.masterhelper.R;
-import com.example.com.masterhelper.core.models.AbilityModel;
+import com.example.com.masterhelper.abilities.models.AbilityModel;
 
 
 /**  */

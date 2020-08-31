@@ -4,9 +4,9 @@ import android.database.Cursor;
 import com.example.com.masterhelper.core.app.DbHelpers;
 import com.example.com.masterhelper.core.app.GlobalApplication;
 import com.example.com.masterhelper.core.contracts.GeneralContract;
-import com.example.com.masterhelper.core.contracts.settings.AbilitiesContract;
+import com.example.com.masterhelper.abilities.contracts.AbilitiesContract;
 import com.example.com.masterhelper.enemies.contracts.EnemyAbilitiesContract;
-import com.example.com.masterhelper.core.models.AbilityModel;
+import com.example.com.masterhelper.abilities.models.AbilityModel;
 import com.example.com.masterhelper.core.models.DataModel;
 import com.example.com.masterhelper.core.models.utilities.ModelList;
 

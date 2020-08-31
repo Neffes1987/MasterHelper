@@ -63,7 +63,7 @@ public class MusicSettingsScreen extends AppCompatActivity implements ICommonIte
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_music_settings_screen);
+    setContentView(R.layout.activity_list_music_settings_screen);
     mediaFiles = new MediaFiles();
     setGeneral();
     setSelectedList();

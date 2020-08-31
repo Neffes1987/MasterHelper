@@ -3,7 +3,7 @@ package com.example.com.masterhelper.enemies.contracts;
 import android.provider.BaseColumns;
 import com.example.com.masterhelper.core.contracts.GeneralContract;
 import com.example.com.masterhelper.core.models.DataModel;
-import com.example.com.masterhelper.core.models.EnemyModel;
+import com.example.com.masterhelper.enemies.models.EnemyModel;
 import com.example.com.masterhelper.scene.contracts.ScriptsContract;
 
 public class EnemyContract implements BaseColumns {

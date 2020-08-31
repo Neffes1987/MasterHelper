@@ -9,7 +9,7 @@ import androidx.cardview.widget.CardView;
 import com.example.com.masterhelper.core.models.DataModel;
 import com.example.com.masterhelper.listFactory.commonAdapter.item.CommonItem;
 import com.example.masterhelper.R;
-import com.example.com.masterhelper.core.models.EnemyModel;
+import com.example.com.masterhelper.enemies.models.EnemyModel;
 
 public class EnemyIconItem extends CommonItem {
   /**  */

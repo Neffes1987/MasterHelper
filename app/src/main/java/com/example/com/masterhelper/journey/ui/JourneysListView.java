@@ -7,8 +7,8 @@ import android.widget.ImageButton;
 import com.example.com.masterhelper.core.models.DataModel;
 import com.example.com.masterhelper.listFactory.commonAdapter.CommonAdapter;
 import com.example.com.masterhelper.listFactory.commonAdapter.item.CommonItem;
+import com.example.com.masterhelper.settings.SettingsType;
 import com.example.com.masterhelper.settings.ui.SettingsItem;
-import com.example.com.masterhelper.settings.SettingsFactory;
 import com.example.com.masterhelper.settings.adapters.AbstractSetting;
 import com.example.com.masterhelper.settings.ui.SettingList;
 import com.example.masterhelper.R;
@@ -56,7 +56,7 @@ public class JourneysListView extends AppCompatActivity implements ICommonItemEv
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_screen_view_projects);
+    setContentView(R.layout.activity_list_screen_view_projects);
 
     journeyCreateBtn = findViewById(R.id.JOURNEY_CREATE_BTN);
     journeyCreateBtn.setOnClickListener(v -> onCreateJourneyButtonPressed());
@@ -65,14 +65,14 @@ public class JourneysListView extends AppCompatActivity implements ICommonItemEv
   }
 
   public CommonItem getCommonItemInstance(CommonAdapter adapter) {
-    SettingsItem item = new SettingsItem(SettingsItem.SettingsType.journey);
+    SettingsItem item = new SettingsItem(SettingsType.showDescription);
     item.attachAdapter(adapter);
     return item;
   }
 
   private void updateJourneysList(){
     FragmentManager fm = getSupportFragmentManager();
-    listAdapter = new CommonAdapter(journeyDBAdapter.list(), R.layout.fragment_view_row_item, this);
+    listAdapter = new CommonAdapter(journeyDBAdapter.list(), R.layout.fragment_view_list_item_row, this);
     listAdapter.setCommonItemInstanceGetter(this::getCommonItemInstance);
     lsf = (ListFactory) fm.findFragmentById(R.id.JOURNEYS_ID);
     if(lsf != null && lsf.getView() != null){
@@ -113,8 +113,8 @@ public class JourneysListView extends AppCompatActivity implements ICommonItemEv
 
   public void addNewGoalToJourney(int id){
     Intent intent = new Intent(this, SettingList.class);
-    intent.putExtra(SettingList.EXTRA_TYPE, SettingsFactory.SettingsFactoryType.goal.name());
-    intent.putExtra(SettingList.EXTRA_PARENT_ID, id);
+    //intent.putExtra(SettingList.EXTRA_TYPE, SettingsFactory.SettingsFactoryType.goal.name());
+    //intent.putExtra(SettingList.EXTRA_PARENT_ID, id);
     intent.putExtra(SettingList.EXTRA_SETTING_TITLE, R.string.force_goal_motivation_title);
     startActivity(intent);
   }

@@ -13,12 +13,13 @@ import com.example.com.masterhelper.force.contracts.ForceJourneyContract;
 import com.example.com.masterhelper.journey.contracts.JourneysContract;
 import com.example.com.masterhelper.scene.contracts.SceneContract;
 import com.example.com.masterhelper.scene.contracts.SceneMusicContract;
-import com.example.com.masterhelper.core.contracts.settings.AbilitiesContract;
-import com.example.com.masterhelper.core.contracts.settings.AdvanceContract;
+import com.example.com.masterhelper.abilities.contracts.AbilitiesContract;
+import com.example.com.masterhelper.settings.contracts.AdvanceContract;
 import com.example.com.masterhelper.journey.contracts.GoalContract;
 import com.example.com.masterhelper.force.contracts.ForceAdvancesContract;
 import com.example.com.masterhelper.force.contracts.ForceContract;
 import com.example.com.masterhelper.force.contracts.ForceGoalsContract;
+import com.example.com.masterhelper.settings.contracts.SettingsContract;
 
 public class DbHelpers extends SQLiteOpenHelper {
   private String SQLCreateTemplate ="DROP TABLE IF EXISTS ";
@@ -40,6 +41,8 @@ public class DbHelpers extends SQLiteOpenHelper {
   public GeneralContract forceAdvancesContract = new ForceAdvancesContract().getContract();
   public GeneralContract forceJourneyContract = new ForceJourneyContract().getContract();
 
+  public GeneralContract settingsContract = new SettingsContract().getContract();
+
 
   /**
    * Имя файла базы данных
@@ -48,13 +51,19 @@ public class DbHelpers extends SQLiteOpenHelper {
   /**
    * Версия базы данных. При изменении схемы увеличить на единицу
    */
-  private static final int DATABASE_VERSION = 42;
+  private static final int DATABASE_VERSION = 44;
 
   SQLiteDatabase db;
 
   private void generateJourneyTable(){
     db.execSQL(SQLCreateTemplate + journeysContract.getTableName());
     String SQL_CREATE_TABLE = journeysContract.getCreateTableQuery();
+    db.execSQL(SQL_CREATE_TABLE);
+  }
+
+  private void generateSettingsTable(){
+    db.execSQL(SQLCreateTemplate + settingsContract.getTableName());
+    String SQL_CREATE_TABLE = settingsContract.getCreateTableQuery();
     db.execSQL(SQL_CREATE_TABLE);
   }
 
@@ -162,6 +171,8 @@ public class DbHelpers extends SQLiteOpenHelper {
     generateForceGoalTable();
     generateForceAdvancesTable();
     generateForceJourneyTable();
+
+    generateSettingsTable();
   }
 
   @Override
@@ -194,6 +205,8 @@ public class DbHelpers extends SQLiteOpenHelper {
     generateForceGoalTable();
     generateForceAdvancesTable();
     generateForceJourneyTable();
+
+    generateSettingsTable();
   }
 
   public Cursor getList(String query){

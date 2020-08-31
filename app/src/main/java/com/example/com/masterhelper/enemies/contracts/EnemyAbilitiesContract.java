@@ -1,9 +1,9 @@
 package com.example.com.masterhelper.enemies.contracts;
 
 import android.provider.BaseColumns;
-import com.example.com.masterhelper.core.contracts.settings.AbilitiesContract;
+import com.example.com.masterhelper.abilities.contracts.AbilitiesContract;
 import com.example.com.masterhelper.core.contracts.GeneralContract;
-import com.example.com.masterhelper.core.models.AbilityModel;
+import com.example.com.masterhelper.abilities.models.AbilityModel;
 import com.example.com.masterhelper.core.models.DataModel;
 
 

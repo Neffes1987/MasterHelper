@@ -1,13 +1,12 @@
-package com.example.com.masterhelper.settings.adapters;
+package com.example.com.masterhelper.abilities.adapters;
 
 import android.database.Cursor;
-import android.util.Log;
 import com.example.com.masterhelper.core.contracts.GeneralContract;
-import com.example.com.masterhelper.core.models.AbilityModel;
-import com.example.com.masterhelper.core.contracts.settings.AbilitiesContract;
+import com.example.com.masterhelper.abilities.models.AbilityModel;
+import com.example.com.masterhelper.abilities.contracts.AbilitiesContract;
 import com.example.com.masterhelper.core.models.DataModel;
 import com.example.com.masterhelper.core.models.utilities.ModelList;
-import com.example.com.masterhelper.force.contracts.ForceContract;
+import com.example.com.masterhelper.settings.adapters.AbstractSetting;
 
 public class AbilityDBAdapter extends AbstractSetting {
   public AbilityDBAdapter(){}

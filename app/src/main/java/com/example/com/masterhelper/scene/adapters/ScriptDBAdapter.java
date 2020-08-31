@@ -1,9 +1,10 @@
-package com.example.com.masterhelper.core.factories.DBAdapters.adapters;
+package com.example.com.masterhelper.scene.adapters;
 
 import android.database.Cursor;
 import com.example.com.masterhelper.core.app.DbHelpers;
 import com.example.com.masterhelper.core.app.GlobalApplication;
 import com.example.com.masterhelper.core.contracts.GeneralContract;
+import com.example.com.masterhelper.core.factories.DBAdapters.adapters.CommonBDAdapter;
 import com.example.com.masterhelper.scene.contracts.ScriptsContract;
 import com.example.com.masterhelper.scene.models.ScriptModel;
 import com.example.com.masterhelper.core.models.utilities.ModelList;

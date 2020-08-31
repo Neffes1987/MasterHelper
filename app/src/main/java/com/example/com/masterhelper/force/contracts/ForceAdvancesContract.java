@@ -2,7 +2,7 @@ package com.example.com.masterhelper.force.contracts;
 
 import android.provider.BaseColumns;
 import com.example.com.masterhelper.core.contracts.GeneralContract;
-import com.example.com.masterhelper.core.contracts.settings.AdvanceContract;
+import com.example.com.masterhelper.settings.contracts.AdvanceContract;
 import com.example.com.masterhelper.core.models.DataModel;
 import com.example.com.masterhelper.force.models.RelationModal;
 

@@ -22,7 +22,7 @@
     android:layout_height="wrap_content"
     android:name="com.example.com.masterhelper.listFactory.ListFactory"
     android:id="@+id/ENEMIES_GRID_ID"
-    tools:layout="@layout/fragment_view_row_item"
+    tools:layout="@layout/fragment_view_list_item_row"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintBottom_toBottomOf="parent"

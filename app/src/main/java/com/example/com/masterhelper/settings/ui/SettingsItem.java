@@ -5,6 +5,7 @@ import android.widget.*;
 import com.example.com.masterhelper.core.models.DataModel;
 import com.example.com.masterhelper.force.models.RelationModal;
 import com.example.com.masterhelper.listFactory.commonAdapter.item.CommonItem;
+import com.example.com.masterhelper.settings.SettingsType;
 import com.example.masterhelper.R;
 
 /** Модель для управления интерфейсом внутри элемента для циклического списка
@@ -18,9 +19,9 @@ public class SettingsItem extends CommonItem {
 
   public SettingsItem(SettingsType type) {
     switch (type){
-      case abilities:
+      case defaultSettings:
         break;
-      case journey:
+      case showDescription:
         showDeleteButton = false;
         hideDescription = false;
         break;
@@ -31,7 +32,7 @@ public class SettingsItem extends CommonItem {
         hideDescription = false;
         hideCheckboxes = false;
         break;
-      case relation:
+      case relationSetting:
         hideDescription = false;
         showRelationBlock = true;
         break;
@@ -40,7 +41,6 @@ public class SettingsItem extends CommonItem {
   }
 
   private void setRelationBlock(DataModel model){
-    id = model.getId();
     LinearLayout relation = itemView.findViewById(R.id.RELATION_BLOCK_ID);
     if(!showRelationBlock){
       relation.setVisibility(View.GONE);
@@ -124,11 +124,5 @@ public class SettingsItem extends CommonItem {
     setRelationBlock(itemData);
   }
 
-  public enum SettingsType{
-    journey,
-    abilities,
-    global,
-    selectable,
-    relation
-  }
+
 }

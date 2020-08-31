@@ -73,7 +73,7 @@ public class SoundsList extends Fragment implements ICommonItemEvents {
 
     CommonAdapter mAdapter = new CommonAdapter(
       data,
-      R.layout.fragment_sounds_item,
+      R.layout.fragment_view_list_item_sounds,
       this
     );
 
