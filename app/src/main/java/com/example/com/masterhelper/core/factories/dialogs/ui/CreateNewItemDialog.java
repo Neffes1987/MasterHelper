@@ -45,7 +45,7 @@ public class CreateNewItemDialog extends AppCompatActivity {
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_create_new_item);
+    setContentView(R.layout.activity_dialog_create_new_item);
     itemId = getIntent().getIntExtra(ID, -1);
     setName();
     setTitle();

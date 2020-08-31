@@ -44,7 +44,7 @@ public class SoundsList extends Fragment implements ICommonItemEvents {
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
                            Bundle savedInstanceState) {
     // Inflate the layout for this fragment
-    View selfFragment = inflater.inflate(R.layout.fragment_sounds_list, container, false);
+    View selfFragment = inflater.inflate(R.layout.fragment_list_sounds, container, false);
     recyclerView = selfFragment.findViewById(R.id.SOUNDS_LIST_ID);
 
     createBtn = selfFragment.findViewById(R.id.ADD_NEW_FILE_ID);
