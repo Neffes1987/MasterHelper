@@ -1,22 +1,22 @@
 package com.example.com.masterhelper.journey.ui;
 
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
+import com.example.com.masterhelper.core.components.dialogs.dialogs.InputDialog;
 import com.example.com.masterhelper.core.models.DataModel;
-import com.example.com.masterhelper.listFactory.commonAdapter.CommonAdapter;
-import com.example.com.masterhelper.listFactory.commonAdapter.item.CommonItem;
+import com.example.com.masterhelper.core.listFactory.commonAdapter.CommonAdapter;
+import com.example.com.masterhelper.core.listFactory.commonAdapter.item.CommonItem;
 import com.example.com.masterhelper.settings.SettingsType;
 import com.example.com.masterhelper.settings.ui.SettingsItem;
 import com.example.com.masterhelper.settings.adapters.AbstractSetting;
 import com.example.com.masterhelper.settings.ui.SettingList;
 import com.example.masterhelper.R;
 import com.example.com.masterhelper.journey.adapters.JourneyDBAdapter;
-import com.example.com.masterhelper.core.factories.dialogs.DialogTypes;
-import com.example.com.masterhelper.core.factories.dialogs.DialogsFactory;
-import com.example.com.masterhelper.core.factories.dialogs.dialogs.CommonDialog;
-import com.example.com.masterhelper.listFactory.commonAdapter.item.ICommonItemEvents;
+import com.example.com.masterhelper.core.components.dialogs.DialogTypes;
+import com.example.com.masterhelper.core.components.dialogs.DialogsFactory;
+import com.example.com.masterhelper.core.components.dialogs.dialogs.CommonDialog;
+import com.example.com.masterhelper.core.listFactory.commonAdapter.item.ICommonItemEvents;
 import com.example.com.masterhelper.journey.models.JourneyModel;
 import com.example.com.masterhelper.appbar.IAppBarFragment;
 import android.content.Intent;
@@ -24,13 +24,11 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentManager;
-import com.example.com.masterhelper.listFactory.ListFactory;
+import com.example.com.masterhelper.core.listFactory.ListFactory;
 import com.example.com.masterhelper.journey.ui.popupMenu.PopupMenuAdapter;
 import com.example.com.masterhelper.journey.ui.popupMenu.PopupMenuEvents;
 
-
 import static android.content.DialogInterface.BUTTON_POSITIVE;
-import static com.example.com.masterhelper.core.factories.dialogs.DialogTypes.oneFieldDialog;
 
 public class JourneysListView extends AppCompatActivity implements ICommonItemEvents, IAppBarFragment, PopupMenuEvents {
   /** ид выбранного путешествия */
@@ -44,6 +42,9 @@ public class JourneysListView extends AppCompatActivity implements ICommonItemEv
 
   /** указатель на тулбар */
   Toolbar toolbar;
+
+  /** диалог добавления нового приключения */
+  InputDialog journeyDialog;
 
   /** хелпер для управлением таблицей путешествий в бд */
   AbstractSetting journeyDBAdapter = new JourneyDBAdapter();
@@ -62,6 +63,12 @@ public class JourneysListView extends AppCompatActivity implements ICommonItemEv
     journeyCreateBtn.setOnClickListener(v -> onCreateJourneyButtonPressed());
     initToolBar();
     updateJourneysList();
+    initJourneyDialog();
+  }
+
+  private void initJourneyDialog(){
+    journeyDialog = new InputDialog(this, getSupportFragmentManager());
+    journeyDialog.hideDescription();
   }
 
   public CommonItem getCommonItemInstance(CommonAdapter adapter) {
@@ -88,20 +95,28 @@ public class JourneysListView extends AppCompatActivity implements ICommonItemEv
 
   /** вызвать диалог создания новго путешествия */
   public void onCreateJourneyButtonPressed() {
-    CommonDialog dialog = DialogsFactory.createDialog(oneFieldDialog);
-    if(dialog != null){
-      dialog.setTitle(R.string.journey_create_title);
-      dialog.show(this, null);
-    }
+    journeyDialog.setTitle(R.string.journey_create_title);
+    journeyDialog.setOnResolveListener((dialog, which) -> {
+      String newName = journeyDialog.getName();
+      JourneyModel item = new JourneyModel(newName, 0);
+      int newId = journeyDBAdapter.add(item,0);
+      item.setId(newId);
+      listAdapter.addItem(item, true);
+    });
+    journeyDialog.show();
   }
 
   /** вызвать диалог редактирования нового путешествия */
   public void onUpdateJourneyButtonPressed(int id) {
-    CommonDialog dialog = DialogsFactory.createDialog(oneFieldDialog);
-    if(dialog != null){
-      dialog.setTitle(R.string.journey_update_title);
-      dialog.show(this, listAdapter.getItemById(id));
-    }
+    journeyDialog.setTitle(R.string.journey_update_title);
+    DataModel item = listAdapter.getItemById(id);
+    journeyDialog.setOnResolveListener((dialog, which) -> {
+      String newName = journeyDialog.getName();
+      journeyDBAdapter.update(id, newName, "", null);
+      item.setName(newName);
+      listAdapter.updateItem(item);
+    });
+    journeyDialog.show(item);
   }
 
   /** провалиться в выбранное путешествие */
@@ -117,32 +132,6 @@ public class JourneysListView extends AppCompatActivity implements ICommonItemEv
     //intent.putExtra(SettingList.EXTRA_PARENT_ID, id);
     intent.putExtra(SettingList.EXTRA_SETTING_TITLE, R.string.force_goal_motivation_title);
     startActivity(intent);
-  }
-
-  /** обработчик результатов диалогов создания и редактирования */
-  @Override
-  protected void onActivityResult(int requestCode, int resultCode, Intent result) {
-    super.onActivityResult(requestCode, resultCode, result);
-    if(resultCode != RESULT_OK){
-      return;
-    }
-    String newName = result.getStringExtra("name");
-    int id = result.getIntExtra("id", -1);
-    if(newName != null && newName.trim().length() == 0){
-      return;
-    }
-    JourneyModel item = new JourneyModel(newName, id);
-    switch (requestCode){
-      case CommonDialog.DIALOG_CREATE_ACTIVITY_RESULT:
-        int newId = journeyDBAdapter.add(item,0);
-        item.setId(newId);
-        listAdapter.addItem(item, true);
-        break;
-      case CommonDialog.DIALOG_UPDATE_ACTIVITY_RESULT:
-        journeyDBAdapter.update(id, newName, "", null);
-        listAdapter.updateItem(item);
-        break;
-    }
   }
 
   /** обработчик вызова музыкальных настроек */
@@ -162,7 +151,6 @@ public class JourneysListView extends AppCompatActivity implements ICommonItemEv
   /**  */
   @Override
   public void onClick(View elementFiredAction, int id) {
-    Log.i("TAG", "onClick: " + id);
     DataModel journeyModel = listAdapter.getItemById(id);
     selectedJourneyId = journeyModel.getId();
     switch (elementFiredAction.getId()){

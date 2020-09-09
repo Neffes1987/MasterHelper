@@ -1,8 +1,8 @@
-package com.example.com.masterhelper.core.factories.dialogs.dialogs;
+package com.example.com.masterhelper.core.components.dialogs.dialogs;
 
 import android.app.Activity;
 import android.content.Intent;
-import com.example.com.masterhelper.core.factories.dialogs.ui.CreateNewItemDialog;
+import com.example.com.masterhelper.core.components.dialogs.ui.CreateNewItemDialog;
 import com.example.com.masterhelper.force.models.AdvanceModel;
 import com.example.com.masterhelper.force.models.RelationModal;
 import com.example.com.masterhelper.core.models.DataModel;
@@ -12,7 +12,6 @@ import com.example.masterhelper.R;
 public class CreateAdvanceDialog extends CommonDialog {
   public CreateAdvanceDialog() {}
 
-  @Override
   public void show(Activity context) {}
 
   private int getSelectedItemName(RelationModal.DirectionType direction){

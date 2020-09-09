@@ -4,7 +4,7 @@ import android.view.View;
 import android.widget.*;
 import com.example.com.masterhelper.core.models.DataModel;
 import com.example.com.masterhelper.force.models.RelationModal;
-import com.example.com.masterhelper.listFactory.commonAdapter.item.CommonItem;
+import com.example.com.masterhelper.core.listFactory.commonAdapter.item.CommonItem;
 import com.example.com.masterhelper.settings.SettingsType;
 import com.example.masterhelper.R;
 

@@ -1,11 +1,11 @@
 package com.example.com.masterhelper.settings;
 
-import com.example.com.masterhelper.core.factories.dialogs.DialogsFactory;
-import com.example.com.masterhelper.core.factories.dialogs.dialogs.CommonDialog;
-import com.example.com.masterhelper.listFactory.commonAdapter.item.CommonItem;
+import com.example.com.masterhelper.core.components.dialogs.DialogsFactory;
+import com.example.com.masterhelper.core.components.dialogs.dialogs.CommonDialog;
+import com.example.com.masterhelper.core.listFactory.commonAdapter.item.CommonItem;
 import com.example.com.masterhelper.settings.ui.SettingsItem;
 
-import static com.example.com.masterhelper.core.factories.dialogs.DialogTypes.*;
+import static com.example.com.masterhelper.core.components.dialogs.DialogTypes.*;
 
 public final class SettingsFactory {
   public CommonDialog dialog;

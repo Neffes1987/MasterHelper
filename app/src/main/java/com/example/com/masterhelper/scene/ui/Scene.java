@@ -10,27 +10,27 @@ import android.os.Bundle;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 import com.example.com.masterhelper.core.models.utilities.ModelList;
-import com.example.com.masterhelper.listFactory.commonAdapter.CommonAdapter;
+import com.example.com.masterhelper.core.listFactory.commonAdapter.CommonAdapter;
 import com.example.com.masterhelper.media.adapters.MediaSettings;
 import com.example.com.masterhelper.media.adapters.SettingsAdapterType;
 import com.example.com.masterhelper.media.SettingsMediaFactory;
 import com.example.com.masterhelper.media.ui.MusicSettingsScreen;
 import com.example.com.masterhelper.enemies.ui.EnemiesListView;
 import com.example.com.masterhelper.core.app.GlobalApplication;
-import com.example.com.masterhelper.core.factories.dialogs.ui.CreateNewItemDialog;
+import com.example.com.masterhelper.core.components.dialogs.ui.CreateNewItemDialog;
 import com.example.masterhelper.R;
-import com.example.com.masterhelper.core.factories.dialogs.DialogTypes;
-import com.example.com.masterhelper.core.factories.dialogs.DialogsFactory;
-import com.example.com.masterhelper.core.factories.dialogs.dialogs.CommonDialog;
+import com.example.com.masterhelper.core.components.dialogs.DialogTypes;
+import com.example.com.masterhelper.core.components.dialogs.DialogsFactory;
+import com.example.com.masterhelper.core.components.dialogs.dialogs.CommonDialog;
 import com.example.com.masterhelper.media.mediaworker.BackgroundMediaPlayer;
-import com.example.com.masterhelper.listFactory.commonAdapter.item.ICommonItemEvents;
-import com.example.com.masterhelper.listFactory.ListFactory;
+import com.example.com.masterhelper.core.listFactory.commonAdapter.item.ICommonItemEvents;
+import com.example.com.masterhelper.core.listFactory.ListFactory;
 import com.example.com.masterhelper.scene.models.ScriptModel;
 import com.example.com.masterhelper.scene.adapters.ScriptDBAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import static android.content.DialogInterface.BUTTON_POSITIVE;
-import static com.example.com.masterhelper.core.factories.dialogs.DialogTypes.scriptDialog;
+import static com.example.com.masterhelper.core.components.dialogs.DialogTypes.scriptDialog;
 
 @RequiresApi(api = Build.VERSION_CODES.M)
 public class Scene extends AppCompatActivity implements ICommonItemEvents {

@@ -1,4 +1,4 @@
-package com.example.com.masterhelper.listFactory.commonAdapter.item;
+package com.example.com.masterhelper.core.listFactory.commonAdapter.item;
 
 import com.example.com.masterhelper.core.models.DataModel;
 

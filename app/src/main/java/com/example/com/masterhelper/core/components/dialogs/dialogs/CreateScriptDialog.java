@@ -1,15 +1,14 @@
-package com.example.com.masterhelper.core.factories.dialogs.dialogs;
+package com.example.com.masterhelper.core.components.dialogs.dialogs;
 
 import android.app.Activity;
 import android.content.Intent;
 import com.example.com.masterhelper.core.models.DataModel;
 import com.example.com.masterhelper.scene.models.ScriptModel;
-import com.example.com.masterhelper.core.factories.dialogs.ui.CreateNewItemDialog;
+import com.example.com.masterhelper.core.components.dialogs.ui.CreateNewItemDialog;
 
 public class CreateScriptDialog extends CommonDialog {
   public CreateScriptDialog() {}
 
-  @Override
   public void show(Activity context) {}
 
   public void show(Activity context, DataModel settings) {

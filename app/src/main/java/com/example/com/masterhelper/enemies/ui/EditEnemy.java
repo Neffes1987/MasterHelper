@@ -17,10 +17,10 @@ import com.example.com.masterhelper.abilities.models.AbilityModel;
 import com.example.com.masterhelper.enemies.models.EnemyModel;
 import com.example.com.masterhelper.core.factories.DBAdapters.adapters.AbilityDBAdapter;
 import com.example.com.masterhelper.enemies.adapters.EnemyDBAdapter;
-import com.example.com.masterhelper.core.factories.dialogs.DialogTypes;
-import com.example.com.masterhelper.core.factories.dialogs.DialogsFactory;
-import com.example.com.masterhelper.core.factories.dialogs.dialogs.CommonDialog;
-import com.example.com.masterhelper.core.factories.dialogs.dialogs.MultiChooseDialog;
+import com.example.com.masterhelper.core.components.dialogs.DialogTypes;
+import com.example.com.masterhelper.core.components.dialogs.DialogsFactory;
+import com.example.com.masterhelper.core.components.dialogs.dialogs.CommonDialog;
+import com.example.com.masterhelper.core.components.dialogs.dialogs.MultiChooseDialog;
 
 
 import static android.content.DialogInterface.BUTTON_POSITIVE;

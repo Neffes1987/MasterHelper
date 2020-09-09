@@ -1,7 +1,7 @@
-package com.example.com.masterhelper.listFactory;
+package com.example.com.masterhelper.core.listFactory;
 
-import com.example.com.masterhelper.listFactory.commonAdapter.CommonAdapter;
-import com.example.com.masterhelper.listFactory.commonAdapter.item.ICommonItemEvents;
+import com.example.com.masterhelper.core.listFactory.commonAdapter.CommonAdapter;
+import com.example.com.masterhelper.core.listFactory.commonAdapter.item.ICommonItemEvents;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;

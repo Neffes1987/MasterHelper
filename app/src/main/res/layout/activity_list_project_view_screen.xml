@@ -11,7 +11,7 @@
   <fragment
     android:layout_width="0dp"
     android:layout_height="0dp"
-    android:name="com.example.com.masterhelper.listFactory.ListFactory"
+    android:name="com.example.com.masterhelper.core.listFactory.ListFactory"
     android:id="@+id/SCREEN_FRAGMENT_ID"
     tools:layout="@layout/fragment_list_recycler_view"
     app:layout_constraintEnd_toEndOf="parent"

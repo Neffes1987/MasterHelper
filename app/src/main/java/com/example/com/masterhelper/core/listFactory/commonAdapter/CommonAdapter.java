@@ -1,6 +1,5 @@
-package com.example.com.masterhelper.listFactory.commonAdapter;
+package com.example.com.masterhelper.core.listFactory.commonAdapter;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,8 +7,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.com.masterhelper.core.models.DataModel;
 import com.example.com.masterhelper.core.models.utilities.ModelList;
-import com.example.com.masterhelper.listFactory.commonAdapter.item.CommonItem;
-import com.example.com.masterhelper.listFactory.commonAdapter.item.ICommonItemEvents;
+import com.example.com.masterhelper.core.listFactory.commonAdapter.item.CommonItem;
+import com.example.com.masterhelper.core.listFactory.commonAdapter.item.ICommonItemEvents;
 
 /**
  * Адаптор для работы с аккордионами внутри цеклического списка

@@ -10,7 +10,7 @@
   <fragment
     android:layout_width="0dp"
     android:layout_height="wrap_content"
-    android:name="com.example.com.masterhelper.listFactory.ListFactory"
+    android:name="com.example.com.masterhelper.core.listFactory.ListFactory"
     android:id="@+id/EXISTED_SETTINGS_LIST_ID"
     android:layout_weight="1"
     tools:layout="@layout/fragment_view_list_item_row"

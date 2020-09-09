@@ -1,9 +1,9 @@
-package com.example.com.masterhelper.listFactory.commonAdapter;
+package com.example.com.masterhelper.core.listFactory.commonAdapter;
 
 import android.view.View;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.com.masterhelper.core.models.DataModel;
-import com.example.com.masterhelper.listFactory.commonAdapter.item.*;
+import com.example.com.masterhelper.core.listFactory.commonAdapter.item.*;
 
 /** Промежуточный класс, который связывает адаптер и вьюху циклического списка*/
 public class CommonHolder extends RecyclerView.ViewHolder {

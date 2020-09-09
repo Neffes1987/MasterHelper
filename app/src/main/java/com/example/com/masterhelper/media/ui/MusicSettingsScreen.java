@@ -16,10 +16,10 @@ import androidx.fragment.app.FragmentManager;
 import com.example.com.masterhelper.core.models.utilities.ModelList;
 import com.example.com.masterhelper.media.adapters.SoundFileModel;
 import com.example.masterhelper.R;
-import com.example.com.masterhelper.core.factories.dialogs.DialogTypes;
-import com.example.com.masterhelper.core.factories.dialogs.DialogsFactory;
-import com.example.com.masterhelper.core.factories.dialogs.dialogs.CommonDialog;
-import com.example.com.masterhelper.listFactory.commonAdapter.item.ICommonItemEvents;
+import com.example.com.masterhelper.core.components.dialogs.DialogTypes;
+import com.example.com.masterhelper.core.components.dialogs.DialogsFactory;
+import com.example.com.masterhelper.core.components.dialogs.dialogs.CommonDialog;
+import com.example.com.masterhelper.core.listFactory.commonAdapter.item.ICommonItemEvents;
 import com.example.com.masterhelper.media.mediaworker.MediaFiles;
 
 import java.util.Collections;

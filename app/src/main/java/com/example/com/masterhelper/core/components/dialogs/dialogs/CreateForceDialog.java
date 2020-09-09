@@ -1,4 +1,4 @@
-package com.example.com.masterhelper.core.factories.dialogs.dialogs;
+package com.example.com.masterhelper.core.components.dialogs.dialogs;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -8,7 +8,6 @@ import com.example.com.masterhelper.core.models.DataModel;
 public class CreateForceDialog extends CommonDialog {
   public CreateForceDialog() {}
 
-  @Override
   public void show(Activity context) {}
 
   public void show(Activity context, DataModel settings) {

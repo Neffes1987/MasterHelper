@@ -1,4 +1,4 @@
-package com.example.com.masterhelper.core.factories.dialogs.ui;
+package com.example.com.masterhelper.core.components.dialogs.ui;
 
 import android.content.Intent;
 import android.view.View;
@@ -12,12 +12,6 @@ import java.util.ArrayList;
 public class CreateNewItemDialog extends AppCompatActivity {
 
   int itemId;
-
-  int createBtnId = R.id.ITEM_CREATE_BTN_ID;
-  Button createBtn;
-
-  int cancelBtnId = R.id.ITEM_CANCEL_BTN_ID;
-  Button cancelBtn;
 
   EditText nameEditField;
 
@@ -49,8 +43,6 @@ public class CreateNewItemDialog extends AppCompatActivity {
     itemId = getIntent().getIntExtra(ID, -1);
     setName();
     setTitle();
-    setCreateButton();
-    setCancelButton();
     setConfigurationType();
   }
 
@@ -112,20 +104,6 @@ public class CreateNewItemDialog extends AppCompatActivity {
     return result;
   }
 
-
-  void setCreateButton(){
-    createBtn = findViewById(createBtnId);
-    createBtn.setOnClickListener(createDialogListener);
-    if(itemId > 0){
-      createBtn.setText(R.string.update);
-    }
-  }
-
-  void setCancelButton(){
-    cancelBtn = findViewById(cancelBtnId);
-    cancelBtn.setOnClickListener(createDialogListener);
-
-  }
 
   void setScriptBlock(boolean show){
     hasBattleSwitch = findViewById(R.id.SCRIPT_HAS_BATTLE_SCENE_ID);
@@ -237,17 +215,6 @@ public class CreateNewItemDialog extends AppCompatActivity {
     }
     result.putStringArrayListExtra(SELECTED_ITEMS, selections);
   }
-
-
-  View.OnClickListener createDialogListener = v -> {
-    if(v.getId() == createBtnId){
-      Intent result = sendData();
-      setResult(RESULT_OK, result);
-    } else {
-      setResult(RESULT_CANCELED);
-    }
-    finish();
-  };
 
   public enum Configurations{
     script,

@@ -1,18 +1,18 @@
-package com.example.com.masterhelper.listFactory.commonAdapter.item;
+package com.example.com.masterhelper.core.listFactory.commonAdapter.item;
 
 import android.app.Activity;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
-import com.example.com.masterhelper.core.factories.dialogs.DialogsFactory;
-import com.example.com.masterhelper.core.factories.dialogs.dialogs.MultiChooseDialog;
+import com.example.com.masterhelper.core.components.dialogs.DialogsFactory;
+import com.example.com.masterhelper.core.components.dialogs.dialogs.MultiChooseDialog;
 import com.example.com.masterhelper.core.models.DataModel;
 import com.example.com.masterhelper.force.models.ForceModel;
 import com.example.com.masterhelper.fragments.PropertyRow.PropertyRow;
 import com.example.masterhelper.R;
 
 import static android.content.DialogInterface.BUTTON_POSITIVE;
-import static com.example.com.masterhelper.core.factories.dialogs.DialogTypes.multi;
+import static com.example.com.masterhelper.core.components.dialogs.DialogTypes.multi;
 
 /** Модель для управления интерфейсом внутри элемента для циклического списка
  * Model - тип модели данных, который следует передать в обработчик жлемента списка для инициализаци

@@ -13,7 +13,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 import com.example.com.masterhelper.core.models.DataModel;
 import com.example.com.masterhelper.core.models.utilities.ModelList;
-import com.example.com.masterhelper.listFactory.commonAdapter.CommonAdapter;
+import com.example.com.masterhelper.core.listFactory.commonAdapter.CommonAdapter;
 import com.example.com.masterhelper.media.adapters.SettingsAdapterType;
 import com.example.com.masterhelper.media.SettingsMediaFactory;
 import com.example.com.masterhelper.media.adapters.MediaSettings;
@@ -22,9 +22,9 @@ import com.example.masterhelper.R;
 import com.example.com.masterhelper.core.app.GlobalApplication;
 import com.example.com.masterhelper.appbar.IAppBarFragment;
 import com.example.com.masterhelper.enemies.adapters.EnemyDBAdapter;
-import com.example.com.masterhelper.listFactory.commonAdapter.item.ICommonItemEvents;
+import com.example.com.masterhelper.core.listFactory.commonAdapter.item.ICommonItemEvents;
 import com.example.com.masterhelper.media.mediaworker.BackgroundMediaPlayer;
-import com.example.com.masterhelper.listFactory.ListFactory;
+import com.example.com.masterhelper.core.listFactory.ListFactory;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 @RequiresApi(api = Build.VERSION_CODES.M)

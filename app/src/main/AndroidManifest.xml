@@ -16,6 +16,8 @@
     android:supportsRtl="true"
     android:theme="@style/Platform.MaterialComponents"
     tools:ignore="GoogleAppIndexingWarning">
+    <activity android:name="com.example.com.masterhelper.core.components.dialogs.ui.DialogTemplate">
+    </activity>
     <activity android:name="com.example.com.masterhelper.force.ui.AddNewForce">
     </activity>
     <activity android:name="com.example.com.masterhelper.settings.ui.SettingList">
@@ -25,7 +27,7 @@
     <activity android:name="com.example.com.masterhelper.media.ui.MusicSettingsScreen">
     </activity>
     <activity
-      android:name="com.example.com.masterhelper.core.factories.dialogs.ui.CreateNewItemDialog"
+      android:name="com.example.com.masterhelper.core.components.dialogs.ui.CreateNewItemDialog"
       android:theme="@style/AppTheme.About">
     </activity>
     <activity
