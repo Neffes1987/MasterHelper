@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
-import com.example.com.masterhelper.core.components.dialogs.DialogsFactory;
 import com.example.com.masterhelper.core.components.dialogs.dialogs.MultiChooseDialog;
 import com.example.com.masterhelper.core.models.DataModel;
 import com.example.com.masterhelper.force.models.ForceModel;
@@ -12,7 +11,6 @@ import com.example.com.masterhelper.fragments.PropertyRow.PropertyRow;
 import com.example.masterhelper.R;
 
 import static android.content.DialogInterface.BUTTON_POSITIVE;
-import static com.example.com.masterhelper.core.components.dialogs.DialogTypes.multi;
 
 /** Модель для управления интерфейсом внутри элемента для циклического списка
  * Model - тип модели данных, который следует передать в обработчик жлемента списка для инициализаци
@@ -20,6 +18,13 @@ import static com.example.com.masterhelper.core.components.dialogs.DialogTypes.m
 public class ForceItem extends CommonItem {
   View view;
   ForceModel forceModel;
+
+  MultiChooseDialog multiChooseDialog;
+
+  public void setMultiChooseDialog(View view) {
+    Activity host = (Activity) view.getContext();
+    this.multiChooseDialog = new MultiChooseDialog(host);
+  }
 
   private void setJourneyProperties(View v, String value){
     View journeysProperty = v.findViewById(R.id.FORCE_JOURNEYS_PROPERTY_ID);
@@ -45,6 +50,7 @@ public class ForceItem extends CommonItem {
     forceModel = (ForceModel) itemData;
     setJourneyProperties(view, forceModel.getInvolvedJourneys().listToString());
     setGoalsProperties(view, "goals");
+    setMultiChooseDialog(view);
     setEditBtn();
   }
 
@@ -60,21 +66,14 @@ public class ForceItem extends CommonItem {
 
 
   View.OnClickListener onJourneyEdit = v -> {
-    MultiChooseDialog dialog = (MultiChooseDialog) DialogsFactory.createDialog(multi);
-    if(dialog != null){
-      dialog.setListOfItems(forceModel.getInvolvedJourneys().getSelectedItems());
-      dialog.setOnResolveListener((dialogInterface, id) -> {
-        if(id == BUTTON_POSITIVE){
-          boolean[] list = dialog.getSelectedItems();
-          //forceModel.getInvolvedJourneys().setSelectedItems(list);
-        }
-      });
-      Activity host = (Activity) view.getContext();
-      dialog.show(host);
-    }
+    multiChooseDialog.setListOfItems(forceModel.getInvolvedJourneys().getSelectedItems());
+    multiChooseDialog.setOnResolveListener((dialogInterface, id) -> {
+      if(id == BUTTON_POSITIVE){
+        boolean[] list = multiChooseDialog.getSelectedItems();
+        //forceModel.getInvolvedJourneys().setSelectedItems(list);
+      }
+    });
+    multiChooseDialog.show();
   };
   View.OnClickListener onGoalsEdit = v -> {};
-
-
-
 }

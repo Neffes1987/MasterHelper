@@ -3,15 +3,17 @@ package com.example.com.masterhelper.core.components.dialogs.dialogs;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import com.example.com.masterhelper.core.models.DataModel;
 
 public class MultiChooseDialog extends CommonDialog {
+  Activity context;
 
   private String[] listOfItems;
 
   private boolean[] selectedItems;
 
-  public MultiChooseDialog() {}
+  public MultiChooseDialog(Activity context) {
+    this.context = context;
+  }
 
   public boolean[] getSelectedItems() {
     return selectedItems;
@@ -29,7 +31,7 @@ public class MultiChooseDialog extends CommonDialog {
   private  DialogInterface.OnMultiChoiceClickListener multiChoice = (dialog, which, isChecked) -> getSelectedItems()[which] = isChecked;
 
 
-  public void show(Activity context) {
+  public void show() {
     int title = getTitle();
     AlertDialog.Builder builder = new AlertDialog.Builder(context);
     builder.setTitle(title)

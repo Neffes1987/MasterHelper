@@ -19,8 +19,6 @@ import com.example.com.masterhelper.abilities.models.AbilityModel;
 import com.example.com.masterhelper.enemies.models.EnemyModel;
 import com.example.com.masterhelper.core.factories.DBAdapters.adapters.AbilityDBAdapter;
 import com.example.com.masterhelper.enemies.adapters.EnemyDBAdapter;
-import com.example.com.masterhelper.core.components.dialogs.DialogTypes;
-import com.example.com.masterhelper.core.components.dialogs.DialogsFactory;
 import com.example.com.masterhelper.core.components.dialogs.dialogs.MultiChooseDialog;
 
 
@@ -53,10 +51,12 @@ public class EditEnemy extends AppCompatActivity implements ViewCharacteristicRo
 
   InputDialog inputDialog;
   DeleteDialog deleteDialog;
+  MultiChooseDialog multiChooseDialog;
 
   private void setDialogs(){
     inputDialog = new InputDialog(this, getSupportFragmentManager());
     deleteDialog = new DeleteDialog(this);
+    multiChooseDialog = new MultiChooseDialog(this);
   }
 
   int scriptID;
@@ -230,17 +230,14 @@ public class EditEnemy extends AppCompatActivity implements ViewCharacteristicRo
       valueIdx += 1;
     }
 
-    MultiChooseDialog dialog = (MultiChooseDialog) DialogsFactory.createDialog(DialogTypes.multi);
-    if(dialog != null){
-      dialog.setListOfItems(abilitiesNames);
-      dialog.setTitle(R.string.abilities_settings);
-      dialog.setOnResolveListener((dialogInterface, id) -> {
-        if(id == BUTTON_POSITIVE){
-          accepted(dialog.getSelectedItems());
-        }
-      });
-      dialog.show(this);
-    }
+    multiChooseDialog.setListOfItems(abilitiesNames);
+    multiChooseDialog.setTitle(R.string.abilities_settings);
+    multiChooseDialog.setOnResolveListener((dialogInterface, id) -> {
+      if(id == BUTTON_POSITIVE){
+        accepted(multiChooseDialog.getSelectedItems());
+      }
+    });
+    multiChooseDialog.show();
   }
 
   @Override
