@@ -3,6 +3,7 @@ package com.example.com.masterhelper.journey.ui;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
+import com.example.com.masterhelper.core.components.dialogs.dialogs.DeleteDialog;
 import com.example.com.masterhelper.core.components.dialogs.dialogs.InputDialog;
 import com.example.com.masterhelper.core.models.DataModel;
 import com.example.com.masterhelper.core.listFactory.commonAdapter.CommonAdapter;
@@ -45,6 +46,7 @@ public class JourneysListView extends AppCompatActivity implements ICommonItemEv
 
   /** диалог добавления нового приключения */
   InputDialog journeyDialog;
+  DeleteDialog deleteDialog;
 
   /** хелпер для управлением таблицей путешествий в бд */
   AbstractSetting journeyDBAdapter = new JourneyDBAdapter();
@@ -69,6 +71,8 @@ public class JourneysListView extends AppCompatActivity implements ICommonItemEv
   private void initJourneyDialog(){
     journeyDialog = new InputDialog(this, getSupportFragmentManager());
     journeyDialog.hideDescription();
+
+    deleteDialog = new DeleteDialog(this);
   }
 
   public CommonItem getCommonItemInstance(CommonAdapter adapter) {
@@ -175,15 +179,12 @@ public class JourneysListView extends AppCompatActivity implements ICommonItemEv
   public void onPopupMenuSelected(MenuItem selectedMenuItem) {
     switch (selectedMenuItem.getItemId()){
       case R.id.POPUP_MENU_DELETE_ID:
-        CommonDialog dialog = DialogsFactory.createDialog(DialogTypes.delete);
-        if(dialog != null){
-          dialog.setOnResolveListener((dialogInterface, id) -> {
-            if(id == BUTTON_POSITIVE){
-              deleteJourney();
-            }
-          });
-          dialog.show(this);
-        }
+        deleteDialog.setOnResolveListener((dialogInterface, id) -> {
+          if(id == BUTTON_POSITIVE){
+            deleteJourney();
+          }
+        });
+        deleteDialog.show();
         break;
       case R.id.POPUP_MENU_UPDATE_ID:
         onUpdateJourneyButtonPressed(selectedJourneyId);

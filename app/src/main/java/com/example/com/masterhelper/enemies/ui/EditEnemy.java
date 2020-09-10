@@ -8,6 +8,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.fragment.app.FragmentManager;
+import com.example.com.masterhelper.core.components.dialogs.dialogs.DeleteDialog;
+import com.example.com.masterhelper.core.components.dialogs.dialogs.InputDialog;
 import com.example.com.masterhelper.core.models.DataModel;
 import com.example.com.masterhelper.core.models.utilities.ModelList;
 import com.example.com.masterhelper.viewCharacteristicRow.Abilities;
@@ -19,7 +21,6 @@ import com.example.com.masterhelper.core.factories.DBAdapters.adapters.AbilityDB
 import com.example.com.masterhelper.enemies.adapters.EnemyDBAdapter;
 import com.example.com.masterhelper.core.components.dialogs.DialogTypes;
 import com.example.com.masterhelper.core.components.dialogs.DialogsFactory;
-import com.example.com.masterhelper.core.components.dialogs.dialogs.CommonDialog;
 import com.example.com.masterhelper.core.components.dialogs.dialogs.MultiChooseDialog;
 
 
@@ -49,6 +50,14 @@ public class EditEnemy extends AppCompatActivity implements ViewCharacteristicRo
   FragmentManager fragmentManager;
 
   AbilityDBAdapter abilityDBAdapter = new AbilityDBAdapter();
+
+  InputDialog inputDialog;
+  DeleteDialog deleteDialog;
+
+  private void setDialogs(){
+    inputDialog = new InputDialog(this, getSupportFragmentManager());
+    deleteDialog = new DeleteDialog(this);
+  }
 
   int scriptID;
   int enemyId;
@@ -102,6 +111,7 @@ public class EditEnemy extends AppCompatActivity implements ViewCharacteristicRo
       updateView();
     }
 
+    setDialogs();
   }
 
   private void updateDescription(String description){
@@ -241,15 +251,10 @@ public class EditEnemy extends AppCompatActivity implements ViewCharacteristicRo
         break;
       case delete:
         if(enemyId > 0){
-          CommonDialog dialog = DialogsFactory.createDialog(DialogTypes.delete);
-          if(dialog != null){
-            dialog.setOnResolveListener((dialogInterface, id) -> {
-              if(id == BUTTON_POSITIVE){
-                deletePerson();
-              }
-            });
-            dialog.show(this);
-          }
+          deleteDialog.setOnResolveListener((dialogInterface, id) -> {
+            deletePerson();
+          });
+          deleteDialog.show();
         } else {
           setResult(RESULT_CANCELED);
           finish();

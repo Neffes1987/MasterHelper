@@ -61,7 +61,7 @@ public class InputDialog extends CommonDialog {
     View dialogTemplate = inflater.inflate(R.layout.activity_dialog_template, null);
 
     setNameField(dialogTemplate, settings.getName());
-    setDescriptionField(dialogTemplate, settings.getName());
+    setDescriptionField(dialogTemplate, settings.getDescription());
 
 
     builder.setView(dialogTemplate);

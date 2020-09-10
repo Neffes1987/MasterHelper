@@ -5,8 +5,6 @@ import com.example.com.masterhelper.core.components.dialogs.dialogs.*;
 public class DialogsFactory implements IDialogsFactory {
   public static CommonDialog createDialog(DialogTypes type) {
     switch (type){
-      case delete:
-        return new DeleteDialog();
       case multi:
         return new MultiChooseDialog();
       case scriptDialog:

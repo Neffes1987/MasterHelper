@@ -8,15 +8,14 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import com.example.com.masterhelper.core.components.dialogs.dialogs.DeleteDialog;
+import com.example.com.masterhelper.core.components.dialogs.dialogs.InputDialog;
 import com.example.com.masterhelper.core.components.dialogs.ui.CreateNewItemDialog;
 import com.example.com.masterhelper.core.models.DataModel;
-import com.example.com.masterhelper.core.components.dialogs.DialogTypes;
-import com.example.com.masterhelper.core.components.dialogs.DialogsFactory;
 import com.example.com.masterhelper.core.components.dialogs.dialogs.CommonDialog;
 import com.example.com.masterhelper.core.listFactory.ListFactory;
 import com.example.com.masterhelper.core.listFactory.commonAdapter.CommonAdapter;
 import com.example.com.masterhelper.core.listFactory.commonAdapter.item.ICommonItemEvents;
-import com.example.com.masterhelper.settings.SettingsFactory;
 import com.example.com.masterhelper.settings.SettingsType;
 import com.example.com.masterhelper.settings.adapters.SettingsListDBAdapter;
 import com.example.com.masterhelper.settings.models.SettingModel;
@@ -39,8 +38,6 @@ public class SettingList extends AppCompatActivity implements ICommonItemEvents 
 
   private static final ArrayList<String> selectedListItemsIds = new ArrayList<>();
 
-  SettingsFactory factory;
-
   int editItemId;
 
   FloatingActionButton addNewNameBtn;
@@ -54,6 +51,14 @@ public class SettingList extends AppCompatActivity implements ICommonItemEvents 
   private String type;
   private String recordType;
 
+  InputDialog inputDialog;
+  DeleteDialog deleteDialog;
+
+  private void setDialogs(){
+    inputDialog = new InputDialog(this, getSupportFragmentManager());
+    deleteDialog = new DeleteDialog(this);
+  }
+
 
   private void initSettingsFactory(){
     int caption = getIntent().getIntExtra(EXTRA_DIALOG_TITLE, 0);
@@ -64,9 +69,8 @@ public class SettingList extends AppCompatActivity implements ICommonItemEvents 
         e.printStackTrace();
       }
     } else {
-
-      factory = new SettingsFactory(SettingsType.valueOf(type), caption);
       selectedIds = getIntent().getStringArrayExtra(EXTRA_SELECTED_IDS);
+      setDialogs();
     }
   }
 
@@ -140,32 +144,28 @@ public class SettingList extends AppCompatActivity implements ICommonItemEvents 
       }
     }
     if(row != null && elementFiredAction.getId() == R.id.ITEM_DELETE_BUTTON){
-      CommonDialog dialog = DialogsFactory.createDialog(DialogTypes.delete);
-      if(dialog != null){
-        dialog.setOnResolveListener((dialogInterface, id) -> {
-          if(id == BUTTON_POSITIVE){
-            deleteRow(row.getId());
-          }
-        });
-        dialog.show(this);
-      }
+      deleteDialog.setOnResolveListener((dialogInterface, id) -> {
+        if(id == BUTTON_POSITIVE){
+          deleteRow(row.getId());
+        }
+      });
+      deleteDialog.show();
     }
     if(row != null && elementFiredAction.getId() == R.id.ITEM_EDIT_ID){
-      CommonDialog dialog = factory.getDialog();
-      if(dialog != null){
-        editItemId = itemId;
-        dialog.show(this, row);
-      }
+      inputDialog.setOnResolveListener((d, w) -> {
+
+      });
+      inputDialog.show(row);
     }
   }
 
 
   /**   */
   public void onAddButtonPressed() {
-    CommonDialog dialog = factory.getDialog();
-    if(dialog != null){
-      dialog.show(this, null);
-    }
+    inputDialog.setOnResolveListener((d, w) -> {
+
+    });
+    inputDialog.show();
   }
 
   /**   */

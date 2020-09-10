@@ -36,6 +36,7 @@ public abstract class CommonDialog {
     }
   }
 
-  public void show(Activity context, DataModel settings){}
-  public void show(Activity context){}
+  public void show(Activity context, DataModel settings){ show(); }
+  public void show(Activity context){ show(); }
+  public void show(){ }
 }

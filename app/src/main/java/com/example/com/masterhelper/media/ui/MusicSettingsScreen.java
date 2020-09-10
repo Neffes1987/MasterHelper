@@ -13,12 +13,10 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.fragment.app.FragmentManager;
+import com.example.com.masterhelper.core.components.dialogs.dialogs.DeleteDialog;
 import com.example.com.masterhelper.core.models.utilities.ModelList;
 import com.example.com.masterhelper.media.adapters.SoundFileModel;
 import com.example.masterhelper.R;
-import com.example.com.masterhelper.core.components.dialogs.DialogTypes;
-import com.example.com.masterhelper.core.components.dialogs.DialogsFactory;
-import com.example.com.masterhelper.core.components.dialogs.dialogs.CommonDialog;
 import com.example.com.masterhelper.core.listFactory.commonAdapter.item.ICommonItemEvents;
 import com.example.com.masterhelper.media.mediaworker.MediaFiles;
 
@@ -54,6 +52,12 @@ public class MusicSettingsScreen extends AppCompatActivity implements ICommonIte
   /** утилита для работы с медиафайлами */
   private MediaFiles mediaFiles;
 
+  DeleteDialog deleteDialog;
+
+  private void setDialogs(){
+    deleteDialog = new DeleteDialog(this);
+  }
+
   /** набор пермишенов которые надо явно запросить у пользователя чтобы загружать в прилагу файлы */
   String[] permissions = new String[] {
     Manifest.permission.READ_EXTERNAL_STORAGE,
@@ -68,6 +72,7 @@ public class MusicSettingsScreen extends AppCompatActivity implements ICommonIte
     setGeneral();
     setSelectedList();
     updateViewList();
+    setDialogs();
   }
 
   @Override
@@ -104,16 +109,13 @@ public class MusicSettingsScreen extends AppCompatActivity implements ICommonIte
             mediaFiles.stopMediaRecord();
           break;
         case R.id.MUSIC_DELETE_ROW_ID:
-          CommonDialog dialog = DialogsFactory.createDialog(DialogTypes.delete);
-          if(dialog != null){
-            dialog.setOnResolveListener((dialogInterface, id) -> {
-              if(id == BUTTON_POSITIVE){
-                mediaFiles.deleteMedeaRecord(position);
-                updateViewList();
-              }
-            });
-            dialog.show(this);
-          }
+          deleteDialog.setOnResolveListener((dialogInterface, id) -> {
+            if(id == BUTTON_POSITIVE){
+              mediaFiles.deleteMedeaRecord(position);
+              updateViewList();
+            }
+          });
+          deleteDialog.show();
           break;
         case R.id.FILE_NAME_SELECTOR_ID:
           String selectedFilePath = mediaFiles.getFileByPosition(position).getPath();

@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
+import com.example.com.masterhelper.core.components.dialogs.dialogs.DeleteDialog;
 import com.example.com.masterhelper.core.models.utilities.ModelList;
 import com.example.com.masterhelper.core.listFactory.commonAdapter.CommonAdapter;
 import com.example.com.masterhelper.media.adapters.MediaSettings;
@@ -19,7 +20,6 @@ import com.example.com.masterhelper.enemies.ui.EnemiesListView;
 import com.example.com.masterhelper.core.app.GlobalApplication;
 import com.example.com.masterhelper.core.components.dialogs.ui.CreateNewItemDialog;
 import com.example.masterhelper.R;
-import com.example.com.masterhelper.core.components.dialogs.DialogTypes;
 import com.example.com.masterhelper.core.components.dialogs.DialogsFactory;
 import com.example.com.masterhelper.core.components.dialogs.dialogs.CommonDialog;
 import com.example.com.masterhelper.media.mediaworker.BackgroundMediaPlayer;
@@ -59,6 +59,12 @@ public class Scene extends AppCompatActivity implements ICommonItemEvents {
 
   /** временный кеш для списка скриптов */
   private CommonAdapter adapter;
+
+  DeleteDialog deleteDialog;
+
+  private void setDialogs(){
+    deleteDialog = new DeleteDialog(this);
+  }
 
   public void setSceneMusicStarted(boolean sceneMusicStarted) {
     this.sceneMusicStarted = sceneMusicStarted;
@@ -117,6 +123,7 @@ public class Scene extends AppCompatActivity implements ICommonItemEvents {
       bar.setSubtitle(R.string.screen_steps);
       bar.setTitle(journeyName + " -> " + sceneName);
     }
+    setDialogs();
   }
 
   private String[] getMediaList(){
@@ -214,16 +221,13 @@ public class Scene extends AppCompatActivity implements ICommonItemEvents {
         onUpdateScriptNameButtonPressed(currId);
         break;
       case R.id.SCRIPT_DELETE_BTN_ID:
-        CommonDialog dialog = DialogsFactory.createDialog(DialogTypes.delete);
-        if(dialog != null){
-          dialog.setOnResolveListener((dialogInterface, id) -> {
-            if(id == BUTTON_POSITIVE){
-              scriptDBAdapter.delete(currentData.getId());
-              adapter.deleteItem(currentData.getId());
-            }
-          });
-          dialog.show(this, null);
-        }
+        deleteDialog.setOnResolveListener((dialogInterface, id) -> {
+          if(id == BUTTON_POSITIVE){
+            scriptDBAdapter.delete(currentData.getId());
+            adapter.deleteItem(currentData.getId());
+          }
+        });
+        deleteDialog.show();
 
         break;
       case R.id.SCRIPT_BTN_DONE_ID:
