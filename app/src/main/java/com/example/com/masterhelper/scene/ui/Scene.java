@@ -10,6 +10,7 @@ import android.os.Bundle;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 import com.example.com.masterhelper.core.components.dialogs.dialogs.DeleteDialog;
+import com.example.com.masterhelper.core.components.dialogs.dialogs.InputDialog;
 import com.example.com.masterhelper.core.models.utilities.ModelList;
 import com.example.com.masterhelper.core.listFactory.commonAdapter.CommonAdapter;
 import com.example.com.masterhelper.media.adapters.MediaSettings;
@@ -18,10 +19,7 @@ import com.example.com.masterhelper.media.SettingsMediaFactory;
 import com.example.com.masterhelper.media.ui.MusicSettingsScreen;
 import com.example.com.masterhelper.enemies.ui.EnemiesListView;
 import com.example.com.masterhelper.core.app.GlobalApplication;
-import com.example.com.masterhelper.core.components.dialogs.ui.CreateNewItemDialog;
 import com.example.masterhelper.R;
-import com.example.com.masterhelper.core.components.dialogs.DialogsFactory;
-import com.example.com.masterhelper.core.components.dialogs.dialogs.CommonDialog;
 import com.example.com.masterhelper.media.mediaworker.BackgroundMediaPlayer;
 import com.example.com.masterhelper.core.listFactory.commonAdapter.item.ICommonItemEvents;
 import com.example.com.masterhelper.core.listFactory.ListFactory;
@@ -30,7 +28,6 @@ import com.example.com.masterhelper.scene.adapters.ScriptDBAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import static android.content.DialogInterface.BUTTON_POSITIVE;
-import static com.example.com.masterhelper.core.components.dialogs.DialogTypes.scriptDialog;
 
 @RequiresApi(api = Build.VERSION_CODES.M)
 public class Scene extends AppCompatActivity implements ICommonItemEvents {
@@ -61,8 +58,11 @@ public class Scene extends AppCompatActivity implements ICommonItemEvents {
   private CommonAdapter adapter;
 
   DeleteDialog deleteDialog;
+  InputDialog scriptDialog;
 
   private void setDialogs(){
+    scriptDialog = new InputDialog(this, getSupportFragmentManager());
+    scriptDialog.setCheckboxLabel(R.string.script_has_battle);
     deleteDialog = new DeleteDialog(this);
   }
 
@@ -86,11 +86,16 @@ public class Scene extends AppCompatActivity implements ICommonItemEvents {
 
 
     newScriptBtn.setOnClickListener(v -> {
-      CommonDialog dialog = DialogsFactory.createDialog(scriptDialog);
-      if(dialog != null){
-        dialog.setTitle(R.string.script_create_title);
-        dialog.show(this, null);
-      }
+      scriptDialog.setTitle(R.string.script_create_title);
+      scriptDialog.setOnResolveListener((d,w) -> {
+        String name = scriptDialog.getName();
+        String description = scriptDialog.getDescription();
+        boolean isBattle = scriptDialog.getCheckboxValue();
+        ScriptModel item = new ScriptModel(name, 0, description, isBattle, false);
+        scriptDBAdapter.add(item, sceneId);
+        adapter.addItem(item, true);
+      });
+      scriptDialog.show();
     });
 
 
@@ -153,11 +158,18 @@ public class Scene extends AppCompatActivity implements ICommonItemEvents {
   /** обновить текущий скрипт  */
   public void onUpdateScriptNameButtonPressed(int id) {
     ScriptModel scriptModel = (ScriptModel) adapter.getItemById(id);
-    CommonDialog dialog = DialogsFactory.createDialog(scriptDialog);
-    if(dialog != null){
-      dialog.setTitle(R.string.script_update_title);
-      dialog.show(this, scriptModel);
-    }
+    scriptDialog.setTitle(R.string.script_update_title);
+    scriptDialog.setOnResolveListener((d,w) -> {
+      String name = scriptDialog.getName();
+      String description = scriptDialog.getDescription();
+      scriptModel.hasBattleActionIcon = scriptDialog.getCheckboxValue();
+      scriptModel.setDescription(description);
+      scriptModel.setName(name);
+      scriptDBAdapter.update(scriptModel);
+      adapter.updateItem(scriptModel);
+    });
+    scriptDialog.show(scriptModel);
+    scriptDialog.setCheckboxValue(scriptModel.hasBattleActionIcon);
   }
 
   /** обработчик результата работы дочерних активностей по созданию или редактированию скриптов */
@@ -167,38 +179,9 @@ public class Scene extends AppCompatActivity implements ICommonItemEvents {
     if(resultCode != RESULT_OK){
       return;
     }
-    String newName = result.getStringExtra(CreateNewItemDialog.NAME);
-    int hasBattleSceneValue = result.getIntExtra(CreateNewItemDialog.IS_BATTLE, 0);
-    String description = result.getStringExtra(CreateNewItemDialog.DESCRIPTION);
-    int id = result.getIntExtra(CreateNewItemDialog.ID, 0);
-
-    if(newName != null && newName.trim().length() == 0){
-      return;
-    }
-
-    ScriptModel item;
-
-    if(id > 0){
-      item = scriptDBAdapter.get(id);
-      item.setName(newName);
-      item.setDescription(description);
-      item.hasBattleActionIcon = hasBattleSceneValue == 1;
-    } else {
-      item = new ScriptModel(newName, id, description, hasBattleSceneValue == 1, false);
-    }
-    switch (requestCode){
-      case CommonDialog.DIALOG_CREATE_ACTIVITY_RESULT:
-        scriptDBAdapter.add(item, sceneId);
-        adapter.addItem(item, true);
-        break;
-      case CommonDialog.DIALOG_UPDATE_ACTIVITY_RESULT:
-        scriptDBAdapter.update(item);
-        adapter.updateItem(item);
-        break;
-      case ADD_MUSIC_TO_SCENE_CODE:
-        String[] selectedPaths = result.getStringArrayExtra(MusicSettingsScreen.SELECTED_LIST);
-        sceneMediaDBAdapter.update(selectedPaths, sceneId);
-        break;
+    if (requestCode == ADD_MUSIC_TO_SCENE_CODE) {
+      String[] selectedPaths = result.getStringArrayExtra(MusicSettingsScreen.SELECTED_LIST);
+      sceneMediaDBAdapter.update(selectedPaths, sceneId);
     }
   }
 

@@ -3,22 +3,18 @@ package com.example.com.masterhelper.settings.ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Toast;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import com.example.com.masterhelper.core.components.dialogs.dialogs.DeleteDialog;
 import com.example.com.masterhelper.core.components.dialogs.dialogs.InputDialog;
-import com.example.com.masterhelper.core.components.dialogs.ui.CreateNewItemDialog;
 import com.example.com.masterhelper.core.models.DataModel;
-import com.example.com.masterhelper.core.components.dialogs.dialogs.CommonDialog;
 import com.example.com.masterhelper.core.listFactory.ListFactory;
 import com.example.com.masterhelper.core.listFactory.commonAdapter.CommonAdapter;
 import com.example.com.masterhelper.core.listFactory.commonAdapter.item.ICommonItemEvents;
 import com.example.com.masterhelper.settings.SettingsType;
 import com.example.com.masterhelper.settings.adapters.SettingsListDBAdapter;
-import com.example.com.masterhelper.settings.models.SettingModel;
 import com.example.masterhelper.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -38,8 +34,6 @@ public class SettingList extends AppCompatActivity implements ICommonItemEvents 
 
   private static final ArrayList<String> selectedListItemsIds = new ArrayList<>();
 
-  int editItemId;
-
   FloatingActionButton addNewNameBtn;
   FloatingActionButton applySelectedItems;
 
@@ -47,7 +41,6 @@ public class SettingList extends AppCompatActivity implements ICommonItemEvents 
   CommonAdapter viewAdapter;
   String[] selectedIds = {};
 
-  int parentId;
   private String type;
   private String recordType;
 
@@ -176,7 +169,8 @@ public class SettingList extends AppCompatActivity implements ICommonItemEvents 
     finish();
   }
 
-  /** обработчик результатов диалогов создания и редактирования */
+
+  /** обработчик результатов диалогов создания и редактирования
   @Override
   protected void onActivityResult(int requestCode, int resultCode, Intent result) {
     super.onActivityResult(requestCode, resultCode, result);
@@ -221,6 +215,6 @@ public class SettingList extends AppCompatActivity implements ICommonItemEvents 
         throw new IllegalStateException("Unexpected value: " + resultCode);
     }
     setList();
-  }
+  }*/
 
 }

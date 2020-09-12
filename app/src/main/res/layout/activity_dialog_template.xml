@@ -34,7 +34,16 @@
       android:name="com.example.com.masterhelper.core.components.ComponentEditField"
       android:id="@+id/DIALOG_DESCRIPTION_ID"
       tools:layout="@layout/fragment_component_edit_field"
-      android:tag="DIALOG_DESCRIPTION_ID"/>
+      android:tag="DIALOG_DESCRIPTION_ID"
+      android:layout_marginBottom="8dp"/>
+
+    <fragment
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:name="com.example.com.masterhelper.core.components.ComponentCheckBox"
+      android:id="@+id/DIALOG_CHECKBOX_ID"
+      tools:layout="@layout/fragment_component_check_box"
+      tools:visibility="gone"/>
   </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

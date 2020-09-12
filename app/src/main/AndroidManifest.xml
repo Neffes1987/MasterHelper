@@ -27,10 +27,6 @@
     <activity android:name="com.example.com.masterhelper.media.ui.MusicSettingsScreen">
     </activity>
     <activity
-      android:name="com.example.com.masterhelper.core.components.dialogs.ui.CreateNewItemDialog"
-      android:theme="@style/AppTheme.About">
-    </activity>
-    <activity
       android:name="com.example.com.masterhelper.enemies.ui.EnemiesListView"
       android:theme="@style/CustomTheme">
     </activity>

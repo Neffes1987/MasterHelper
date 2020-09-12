@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import com.example.com.masterhelper.core.components.ComponentCheckBox;
 import com.example.com.masterhelper.core.components.ComponentEditField;
 import com.example.com.masterhelper.core.models.DataModel;
 import com.example.masterhelper.R;
@@ -15,12 +16,33 @@ public class InputDialog extends CommonDialog {
   private FragmentManager manager;
   private Activity context;
   private boolean hideDescription;
+  private int checkboxLabel;
+
   private View description;
   private View name;
+  private View checkbox;
 
   public InputDialog(Activity context, FragmentManager manager) {
     this.manager = manager;
     this.context = context;
+  }
+
+  public void setCheckboxValue(boolean value) {
+    ComponentCheckBox.setCheckbox(checkbox, value);
+  }
+
+  public boolean getCheckboxValue() {
+    return ComponentCheckBox.getCheckboxState(checkbox);
+  }
+
+  public void setCheckboxLabel(int label) {
+    this.checkboxLabel = label;
+  }
+
+  public void setCheckbox(View dialogTemplate, int label) {
+    checkbox = dialogTemplate.findViewById(R.id.DIALOG_CHECKBOX_ID);
+    checkbox.setVisibility(label > 0 ? View.VISIBLE : View.GONE);
+    ComponentCheckBox.setLabel(checkbox, label);
   }
 
   private void setNameField(View dialogTemplate, String value){
@@ -62,6 +84,7 @@ public class InputDialog extends CommonDialog {
 
     setNameField(dialogTemplate, settings.getName());
     setDescriptionField(dialogTemplate, settings.getDescription());
+    setCheckbox(dialogTemplate, checkboxLabel);
 
 
     builder.setView(dialogTemplate);
@@ -78,6 +101,7 @@ public class InputDialog extends CommonDialog {
     FragmentTransaction f = manager.beginTransaction();
     f.remove(manager.findFragmentById(R.id.DIALOG_NAME_ID));
     f.remove(manager.findFragmentById(R.id.DIALOG_DESCRIPTION_ID));
+    f.remove(manager.findFragmentById(R.id.DIALOG_CHECKBOX_ID));
     f.commit();
   }
 }
