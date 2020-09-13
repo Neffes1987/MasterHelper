@@ -131,7 +131,7 @@ public class JourneysListView extends AppCompatActivity implements ICommonItemEv
     Intent intent = new Intent(this, SettingList.class);
     //intent.putExtra(SettingList.EXTRA_TYPE, SettingsFactory.SettingsFactoryType.goal.name());
     //intent.putExtra(SettingList.EXTRA_PARENT_ID, id);
-    intent.putExtra(SettingList.EXTRA_SETTING_TITLE, R.string.force_goal_motivation_title);
+    intent.putExtra(SettingList.EXTRA_SETTING_TITLE, R.string.force_goal_title);
     startActivity(intent);
   }
 

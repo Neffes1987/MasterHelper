@@ -1,7 +1,6 @@
 package com.example.com.masterhelper.enemies.ui;
 
 import android.content.Intent;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -14,7 +13,7 @@ import com.example.com.masterhelper.core.components.dialogs.dialogs.InputDialog;
 import com.example.com.masterhelper.core.models.DataModel;
 import com.example.com.masterhelper.core.models.utilities.ModelList;
 import com.example.masterhelper.R;
-import com.example.com.masterhelper.abilities.models.AbilityModel;
+import com.example.com.masterhelper.enemies.models.AbilityModel;
 import com.example.com.masterhelper.enemies.models.EnemyModel;
 import com.example.com.masterhelper.enemies.adapters.AbilityDBAdapter;
 import com.example.com.masterhelper.enemies.adapters.EnemyDBAdapter;
@@ -95,8 +94,6 @@ public class EditEnemy extends AppCompatActivity implements ViewCharacteristicRo
 
     updateDescription(currentEnemy.getDescription());
     updateTitle(currentEnemy.getName());
-
-    Log.i("TAG", "onCreate:healthAbility:getId " + healthAbility.getId());
 
     fragmentManager = getSupportFragmentManager();
 

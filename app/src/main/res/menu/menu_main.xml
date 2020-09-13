@@ -8,11 +8,20 @@
     <menu
       >
       <item
-        android:title="@string/force_advantages_title"
-        android:id="@+id/ADVANCE_SETTING_ID"/>
-      <item
         android:title="@string/force_menu_create_item_title"
-        android:id="@+id/FORCES_SETTINGS"/>
+        android:id="@+id/SETTING_FORCES_ID"/>
+      <item
+        android:title="@string/abilities_settings"
+        android:id="@+id/SETTING_ABILITIES_ID"/>
+      <item
+        android:title="@string/advantages"
+        android:id="@+id/SETTING_ADVANCES_ID"/>
+      <item
+        android:title="@string/disadvantages"
+        android:id="@+id/SETTING_DISADVANCE_ID"/>
+      <item
+        android:title="@string/goals"
+        android:id="@+id/SETTING_GOALS_ID"/>
     </menu>
   </item>
   <item
@@ -20,7 +29,4 @@
     android:title="@string/action_settings"
     android:orderInCategory="100"
     app:showAsAction="never"/>
-  <item
-    android:title="@string/abilities_settings"
-    android:id="@+id/ABILITIES_SETTINGS"/>
 </menu>

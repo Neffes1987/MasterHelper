@@ -22,7 +22,7 @@
   <!-- settings -->
   <string name="app_name">Помошник настольщика</string>
   <string name="action_settings">Загрузить музыку</string>
-  <string name="abilities_settings">Редактировать характеристики</string>
+  <string name="abilities_settings">Характеристики</string>
   <string name="add_setting_dialog_caption">Создать запись</string>
   <string name="update_setting_dialog_caption">Обновить запись</string>
   <string name="screen_name_music">Музыка</string>
@@ -30,6 +30,9 @@
   <string name="library_music">Фоновая музыка</string>
   <string name="screen_name_facts">Факты и Мифы</string>
   <string name="screen_settings_default_caption">Настройки</string>
+  <string name="advantages">Преимущества</string>
+  <string name="disadvantages">Слабости</string>
+  <string name="goals">Цели</string>
 
 
   <!-- abilities -->
@@ -97,7 +100,7 @@
   <!-- forces -->
   <string name="force_menu_item_title">Фракции и NPC</string>
   <string name="force_menu_create_item_title">Список фракций</string>
-  <string name="force_goal_motivation_title">Цели и мотивация</string>
+  <string name="force_goal_title">Цели</string>
   <string name="force_cooperators_title">Союзники</string>
   <string name="force_enemies_title">Противники</string>
   <string name="force_advantages_title">Преимущества</string>

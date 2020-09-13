@@ -1,6 +1,6 @@
 package com.example.com.masterhelper.enemies.adapters;
 
-import com.example.com.masterhelper.abilities.models.AbilityModel;
+import com.example.com.masterhelper.enemies.models.AbilityModel;
 
 public class AbilityRowAdapter {
   /**  */

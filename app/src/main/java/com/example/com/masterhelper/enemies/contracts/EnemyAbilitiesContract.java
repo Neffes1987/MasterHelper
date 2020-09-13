@@ -1,10 +1,10 @@
 package com.example.com.masterhelper.enemies.contracts;
 
 import android.provider.BaseColumns;
-import com.example.com.masterhelper.abilities.contracts.AbilitiesContract;
 import com.example.com.masterhelper.core.contracts.GeneralContract;
-import com.example.com.masterhelper.abilities.models.AbilityModel;
+import com.example.com.masterhelper.enemies.models.AbilityModel;
 import com.example.com.masterhelper.core.models.DataModel;
+import com.example.com.masterhelper.settings.contracts.SettingsContract;
 
 
 public class EnemyAbilitiesContract implements BaseColumns {
@@ -16,7 +16,7 @@ public class EnemyAbilitiesContract implements BaseColumns {
   public final static String COLUMN_ABILITY_VALUE = "abilityValue";
 
   public final static String COLUMN_ENEMY_REF_PROPS = "FOREIGN KEY ("+COLUMN_ENEMY_ID+") REFERENCES " + EnemyContract.TABLE_NAME + "("+EnemyContract._ID+") ON DELETE CASCADE";
-  public final static String COLUMN_ABILITY_REF_PROPS = "FOREIGN KEY ("+COLUMN_ABILITY_ID+") REFERENCES " + AbilitiesContract.TABLE_NAME + "("+AbilitiesContract._ID+") ON DELETE CASCADE";
+  public final static String COLUMN_ABILITY_REF_PROPS = "FOREIGN KEY ("+COLUMN_ABILITY_ID+") REFERENCES " + SettingsContract.TABLE_NAME + "("+SettingsContract._ID+") ON DELETE CASCADE";
 
   private final static String COLUMN_SCRIPT_ID_PROPS = COLUMN_ENEMY_ID + " INTEGER NOT NULL";
   private final static String COLUMN_ABILITY_ID_PROPS = COLUMN_ABILITY_ID + " INTEGER NOT NULL";

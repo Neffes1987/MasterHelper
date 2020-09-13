@@ -1,4 +1,4 @@
-package com.example.com.masterhelper.abilities.models;
+package com.example.com.masterhelper.enemies.models;
 
 import com.example.com.masterhelper.core.models.DataModel;
 

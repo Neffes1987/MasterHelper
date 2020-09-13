@@ -40,8 +40,8 @@ public class SceneItem extends CommonItem {
    * @param description - описание сцены
    * */
   private void setDescription(String description) {
+    this.description = itemView.findViewById(R.id.SCENE_DESCRIPTION_ID);
     if(description.length() > 0){
-      this.description = itemView.findViewById(R.id.SCENE_DESCRIPTION_ID);
       this.description.setText(description);
       this.description.setVisibility(View.VISIBLE);
     } else {

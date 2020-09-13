@@ -148,5 +148,4 @@ public class SettingList extends AppCompatActivity implements ICommonItemEvents 
     });
     inputDialog.show();
   }
-
 }

@@ -13,7 +13,6 @@ import com.example.com.masterhelper.force.contracts.ForceJourneyContract;
 import com.example.com.masterhelper.journey.contracts.JourneysContract;
 import com.example.com.masterhelper.scene.contracts.SceneContract;
 import com.example.com.masterhelper.scene.contracts.SceneMusicContract;
-import com.example.com.masterhelper.abilities.contracts.AbilitiesContract;
 import com.example.com.masterhelper.settings.contracts.AdvanceContract;
 import com.example.com.masterhelper.journey.contracts.GoalContract;
 import com.example.com.masterhelper.force.contracts.ForceAdvancesContract;
@@ -24,7 +23,6 @@ import com.example.com.masterhelper.settings.contracts.SettingsContract;
 public class DbHelpers extends SQLiteOpenHelper {
   private String SQLCreateTemplate ="DROP TABLE IF EXISTS ";
 
-  public GeneralContract abilitiesContract = new AbilitiesContract().getContract();
   public GeneralContract enemyAbilitiesContract = new EnemyAbilitiesContract().getContract();
   public GeneralContract enemyContract = new EnemyContract().getContract();
   public GeneralContract journeysContract = new JourneysContract().getContract();
@@ -51,7 +49,7 @@ public class DbHelpers extends SQLiteOpenHelper {
   /**
    * Версия базы данных. При изменении схемы увеличить на единицу
    */
-  private static final int DATABASE_VERSION = 44;
+  private static final int DATABASE_VERSION = 45;
 
   SQLiteDatabase db;
 
@@ -127,12 +125,6 @@ public class DbHelpers extends SQLiteOpenHelper {
     db.execSQL(SQL_CREATE_TABLE);
   }
 
-  private void generateAbilitiesTable(){
-    db.execSQL(SQLCreateTemplate + abilitiesContract.getTableName());
-    String SQL_CREATE_TABLE = abilitiesContract.getCreateTableQuery();
-    db.execSQL(SQL_CREATE_TABLE);
-  }
-
   private void generateEnemyAbilitiesTable(){
     db.execSQL(SQLCreateTemplate + enemyAbilitiesContract.getTableName());
     String SQL_CREATE_TABLE = enemyAbilitiesContract.getCreateTableQuery();
@@ -160,7 +152,6 @@ public class DbHelpers extends SQLiteOpenHelper {
     generateScenesTable();
     generateScriptsTable();
     generateEnemyTable();
-    generateAbilitiesTable();
     generateEnemyAbilitiesTable();
     generateScenesMusicTable();
     generateScriptMusicTable();
@@ -194,7 +185,6 @@ public class DbHelpers extends SQLiteOpenHelper {
     generateScenesTable();
     generateScriptsTable();
     generateEnemyTable();
-    generateAbilitiesTable();
     generateEnemyAbilitiesTable();
     generateScenesMusicTable();
     generateScriptMusicTable();

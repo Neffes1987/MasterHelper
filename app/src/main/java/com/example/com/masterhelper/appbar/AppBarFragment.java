@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.*;
 import androidx.fragment.app.Fragment;
 import com.example.com.masterhelper.media.ui.MusicSettingsScreen;
-import com.example.com.masterhelper.settings.SettingsType;
 import com.example.com.masterhelper.settings.ui.SettingList;
 import com.example.masterhelper.R;
 
@@ -40,28 +39,43 @@ public class AppBarFragment extends Fragment {
 
   @Override
   public boolean onOptionsItemSelected(MenuItem item) {
-    Intent intent;
+    Intent intent = new Intent(getActivity(), SettingList.class);;
     switch (item.getItemId()){
       case R.id.ACTION_SETTINGS:
         intent = new Intent(getActivity(), MusicSettingsScreen.class);
         startActivity(intent);
         break;
-      case R.id.ABILITIES_SETTINGS:
-        intent = new Intent(getActivity(), SettingList.class);
-        intent.putExtra(SettingList.EXTRA_RECORD_TYPE,"ability");
+      case R.id.SETTING_ABILITIES_ID:
+        intent.putExtra(SettingList.EXTRA_RECORD_TYPE,RecordType.ability.name());
         intent.putExtra(SettingList.EXTRA_SETTING_TITLE, R.string.abilities_settings);
         startActivity(intent);
         break;
-      case R.id.ADVANCE_SETTING_ID:
-          intent = new Intent(getActivity(), SettingList.class);
-          intent.putExtra(SettingList.EXTRA_RECORD_TYPE,"advance");
+      case R.id.SETTING_ADVANCES_ID:
+          intent.putExtra(SettingList.EXTRA_RECORD_TYPE,RecordType.advance.name());
           intent.putExtra(SettingList.EXTRA_SETTING_TITLE, R.string.force_advantages_title);
           startActivity(intent);
+        break;
+      case R.id.SETTING_DISADVANCE_ID:
+        intent.putExtra(SettingList.EXTRA_RECORD_TYPE,RecordType.disadvance.name());
+        intent.putExtra(SettingList.EXTRA_SETTING_TITLE, R.string.force_disadvantages_title);
+        startActivity(intent);
+        break;
+      case R.id.SETTING_GOALS_ID:
+        intent.putExtra(SettingList.EXTRA_RECORD_TYPE,RecordType.goals.name());
+        intent.putExtra(SettingList.EXTRA_SETTING_TITLE, R.string.force_goal_title);
+        startActivity(intent);
         break;
       default:
         //mListener.onItemSelected(item);
     }
     return super.onOptionsItemSelected(item);
+  }
+
+  public enum RecordType {
+    ability,
+    advance,
+    disadvance,
+    goals,
   }
 
 }
