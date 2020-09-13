@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:app="http://schemas.android.com/apk/res-auto"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             tools:context="com.example.com.masterhelper.core.components.buttons.ComponentFloatButtonPrimary">
+
+  <com.google.android.material.floatingactionbutton.FloatingActionButton
+    android:src="@mipmap/baseline_add_black_18dp"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    android:id="@+id/COMPONENT_BUTTON_FLOAT_PRIMARY_ID"
+    style="@style/float_button_styles"
+    android:layout_gravity="bottom|right"/>
+</FrameLayout>

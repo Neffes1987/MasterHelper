@@ -7,7 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import com.example.com.masterhelper.core.components.ComponentCheckBox;
+import com.example.com.masterhelper.core.components.ComponentCheckbox;
 import com.example.com.masterhelper.core.components.ComponentEditField;
 import com.example.com.masterhelper.core.models.DataModel;
 import com.example.masterhelper.R;
@@ -18,9 +18,9 @@ public class InputDialog extends CommonDialog {
   private boolean hideDescription;
   private int checkboxLabel;
 
-  private View description;
-  private View name;
-  private View checkbox;
+  private ComponentEditField name;
+  private ComponentEditField description;
+  private ComponentCheckbox checkbox;
 
   public InputDialog(Activity context, FragmentManager manager) {
     this.manager = manager;
@@ -28,11 +28,11 @@ public class InputDialog extends CommonDialog {
   }
 
   public void setCheckboxValue(boolean value) {
-    ComponentCheckBox.setCheckbox(checkbox, value);
+    checkbox.setCheckbox(value);
   }
 
   public boolean getCheckboxValue() {
-    return ComponentCheckBox.getCheckboxState(checkbox);
+    return checkbox.getCheckboxState();
   }
 
   public void setCheckboxLabel(int label) {
@@ -40,32 +40,35 @@ public class InputDialog extends CommonDialog {
   }
 
   public void setCheckbox(View dialogTemplate, int label) {
-    checkbox = dialogTemplate.findViewById(R.id.DIALOG_CHECKBOX_ID);
-    checkbox.setVisibility(label > 0 ? View.VISIBLE : View.GONE);
-    ComponentCheckBox.setLabel(checkbox, label);
+    View parent = dialogTemplate.findViewById(R.id.DIALOG_CHECKBOX_ID);
+    parent.setVisibility(label > 0 ? View.VISIBLE : View.GONE);
+    checkbox = new ComponentCheckbox(parent);
+    checkbox.setLabel(label);
   }
 
   private void setNameField(View dialogTemplate, String value){
-    name = dialogTemplate.findViewById(R.id.DIALOG_NAME_ID);
-    ComponentEditField.setCaption(name, R.string.name);
-    ComponentEditField.setValue(name, value, false);
+    View parent = dialogTemplate.findViewById(R.id.DIALOG_NAME_ID);
+    name = new ComponentEditField(parent);
+    name.setCaption(R.string.name);
+    name.setValue(value, false);
   }
 
   private void setDescriptionField(View dialogTemplate, String value){
-    description = dialogTemplate.findViewById(R.id.DIALOG_DESCRIPTION_ID);
+    View parent = dialogTemplate.findViewById(R.id.DIALOG_DESCRIPTION_ID);
+    description = new ComponentEditField(parent);
     if (hideDescription){
-      description.setVisibility(View.GONE);
+      parent.setVisibility(View.GONE);
     }
-    ComponentEditField.setCaption(description, R.string.description);
-    ComponentEditField.setValue(description, value, false);
+    description.setCaption(R.string.description);
+    description.setValue(value, false);
   }
 
   public String getName(){
-    return ComponentEditField.getValue(name);
+    return name.getValue();
   }
 
   public String getDescription(){
-    return ComponentEditField.getValue(description);
+    return description.getValue();
   }
 
   public void hideDescription(){

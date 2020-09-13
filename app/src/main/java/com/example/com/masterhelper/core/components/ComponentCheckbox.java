@@ -9,34 +9,35 @@ import android.view.ViewGroup;
 import com.example.masterhelper.R;
 
 
-public class ComponentCheckBox extends Fragment {
+public class ComponentCheckbox extends Fragment {
   static int CHECKBOX_ID = R.id.COMPONENT_CHECKBOX_ID;
+  CheckBox checkBox;
 
-  public static void setCheckbox(View parentView, boolean value){
-    CheckBox checkBox = parentView.findViewById(CHECKBOX_ID);
+  public void setCheckbox(boolean value){
     checkBox.setChecked(value);
   }
 
-  public static boolean getCheckboxState(View parentView){
-    CheckBox checkBox = parentView.findViewById(CHECKBOX_ID);
+  public boolean getCheckboxState(){
     return checkBox.isChecked();
   }
 
-  public static void setVisibility(View parentView, boolean isVisible){
-    CheckBox checkBox = parentView.findViewById(CHECKBOX_ID);
+  public void setVisibility(boolean isVisible){
     checkBox.setVisibility(isVisible ? View.VISIBLE : View.GONE);
   }
 
-  public static void setLabel(View parentView, int title){
-    CheckBox checkBox = parentView.findViewById(CHECKBOX_ID);
+  public void setLabel(int title){
     if(checkBox == null || title == 0){
       return;
     }
     checkBox.setText(title);
   }
 
-  public ComponentCheckBox() {
+  public ComponentCheckbox() {
     // Required empty public constructor
+  }
+
+  public ComponentCheckbox(View parentView) {
+    checkBox = parentView.findViewById(CHECKBOX_ID);
   }
 
 
