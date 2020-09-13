@@ -1,4 +1,4 @@
-package com.example.com.masterhelper.viewCharacteristicRow;
+package com.example.com.masterhelper.enemies.ui;
 
 
 import android.content.Context;
@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import com.example.com.masterhelper.enemies.adapters.AbilityRowAdapter;
 import com.example.masterhelper.R;
 import com.example.com.masterhelper.abilities.models.AbilityModel;
 

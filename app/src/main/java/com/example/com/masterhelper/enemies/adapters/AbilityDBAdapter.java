@@ -1,10 +1,11 @@
-package com.example.com.masterhelper.core.factories.DBAdapters.adapters;
+package com.example.com.masterhelper.enemies.adapters;
 
 import android.database.Cursor;
 import com.example.com.masterhelper.core.app.DbHelpers;
 import com.example.com.masterhelper.core.app.GlobalApplication;
 import com.example.com.masterhelper.core.contracts.GeneralContract;
 import com.example.com.masterhelper.abilities.contracts.AbilitiesContract;
+import com.example.com.masterhelper.core.DBadapters.CommonBDAdapter;
 import com.example.com.masterhelper.enemies.contracts.EnemyAbilitiesContract;
 import com.example.com.masterhelper.abilities.models.AbilityModel;
 import com.example.com.masterhelper.core.models.DataModel;

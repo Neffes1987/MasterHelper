@@ -9,8 +9,6 @@ import com.example.com.masterhelper.core.models.DataModel;
 import com.example.com.masterhelper.scene.models.SceneModel;
 import com.example.com.masterhelper.scene.models.ScriptModel;
 import com.example.com.masterhelper.core.models.utilities.ModelList;
-import com.example.com.masterhelper.core.factories.DBAdapters.AdaptersType;
-import com.example.com.masterhelper.core.factories.DBAdapters.DBAdapterFactory;
 import com.example.com.masterhelper.journey.contracts.JourneysContract;
 import com.example.com.masterhelper.settings.adapters.AbstractSetting;
 

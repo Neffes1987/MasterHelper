@@ -23,7 +23,8 @@
   <string name="app_name">Помошник настольщика</string>
   <string name="action_settings">Загрузить музыку</string>
   <string name="abilities_settings">Редактировать характеристики</string>
-  <string name="add_abilities_setting">Создать характеристику</string>
+  <string name="add_setting_dialog_caption">Создать запись</string>
+  <string name="update_setting_dialog_caption">Обновить запись</string>
   <string name="screen_name_music">Музыка</string>
   <string name="background_music">Фоновая музыка</string>
   <string name="library_music">Фоновая музыка</string>

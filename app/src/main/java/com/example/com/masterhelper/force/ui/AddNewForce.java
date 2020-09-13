@@ -140,10 +140,7 @@ public class AddNewForce extends AppCompatActivity {
     switch (requestCode){
       case ADD_GOALS_RESULT_CODE: break;
       case ADD_JOURNEY_RESULT_CODE:
-        ArrayList<String> selectedJourneys = data.getStringArrayListExtra(SettingList.EXTRA_SELECTED_LIST_ITEMS_IDS);
-        if(selectedJourneys != null){
-          coreForceAdapter.setSelectedJourney(currentId, selectedJourneys);
-        }
+
         break;
     }
 

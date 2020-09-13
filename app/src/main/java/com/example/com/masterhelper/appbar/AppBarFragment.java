@@ -48,18 +48,14 @@ public class AppBarFragment extends Fragment {
         break;
       case R.id.ABILITIES_SETTINGS:
         intent = new Intent(getActivity(), SettingList.class);
-        intent.putExtra(SettingList.EXTRA_TYPE, SettingsType.global.name());
         intent.putExtra(SettingList.EXTRA_RECORD_TYPE,"ability");
         intent.putExtra(SettingList.EXTRA_SETTING_TITLE, R.string.abilities_settings);
-        intent.putExtra(SettingList.EXTRA_DIALOG_TITLE, R.string.abilities_settings);
         startActivity(intent);
         break;
       case R.id.ADVANCE_SETTING_ID:
           intent = new Intent(getActivity(), SettingList.class);
-          intent.putExtra(SettingList.EXTRA_TYPE, SettingsType.global.name());
           intent.putExtra(SettingList.EXTRA_RECORD_TYPE,"advance");
           intent.putExtra(SettingList.EXTRA_SETTING_TITLE, R.string.force_advantages_title);
-          intent.putExtra(SettingList.EXTRA_DIALOG_TITLE, R.string.force_advantages_title);
           startActivity(intent);
         break;
       default:

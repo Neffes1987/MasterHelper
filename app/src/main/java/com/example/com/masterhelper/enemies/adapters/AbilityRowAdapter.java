@@ -1,4 +1,4 @@
-package com.example.com.masterhelper.viewCharacteristicRow;
+package com.example.com.masterhelper.enemies.adapters;
 
 import com.example.com.masterhelper.abilities.models.AbilityModel;
 
@@ -13,7 +13,7 @@ public class AbilityRowAdapter {
   int rowId = 0;
 
   /**  */
-  boolean editable = false;
+  public boolean editable = false;
 
   /** */
   public void updateRowData(AbilityModel abilityModel){

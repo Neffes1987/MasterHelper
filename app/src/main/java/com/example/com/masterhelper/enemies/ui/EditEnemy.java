@@ -13,12 +13,10 @@ import com.example.com.masterhelper.core.components.dialogs.dialogs.DeleteDialog
 import com.example.com.masterhelper.core.components.dialogs.dialogs.InputDialog;
 import com.example.com.masterhelper.core.models.DataModel;
 import com.example.com.masterhelper.core.models.utilities.ModelList;
-import com.example.com.masterhelper.viewCharacteristicRow.Abilities;
-import com.example.com.masterhelper.viewCharacteristicRow.ViewCharacteristicRow;
 import com.example.masterhelper.R;
 import com.example.com.masterhelper.abilities.models.AbilityModel;
 import com.example.com.masterhelper.enemies.models.EnemyModel;
-import com.example.com.masterhelper.core.factories.DBAdapters.adapters.AbilityDBAdapter;
+import com.example.com.masterhelper.enemies.adapters.AbilityDBAdapter;
 import com.example.com.masterhelper.enemies.adapters.EnemyDBAdapter;
 import com.example.com.masterhelper.core.components.dialogs.dialogs.MultiChooseDialog;
 

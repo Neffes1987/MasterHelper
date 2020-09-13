@@ -1,4 +1,4 @@
-package com.example.com.masterhelper.core.factories.DBAdapters.adapters;
+package com.example.com.masterhelper.core.DBadapters;
 
 import com.example.com.masterhelper.core.models.utilities.ModelList;
 

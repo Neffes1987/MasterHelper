@@ -29,6 +29,9 @@ public class ComponentCheckBox extends Fragment {
 
   public static void setLabel(View parentView, int title){
     CheckBox checkBox = parentView.findViewById(CHECKBOX_ID);
+    if(checkBox == null || title == 0){
+      return;
+    }
     checkBox.setText(title);
   }
 

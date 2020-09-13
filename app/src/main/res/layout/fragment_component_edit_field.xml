@@ -14,7 +14,8 @@
       android:text="@string/caption"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:id="@+id/EDIT_FIELD_CAPTION_ID"/>
+      android:id="@+id/EDIT_FIELD_CAPTION_ID"
+      android:textAlignment="textStart"/>
 
     <TextView
       android:text="TextView"
