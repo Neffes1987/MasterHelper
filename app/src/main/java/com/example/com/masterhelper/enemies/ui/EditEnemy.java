@@ -1,6 +1,7 @@
 package com.example.com.masterhelper.enemies.ui;
 
 import android.content.Intent;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -31,8 +32,8 @@ public class EditEnemy extends AppCompatActivity implements ViewCharacteristicRo
   /** редактировать имя врага */
   TextView maxHealthValue;
 
-  final int  HEALTH_POSITION = 0;
-  final int  ORDERING_POSITION = -1;
+  final int  HEALTH_POSITION = -1;
+  final int  ORDERING_POSITION = -2;
 
   /** редактировать описание врага */
   EditText enemyDescription;
@@ -96,6 +97,8 @@ public class EditEnemy extends AppCompatActivity implements ViewCharacteristicRo
 
     updateDescription(currentEnemy.getDescription());
     updateTitle(currentEnemy.getName());
+
+    Log.i("TAG", "onCreate:healthAbility:getId " + healthAbility.getId());
 
     fragmentManager = getSupportFragmentManager();
 

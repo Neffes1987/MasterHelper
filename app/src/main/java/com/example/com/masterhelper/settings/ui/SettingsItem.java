@@ -104,6 +104,8 @@ public class SettingsItem extends CommonItem {
     ImageButton deleteButton = itemView.findViewById(R.id.ITEM_DELETE_BUTTON);
     if(showDeleteButton){
       deleteButton.setVisibility(View.VISIBLE);
+    } else {
+      deleteButton.setVisibility(View.GONE);
     }
     deleteButton.setOnClickListener(commonListener);
   }

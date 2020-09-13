@@ -26,7 +26,7 @@ public class AbilityModel extends DataModel {
   public AbilityModel(int id, String name, int value, ACHIEVE_CONST_TAGS tag){
     setValue(value);
     setTag(tag);
-    initGeneralFields(0, name, null);
+    initGeneralFields(id, name, null);
   }
 
   public int getValue() {

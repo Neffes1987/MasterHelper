@@ -1,6 +1,7 @@
 package com.example.com.masterhelper.viewCharacteristicRow;
 
 import android.app.Activity;
+import android.util.Log;
 import android.widget.LinearLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
