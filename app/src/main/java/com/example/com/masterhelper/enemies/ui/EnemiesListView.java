@@ -66,7 +66,7 @@ public class EnemiesListView extends AppCompatActivity implements ICommonItemEve
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_screen_view_script);
+    setContentView(R.layout.activity_list_screen_view_script);
 
     scriptId = getIntent().getIntExtra("scriptId", 0);
     String scriptName = getIntent().getStringExtra("scriptName");

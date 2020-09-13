@@ -85,7 +85,7 @@ public class ViewCharacteristicRow extends Fragment {
   View.OnLongClickListener onLongClickListener = v -> calculateNewValue(v, 10);
 
   /**  */
-  int fragmentViewCharacteristicRowLayout = R.layout.fragment_view_characteristic_row;
+  int fragmentViewCharacteristicRowLayout = R.layout.fragment_view_list_item_characteristic_row;
 
   /** */
   public ViewCharacteristicRow() {

@@ -73,7 +73,7 @@ public class SettingList extends AppCompatActivity implements ICommonItemEvents 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_settings_list);
+    setContentView(R.layout.activity_list_screen_settings);
     recordType = getIntent().getStringExtra(EXTRA_RECORD_TYPE);
 
     setListTitle();
