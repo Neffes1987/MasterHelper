@@ -24,13 +24,12 @@
     android:layout_marginLeft="8dp"
     android:layout_marginRight="8dp"/>
 
-  <com.google.android.material.floatingactionbutton.FloatingActionButton
+  <fragment
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    style="@style/float_button_styles"
-    app:srcCompat="@mipmap/baseline_add_black_18dp"
+    android:name="com.example.com.masterhelper.core.components.buttons.ComponentFloatButtonPrimary"
     android:id="@+id/JOURNEY_CREATE_BTN"
-    android:layout_gravity="bottom|end"
-    android:layout_margin="8dp"/>
+    tools:layout="@layout/fragment_component_float_button_primary"
+    android:layout_gravity="bottom|right"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

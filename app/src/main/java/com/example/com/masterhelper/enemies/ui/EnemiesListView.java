@@ -9,8 +9,8 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
+import com.example.com.masterhelper.core.components.buttons.ComponentFloatButtonPrimary;
 import com.example.com.masterhelper.core.models.DataModel;
 import com.example.com.masterhelper.core.models.utilities.ModelList;
 import com.example.com.masterhelper.core.listFactory.commonAdapter.CommonAdapter;
@@ -25,7 +25,6 @@ import com.example.com.masterhelper.enemies.adapters.EnemyDBAdapter;
 import com.example.com.masterhelper.core.listFactory.commonAdapter.item.ICommonItemEvents;
 import com.example.com.masterhelper.media.mediaworker.BackgroundMediaPlayer;
 import com.example.com.masterhelper.core.listFactory.ListFactory;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 @RequiresApi(api = Build.VERSION_CODES.M)
 public class EnemiesListView extends AppCompatActivity implements ICommonItemEvents, IAppBarFragment {
@@ -36,13 +35,13 @@ public class EnemiesListView extends AppCompatActivity implements ICommonItemEve
   private final int ADD_MUSIC_TO_SCRIPT_CODE = 3;
 
   /** указатель на кнопку проигрывания музыки */
-  FloatingActionButton musicControl;
+  ComponentFloatButtonPrimary musicControl;
 
   BackgroundMediaPlayer backgroundMediaPlayer = GlobalApplication.getBackgroundMediaPlayer();
   MediaSettings scriptMediaSettings = SettingsMediaFactory.getAdapter(SettingsAdapterType.script);
 
   /** */
-  FloatingActionButton createNewEnemy;
+  ComponentFloatButtonPrimary createNewEnemy;
 
   boolean scriptMusicStarted = false;
 
@@ -71,11 +70,15 @@ public class EnemiesListView extends AppCompatActivity implements ICommonItemEve
     scriptId = getIntent().getIntExtra("scriptId", 0);
     String scriptName = getIntent().getStringExtra("scriptName");
 
-    createNewEnemy = findViewById(R.id.CREATE_NEW_ENEMY_ID);
+    View createNewEnemyWrapper = findViewById(R.id.CREATE_NEW_ENEMY_ID);
 
-    musicControl = findViewById(R.id.SCRIPT_START_MUSIC_ID);
+    createNewEnemy = new ComponentFloatButtonPrimary(createNewEnemyWrapper);
 
-    createNewEnemy.setOnClickListener(v -> {
+    View musicControlWrapper = findViewById(R.id.SCRIPT_START_MUSIC_ID);
+    musicControl = new ComponentFloatButtonPrimary(musicControlWrapper);
+    musicControl.setIconResource(R.mipmap.baseline_music_note_black_18dp);
+
+    createNewEnemy.setListener(v -> {
       int btnId = v.getId();
       if (btnId == R.id.CREATE_NEW_ENEMY_ID) {
         editEnemyDetails(scriptId);
@@ -87,7 +90,7 @@ public class EnemiesListView extends AppCompatActivity implements ICommonItemEve
     toolbar.setTitle(scriptName);
     setSupportActionBar(toolbar);
 
-    musicControl.setOnLongClickListener(v -> {
+    musicControl.setLongListener(v -> {
       Intent intent = new Intent(this, MusicSettingsScreen.class);
       intent.putExtra(MusicSettingsScreen.IS_GENERAL, 0);
       intent.putExtra(MusicSettingsScreen.SELECTED_LIST, getMediaList());
@@ -95,16 +98,16 @@ public class EnemiesListView extends AppCompatActivity implements ICommonItemEve
       return true;
     });
 
-    musicControl.setOnClickListener(v -> {
+    musicControl.setListener(v -> {
       boolean newSceneMusicState = !scriptMusicStarted;
       setScriptMusicStarted(newSceneMusicState);
       if(newSceneMusicState){
         backgroundMediaPlayer.setMediaList(getMediaList());
         backgroundMediaPlayer.startMediaList();
-        musicControl.setBackgroundTintList(ContextCompat.getColorStateList(getApplicationContext(), R.color.colorMusicStartedFloatTint));
+        musicControl.setColorResource(R.color.colorMusicStartedFloatTint);
       } else {
         backgroundMediaPlayer.stopMediaList();
-        musicControl.setBackgroundTintList(ContextCompat.getColorStateList(getApplicationContext(), R.color.colorCommonFloatTint));
+        musicControl.setColorResource(R.color.colorCommonFloatTint);
       }
     });
 

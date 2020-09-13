@@ -2,7 +2,7 @@ package com.example.com.masterhelper.journey.ui;
 
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageButton;
+import com.example.com.masterhelper.core.components.buttons.ComponentFloatButtonPrimary;
 import com.example.com.masterhelper.core.components.dialogs.dialogs.DeleteDialog;
 import com.example.com.masterhelper.core.components.dialogs.dialogs.InputDialog;
 import com.example.com.masterhelper.core.models.DataModel;
@@ -33,7 +33,7 @@ public class JourneysListView extends AppCompatActivity implements ICommonItemEv
   int selectedJourneyId;
 
   /** указатель на кнопку создания новой сценой */
-  ImageButton journeyCreateBtn;
+  ComponentFloatButtonPrimary journeyCreateBtn;
 
   /** указатель на диалог создания нового путешествия */
   PopupMenuAdapter journeysPopup;
@@ -58,8 +58,10 @@ public class JourneysListView extends AppCompatActivity implements ICommonItemEv
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_list_screen_view_projects);
 
-    journeyCreateBtn = findViewById(R.id.JOURNEY_CREATE_BTN);
-    journeyCreateBtn.setOnClickListener(v -> onCreateJourneyButtonPressed());
+    View btnWrapper = findViewById(R.id.JOURNEY_CREATE_BTN);
+
+    journeyCreateBtn = new ComponentFloatButtonPrimary(btnWrapper);
+    journeyCreateBtn.setListener(this::onCreateJourneyButtonPressed);
     initToolBar();
     updateJourneysList();
     initJourneyDialog();
@@ -95,7 +97,7 @@ public class JourneysListView extends AppCompatActivity implements ICommonItemEv
   }
 
   /** вызвать диалог создания новго путешествия */
-  public void onCreateJourneyButtonPressed() {
+  public void onCreateJourneyButtonPressed(View v) {
     journeyDialog.setTitle(R.string.journey_create_title);
     journeyDialog.setOnResolveListener((dialog, which) -> {
       String newName = journeyDialog.getName();

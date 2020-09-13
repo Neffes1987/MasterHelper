@@ -9,12 +9,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import com.example.com.masterhelper.core.components.buttons.ComponentFloatButtonSecondary;
+import com.example.com.masterhelper.core.components.buttons.ComponentFloatButtonPrimary;
 import com.example.com.masterhelper.core.models.utilities.ModelList;
 import com.example.com.masterhelper.core.listFactory.commonAdapter.item.CommonItem;
 import com.example.masterhelper.R;
 import com.example.com.masterhelper.core.listFactory.commonAdapter.CommonAdapter;
 import com.example.com.masterhelper.core.listFactory.commonAdapter.item.ICommonItemEvents;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 
 /**
@@ -32,8 +33,8 @@ public class SoundsList extends Fragment implements ICommonItemEvents {
 
   private RecyclerView recyclerView;
 
-  FloatingActionButton createBtn;
-  FloatingActionButton addBtn;
+  ComponentFloatButtonPrimary createBtn;
+  ComponentFloatButtonSecondary addBtn;
 
   public SoundsList() {
     // Required empty public constructor
@@ -47,12 +48,15 @@ public class SoundsList extends Fragment implements ICommonItemEvents {
     View selfFragment = inflater.inflate(R.layout.fragment_list_sounds, container, false);
     recyclerView = selfFragment.findViewById(R.id.SOUNDS_LIST_ID);
 
-    createBtn = selfFragment.findViewById(R.id.ADD_NEW_FILE_ID);
-    addBtn = selfFragment.findViewById(R.id.ADD_FILES_TO_EVENT_ID);
+    View createBtnWrapper = selfFragment.findViewById(R.id.ADD_NEW_FILE_ID);
+    createBtn = new ComponentFloatButtonPrimary(createBtnWrapper);
+
+    View addBtnWrapper = selfFragment.findViewById(R.id.ADD_FILES_TO_EVENT_ID);
+    addBtn = new ComponentFloatButtonSecondary(addBtnWrapper);
 
 
-    createBtn.setOnClickListener(addSoundListener);
-    addBtn.setOnClickListener(attachSoundListener);
+    createBtn.setListener(v -> mListener.onClick(v, ADD_MUSIC_BTN));
+    addBtn.setListener(v -> mListener.onClick(v, ATTACH_MUSIC_BTN));
     return selfFragment;
   }
 
@@ -62,11 +66,11 @@ public class SoundsList extends Fragment implements ICommonItemEvents {
     recyclerView.setLayoutManager(layoutManager);
 
     if(isGeneral){
-      createBtn.setVisibility(View.VISIBLE);
-      addBtn.setVisibility(View.GONE);
+      createBtn.setVisibility(true);
+      addBtn.setVisibility(false);
     } else {
-      createBtn.setVisibility(View.GONE);
-      addBtn.setVisibility(View.VISIBLE);
+      createBtn.setVisibility(false);
+      addBtn.setVisibility(true);
     }
 
 
@@ -108,20 +112,6 @@ public class SoundsList extends Fragment implements ICommonItemEvents {
     super.onDetach();
     mListener = null;
   }
-
-  View.OnClickListener addSoundListener = new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-      mListener.onClick(v, ADD_MUSIC_BTN);
-    }
-  };
-
-  View.OnClickListener attachSoundListener = new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-      mListener.onClick(v, ATTACH_MUSIC_BTN);
-    }
-  };
 
   @Override
   public void onClick(View elementFiredAction, int position) {

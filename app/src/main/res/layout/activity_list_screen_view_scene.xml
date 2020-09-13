@@ -20,25 +20,22 @@
     app:layout_constraintBottom_toBottomOf="parent"
     tools:layout="@layout/fragment_list_recycler_view"/>
 
-  <com.google.android.material.floatingactionbutton.FloatingActionButton
+  <fragment
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    app:srcCompat="@mipmap/baseline_music_note_black_18dp"
+    android:name="com.example.com.masterhelper.core.components.buttons.ComponentFloatButtonPrimary"
     android:id="@+id/SCENE_MUSIC_START_ID"
+    tools:layout="@layout/fragment_component_float_button_primary"
     app:layout_constraintBottom_toTopOf="@+id/SCRIPT_CREATE_NEW_BTN_ID"
-    app:layout_constraintEnd_toEndOf="parent"
-    style="@style/float_button_styles"/>
+    app:layout_constraintEnd_toEndOf="@+id/SCREEN_SCRIPTS_LIST_ID"/>
 
-  <com.google.android.material.floatingactionbutton.FloatingActionButton
+  <fragment
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    app:srcCompat="@mipmap/baseline_add_black_18dp"
+    android:name="com.example.com.masterhelper.core.components.buttons.ComponentFloatButtonPrimary"
     android:id="@+id/SCRIPT_CREATE_NEW_BTN_ID"
+    tools:layout="@layout/fragment_component_float_button_primary"
+    android:foregroundGravity="bottom"
     app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintBottom_toBottomOf="@+id/SCREEN_SCRIPTS_LIST_ID"
-    app:layout_constraintTop_toBottomOf="parent"
-    app:layout_constraintStart_toEndOf="@+id/SCREEN_SCRIPTS_LIST_ID"
-    app:layout_constraintVertical_bias="1.0"
-    app:layout_constraintHorizontal_bias="1.0"
-    style="@style/float_button_styles"/>
+    app:layout_constraintBottom_toBottomOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

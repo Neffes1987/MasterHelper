@@ -7,24 +7,6 @@
              tools:context="com.example.com.masterhelper.media.ui.SoundsList"
   >
 
-  <com.google.android.material.floatingactionbutton.FloatingActionButton
-    android:src="@mipmap/baseline_add_black_18dp"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    style="@style/float_button_styles"
-    android:id="@+id/ADD_NEW_FILE_ID"
-    android:layout_gravity="bottom|end"/>
-
-  <com.google.android.material.floatingactionbutton.FloatingActionButton
-    android:src="@mipmap/baseline_done_black_18dp"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:clickable="true"
-    android:id="@+id/ADD_FILES_TO_EVENT_ID"
-    android:layout_gravity="bottom|right"
-    style="@style/float_button_styles"
-    android:visibility="gone"/>
-
   <LinearLayout
     android:orientation="vertical"
     android:layout_width="match_parent"
@@ -45,5 +27,21 @@
       android:id="@+id/SOUNDS_LIST_ID"/>
 
   </LinearLayout>
+
+  <fragment
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:name="com.example.com.masterhelper.core.components.buttons.ComponentFloatButtonPrimary"
+    android:id="@+id/ADD_NEW_FILE_ID"
+    tools:layout="@layout/fragment_component_float_button_primary"
+    android:layout_gravity="bottom|end"/>
+
+  <fragment
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:name="com.example.com.masterhelper.core.components.buttons.ComponentFloatButtonSecondary"
+    android:id="@+id/ADD_FILES_TO_EVENT_ID"
+    tools:layout="@layout/fragment_component_float_button_secondary"
+    android:layout_gravity="bottom|start"/>
 
 </FrameLayout>

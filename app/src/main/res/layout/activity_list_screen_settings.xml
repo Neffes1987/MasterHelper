@@ -20,26 +20,13 @@
     android:layout_marginEnd="8dp"
     app:layout_constraintTop_toTopOf="parent"/>
 
-  <com.google.android.material.floatingactionbutton.FloatingActionButton
-    android:src="@mipmap/baseline_add_black_18dp"
+  <fragment
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:clickable="true"
+    android:name="com.example.com.masterhelper.core.components.buttons.ComponentFloatButtonPrimary"
     android:id="@+id/SETTING_EDIT_ADD_BTN_ID"
+    tools:layout="@layout/fragment_component_float_button_primary"
     app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    style="@style/float_button_styles"/>
-
-  <com.google.android.material.floatingactionbutton.FloatingActionButton
-    android:src="@mipmap/baseline_done_black_18dp"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:clickable="true"
-    app:layout_constraintEnd_toEndOf="parent"
-    style="@style/float_secondary_button"
-    android:id="@+id/SETTINGS_APPLY_BTN_ID"
-    app:layout_constraintBottom_toTopOf="@+id/SETTING_EDIT_ADD_BTN_ID"
-    android:layout_marginBottom="16dp"
-    android:visibility="gone"/>
+    app:layout_constraintEnd_toEndOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

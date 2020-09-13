@@ -5,6 +5,7 @@ import android.view.View;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBar;
 import com.example.com.masterhelper.core.app.GlobalApplication;
+import com.example.com.masterhelper.core.components.buttons.ComponentFloatButtonPrimary;
 import com.example.com.masterhelper.core.components.dialogs.dialogs.DeleteDialog;
 import com.example.com.masterhelper.core.components.dialogs.dialogs.InputDialog;
 import com.example.com.masterhelper.core.listFactory.commonAdapter.CommonAdapter;
@@ -28,7 +29,7 @@ import static android.content.DialogInterface.BUTTON_POSITIVE;
 
 public class JourneyItemView extends AppCompatActivity implements ICommonItemEvents {
   /** кнопка создания новой сцены */
-  FloatingActionButton createNewSceneBtn;
+  ComponentFloatButtonPrimary createNewSceneBtn;
 
   /** хелпер для управления данными по прикобчениям в базе */
   JourneyDBAdapter journeyDBAdapter = new JourneyDBAdapter();
@@ -68,8 +69,9 @@ public class JourneyItemView extends AppCompatActivity implements ICommonItemEve
     }
 
 
-    createNewSceneBtn = findViewById(R.id.CREATE_NEW_SCENE_BTN_ID);
-    createNewSceneBtn.setOnClickListener(v -> onCreateButtonPressed());
+    View createNewSceneBtnWrapper = findViewById(R.id.CREATE_NEW_SCENE_BTN_ID);
+    createNewSceneBtn = new ComponentFloatButtonPrimary(createNewSceneBtnWrapper);
+    createNewSceneBtn.setListener(v -> onCreateButtonPressed());
     setDialogs();
   }
 

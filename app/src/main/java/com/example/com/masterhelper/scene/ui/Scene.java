@@ -7,8 +7,8 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
+import com.example.com.masterhelper.core.components.buttons.ComponentFloatButtonPrimary;
 import com.example.com.masterhelper.core.components.dialogs.dialogs.DeleteDialog;
 import com.example.com.masterhelper.core.components.dialogs.dialogs.InputDialog;
 import com.example.com.masterhelper.core.models.utilities.ModelList;
@@ -25,7 +25,6 @@ import com.example.com.masterhelper.core.listFactory.commonAdapter.item.ICommonI
 import com.example.com.masterhelper.core.listFactory.ListFactory;
 import com.example.com.masterhelper.scene.models.ScriptModel;
 import com.example.com.masterhelper.scene.adapters.ScriptDBAdapter;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import static android.content.DialogInterface.BUTTON_POSITIVE;
 
@@ -37,10 +36,10 @@ public class Scene extends AppCompatActivity implements ICommonItemEvents {
   MediaSettings sceneMediaDBAdapter = SettingsMediaFactory.getAdapter(SettingsAdapterType.scene);
 
   /** указатель на кнопку создания нового скрипта сцены */
-  FloatingActionButton newScriptBtn;
+  ComponentFloatButtonPrimary newScriptBtn;
 
   /** указатель на кнопку проигрывания музыки */
-  FloatingActionButton musicControl;
+  ComponentFloatButtonPrimary musicControl;
 
   ListFactory scriptsViewList;
 
@@ -79,13 +78,14 @@ public class Scene extends AppCompatActivity implements ICommonItemEvents {
     String sceneName = getIntent().getStringExtra("sceneName");
     sceneId = getIntent().getIntExtra("sceneId", 0);
 
-    newScriptBtn = findViewById(R.id.SCRIPT_CREATE_NEW_BTN_ID);
-    musicControl = findViewById(R.id.SCENE_MUSIC_START_ID);
+    View createBtnWrapper = findViewById(R.id.SCRIPT_CREATE_NEW_BTN_ID);
+    newScriptBtn = new ComponentFloatButtonPrimary(createBtnWrapper);
+
 
     ActionBar bar = getSupportActionBar();
 
 
-    newScriptBtn.setOnClickListener(v -> {
+    newScriptBtn.setListener(v -> {
       scriptDialog.setTitle(R.string.script_create_title);
       scriptDialog.setOnResolveListener((d,w) -> {
         String name = scriptDialog.getName();
@@ -98,8 +98,10 @@ public class Scene extends AppCompatActivity implements ICommonItemEvents {
       scriptDialog.show();
     });
 
-
-    musicControl.setOnLongClickListener(v -> {
+    View addMusicBtnWrapper = findViewById(R.id.SCENE_MUSIC_START_ID);
+    musicControl = new ComponentFloatButtonPrimary(addMusicBtnWrapper);
+    musicControl.setIconResource(R.mipmap.baseline_music_note_black_18dp);
+    musicControl.setLongListener(v -> {
       Intent intent = new Intent(this, MusicSettingsScreen.class);
       intent.putExtra(MusicSettingsScreen.IS_GENERAL, 0);
       intent.putExtra(MusicSettingsScreen.SELECTED_LIST, getMediaList());
@@ -107,16 +109,16 @@ public class Scene extends AppCompatActivity implements ICommonItemEvents {
       return true;
     });
 
-    musicControl.setOnClickListener(v -> {
+    musicControl.setListener(v -> {
       boolean newSceneMusicState = !sceneMusicStarted;
       setSceneMusicStarted(newSceneMusicState);
       if(newSceneMusicState){
         backgroundMediaPlayer.setMediaList(getMediaList());
         backgroundMediaPlayer.startMediaList();
-        musicControl.setBackgroundTintList(ContextCompat.getColorStateList(getApplicationContext(), R.color.colorMusicStartedFloatTint));
+        musicControl.setColorResource(R.color.colorMusicStartedFloatTint);
       } else {
         backgroundMediaPlayer.stopMediaList();
-        musicControl.setBackgroundTintList(ContextCompat.getColorStateList(getApplicationContext(), R.color.colorCommonFloatTint));
+        musicControl.setColorResource(R.color.colorCommonFloatTint);
       }
     });
 

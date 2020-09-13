@@ -6,6 +6,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import com.example.com.masterhelper.core.components.buttons.ComponentFloatButtonPrimary;
 import com.example.com.masterhelper.core.components.dialogs.dialogs.DeleteDialog;
 import com.example.com.masterhelper.core.components.dialogs.dialogs.InputDialog;
 import com.example.com.masterhelper.core.listFactory.commonAdapter.item.CommonItem;
@@ -17,7 +18,6 @@ import com.example.com.masterhelper.settings.SettingsType;
 import com.example.com.masterhelper.settings.adapters.SettingsListDBAdapter;
 import com.example.com.masterhelper.settings.models.SettingModel;
 import com.example.masterhelper.R;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 
@@ -31,7 +31,7 @@ public class SettingList extends AppCompatActivity implements ICommonItemEvents 
 
   private static final ArrayList<String> selectedListItemsIds = new ArrayList<>();
 
-  FloatingActionButton addNewNameBtn;
+  ComponentFloatButtonPrimary addNewNameBtn;
 
   SettingsListDBAdapter settingsAdapter;
   CommonAdapter viewAdapter;
@@ -79,8 +79,9 @@ public class SettingList extends AppCompatActivity implements ICommonItemEvents 
     setListTitle();
     initViewAdapter();
 
-    addNewNameBtn = findViewById(R.id.SETTING_EDIT_ADD_BTN_ID);
-    addNewNameBtn.setOnClickListener(v -> onAddButtonPressed());
+    View addNewNameBtnWrapper = findViewById(R.id.SETTING_EDIT_ADD_BTN_ID);
+    addNewNameBtn = new ComponentFloatButtonPrimary(addNewNameBtnWrapper);
+    addNewNameBtn.setListener(v -> onAddButtonPressed());
     setList();
     setDialogs();
   }
